@@ -2,6 +2,7 @@ import About from "../components/About";
 import Features from "../components/Features";
 import HomeHeader from "../components/Header";
 import NavBar from "../components/NavBar";
+import { about } from "../data/about";
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
       <HomeHeader>
         <NavBar />
       </HomeHeader>
-      <About />
+      <About text={about} />
       <Features />
     </>
   );
