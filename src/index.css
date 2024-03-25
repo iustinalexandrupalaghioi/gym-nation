@@ -1,0 +1,43 @@
+body {
+  background: rgb(249, 249, 249);
+  background: linear-gradient(
+    0deg,
+    rgba(249, 249, 249, 1) 0%,
+    rgba(249, 249, 249, 0.6334908963585435) 100%,
+    rgba(249, 249, 249, 1) 100%
+  );
+}
+.green-text {
+  color: #3fa796;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  height: 100vh;
+  background: url("/images/home-background.avif");
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  .hero-paragraph {
+    font-size: 1.2rem;
+  }
+}
+
+/* NAVBAR */
+.nav-link::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #3fa796;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
