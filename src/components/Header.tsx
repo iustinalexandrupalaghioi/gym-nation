@@ -25,7 +25,7 @@ const HomeHeader = ({ children }: { children: ReactNode }) => {
               <FaArrowRight />
             </a>
             <button
-              className="btn btn-outline-secondary ms-2 rounded-4"
+              className="btn btn-outline-info ms-2 rounded-4"
               onClick={scrollToAbout}
             >
               Detalii
