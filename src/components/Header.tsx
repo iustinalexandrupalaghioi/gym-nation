@@ -9,7 +9,7 @@ const HomeHeader = ({ children }: { children: ReactNode }) => {
   return (
     <header className="header d-flex flex-column justify-content-center align-items-center">
       {children}
-      <div className="row h-100 d-flex flex-column justify-content-center align-items-center">
+      <div className="row h-100 align-items-center">
         <div className="text-center text-light mb-5">
           <h1 className="fw-bold hero-title">
             Join the Nation, <span className="green-text">Get Fit</span> with
