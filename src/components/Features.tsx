@@ -3,7 +3,7 @@ import FeatureCard from "./FeatureCard";
 
 const Features = () => {
   return (
-    <section className="container py-5 mt-5" id="features">
+    <section className="container-fluid py-5 mt-5" id="features">
       <h2 className="pb-2 border-bottom text-center">
         De ce să lucrezi cu noi?
       </h2>
