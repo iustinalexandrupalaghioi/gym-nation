@@ -3,12 +3,16 @@ import FeatureCard from "./FeatureCard";
 
 const Features = () => {
   return (
-    <div className="container px-4 py-5 d-flex  flex-column align-items-center">
-      <h2 className="pb-2 border-bottom">De ce să lucrezi cu noi?</h2>
-      {features.map((feature) => (
-        <FeatureCard feature={feature} />
-      ))}
-    </div>
+    <section className="container py-5 mt-5" id="features">
+      <h2 className="pb-2 border-bottom text-center">
+        De ce să lucrezi cu noi?
+      </h2>
+      <div className="row row-cols-1 justify-content-center pt-2">
+        {features.map((feature, index) => (
+          <FeatureCard key={index} feature={feature} />
+        ))}
+      </div>
+    </section>
   );
 };
 

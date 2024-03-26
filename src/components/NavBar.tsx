@@ -7,9 +7,9 @@ const NavBar = () => {
   return (
     <nav className="navbar container-xl navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           <img src={logo} className="object-fit-cover" height="60px" />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

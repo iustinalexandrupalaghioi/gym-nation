@@ -1,4 +1,4 @@
-body {
+/* body {
   background: rgb(249, 249, 249);
   background: linear-gradient(
     0deg,
@@ -7,10 +7,10 @@ body {
     rgba(249, 249, 249, 1) 100%
   );
 }
+ */
 .green-text {
   color: #3fa796;
 }
-
 /* HEADER */
 .header {
   width: 100%;
