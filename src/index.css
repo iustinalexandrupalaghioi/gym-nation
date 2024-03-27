@@ -51,8 +51,8 @@
 .nav-link:hover::after {
   width: 100%;
 }
-/* SERVICES */
 
+/* SERVICES */
 .icon {
   width: 45px;
 }
@@ -66,6 +66,7 @@
   top: 0;
   left: 0;
   transition: 0.5s;
+  cursor: pointer;
 }
 .layer:hover {
   background: var(--grenOpac);
@@ -77,9 +78,9 @@
   transform: translateX(-50%);
   position: absolute;
   opacity: 0;
-  transition: 0.7s;
+  transition: 1s;
 }
 .layer:hover h3 {
-  bottom: 49%;
+  bottom: 40%;
   opacity: 1;
 }

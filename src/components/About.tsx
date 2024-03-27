@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import heroImage from "/images/crossfit1.avif";
 
 const About = () => {
   return (
     <section id="about" className="container col-xxl-8 px-4 py-5">
       <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div className="col-10 col-sm-8 col-lg-6">
+        <div className="col-12 col-lg-6">
           <img
-            src="/images/crossfit1.avif"
-            className="d-block mx-lg-auto img-fluid rounded-4"
+            src={heroImage}
+            className="d-block img-fluid rounded-4"
             alt="Gym Nation representative picture"
             loading="lazy"
           />

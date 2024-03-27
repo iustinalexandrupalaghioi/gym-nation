@@ -1,9 +1,9 @@
-import Features from "../components/Features";
+import FeaturesGrid from "../components/FeaturesGrid";
 import HomeHeader from "../components/Header";
 import NavBar from "../components/NavBar";
 import CoverText from "../components/CoverText";
 import About from "../components/About";
-import Services from "../components/Services";
+import ServicesGrid from "../components/ServicesGrid";
 
 const Home = () => {
   return (
@@ -13,8 +13,8 @@ const Home = () => {
         <CoverText />
       </HomeHeader>
       <About />
-      <Services />
-      <Features />
+      <ServicesGrid />
+      <FeaturesGrid />
     </>
   );
 };

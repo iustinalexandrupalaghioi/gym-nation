@@ -1,3 +1,4 @@
+import { IconType } from "react-icons";
 import {
   BiDumbbell,
   BiFoodMenu,
@@ -7,7 +8,7 @@ import {
   BiBarChart,
 } from "react-icons/bi";
 
-const iconsMapping = {
+const iconsMapping: { [key: string]: IconType } = {
   "Planuri personalizate de antrenament": BiDumbbell,
   "Nutriție și dietă": BiFoodMenu,
   "Monitorizarea progresului": BiLineChart,
@@ -74,3 +75,9 @@ export const features = [
     icon: iconsMapping["Comunitate și suport"],
   },
 ];
+export interface Feature {
+  id: number;
+  title: string;
+  description: string;
+  icon: IconType;
+}
