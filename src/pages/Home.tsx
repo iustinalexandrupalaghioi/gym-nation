@@ -1,18 +1,19 @@
-import About from "../components/About";
 import Features from "../components/Features";
 import HomeHeader from "../components/Header";
-import HomeWelcome from "../components/HomeWelcome";
 import NavBar from "../components/NavBar";
-import { about } from "../data/about";
+import CoverText from "../components/CoverText";
+import About from "../components/About";
+import Services from "../components/Services";
 
 const Home = () => {
   return (
     <>
       <HomeHeader>
         <NavBar />
-        <HomeWelcome />
+        <CoverText />
       </HomeHeader>
-      <About text={about} />
+      <About />
+      <Services />
       <Features />
     </>
   );

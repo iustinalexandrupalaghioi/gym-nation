@@ -1,4 +1,3 @@
-import logo from "/images/logo1.png";
 import { Link, useLocation } from "react-router-dom";
 import { links } from "../data/links";
 
@@ -8,7 +7,7 @@ const NavBar = () => {
     <nav className="navbar container-xl navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={logo} className="object-fit-cover" height="60px" />
+          GymNationRomania
         </Link>
         <button
           className="navbar-toggler"
@@ -28,7 +27,7 @@ const NavBar = () => {
                 <Link
                   className={
                     link.path === "/members"
-                      ? "btn btn-primary text-light rounded-4"
+                      ? "btn btn-primary text-light"
                       : pathname === link.path
                       ? "nav-link active"
                       : "nav-link"

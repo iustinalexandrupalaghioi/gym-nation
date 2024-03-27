@@ -1,17 +1,37 @@
-const About = ({
-  text,
-}: {
-  text: { title: string; subtitle?: string; description: string };
-}) => {
+import { Link } from "react-router-dom";
+
+const About = () => {
   return (
-    <section
-      id="about"
-      className="container text-center mt-5 d-flex flex-column align-items-center"
-    >
-      <h1>{text.title}</h1>
-      <p>{text.subtitle}</p>
-      <div className="container">
-        <p>{text.description}</p>
+    <section id="about" className="container col-xxl-8 px-4 py-5">
+      <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div className="col-10 col-sm-8 col-lg-6">
+          <img
+            src="/images/crossfit1.avif"
+            className="d-block mx-lg-auto img-fluid rounded-4"
+            alt="Gym Nation representative picture"
+            loading="lazy"
+          />
+        </div>
+        <div className="col-lg-6">
+          <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+            Gym Nation România
+          </h1>
+          <p className="lead">
+            Suntem aici pentru a-ți oferi resursele și suportul necesar pentru
+            a-ți atinge obiectivele de fitness și a-ți transforma stilul de
+            viață. Fie că îți dorești să slăbești, să-ți construiești masă
+            musculară sau să îți îmbunătățești sănătatea generală, creăm un plan
+            personalizat care să se potrivească nevoilor tale specifice.
+          </p>
+
+          <Link
+            type="button"
+            className="btn btn-primary text-light"
+            to="/members"
+          >
+            Începe Acum
+          </Link>
+        </div>
       </div>
     </section>
   );
