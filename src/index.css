@@ -71,7 +71,7 @@
 .layer:hover {
   background: var(--grenOpac);
 }
-.layer h3 {
+.layer h4 {
   width: 100%;
   bottom: 0;
   left: 50%;
@@ -80,7 +80,7 @@
   opacity: 0;
   transition: 1s;
 }
-.layer:hover h3 {
+.layer:hover h4 {
   bottom: 40%;
   opacity: 1;
 }

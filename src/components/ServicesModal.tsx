@@ -12,7 +12,7 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
             <h1
@@ -29,7 +29,7 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
             ></button>
           </div>
           <div className="modal-body">
-            <div className="row row-cols-1">
+            <div className="row row-cols-1 mb-2 text-center">
               <img
                 src={img}
                 className="d-block img-fluid rounded-4"
