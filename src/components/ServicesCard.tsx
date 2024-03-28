@@ -1,5 +1,4 @@
 import { Service } from "../data/services";
-import ServicesModal from "./ServicesModal";
 
 interface Props {
   service: Service;
@@ -10,7 +9,7 @@ const ServicesCard = ({ service: { id, title, img } }: Props) => {
       className="col"
       key={id}
       data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
+      data-bs-target={`#modal-${id}`}
     >
       <div className="card card-cover h-100 overflow-hidden rounded-4 shadow-lg">
         <img src={img} />
@@ -18,7 +17,6 @@ const ServicesCard = ({ service: { id, title, img } }: Props) => {
           <h3 className="display-6 lh-1 fw-bold text-center px-2">{title}</h3>
         </div>
       </div>
-      <ServicesModal />
     </div>
   );
 };

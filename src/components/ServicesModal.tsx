@@ -1,8 +1,13 @@
-const ServicesModal = () => {
+import { Service } from "../data/services";
+
+interface Props {
+  service: Service;
+}
+const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
   return (
     <div
       className="modal fade"
-      id="exampleModal"
+      id={`modal-${id}`}
       tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -10,8 +15,11 @@ const ServicesModal = () => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Modal title
+            <h1
+              className="modal-title fs-5 text-primary"
+              id="exampleModalLabel"
+            >
+              {title}
             </h1>
             <button
               type="button"
@@ -20,17 +28,26 @@ const ServicesModal = () => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">...</div>
+          <div className="modal-body">
+            <div className="row row-cols-1">
+              <img
+                src={img}
+                className="d-block img-fluid rounded-4"
+                alt="Gym Nation representative picture"
+                loading="lazy"
+              />
+            </div>
+            <div className="row row-cols-1">
+              <p className="lead">{description}</p>
+            </div>
+          </div>
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-primary text-light"
               data-bs-dismiss="modal"
             >
               Close
-            </button>
-            <button type="button" className="btn btn-primary">
-              Save changes
             </button>
           </div>
         </div>
