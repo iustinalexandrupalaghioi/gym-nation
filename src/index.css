@@ -84,3 +84,7 @@
   bottom: 40%;
   opacity: 1;
 }
+
+.custom-modal {
+  backdrop-filter: blur(10px);
+}

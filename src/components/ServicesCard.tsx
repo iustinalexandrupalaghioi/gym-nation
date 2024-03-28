@@ -1,5 +1,4 @@
 import { Service } from "../data/services";
-import { IoIosArrowForward } from "react-icons/io";
 
 interface Props {
   service: Service;
@@ -15,9 +14,7 @@ const ServicesCard = ({ service: { id, title, img } }: Props) => {
       <div className="card card-cover h-100 overflow-hidden rounded-4 shadow-lg">
         <img src={img} />
         <div className="layer d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
-          <h4 className="display-6 lh-1 fw-bold text-center px-2">
-            {title} <IoIosArrowForward />
-          </h4>
+          <h4 className="display-6 lh-1 fw-bold text-center px-2">{title}</h4>
         </div>
       </div>
     </div>

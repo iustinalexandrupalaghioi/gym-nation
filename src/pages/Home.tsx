@@ -12,8 +12,8 @@ const Home = () => {
         <NavBar />
         <CoverText />
       </HomeHeader>
-      <About />
       <ServicesGrid />
+      <About />
       <FeaturesGrid />
     </>
   );

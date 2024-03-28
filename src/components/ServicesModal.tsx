@@ -6,20 +6,17 @@ interface Props {
 const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
   return (
     <div
-      className="modal fade"
+      className="modal custom-modal fade"
       id={`modal-${id}`}
       tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-dialog modal-xl modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
-            <h1
-              className="modal-title fs-5 text-primary"
-              id="exampleModalLabel"
-            >
-              {title}
+            <h1 className="modal-title fs-5" id="exampleModalLabel">
+              Gym Nation România
             </h1>
             <button
               type="button"
@@ -28,17 +25,19 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
-            <div className="row row-cols-1 mb-2 text-center">
+          <div className="modal-body row">
+            <div className="col-md-4">
               <img
                 src={img}
-                className="d-block img-fluid rounded-4"
-                alt="Gym Nation representative picture"
-                loading="lazy"
+                className="img-fluid rounded-2"
+                alt={description}
               />
             </div>
-            <div className="row row-cols-1">
-              <p className="lead">{description}</p>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h3 className="card-title text-primary">{title}</h3>
+                <p className="card-text fs-5">{description}</p>
+              </div>
             </div>
           </div>
           <div className="modal-footer">
@@ -47,7 +46,7 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
               className="btn btn-primary text-light"
               data-bs-dismiss="modal"
             >
-              Close
+              Înapoi
             </button>
           </div>
         </div>
