@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Question } from "../data/faq";
+import { Question } from "../../data/faq";
 
 interface Props {
   question: Question;

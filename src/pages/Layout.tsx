@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../components/NavBar";
-import SubHeader from "../components/SubHeader";
+import NavBar from "../components/partials/NavBar";
+import SubHeader from "../components/partials/SubHeader";
 
 const Layout = () => {
   return (

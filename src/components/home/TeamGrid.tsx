@@ -1,4 +1,4 @@
-import { people } from "../data/people";
+import { people } from "../../data/people";
 import TeamCard from "./TeamCard";
 
 const TeamGrid = () => {

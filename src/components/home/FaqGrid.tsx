@@ -1,4 +1,4 @@
-import { faq } from "../data/faq";
+import { faq } from "../../data/faq";
 import CollapseFaq from "./CollapseFaq";
 import { FaArrowUp } from "react-icons/fa";
 

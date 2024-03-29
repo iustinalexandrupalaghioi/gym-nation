@@ -1,4 +1,4 @@
-import { Testimonial } from "../data/testimonials";
+import { Testimonial } from "../../data/testimonials";
 import { FaStar } from "react-icons/fa";
 
 interface Props {
@@ -7,16 +7,13 @@ interface Props {
 const TestimonialCard = ({
   testimonial: { id, name, content, img, stars },
 }: Props) => {
-  const array = [];
+  const starNumber = [];
   for (let i = 0; i < stars; i++) {
-    array[i] = i;
+    starNumber[i] = i;
   }
   return (
-    <div className="col">
-      <div
-        className="card d-flex border-0 shadow-lg h-100 mb-3"
-        id={`testimonial-${id}`}
-      >
+    <div className="col h-100 p-3">
+      <div className="card d-flex border-1 h-100 mb-3" id={`testimonial-${id}`}>
         <div className="card-header d-flex gap-2 align-items-center">
           <img
             src={img}
@@ -27,7 +24,7 @@ const TestimonialCard = ({
           <div className="author d-flex flex-column justify-content-center">
             <h5 className="card-title">{name}</h5>
             <div className="d-flex">
-              {array.map((star) => (
+              {starNumber.map((star) => (
                 <p key={star} className="text-primary">
                   <FaStar />
                 </p>

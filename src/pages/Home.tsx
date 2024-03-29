@@ -1,13 +1,13 @@
-import FeaturesGrid from "../components/FeaturesGrid";
-import NavBar from "../components/NavBar";
-import About from "../components/About";
-import ServicesGrid from "../components/ServicesGrid";
-import HomeCover from "../components/HomeCover";
-import TeamGrid from "../components/TeamGrid";
-import HomeCoverText from "../components/HomeCoverText";
-import FaqGrid from "../components/FaqGrid";
-import TestimonialsGrid from "../components/TestimonialsGrid";
-import Footer from "../components/Footer";
+import About from "../components/home/About";
+import FaqGrid from "../components/home/FaqGrid";
+import FeaturesGrid from "../components/home/FeaturesGrid";
+import HomeCover from "../components/home/HomeCover";
+import HomeCoverText from "../components/home/HomeCoverText";
+import ServicesGrid from "../components/home/ServicesGrid";
+import TeamGrid from "../components/home/TeamGrid";
+import TestimonialsGrid from "../components/home/TestimonialsGrid";
+import Footer from "../components/partials/Footer";
+import NavBar from "../components/partials/NavBar";
 
 const Home = () => {
   return (

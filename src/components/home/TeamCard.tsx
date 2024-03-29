@@ -1,5 +1,5 @@
 import React from "react";
-import { Person } from "../data/people";
+import { Person } from "../../data/people";
 
 interface Props {
   person: Person;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Feature } from "../data/features";
+import { Feature } from "../../data/features";
 
 interface Props {
   feature: Feature;

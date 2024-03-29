@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import { links } from "../data/links";
+import { links } from "../../data/links";
 interface Props {
   children: ReactNode;
 }
