@@ -5,6 +5,7 @@ import ServicesGrid from "../components/ServicesGrid";
 import HomeCover from "../components/HomeCover";
 import TeamGrid from "../components/TeamGrid";
 import HomeCoverText from "../components/HomeCoverText";
+import FaqGrid from "../components/FaqGrid";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         <About />
         <FeaturesGrid />
         <TeamGrid />
+        <FaqGrid />
       </main>
     </>
   );
