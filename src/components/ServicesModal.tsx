@@ -25,7 +25,7 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body row">
+          <div className="modal-body row g-3">
             <div className="col-md-4">
               <img
                 src={img}

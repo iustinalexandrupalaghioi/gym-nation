@@ -1,21 +1,23 @@
 import FeaturesGrid from "../components/FeaturesGrid";
-import HomeHeader from "../components/Header";
 import NavBar from "../components/NavBar";
 import CoverText from "../components/CoverText";
 import About from "../components/About";
 import ServicesGrid from "../components/ServicesGrid";
+import HomeCover from "../components/HomeCover";
+import TeamGrid from "../components/TeamGrid";
 
 const Home = () => {
   return (
-    <>
-      <HomeHeader>
+    <main>
+      <HomeCover>
         <NavBar />
         <CoverText />
-      </HomeHeader>
+      </HomeCover>
       <ServicesGrid />
       <About />
       <FeaturesGrid />
-    </>
+      <TeamGrid />
+    </main>
   );
 };
 
