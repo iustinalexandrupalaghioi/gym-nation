@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CoverText = () => {
+const HomeCoverText = () => {
   const scrollToServices = () => {
     const services = document.getElementById("services");
     services?.scrollIntoView({ behavior: "smooth" });
@@ -32,4 +32,4 @@ const CoverText = () => {
   );
 };
 
-export default CoverText;
+export default HomeCoverText;
