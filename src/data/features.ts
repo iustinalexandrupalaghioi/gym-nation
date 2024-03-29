@@ -1,18 +1,18 @@
 import { IconType } from "react-icons";
 import {
   BiDumbbell,
-  BiFoodMenu,
   BiLineChart,
   BiBookOpen,
   BiGroup,
   BiBarChart,
 } from "react-icons/bi";
+import { GiKnifeFork } from "react-icons/gi";
 
 const iconsMapping: { [key: string]: IconType } = {
-  "Planuri personalizate de antrenament": BiDumbbell,
-  "Nutriție și dietă": BiFoodMenu,
+  "Planuri personalizate": BiDumbbell,
+  "Nutriție și dietă": GiKnifeFork,
   "Monitorizarea progresului": BiLineChart,
-  "Blog și resurse educaționale": BiBookOpen,
+  "Blog și resurse": BiBookOpen,
   "Comunitate și suport": BiGroup,
   "Sesiuni de antrenament live": BiBarChart,
 };
@@ -22,7 +22,7 @@ export const features = [
     title: "Planuri personalizate de antrenament",
     description:
       "Primești planuri de antrenament personalizate adaptate obiectivelor tale individuale, nivelului de fitness și echipamentului disponibil.",
-    icon: iconsMapping["Planuri personalizate de antrenament"],
+    icon: iconsMapping["Planuri personalizate"],
   },
   {
     id: 2,
@@ -55,10 +55,10 @@ export const features = [
   },
   {
     id: 6,
-    title: "Blog și resurse educaționale",
+    title: "Blog și resurse",
     description:
       "Secțiunea blogului oferă conținut util și informativ despre sănătate, fitness, nutriție și motivație.",
-    icon: iconsMapping["Blog și resurse educaționale"],
+    icon: iconsMapping["Blog și resurse"],
   },
   {
     id: 7,

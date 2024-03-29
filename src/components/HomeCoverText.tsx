@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 const HomeCoverText = () => {
-  const scrollToServices = () => {
-    const services = document.getElementById("services");
-    services?.scrollIntoView({ behavior: "smooth" });
+  const scrollToAbout = () => {
+    const about = document.getElementById("about");
+    about?.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <div className="row h-100 w-100  d-flex flex-column justify-content-center text-center">
@@ -23,7 +23,7 @@ const HomeCoverText = () => {
         <button
           type="button"
           className="btn btn-outline-info  px-4"
-          onClick={scrollToServices}
+          onClick={scrollToAbout}
         >
           Vezi mai mult
         </button>
