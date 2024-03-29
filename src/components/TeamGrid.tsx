@@ -3,7 +3,7 @@ import TeamCard from "./TeamCard";
 
 const TeamGrid = () => {
   return (
-    <div className="container px-4 py-3 team" id="featured-3">
+    <section className="container px-4 py-5 team" id="team">
       <h2 className="pb-2 border-bottom text-center">Echipa noastră</h2>
       <div className="row g-5 py-5 row-cols-3 justify-content-center">
         {people.map((person, index) => (
@@ -16,7 +16,7 @@ const TeamGrid = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

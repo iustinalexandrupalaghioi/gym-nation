@@ -7,8 +7,8 @@ interface Props {
 
 const FeatureCard = ({ feature: { title, description, icon } }: Props) => {
   return (
-    <div className="col d-flex flex-column gap-2">
-      <div className="icon p-2 bg-primary d-flex justify-content-centr align-items-center text-light fs-4 rounded-3">
+    <div className="col d-flex flex-column gap-2 px-4">
+      <div className="icon p-2 bg-primary d-flex justify-content-centr align-items-center text-light fs-4 rounded-3 shadow-lg">
         {React.createElement(icon)}
       </div>
       <h4 className="fw-semibold mb-0 text-body-emphasis fadeUp">{title}</h4>

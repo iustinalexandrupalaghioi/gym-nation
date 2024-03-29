@@ -3,7 +3,7 @@ import FeatureCard from "./FeatureCard";
 
 const FeaturesGrid = () => {
   return (
-    <section className="container px-4 py-5">
+    <section className="container px-4 py-5" id="features">
       <h2 className="pb-2 border-bottom text-center">
         De ce să lucrezi cu noi?
       </h2>

@@ -109,3 +109,20 @@ body {
     opacity: 1;
   }
 }
+
+/* FAQ */
+
+.faq {
+  width: 75%;
+}
+@media (max-width: 728px) {
+  .faq {
+    width: 100%;
+  }
+}
+.question-card {
+  border-radius: 6px 6px 0 0;
+}
+.response-card {
+  border-radius: 0 0 6px 6px;
+}
