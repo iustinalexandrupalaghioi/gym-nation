@@ -12,16 +12,19 @@ const TestimonialCard = ({
     starNumber[i] = i;
   }
   return (
-    <div className="col h-100 p-3">
-      <div className="card d-flex border-1 h-100 mb-3" id={`testimonial-${id}`}>
-        <div className="card-header d-flex gap-2 align-items-center">
+    <div className="card d-flex border-0 h-100 shadow" id={`testimonial-${id}`}>
+      <div className="card-body">
+        <p>{content}</p>
+
+        <div className=" d-flex gap-2 align-items-center">
           <img
             src={img}
             className="rounded-circle img-fluid"
             alt={`picture with ${name}`}
             style={{ width: "70px", height: "70px" }}
           />
-          <div className="author d-flex flex-column justify-content-center">
+
+          <div className="author d-flex flex-column ">
             <h5 className="card-title">{name}</h5>
             <div className="d-flex">
               {starNumber.map((star) => (
@@ -31,9 +34,6 @@ const TestimonialCard = ({
               ))}
             </div>
           </div>
-        </div>
-        <div className="card-body">
-          <p className="card-text">{content}</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 :root {
-  --grenOpac: rgba(34, 165, 152, 0.8);
-  --primary: #22a699;
+  --grenOpac: rgba(34, 165, 153, 0.8);
+  --primary: rgb(34, 166, 153);
   --info: #f9f9f9;
 }
 body {
@@ -138,3 +138,31 @@ body {
 }
 
 /* testimonials */
+
+.slick-arrow::before {
+  color: var(--primary) !important;
+  height: 30px !important;
+  display: flex;
+  font-size: 40px !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.slick-track {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+}
+.slick-slide > div {
+  padding: 20px 10px;
+}
+
+.slick-dots li button::before {
+  color: var(--grenOpac) !important;
+  &:hover {
+    color: var(--primary) !important;
+  }
+  &:active {
+    color: var(--primary);
+  }
+}

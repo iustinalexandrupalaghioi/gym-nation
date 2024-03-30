@@ -29,7 +29,7 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
             <div className="col-md-4">
               <img
                 src={img}
-                className="img-fluid rounded-2"
+                className="img-fluid rounded-2 shadow"
                 alt={description}
               />
             </div>
