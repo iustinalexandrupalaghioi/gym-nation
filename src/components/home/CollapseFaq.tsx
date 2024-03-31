@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Question } from "../../data/faq";
+import "../../assets/styles/CollapseFaq.css";
 
 interface Props {
   question: Question;

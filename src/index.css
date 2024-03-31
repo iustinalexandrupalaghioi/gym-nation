@@ -3,7 +3,7 @@
   --primary: rgb(34, 166, 153);
   --info: #f9f9f9;
 }
-body {
+/* body {
   background: rgb(249, 249, 249);
   background: linear-gradient(
     0deg,
@@ -11,19 +11,7 @@ body {
     rgba(249, 249, 249, 0.6334908963585435) 100%,
     rgba(249, 249, 249, 1) 100%
   );
-}
-
-.green-text {
-  color: #22a699;
-}
-/* HEADER */
-.cover {
-  width: 100%;
-  height: 100%;
-  background: url("/images/background-home.avif");
-  background-size: cover;
-  background-position: center;
-}
+} */
 
 .subheader {
   width: 100%;
@@ -31,138 +19,4 @@ body {
   background: url("/images/cover.avif");
   background-size: cover;
   background-position: center;
-}
-
-/* NAVBAR */
-.nav-link::after {
-  content: "";
-  width: 0%;
-  height: 2px;
-  background: #3fa796;
-  display: block;
-  margin: auto;
-  transition: 0.5s;
-}
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* SERVICES */
-.icon {
-  width: 45px;
-}
-
-.layer {
-  background: transparent;
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: 0.5s;
-  cursor: pointer;
-}
-.layer:hover {
-  background: var(--grenOpac);
-}
-.layer h4 {
-  width: 100%;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  position: absolute;
-  opacity: 0;
-  transition: 1s;
-}
-.layer:hover h4 {
-  bottom: 40%;
-  opacity: 1;
-}
-
-.custom-modal {
-  backdrop-filter: blur(10px);
-}
-
-/* TEAM */
-
-.team .card::before {
-  content: "";
-  position: absolute;
-  background: var(--grenOpac);
-  height: 8.5rem;
-  width: 100%;
-  border-radius: 20px 20px 0 0;
-  display: block;
-}
-.team .card .card-content {
-  z-index: 100;
-}
-.team .card .media-icons {
-  top: 10px;
-  right: 20px;
-}
-.team .card .media-icons a {
-  transition: 0.5s;
-  opacity: 0.6;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-/* FAQ */
-
-.faq {
-  width: 75%;
-}
-@media (max-width: 728px) {
-  .faq {
-    width: 100%;
-  }
-  .call-to-action {
-    width: 90%;
-  }
-}
-.question-card {
-  border-radius: 6px 6px 0 0;
-}
-.response-card {
-  border-radius: 0 0 6px 6px;
-}
-
-/* CTA */
-.call-to-action {
-  background-image: url("/images/dumbbell.avif");
-  background-position: center;
-  background-size: cover;
-}
-
-/* testimonials */
-
-.slick-arrow::before {
-  color: var(--primary) !important;
-  height: 30px !important;
-  display: flex;
-  font-size: 40px !important;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
-.slick-track {
-  display: flex !important;
-  justify-content: center;
-  gap: 10px;
-}
-.slick-slide > div {
-  padding: 20px 10px;
-}
-
-.slick-dots li button::before {
-  color: var(--grenOpac) !important;
-  &:hover {
-    color: var(--primary) !important;
-  }
-  &:active {
-    color: var(--primary);
-  }
 }

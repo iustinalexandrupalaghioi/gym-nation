@@ -1,12 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import { links } from "../../data/links";
+import "../../assets/styles/NavBar.css";
 
 const NavBar = () => {
   const { pathname } = useLocation();
   return (
     <header>
-      <nav className="navbar container-xl navbar-expand-lg navbar-dark">
-        <div className="container-fluid">
+      <nav
+        className="navbar container-fluid navbar-expand-lg bg-danger navbar-dark fixed-top"
+        style={{ opacity: 0.98 }}
+      >
+        <div className="container">
           <Link className="navbar-brand" to="/">
             GymNationRomania
           </Link>

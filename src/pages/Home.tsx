@@ -2,7 +2,7 @@ import About from "../components/home/About";
 import FaqGrid from "../components/home/FaqGrid";
 import FeaturesGrid from "../components/home/FeaturesGrid";
 import HomeCover from "../components/home/HomeCover";
-import HomeCoverText from "../components/home/HomeCoverText";
+import HomeCoverContent from "../components/home/HomeCoverContent";
 import ServicesGrid from "../components/home/ServicesGrid";
 import TeamGrid from "../components/home/TeamGrid";
 import TestimonialsGrid from "../components/home/TestimonialsGrid";
@@ -14,7 +14,7 @@ const Home = () => {
     <>
       <HomeCover>
         <NavBar />
-        <HomeCoverText />
+        <HomeCoverContent />
       </HomeCover>
       <main>
         <About />
@@ -23,8 +23,8 @@ const Home = () => {
         <FeaturesGrid />
         <TestimonialsGrid />
         <FaqGrid />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

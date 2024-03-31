@@ -1,4 +1,5 @@
 import { Service } from "../../data/services";
+import "../../assets/styles/ServicesCard.css";
 
 interface Props {
   service: Service;

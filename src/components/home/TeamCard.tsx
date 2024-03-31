@@ -1,6 +1,6 @@
 import React from "react";
 import { Person } from "../../data/people";
-
+import "../../assets/styles/TeamCard.css";
 interface Props {
   person: Person;
 }

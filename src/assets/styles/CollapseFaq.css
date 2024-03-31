@@ -1,0 +1,6 @@
+.question-card {
+  border-radius: 6px 6px 0 0;
+}
+.response-card {
+  border-radius: 0 0 6px 6px;
+}

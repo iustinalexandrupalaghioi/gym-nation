@@ -1,0 +1,30 @@
+.icon {
+  width: 45px;
+}
+.layer {
+  background: transparent;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.layer:hover {
+  background: var(--grenOpac);
+}
+.layer h4 {
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  opacity: 0;
+  transition: 1s;
+}
+.layer:hover h4 {
+  bottom: 40%;
+  opacity: 1;
+}

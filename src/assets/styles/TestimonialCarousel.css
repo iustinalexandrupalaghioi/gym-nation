@@ -1,0 +1,33 @@
+.slick-arrow::before {
+  color: var(--primary);
+  background-color: #fff;
+  padding: 0;
+  height: 28px;
+  display: flex;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  opacity: 1;
+}
+.slick-arrow:active {
+  color: var(--grenOpac);
+  opacity: 0.85;
+}
+.slick-arrow:hover {
+  color: var(--grenOpac);
+  opacity: 0.85;
+}
+.slick-track {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.slick-slide > div {
+  padding: 20px 10px;
+}
+
+.slick-dots li button::before {
+  color: var(--grenOpac) !important;
+  font-size: 10px;
+}

@@ -6,7 +6,8 @@ interface Props {
 const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
   return (
     <div
-      className="modal custom-modal fade"
+      className="modal mt-0 fade"
+      style={{ backdropFilter: "blur(4px)" }}
       id={`modal-${id}`}
       tabIndex={-1}
       aria-labelledby="exampleModalLabel"

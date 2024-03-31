@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
-const HomeCoverText = () => {
+const HomeCoverContent = () => {
   const scrollToAbout = () => {
     const about = document.getElementById("about");
     about?.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <div className="row h-100 w-100  d-flex flex-column justify-content-center text-center">
+    <div className="row w-100 m-0 px-4  h-100 d-flex flex-column align-items-center justify-content-center text-center">
       <h1 className="display-5 fw-bold text-light">
-        Join the Nation, <span className="green-text">Get Fit</span> with
-        <span className="green-text"> Gym Nation</span>!
+        Join the Nation, <span className="text-primary">Get Fit</span> with
+        <span className="text-primary"> Gym Nation</span>!
       </h1>
       <p className="lead mb-4 text-light">Imposibilul nu există.</p>
       <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -32,4 +32,4 @@ const HomeCoverText = () => {
   );
 };
 
-export default HomeCoverText;
+export default HomeCoverContent;
