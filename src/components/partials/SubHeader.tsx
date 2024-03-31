@@ -11,7 +11,7 @@ const SubHeader = ({ children }: Props) => {
   return (
     <header className="subheader d-flex flex-column align-items-center">
       {children}
-      <div className="row h-50 d-flex flex-column justify-content-center align-items-center">
+      <div className="row d-flex flex-column justify-content-center align-items-center">
         <div className="text-center text-light mb-5">
           <h1 className="fw-bold hero-title">{page?.name}</h1>
         </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import heroImage from "/images/crossfit1.avif";
 
-const About = () => {
+const AboutSection = () => {
   return (
     <section id="about" className="container col-xxl-8 px-4 py-5">
       <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -38,4 +38,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutSection;

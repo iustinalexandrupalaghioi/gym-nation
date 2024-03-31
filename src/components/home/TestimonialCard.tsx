@@ -13,19 +13,19 @@ const TestimonialCard = ({
   }
   return (
     <div
-      className="card d-flex flex-column justify-content-center p-2 border-0 h-100 shadow"
+      className="card h-100 p-4 rounded-4 border-0 shadow d-flex flex-column justify-content-between"
       id={`testimonial-${id}`}
     >
-      <p>{content}</p>
+      <p className="">{content}</p>
       <div className=" d-flex gap-2 align-items-center">
         <img
           src={img}
-          className="rounded-circle img-fluid"
+          className="rounded-circle"
           alt={`picture with ${name}`}
           style={{ width: "70px", height: "70px" }}
         />
 
-        <div className="author d-flex flex-column ">
+        <div className="author d-flex flex-column">
           <h5 className="card-title">{name}</h5>
           <div className="d-flex">
             {starNumber.map((star) => (
