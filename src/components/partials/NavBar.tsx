@@ -6,10 +6,7 @@ const NavBar = () => {
   const { pathname } = useLocation();
   return (
     <header>
-      <nav
-        className="navbar container-fluid navbar-expand-lg bg-danger navbar-dark fixed-top"
-        style={{ opacity: 0.98 }}
-      >
+      <nav className="navbar container-fluid navbar-expand-lg navbar-dark">
         <div className="container">
           <Link className="navbar-brand" to="/">
             GymNationRomania
