@@ -3,6 +3,8 @@ import FaqGrid from "../components/home/FaqGrid";
 import FeaturesGrid from "../components/home/FeaturesGrid";
 import HomeCover from "../components/home/HomeCover";
 import HomeCoverContent from "../components/home/HomeCoverContent";
+import ScrollToButton from "../components/home/ScrollToButton";
+import ScrollTo from "../components/home/ScrollToButton";
 import Section from "../components/home/Section";
 import ServicesGrid from "../components/home/ServicesGrid";
 import TeamGrid from "../components/home/TeamGrid";
@@ -19,7 +21,7 @@ const Home = () => {
       </HomeCover>
       <main>
         <AboutSection />
-        <Section title="Serviciile noastre" sectionId="service">
+        <Section title="Serviciile noastre" sectionId="services">
           <ServicesGrid />
         </Section>
         <TeamGrid />
@@ -35,6 +37,7 @@ const Home = () => {
         <Section title="Întrebări frecvente" sectionId="faq">
           <FaqGrid />
         </Section>
+        <ScrollToButton sectionId="header" />
       </main>
       <Footer />
     </>

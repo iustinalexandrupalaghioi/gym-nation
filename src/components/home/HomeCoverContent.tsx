@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
+import scrollToSection from "../../services/scrollToSection";
 
 const HomeCoverContent = () => {
-  const scrollToAbout = () => {
-    const about = document.getElementById("about");
-    about?.scrollIntoView({ behavior: "smooth" });
-  };
   return (
     <div className="row w-100 m-0 px-4  h-100 d-flex flex-column align-items-center justify-content-center text-center">
       <h1 className="display-5 fw-bold text-light">
@@ -24,7 +21,7 @@ const HomeCoverContent = () => {
         <button
           type="button"
           className="btn btn-outline-info  px-4"
-          onClick={scrollToAbout}
+          onClick={() => scrollToSection("about")}
         >
           Vezi mai mult
         </button>

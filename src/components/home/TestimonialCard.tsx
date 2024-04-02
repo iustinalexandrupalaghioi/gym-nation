@@ -1,5 +1,6 @@
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { Testimonial } from "../../data/testimonials";
-import { FaStar } from "react-icons/fa";
+import useStars from "../../hooks/useStars";
 
 interface Props {
   testimonial: Testimonial;
@@ -7,10 +8,7 @@ interface Props {
 const TestimonialCard = ({
   testimonial: { id, name, content, img, stars },
 }: Props) => {
-  const starNumber = [];
-  for (let i = 0; i < stars; i++) {
-    starNumber[i] = i;
-  }
+  const { regStars, starNumber } = useStars(stars);
   return (
     <div
       className="card h-100 p-4 rounded-4 border-0 shadow d-flex flex-column justify-content-between"
@@ -28,11 +26,14 @@ const TestimonialCard = ({
         <div className="author d-flex flex-column">
           <h5 className="card-title">{name}</h5>
           <div className="d-flex">
-            {starNumber.map((star) => (
-              <p key={star} className="text-primary">
-                <FaStar />
-              </p>
-            ))}
+            <p className="text-primary">
+              {starNumber.map((star) => (
+                <FaStar key={star} />
+              ))}
+              {regStars.map((star) => (
+                <FaRegStar key={star} />
+              ))}
+            </p>
           </div>
         </div>
       </div>
