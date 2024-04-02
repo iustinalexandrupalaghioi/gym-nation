@@ -12,11 +12,3 @@
     rgba(249, 249, 249, 1) 100%
   );
 } */
-
-.subheader {
-  width: 100%;
-  height: 20vh;
-  background: url("/images/cover.avif");
-  background-size: cover;
-  background-position: center;
-}
