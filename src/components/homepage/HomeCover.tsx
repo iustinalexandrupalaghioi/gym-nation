@@ -3,12 +3,12 @@ import "../../assets/styles/HomeCover.css";
 
 const HomeCover = ({ children }: { children: ReactNode }) => {
   return (
-    <div
+    <header
       className="cover w-100 vh-100  d-flex justify-content-center flex-column"
       id="header"
     >
       {children}
-    </div>
+    </header>
   );
 };
 

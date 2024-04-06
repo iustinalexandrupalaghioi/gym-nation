@@ -1,4 +1,5 @@
 import AboutSection from "../components/homepage/About";
+import ContactGrid from "../components/homepage/ContactGrid";
 import FaqGrid from "../components/homepage/FaqGrid";
 import FeaturesGrid from "../components/homepage/FeaturesGrid";
 import HomeCover from "../components/homepage/HomeCover";
@@ -35,6 +36,9 @@ const Home = () => {
         </Section>
         <Section title="Întrebări frecvente" sectionId="faq">
           <FaqGrid />
+        </Section>
+        <Section title="Contactează-ne" sectionId="contact">
+          <ContactGrid />
         </Section>
         <ScrollToButton sectionId="header" />
       </main>

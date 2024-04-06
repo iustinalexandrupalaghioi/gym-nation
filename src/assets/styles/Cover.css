@@ -1,7 +1,7 @@
 .second-cover {
-  background-image: url("/images/dumbbell.avif");
+  background-image: url("https://img.freepik.com/free-photo/closeup-male-hands-preparing-smoothie-with-fresh-fruits-berries_32991-2595.jpg?t=st=1712136607~exp=1712140207~hmac=8efeb44b62ac8a3ee8b9c34ecca5bcea88f1d43d689def38630bcd73dbbc6e71&w=1800");
   width: 100%;
-  height: 25vh;
+  height: 30vh;
   background-position: center;
   background-size: cover;
 }
