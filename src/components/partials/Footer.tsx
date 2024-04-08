@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { FaInstagram, FaFacebookSquare, FaTiktok } from "react-icons/fa";
-
+import logo from "/images/logo1.png";
 const Footer = () => {
   const icnonsMap = {
     facebook: FaFacebookSquare,
@@ -14,22 +14,22 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-      <div className="col-md-4 d-flex align-items-center justify-content-center fs-5">
-        <a href="/" className="mb-3 me-2 mb-md-0  text-decoration-none lh-1">
-          <svg className="bi" width="30" height="24">
-            //logo
-          </svg>
+    <footer className="container d-flex flex-column flex-lg-row justify-content-center align-items-center py-3 my-4 gap-2 border-top">
+      <div className="col-md-4 d-flex justify-content-center align-items-center">
+        <a href="/" className="mb-3 text-decoration-none lh-1">
+          <img src={logo} style={{ height: "55px" }} alt="gym nation logo" />
         </a>
-        <span className="mb-3 mb-md-0 ">
+      </div>
+      <div className="col-md-4 d-flex align-items-center justify-content-center  text-center fs-5">
+        <span className="mb-3">
           © {new Date().getFullYear()} Gym nation România
         </span>
       </div>
 
-      <ul className="col-md-4 justify-content-end list-unstyled d-flex gap-2 fs-4">
+      <ul className="col-md-4 justify-content-center  align-items-center list-unstyled d-flex gap-2 fs-4">
         {socialMedia.map(({ id, link, name, icon }) => (
-          <li key={id}>
-            <a href={link} aria-label={name}>
+          <li key={id} className="nav-item">
+            <a href={link} className="" aria-label={name}>
               {createElement(icon)}
             </a>
           </li>

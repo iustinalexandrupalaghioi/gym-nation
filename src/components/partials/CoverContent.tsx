@@ -5,9 +5,9 @@ const CoverContent = () => {
   const { pathname } = useLocation();
   const page = links.find((link) => link.path === pathname);
   return (
-    <div className="row w-100 m-0 px-4 h-100 d-flex flex-column align-items-center justify-content-center text-center">
+    <div className="row w-100 px-4 d-flex flex-column align-items-center justify-content-center text-center">
       <h1 className="display-5 fw-bold text-light">
-        <span className="text-primary">{page?.name}</span>
+        <span className="text-light">{page?.name}</span>
       </h1>
     </div>
   );

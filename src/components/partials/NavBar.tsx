@@ -6,7 +6,7 @@ import logo from "/images/logo1.png";
 const NavBar = () => {
   const { pathname } = useLocation();
   return (
-    <nav className="navbar container-fluid navbar-expand-lg navbar-dark">
+    <nav className={`navbar container-fluid navbar-expand-lg navbar-dark`}>
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img src={logo} className="img-fluid" style={{ height: "55px" }} />
