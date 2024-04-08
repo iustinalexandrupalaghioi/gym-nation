@@ -6,7 +6,7 @@ interface Props {
   setValue: Dispatch<SetStateAction<string>>;
 }
 
-const BlogQuill = ({ value, setValue }: Props) => {
+const NewBlogQuill = ({ value, setValue }: Props) => {
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -53,4 +53,4 @@ const BlogQuill = ({ value, setValue }: Props) => {
   );
 };
 
-export default BlogQuill;
+export default NewBlogQuill;

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import NewBlogGrid from "../components/blog/NewBlogGrid";
-import BlogQuill from "../components/blog/BlogQuill";
-import NewBlogPreview from "../components/blog/NewBlogPreview";
-import NewBlogButtons from "../components/blog/NewBlogButtons";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../db";
-import NewBlogImage from "../components/blog/NewBlogTitleQuill";
+import NewBlogGrid from "../components/blog/NewBlogGrid";
+import NewBlogPreview from "../components/blog/NewBlogPreview";
+import NewBlogButtons from "../components/blog/NewBlogButtons";
+import NewBlogImage from "../components/blog/NewBlogImageQuill";
+import NewBlogQuill from "../components/blog/NewBlogQuill";
 
 const NewEditBlog = () => {
   const [value, setValue] = useState("");
@@ -25,7 +25,7 @@ const NewEditBlog = () => {
   return (
     <NewBlogGrid>
       <NewBlogImage image={image} setImage={setImage} />
-      <BlogQuill value={value} setValue={setValue} />
+      <NewBlogQuill value={value} setValue={setValue} />
       {value !== "" ? <NewBlogPreview value={value} /> : null}
       <NewBlogButtons handleSubmit={handleSubmit} />
     </NewBlogGrid>
