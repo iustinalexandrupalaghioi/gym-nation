@@ -1,15 +1,14 @@
+import { Outlet } from "react-router-dom";
 import BlogGrid from "../components/blog/BlogGrid";
-import BlogPostsOverview from "../components/blog/BlogPostsOverview";
 import BlogPostsCategories from "../components/blog/BlogPostsCategories";
-import { posts } from "../data/blogs";
 
-const Blog = () => {
+const BlogLayout = () => {
   return (
     <BlogGrid>
-      <BlogPostsOverview posts={posts} />
+      <Outlet />
       <BlogPostsCategories />
     </BlogGrid>
   );
 };
 
-export default Blog;
+export default BlogLayout;

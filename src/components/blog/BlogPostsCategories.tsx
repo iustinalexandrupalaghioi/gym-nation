@@ -15,10 +15,7 @@ const BlogPostsCategories = () => {
                 key={index}
                 className="d-flex justify-content-between align-items-center"
               >
-                <Link
-                  to={`/category=${category.slug}`}
-                  className="nav-link active"
-                >
+                <Link to={`/blog/${category.slug}`} className="nav-link active">
                   {category.nume}
                 </Link>
                 <p className="text-primary fw-bold">

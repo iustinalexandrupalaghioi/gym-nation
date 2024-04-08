@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import { BlogPost } from "../../data/blogs";
+import { posts } from "../../data/blogs";
 
-interface Props {
-  posts: BlogPost[];
-}
-const BlogPostsOverview = ({ posts }: Props) => {
+const BlogPostsOverview = () => {
   return (
     <div className="col-12 col-md-8">
       {posts.map(({ id, title, img, createdAt, content }) => (
@@ -14,10 +11,12 @@ const BlogPostsOverview = ({ posts }: Props) => {
               <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">
-                  <small className="text-body-secondary">{createdAt}</small>
+                  <small className="text-body-secondary">
+                    Postat la data de: {createdAt}
+                  </small>
                 </p>
                 <p className="card-text">{content.substring(0, 70)}...</p>
-                <Link to={`/:${id}`}>Citește articolul {">>"}</Link>
+                <Link to={`/blog/${id}`}>Citește articolul {">>"}</Link>
               </div>
             </div>
 
@@ -27,6 +26,10 @@ const BlogPostsOverview = ({ posts }: Props) => {
           </div>
         </div>
       ))}
+      <div className="buttons d-flex gap-2 justify-content-between">
+        <button className="btn btn-outline-primary btnOutline">Înapoi</button>
+        <button className="btn btn-primary text-light">Pagina următoare</button>
+      </div>
     </div>
   );
 };

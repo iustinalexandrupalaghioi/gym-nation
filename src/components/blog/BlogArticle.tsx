@@ -1,28 +1,22 @@
-import { BlogPost } from "../../data/blogs";
+import { useParams } from "react-router-dom";
+import { posts } from "../../data/blogs";
 
-interface Props {
-  post: BlogPost;
-}
-const BlogArticle = ({
-  post: { id, title, content, createdAt, img },
-}: Props) => {
+const BlogArticle = () => {
+  const { id } = useParams();
+  const article = posts.find((post) => post.id == parseInt(id!));
+
   return (
     <div className="col-12 col-md-8">
-      <div key={id} className="card mb-3">
-        <div className="row g-0 justify-content-between">
-          <div className="col-12 col-lg-8">
-            <div className="card-body">
-              <h5 className="card-title">{title}</h5>
-              <p className="card-text">
-                <small className="text-body-secondary">{createdAt}</small>
-              </p>
-              <p className="card-text">{content}</p>
-            </div>
-          </div>
-
-          <div className="col-lg-4">
-            <img src={img} className="h-100 w-100 rounded-end" alt={title} />
-          </div>
+      <div className="mb-3 d-flex flex-column gap-2">
+        <img src={article?.img} className="card-img-top" alt={article?.title} />
+        <div className="card-body">
+          <h3 className="card-title">{article?.title}</h3>
+          <p className="card-text">
+            <small className="text-body-secondary">
+              Postat la data de: {article?.createdAt}
+            </small>
+          </p>
+          <p className="card-text">{article?.content}</p>
         </div>
       </div>
     </div>
