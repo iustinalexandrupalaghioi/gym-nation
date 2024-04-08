@@ -5,7 +5,6 @@ import Layout from "./pages/Layout";
 import BlogPostsOverview from "./components/blog/BlogPostsOverview";
 import BlogArticle from "./components/blog/BlogArticle";
 import BlogLayout from "./pages/BlogLayout";
-
 import NewEditBlog from "./pages/NewEditBlog";
 
 const router = createBrowserRouter([

@@ -10,6 +10,7 @@ import NewBlogQuill from "../components/blog/NewBlogQuill";
 const NewEditBlog = () => {
   const [value, setValue] = useState("");
   const [image, setImage] = useState("");
+
   const handleSubmit = () => {
     addDoc(collection(db, "posts"), { image: image, content: value })
       .then(() => {
@@ -22,6 +23,7 @@ const NewEditBlog = () => {
         );
       });
   };
+
   return (
     <NewBlogGrid>
       <NewBlogImage image={image} setImage={setImage} />

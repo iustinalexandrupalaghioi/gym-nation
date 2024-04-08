@@ -9,10 +9,7 @@ const NewBlogImage = ({ image, setImage }: Props) => {
   const modules = {
     toolbar: [["image"]],
   };
-
   const formats = ["image"];
-
-  // Add a new document in collection "cities"
 
   return (
     <div className="row my-3">
