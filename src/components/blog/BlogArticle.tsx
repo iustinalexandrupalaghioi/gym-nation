@@ -8,7 +8,11 @@ const BlogArticle = () => {
   return (
     <div className="col-12 col-md-8">
       <div className="mb-3 d-flex flex-column gap-2">
-        <img src={article?.img} className="card-img-top" alt={article?.title} />
+        <img
+          src={article?.img}
+          className="card-img-top rounded-2 shadow-lg"
+          alt={article?.title}
+        />
         <div className="card-body">
           <h3 className="card-title">{article?.title}</h3>
           <p className="card-text">

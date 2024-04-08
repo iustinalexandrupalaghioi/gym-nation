@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
-import BlogGrid from "../components/blog/BlogGrid";
 import BlogPostsCategories from "../components/blog/BlogPostsCategories";
+import BlogPostsGrid from "../components/blog/BlogPostsGrid";
 
 const BlogLayout = () => {
   return (
-    <BlogGrid>
+    <BlogPostsGrid>
       <Outlet />
       <BlogPostsCategories />
-    </BlogGrid>
+    </BlogPostsGrid>
   );
 };
 

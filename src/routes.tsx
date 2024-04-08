@@ -6,6 +6,8 @@ import BlogPostsOverview from "./components/blog/BlogPostsOverview";
 import BlogArticle from "./components/blog/BlogArticle";
 import BlogLayout from "./pages/BlogLayout";
 
+import NewEditBlog from "./pages/NewEditBlog";
+
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   {
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
           { path: "/blog/:id", element: <BlogArticle /> },
         ],
       },
+      { path: "/blog/new", element: <NewEditBlog /> },
       { path: "services", element: <Home /> },
     ],
   },

@@ -27,14 +27,14 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
             ></button>
           </div>
           <div className="modal-body row g-3">
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <img
                 src={img}
                 className="img-fluid rounded-2 shadow"
                 alt={description}
               />
             </div>
-            <div className="col-md-8">
+            <div className="col-lg-8">
               <div className="card-body">
                 <h3 className="card-title text-primary">{title}</h3>
                 <p className="card-text fs-5">{description}</p>
