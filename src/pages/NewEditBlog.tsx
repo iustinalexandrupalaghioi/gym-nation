@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { db } from "../db";
 import NewBlogGrid from "../components/blog/NewBlogGrid";
 import NewBlogPreview from "../components/blog/NewBlogPreview";
 import NewBlogButtons from "../components/blog/NewBlogButtons";
-import NewBlogImage from "../components/blog/NewBlogImageQuill";
+
 import NewBlogQuill from "../components/blog/NewBlogQuill";
+import NewBlogTitle from "../components/blog/NewBlogTitle";
+import NewBlogImage from "../components/blog/NewBlogImageQuill";
 
 const NewEditBlog = () => {
+  const [post, setPost] = useState({ title: "" });
+  const [image, setImage] = useState<File | null>(null);
   const [value, setValue] = useState("");
-  const [image, setImage] = useState("");
 
-  const handleSubmit = () => {
-    addDoc(collection(db, "posts"), { image: image, content: value })
+  const handleSubmit = async () => {
+    let imageURL = "";
+    const storage = getStorage();
+    if (image) {
+      const storageRef = ref(storage, `images/${image.name}`);
+      await uploadBytes(storageRef, image);
+      imageURL = await getDownloadURL(storageRef);
+    }
+
+    addDoc(collection(db, "posts"), {
+      blogTitle: post.title,
+      imageSource: imageURL,
+      blogContent: value,
+    })
       .then(() => {
         alert("Articolul a fost postat cu succes!");
       })
@@ -26,9 +42,22 @@ const NewEditBlog = () => {
 
   return (
     <NewBlogGrid>
-      <NewBlogImage image={image} setImage={setImage} />
+      <NewBlogTitle
+        title={post.title}
+        handleChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setPost((prev) => ({ ...prev, title: event.target.value }))
+        }
+      />
+      <NewBlogImage
+        handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+          const files = event.target.files;
+          if (files && files.length > 0) {
+            setImage(files[0]);
+          }
+        }}
+      />
       <NewBlogQuill value={value} setValue={setValue} />
-      {value !== "" ? <NewBlogPreview value={value} /> : null}
+      {value && <NewBlogPreview value={value} />}
       <NewBlogButtons handleSubmit={handleSubmit} />
     </NewBlogGrid>
   );

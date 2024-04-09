@@ -1,27 +1,45 @@
+import { db } from "../../db";
+import { collection, query, getDocs } from "firebase/firestore";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { posts } from "../../data/blogs";
 
 const BlogPostsOverview = () => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      return getDocs(query(collection(db, "posts")));
+    },
+  });
+  if (error) return;
+  if (isLoading) return <h1>Loading...</h1>;
+
   return (
     <div className="col-12 col-md-8">
-      {posts.map(({ id, title, img, createdAt, content }) => (
-        <div key={id} className="card mb-3">
+      {data?.docs.map((doc) => (
+        <div key={doc.id} className="card mb-3">
           <div className="row g-0 justify-content-between">
             <div className="col-12 col-lg-8">
               <div className="card-body">
-                <h5 className="card-title">{title}</h5>
+                <h5 className="card-title">{doc.data().blogTitle}</h5>
                 <p className="card-text">
                   <small className="text-body-secondary">
-                    Postat la data de: {createdAt}
+                    Postat la data de: {"today"}
                   </small>
                 </p>
-                <p className="card-text">{content.substring(0, 70)}...</p>
-                <Link to={`/blog/${id}`}>Citește articolul {">>"}</Link>
+                <p className="card-text">
+                  {doc.data().blogContent.substring(0, 70)}...
+                </p>
+
+                <Link to={`/blog/${doc.id}`}>Citește articolul {">>"}</Link>
               </div>
             </div>
 
             <div className="col-lg-4">
-              <img src={img} className="h-100 w-100 rounded-end" alt={title} />
+              <img
+                src={doc.data().imageSource}
+                className="h-100 w-100 rounded-end"
+                alt={""}
+              />
             </div>
           </div>
         </div>

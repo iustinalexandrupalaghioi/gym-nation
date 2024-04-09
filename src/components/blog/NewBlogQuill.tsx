@@ -40,12 +40,12 @@ const NewBlogQuill = ({ value, setValue }: Props) => {
 
   return (
     <div className="row my-5">
-      <h3 className="my-2">Conținutul articolului aici</h3>
       <ReactQuill
         className="blog-quill"
         modules={modules}
         formats={formats}
         theme="snow"
+        placeholder="Introdu conținutul articolului aici"
         value={value}
         onChange={setValue}
       />
