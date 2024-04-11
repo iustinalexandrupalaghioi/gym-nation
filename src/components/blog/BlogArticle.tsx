@@ -1,26 +1,43 @@
 import { useParams } from "react-router-dom";
-import { posts } from "../../data/blogs";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../db";
+import { useQuery } from "@tanstack/react-query";
 
 const BlogArticle = () => {
   const { id } = useParams();
-  const article = posts.find((post) => post.id == parseInt(id!));
+  const docRef = doc(db, "posts", id!);
+  const {
+    data: post,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["article"],
+    queryFn: () => {
+      return getDoc(docRef);
+    },
+  });
+  if (error) return;
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="col-12 col-md-8">
       <div className="mb-3 d-flex flex-column gap-2">
         <img
-          src={article?.img}
+          src={post?.data()?.imageSource}
           className="card-img-top rounded-2 shadow-lg"
-          alt={article?.title}
+          alt={post?.data()?.blogTitle}
         />
         <div className="card-body">
-          <h3 className="card-title">{article?.title}</h3>
+          <h3 className="card-title">{post?.data()?.blogTitle}</h3>
           <p className="card-text">
             <small className="text-body-secondary">
-              Postat la data de: {article?.createdAt}
+              Postat la data de: {post?.data()?.createdAt}
             </small>
           </p>
-          <p className="card-text">{article?.content}</p>
+          <div
+            className="card-text"
+            dangerouslySetInnerHTML={{ __html: post?.data()?.blogContent }}
+          ></div>
         </div>
       </div>
     </div>

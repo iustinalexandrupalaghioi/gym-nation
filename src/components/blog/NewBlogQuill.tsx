@@ -4,9 +4,10 @@ import "react-quill/dist/quill.snow.css";
 interface Props {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  blogQuillRef: React.RefObject<ReactQuill>;
 }
 
-const NewBlogQuill = ({ value, setValue }: Props) => {
+const NewBlogQuill = ({ value, setValue, blogQuillRef }: Props) => {
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -33,22 +34,22 @@ const NewBlogQuill = ({ value, setValue }: Props) => {
     "bullet",
     "indent",
     "link",
-    "image",
   ];
 
-  // Add a new document in collection "cities"
-
   return (
-    <div className="row my-5">
-      <ReactQuill
-        className="blog-quill"
-        modules={modules}
-        formats={formats}
-        theme="snow"
-        placeholder="Introdu conținutul articolului aici"
-        value={value}
-        onChange={setValue}
-      />
+    <div className="row">
+      <div className="form-group">
+        <label htmlFor="quill">Conținutul articolului</label>
+        <ReactQuill
+          ref={blogQuillRef}
+          className="blog-quill"
+          modules={modules}
+          formats={formats}
+          theme="snow"
+          value={value}
+          onChange={setValue}
+        />
+      </div>
     </div>
   );
 };

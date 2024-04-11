@@ -6,7 +6,8 @@ interface Props {
 }
 const NewBlogTitle = ({ title, handleChange }: Props) => {
   return (
-    <div className="form-floating">
+    <div className="form-group">
+      <label htmlFor="title">Titlul articolului</label>
       <input
         id="title"
         type="text"
@@ -15,7 +16,6 @@ const NewBlogTitle = ({ title, handleChange }: Props) => {
         value={title}
         onChange={handleChange}
       />
-      <label htmlFor="title">Titlul articolului</label>
     </div>
   );
 };

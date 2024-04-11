@@ -16,18 +16,18 @@ const BlogPostsOverview = () => {
   return (
     <div className="col-12 col-md-8">
       {data?.docs.map((doc) => (
-        <div key={doc.id} className="card mb-3">
+        <div key={doc.id} className="card border-0 shadow-lg mb-5">
           <div className="row g-0 justify-content-between">
             <div className="col-12 col-lg-8">
               <div className="card-body">
                 <h5 className="card-title">{doc.data().blogTitle}</h5>
                 <p className="card-text">
                   <small className="text-body-secondary">
-                    Postat la data de: {"today"}
+                    Postat la data de: {doc.data().createdAt}
                   </small>
                 </p>
                 <p className="card-text">
-                  {doc.data().blogContent.substring(0, 70)}...
+                  {doc.data().textContent.substring(0, 200)}...
                 </p>
 
                 <Link to={`/blog/${doc.id}`}>Citește articolul {">>"}</Link>
@@ -38,7 +38,7 @@ const BlogPostsOverview = () => {
               <img
                 src={doc.data().imageSource}
                 className="h-100 w-100 rounded-end"
-                alt={""}
+                alt={doc.data().blogTitle}
               />
             </div>
           </div>

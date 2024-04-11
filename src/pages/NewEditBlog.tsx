@@ -1,36 +1,52 @@
-import { ChangeEvent, useRef, useState } from "react";
+import ReactQuill from "react-quill";
+import { ChangeEvent, createRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { getStorage } from "firebase/storage";
+import { uploadImage } from "../services/firebase-storage";
 import { db } from "../db";
+
 import NewBlogGrid from "../components/blog/NewBlogGrid";
 import NewBlogPreview from "../components/blog/NewBlogPreview";
 import NewBlogButtons from "../components/blog/NewBlogButtons";
-
 import NewBlogQuill from "../components/blog/NewBlogQuill";
 import NewBlogTitle from "../components/blog/NewBlogTitle";
 import NewBlogImage from "../components/blog/NewBlogImageQuill";
 
 const NewEditBlog = () => {
-  const [post, setPost] = useState({ title: "" });
+  const redirect = useNavigate();
+  const [title, setTitle] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [value, setValue] = useState("");
 
+  const blogQuillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
+  const storage = getStorage();
+  const path = `blogImages/${image?.name}`;
+  let date = new Date();
+
   const handleSubmit = async () => {
-    let imageURL = "";
-    const storage = getStorage();
-    if (image) {
-      const storageRef = ref(storage, `images/${image.name}`);
-      await uploadBytes(storageRef, image);
-      imageURL = await getDownloadURL(storageRef);
+    const imageURL = await uploadImage(image, storage, path);
+    let textContent = "";
+    if (blogQuillRef.current) {
+      const quill = blogQuillRef.current.getEditor(); // Get the Quill instance
+      // Get the text content
+      textContent = quill.getText();
+    } else {
+      console.error("React Quill reference not available");
     }
 
     addDoc(collection(db, "posts"), {
-      blogTitle: post.title,
+      blogTitle: title,
       imageSource: imageURL,
       blogContent: value,
+      textContent: textContent,
+      createdAt: `${date.getDate()}/${
+        date.getMonth() + 1
+      }/${date.getFullYear()}`,
     })
       .then(() => {
         alert("Articolul a fost postat cu succes!");
+        redirect("/blog");
       })
       .catch((err) => {
         console.error(err.message);
@@ -43,9 +59,9 @@ const NewEditBlog = () => {
   return (
     <NewBlogGrid>
       <NewBlogTitle
-        title={post.title}
+        title={title}
         handleChange={(event: ChangeEvent<HTMLInputElement>) =>
-          setPost((prev) => ({ ...prev, title: event.target.value }))
+          setTitle(event.target.value)
         }
       />
       <NewBlogImage
@@ -56,8 +72,13 @@ const NewEditBlog = () => {
           }
         }}
       />
-      <NewBlogQuill value={value} setValue={setValue} />
+      <NewBlogQuill
+        blogQuillRef={blogQuillRef}
+        value={value}
+        setValue={setValue}
+      />
       {value && <NewBlogPreview value={value} />}
+
       <NewBlogButtons handleSubmit={handleSubmit} />
     </NewBlogGrid>
   );

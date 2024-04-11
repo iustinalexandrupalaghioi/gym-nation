@@ -5,7 +5,7 @@ interface Props {
 }
 const NewBlogButtons = ({ handleSubmit }: Props) => {
   return (
-    <div className="container-fluid pt-2 d-flex justify-content-end gap-2">
+    <div className="container-fluid mt-3 d-flex justify-content-end gap-2">
       <Link to="/blog" className="btn btn-outline-primary btnOutline">
         Anulează
       </Link>
