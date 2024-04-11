@@ -6,7 +6,9 @@ import router from "./routes.tsx";
 import "./assets/styles/_custom.scss";
 import "bootstrap";
 import "./index.css";
-const queryClient = new QueryClient();
+
+export const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

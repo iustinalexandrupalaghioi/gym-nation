@@ -1,21 +1,9 @@
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../db";
-import { useQuery } from "@tanstack/react-query";
+import useBlogPost from "../../hooks/useBlogPost";
 
 const BlogArticle = () => {
   const { id } = useParams();
-  const docRef = doc(db, "posts", id!);
-  const {
-    data: post,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["article"],
-    queryFn: () => {
-      return getDoc(docRef);
-    },
-  });
+  const { data: post, error, isLoading } = useBlogPost(id!);
   if (error) return;
   if (isLoading) return <h1>Loading...</h1>;
 
