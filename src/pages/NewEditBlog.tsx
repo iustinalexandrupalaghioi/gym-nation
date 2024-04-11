@@ -1,5 +1,11 @@
 import ReactQuill from "react-quill";
-import { ChangeEvent, createRef, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  MouseEventHandler,
+  createRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -12,20 +18,30 @@ import NewBlogButtons from "../components/blog/NewBlogButtons";
 import NewBlogQuill from "../components/blog/NewBlogQuill";
 import NewBlogTitle from "../components/blog/NewBlogTitle";
 import NewBlogImage from "../components/blog/NewBlogImageQuill";
+import NewBlogCategory from "../components/blog/NewBlogCategory";
+
+interface BlogPost {
+  title: string;
+  image: File | null;
+  category: string;
+}
 
 const NewEditBlog = () => {
   const redirect = useNavigate();
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState<File | null>(null);
   const [value, setValue] = useState("");
+  const [post, setPost] = useState<BlogPost>({
+    title: "",
+    image: null,
+    category: "",
+  });
 
   const blogQuillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
   const storage = getStorage();
-  const path = `blogImages/${image?.name}`;
+  const path = `blogImages/${post.image?.name}`;
   let date = new Date();
 
   const handleSubmit = async () => {
-    const imageURL = await uploadImage(image, storage, path);
+    const imageURL = await uploadImage(post.image, storage, path);
     let textContent = "";
     if (blogQuillRef.current) {
       const quill = blogQuillRef.current.getEditor(); // Get the Quill instance
@@ -36,7 +52,7 @@ const NewEditBlog = () => {
     }
 
     addDoc(collection(db, "posts"), {
-      blogTitle: title,
+      blogTitle: post.title,
       imageSource: imageURL,
       blogContent: value,
       textContent: textContent,
@@ -59,16 +75,17 @@ const NewEditBlog = () => {
   return (
     <NewBlogGrid>
       <NewBlogTitle
-        title={title}
+        title={post.title}
         handleChange={(event: ChangeEvent<HTMLInputElement>) =>
-          setTitle(event.target.value)
+          setPost((prev) => ({ ...prev, title: event.target.value }))
         }
       />
+      <NewBlogCategory category={post.category} />
       <NewBlogImage
         handleChange={(event: ChangeEvent<HTMLInputElement>) => {
           const files = event.target.files;
           if (files && files.length > 0) {
-            setImage(files[0]);
+            setPost((prev) => ({ ...prev, image: files[0] }));
           }
         }}
       />

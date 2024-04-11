@@ -52,7 +52,7 @@ export const categoriiArticole = [
   {
     nume: "Toate categoriile",
     slug: "",
-    subcategorii: [
+    titluri: [
       "Alimente sănătoase și echilibrate",
       "Planuri de masă pentru diverse scopuri",
       "Importanța hidratării în dietă",
@@ -83,7 +83,7 @@ export const categoriiArticole = [
   {
     nume: "Nutriție și Dietă",
     slug: "nutritie-si-dieta",
-    subcategorii: [
+    titluri: [
       "Alimente sănătoase și echilibrate",
       "Planuri de masă pentru diverse scopuri",
       "Importanța hidratării în dietă",
@@ -94,7 +94,7 @@ export const categoriiArticole = [
   {
     nume: "Fitness și Exerciții",
     slug: "fitness-si-nutritie",
-    subcategorii: [
+    titluri: [
       "Alimente sănătoase și echilibrate",
       "Planuri de masă pentru diverse scopuri",
       "Importanța hidratării în dietă",
@@ -105,7 +105,7 @@ export const categoriiArticole = [
   {
     nume: "Antrenamente în Sala de Fitness",
     slug: "antrenamente-in-sala-de-fitness",
-    subcategorii: [
+    titluri: [
       "Rutine de antrenament cu greutăți libere (bară și gantere)",
       "Utilizarea echipamentului de forță și cardio",
       "Tehnici corecte de ridicare și manipulare a greutăților",
@@ -116,7 +116,7 @@ export const categoriiArticole = [
   {
     nume: "Antrenamente în Aer Liber",
     slug: "antrenamente-in-aer-liber",
-    subcategorii: [
+    titluri: [
       "Beneficiile exercițiilor în aer liber pentru sănătatea fizică și mentală",
       "Rutine de alergare, ciclism sau mers pe jos",
       "Antrenamente HIIT (antrenament intervalat de mare intensitate) în aer liber",
@@ -127,7 +127,7 @@ export const categoriiArticole = [
   {
     nume: "Antrenamente acasă",
     slug: "antrenamente-acasa",
-    subcategorii: [
+    titluri: [
       "Setarea unui spațiu de antrenament eficient acasă",
       "Antrenamente fără echipament sau cu echipament minimal",
       "Utilizarea greutății corporale în antrenamentele la domiciliu",

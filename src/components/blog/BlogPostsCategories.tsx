@@ -19,7 +19,7 @@ const BlogPostsCategories = () => {
                   {category.nume}
                 </Link>
                 <p className="text-primary fw-bold">
-                  {category.subcategorii.length}
+                  {category.titluri.length}
                 </p>
               </li>
             ))}
