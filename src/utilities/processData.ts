@@ -2,7 +2,6 @@ import { RefObject } from "react";
 import ReactQuill from "react-quill";
 import useImage from "../hooks/useImage";
 import slugify from "slugify";
-import { categoriiArticole } from "../data/blogs";
 import useCategory from "../hooks/useCategory";
 
 const processData = async (
@@ -24,11 +23,11 @@ const processData = async (
     replacement: "-",
     lower: true,
   });
-  const c = useCategory(category);
+  const categoryName = useCategory(category);
   return {
     title: title,
     titleSlug: titleSlug,
-    categorySlug: c?.slug,
+    category: categoryName,
     image: imageURL,
     htmlContent: value,
     textContent: textContent,

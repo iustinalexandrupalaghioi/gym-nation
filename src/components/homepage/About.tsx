@@ -8,7 +8,7 @@ const AboutSection = () => {
         <div className="col-12 col-lg-6">
           <img
             src={heroImage}
-            className=" img-fluid rounded-4 shadow-lg"
+            className=" img-fluid rounded-4 shadow"
             alt="Gym Nation representative picture"
             loading="lazy"
           />

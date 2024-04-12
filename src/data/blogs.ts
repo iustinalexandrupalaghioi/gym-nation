@@ -1,56 +1,6 @@
-export const posts = [
-  {
-    id: 1,
-    title: "Descoperă Secretele unei Vieți Sănătoase: Fitness și Nutriție",
-    img: "/images/about-img.jpg",
-    content:
-      "Bine ai venit în lumea fitness-ului și a nutriției, unde sănătatea și bunăstarea sunt prioritare! Este esențial să-ți asumi controlul asupra alegerilor tale pentru a trăi o viață echilibrată și plină de energie. Indiferent dacă vrei să construiești mușchi, să slăbești sau să îți îmbunătățești performanțele sportive, combinația dintre exerciții fizice și o alimentație sănătoasă este cheia succesului.\n\nFitness-ul nu înseamnă doar antrenamente intense la sală. Poți adopta și alte activități plăcute precum yoga, alergatul în aer liber sau înotul. Importanța este să fii consecvent și să-ți asiguri mișcare în mod regulat.\n\nPe de altă parte, nutriția reprezintă combustibilul corpului tău. O dietă echilibrată, bogată în nutrienți esențiali precum proteinele, carbohidrații complecși, grăsimile sănătoase, vitaminele și mineralele, te va ajuta să-ți menții nivelul de energie și să-ți optimizezi performanțele.\n\nNu uita să-ți acorzi și odihna necesară. Somnul adecvat este esențial pentru recuperarea musculară și pentru funcționarea optimă a organismului în general.\n\nDescoperă și tu plăcerea de a fi în formă și de a te hrăni sănătos! Viața ta merită să fie trăită la intensitate maximă.",
-    createdAt: "2024-04-06",
-  },
-  {
-    id: 2,
-    title: "Descoperă Secretele unei Vieți Sănătoase: Fitness și Nutriție",
-    img: "/images/about-img.jpg",
-    content:
-      "Bine ai venit în lumea fitness-ului și a nutriției, unde sănătatea și bunăstarea sunt prioritare! Este esențial să-ți asumi controlul asupra alegerilor tale pentru a trăi o viață echilibrată și plină de energie. Indiferent dacă vrei să construiești mușchi, să slăbești sau să îți îmbunătățești performanțele sportive, combinația dintre exerciții fizice și o alimentație sănătoasă este cheia succesului.\n\nFitness-ul nu înseamnă doar antrenamente intense la sală. Poți adopta și alte activități plăcute precum yoga, alergatul în aer liber sau înotul. Importanța este să fii consecvent și să-ți asiguri mișcare în mod regulat.\n\nPe de altă parte, nutriția reprezintă combustibilul corpului tău. O dietă echilibrată, bogată în nutrienți esențiali precum proteinele, carbohidrații complecși, grăsimile sănătoase, vitaminele și mineralele, te va ajuta să-ți menții nivelul de energie și să-ți optimizezi performanțele.\n\nNu uita să-ți acorzi și odihna necesară. Somnul adecvat este esențial pentru recuperarea musculară și pentru funcționarea optimă a organismului în general.\n\nDescoperă și tu plăcerea de a fi în formă și de a te hrăni sănătos! Viața ta merită să fie trăită la intensitate maximă.",
-    createdAt: "2024-04-06",
-  },
-  {
-    id: 3,
-    title: "Descoperă Secretele unei Vieți Sănătoase: Fitness și Nutriție",
-    img: "/images/about-img.jpg",
-    content:
-      "Bine ai venit în lumea fitness-ului și a nutriției, unde sănătatea și bunăstarea sunt prioritare! Este esențial să-ți asumi controlul asupra alegerilor tale pentru a trăi o viață echilibrată și plină de energie. Indiferent dacă vrei să construiești mușchi, să slăbești sau să îți îmbunătățești performanțele sportive, combinația dintre exerciții fizice și o alimentație sănătoasă este cheia succesului.\n\nFitness-ul nu înseamnă doar antrenamente intense la sală. Poți adopta și alte activități plăcute precum yoga, alergatul în aer liber sau înotul. Importanța este să fii consecvent și să-ți asiguri mișcare în mod regulat.\n\nPe de altă parte, nutriția reprezintă combustibilul corpului tău. O dietă echilibrată, bogată în nutrienți esențiali precum proteinele, carbohidrații complecși, grăsimile sănătoase, vitaminele și mineralele, te va ajuta să-ți menții nivelul de energie și să-ți optimizezi performanțele.\n\nNu uita să-ți acorzi și odihna necesară. Somnul adecvat este esențial pentru recuperarea musculară și pentru funcționarea optimă a organismului în general.\n\nDescoperă și tu plăcerea de a fi în formă și de a te hrăni sănătos! Viața ta merită să fie trăită la intensitate maximă.",
-    createdAt: "2024-04-06",
-  },
-  {
-    id: 4,
-    title: "Descoperă Secretele unei Vieți Sănătoase: Fitness și Nutriție",
-    img: "/images/about-img.jpg",
-    content:
-      "Bine ai venit în lumea fitness-ului și a nutriției, unde sănătatea și bunăstarea sunt prioritare! Este esențial să-ți asumi controlul asupra alegerilor tale pentru a trăi o viață echilibrată și plină de energie. Indiferent dacă vrei să construiești mușchi, să slăbești sau să îți îmbunătățești performanțele sportive, combinația dintre exerciții fizice și o alimentație sănătoasă este cheia succesului.\n\nFitness-ul nu înseamnă doar antrenamente intense la sală. Poți adopta și alte activități plăcute precum yoga, alergatul în aer liber sau înotul. Importanța este să fii consecvent și să-ți asiguri mișcare în mod regulat.\n\nPe de altă parte, nutriția reprezintă combustibilul corpului tău. O dietă echilibrată, bogată în nutrienți esențiali precum proteinele, carbohidrații complecși, grăsimile sănătoase, vitaminele și mineralele, te va ajuta să-ți menții nivelul de energie și să-ți optimizezi performanțele.\n\nNu uita să-ți acorzi și odihna necesară. Somnul adecvat este esențial pentru recuperarea musculară și pentru funcționarea optimă a organismului în general.\n\nDescoperă și tu plăcerea de a fi în formă și de a te hrăni sănătos! Viața ta merită să fie trăită la intensitate maximă.",
-    createdAt: "2024-04-06",
-  },
-  {
-    id: 5,
-    title: "Descoperă Secretele unei Vieți Sănătoase: Fitness și Nutriție",
-    img: "/images/about-img.jpg",
-    content:
-      "Bine ai venit în lumea fitness-ului și a nutriției, unde sănătatea și bunăstarea sunt prioritare! Este esențial să-ți asumi controlul asupra alegerilor tale pentru a trăi o viață echilibrată și plină de energie. Indiferent dacă vrei să construiești mușchi, să slăbești sau să îți îmbunătățești performanțele sportive, combinația dintre exerciții fizice și o alimentație sănătoasă este cheia succesului.\n\nFitness-ul nu înseamnă doar antrenamente intense la sală. Poți adopta și alte activități plăcute precum yoga, alergatul în aer liber sau înotul. Importanța este să fii consecvent și să-ți asiguri mișcare în mod regulat.\n\nPe de altă parte, nutriția reprezintă combustibilul corpului tău. O dietă echilibrată, bogată în nutrienți esențiali precum proteinele, carbohidrații complecși, grăsimile sănătoase, vitaminele și mineralele, te va ajuta să-ți menții nivelul de energie și să-ți optimizezi performanțele.\n\nNu uita să-ți acorzi și odihna necesară. Somnul adecvat este esențial pentru recuperarea musculară și pentru funcționarea optimă a organismului în general.\n\nDescoperă și tu plăcerea de a fi în formă și de a te hrăni sănătos! Viața ta merită să fie trăită la intensitate maximă.",
-    createdAt: "2024-04-06",
-  },
-];
-export interface BlogPost {
-  id: number;
-  title: string;
-  img: string;
-  content: string;
-  createdAt: string;
-}
-
 export const categoriiArticole = [
   {
-    nume: "Toate categoriile",
+    name: "Toate categoriile",
     slug: "",
     titluri: [
       "Alimente sănătoase și echilibrate",
@@ -81,7 +31,7 @@ export const categoriiArticole = [
     ],
   },
   {
-    nume: "Nutriție și Dietă",
+    name: "Nutriție și Dietă",
     slug: "nutritie-si-dieta",
     titluri: [
       "Alimente sănătoase și echilibrate",
@@ -92,7 +42,7 @@ export const categoriiArticole = [
     ],
   },
   {
-    nume: "Fitness și Exerciții",
+    name: "Fitness și Exerciții",
     slug: "fitness-si-nutritie",
     titluri: [
       "Alimente sănătoase și echilibrate",
@@ -103,7 +53,7 @@ export const categoriiArticole = [
     ],
   },
   {
-    nume: "Antrenamente în Sala de Fitness",
+    name: "Antrenamente în Sala de Fitness",
     slug: "antrenamente-in-sala-de-fitness",
     titluri: [
       "Rutine de antrenament cu greutăți libere (bară și gantere)",
@@ -114,7 +64,7 @@ export const categoriiArticole = [
     ],
   },
   {
-    nume: "Antrenamente în Aer Liber",
+    name: "Antrenamente în Aer Liber",
     slug: "antrenamente-in-aer-liber",
     titluri: [
       "Beneficiile exercițiilor în aer liber pentru sănătatea fizică și mentală",
@@ -125,7 +75,7 @@ export const categoriiArticole = [
     ],
   },
   {
-    nume: "Antrenamente acasă",
+    name: "Antrenamente acasă",
     slug: "antrenamente-acasa",
     titluri: [
       "Setarea unui spațiu de antrenament eficient acasă",

@@ -19,7 +19,7 @@ const ServicesCard = ({ service: { id, title, img } }: Props) => {
             <FaPlus />
           </h4>
         </div>
-        <img src={img} />
+        <img src={img} alt={title} />
       </div>
     </div>
   );

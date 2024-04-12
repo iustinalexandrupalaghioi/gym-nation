@@ -4,7 +4,7 @@ import { categoriiArticole } from "../../data/blogs";
 const BlogPostsCategories = () => {
   return (
     <div className="col-0 col-md-4 d-none d-md-block">
-      <div className="card border-0 shadow-lg">
+      <div className="card border-0 shadow">
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>
@@ -16,7 +16,7 @@ const BlogPostsCategories = () => {
                 className="d-flex justify-content-between align-items-center"
               >
                 <Link to={`/blog/${category.slug}`} className="nav-link active">
-                  {category.nume}
+                  {category.name}
                 </Link>
                 <p className="text-primary fw-bold">
                   {category.titluri.length}

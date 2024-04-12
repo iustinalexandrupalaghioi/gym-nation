@@ -2,27 +2,27 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
-import BlogPostsOverview from "./components/blog/BlogPostsOverview";
-import BlogArticle from "./components/blog/BlogArticle";
-import BlogLayout from "./pages/BlogLayout";
 import NewEditBlog from "./pages/NewEditBlog";
+import ErrorPage from "./pages/ErrorPage";
+import BlogPostsPage from "./pages/BlogPostsPage";
+import BlogArticlePage from "./pages/BlogArticlePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   {
-    path: "/",
+    path: "/blog",
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "blog",
-        element: <BlogLayout />,
-        children: [
-          { index: true, element: <BlogPostsOverview /> },
-          { path: "/blog/:id", element: <BlogArticle /> },
-        ],
+        index: true,
+        element: <BlogPostsPage />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogArticlePage />,
       },
       { path: "/blog/new", element: <NewEditBlog /> },
-      { path: "services", element: <Home /> },
     ],
   },
 ]);
