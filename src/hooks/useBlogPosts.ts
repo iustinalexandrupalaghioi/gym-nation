@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../services/api-client";
+import APIClient from "../utilities/api-client";
 import ms from "ms";
 
 const apiClient = new APIClient("/posts");

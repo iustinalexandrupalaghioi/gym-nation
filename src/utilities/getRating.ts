@@ -1,4 +1,4 @@
-const useStars = (stars: number) => {
+const getRating = (stars: number) => {
   let starNumber = [];
   let regStars = [];
   if (stars < 5) {
@@ -11,4 +11,4 @@ const useStars = (stars: number) => {
   }
   return { regStars, starNumber };
 };
-export default useStars;
+export default getRating;

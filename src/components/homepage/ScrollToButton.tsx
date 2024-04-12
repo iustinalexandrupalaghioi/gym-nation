@@ -1,5 +1,5 @@
 import { FaArrowUp } from "react-icons/fa";
-import scrollToSection from "../../services/scrollToSection";
+import scrollToSection from "../../utilities/scrollToSection";
 
 interface Props {
   sectionId: string;

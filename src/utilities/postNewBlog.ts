@@ -1,9 +1,9 @@
 import { DocumentData } from "firebase/firestore";
-import APIClient from "../services/api-client";
+import APIClient from "./api-client";
 import { queryClient } from "../main";
 
 const apiClient = new APIClient("/posts");
-const useNewBlog = async (data: DocumentData) => {
+const postNewBlog = async (data: DocumentData) => {
   await apiClient
     .post(data)
     .then(() => {
@@ -17,4 +17,4 @@ const useNewBlog = async (data: DocumentData) => {
       );
     });
 };
-export default useNewBlog;
+export default postNewBlog;

@@ -1,6 +1,6 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { Testimonial } from "../../data/testimonials";
-import useStars from "../../hooks/useStars";
+import getRating from "../../utilities/getRating";
 
 interface Props {
   testimonial: Testimonial;
@@ -8,7 +8,7 @@ interface Props {
 const TestimonialCard = ({
   testimonial: { id, name, content, img, stars },
 }: Props) => {
-  const { regStars, starNumber } = useStars(stars);
+  const { regStars, starNumber } = getRating(stars);
   return (
     <div
       className="card h-100 p-4 rounded-4 border-0 shadow d-flex flex-column justify-content-between"

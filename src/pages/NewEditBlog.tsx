@@ -1,14 +1,17 @@
 import ReactQuill from "react-quill";
 import { ChangeEvent, createRef, useState } from "react";
-import useNewBlog from "../hooks/useNewBlog";
+import { useNavigate } from "react-router-dom";
+import postNewBlog from "../utilities/postNewBlog";
+import processData from "../utilities/processData";
+
 import NewBlogGrid from "../components/blog/NewBlogGrid";
 import NewBlogPreview from "../components/blog/NewBlogPreview";
 import NewBlogButtons from "../components/blog/NewBlogButtons";
 import NewBlogQuill from "../components/blog/NewBlogQuill";
 import NewBlogTitle from "../components/blog/NewBlogTitle";
 import NewBlogImage from "../components/blog/NewBlogImageQuill";
-import useProcessData from "../hooks/useProcessData";
-import { useNavigate } from "react-router-dom";
+import NewBlogCategory from "../components/blog/NewBlogCategory";
+import ErrorPage from "./ErrorPage";
 
 interface BlogPost {
   title: string;
@@ -23,18 +26,22 @@ const NewEditBlog = () => {
     image: null,
     category: "",
   });
-  const blogQuillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
+
+  const quillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
   const navigate = useNavigate();
+
   const handleSubmit = async () => {
     //pregatirea datelor pentru inserarea in baza de date
-    const data = await useProcessData(
+    const data = await processData(
       post.image,
-      blogQuillRef,
+      quillRef,
       post.title,
+      post.category,
       value
     );
+
     //incarcarea articolului in baza de date
-    useNewBlog(data).then(() => navigate("/blog"));
+    postNewBlog(data).then(() => navigate("/blog"));
   };
 
   return (
@@ -45,6 +52,11 @@ const NewEditBlog = () => {
           setPost((prev) => ({ ...prev, title: event.target.value }))
         }
       />
+      <NewBlogCategory
+        setCategory={(event: ChangeEvent<HTMLSelectElement>) =>
+          setPost((prev) => ({ ...prev, category: event.target.value }))
+        }
+      />
       <NewBlogImage
         handleChange={(event: ChangeEvent<HTMLInputElement>) => {
           const files = event.target.files;
@@ -53,11 +65,7 @@ const NewEditBlog = () => {
           }
         }}
       />
-      <NewBlogQuill
-        blogQuillRef={blogQuillRef}
-        value={value}
-        setValue={setValue}
-      />
+      <NewBlogQuill blogQuillRef={quillRef} value={value} setValue={setValue} />
       {value && <NewBlogPreview value={value} />}
       <NewBlogButtons handleSubmit={handleSubmit} />
     </NewBlogGrid>

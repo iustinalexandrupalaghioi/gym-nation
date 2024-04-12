@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import scrollToSection from "../../services/scrollToSection";
+import scrollToSection from "../../utilities/scrollToSection";
 
 const HomeCoverContent = () => {
   return (

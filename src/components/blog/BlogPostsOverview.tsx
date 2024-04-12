@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import useBlogPosts from "../../hooks/useBlogPosts";
+import ErrorPage from "../../pages/ErrorPage";
 
 const BlogPostsOverview = () => {
   const { data, error, isLoading } = useBlogPosts();
 
-  if (error) return;
+  if (error) return <ErrorPage />;
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
@@ -30,7 +31,7 @@ const BlogPostsOverview = () => {
 
             <div className="col-lg-4">
               <img
-                src={doc.data().imageSource}
+                src={doc.data().image}
                 className="h-100 w-100 rounded-end"
                 alt={doc.data().blogTitle}
               />

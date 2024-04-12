@@ -1,9 +1,10 @@
+import { ChangeEvent } from "react";
 import { categoriiArticole } from "../../data/blogs";
 
 interface Props {
-  category: string;
+  setCategory: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
-const NewBlogCategory = ({ category }: Props) => {
+const NewBlogCategory = ({ setCategory }: Props) => {
   return (
     <div className="form-group mb-3">
       <label htmlFor="category">Categorie</label>
@@ -11,14 +12,14 @@ const NewBlogCategory = ({ category }: Props) => {
         className="form-select"
         id="category"
         aria-label="Alege o categorie"
-        value={category}
+        onChange={setCategory}
       >
-        <option selected>Alege o categorie din listă</option>
+        <option value="">{"Alege o categorie din listă"}</option>
         {categoriiArticole.map(
-          (category, index) =>
-            category.slug !== "" && (
-              <option key={index} value={category.slug}>
-                {category.nume}
+          (option, index) =>
+            option.slug !== "" && (
+              <option key={index} value={option.slug}>
+                {option.nume}
               </option>
             )
         )}
