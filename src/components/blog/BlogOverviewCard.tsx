@@ -23,7 +23,9 @@ const BlogOverviewCard = ({ doc }: Props) => {
               {doc.data().textContent.substring(0, 200)}...
             </p>
 
-            <Link to={`/blog/${doc.id}`}>Citește articolul {">>"}</Link>
+            <Link reloadDocument={true} to={`/blog/${doc.id}`}>
+              Citește articolul {">>"}
+            </Link>
           </div>
         </div>
 
