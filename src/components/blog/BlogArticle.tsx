@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import useBlogPost from "../../hooks/useBlogPost";
 import DOMPurify from "dompurify";
+import { useEffect } from "react";
 
 const BlogArticle = () => {
   const { id } = useParams();
   const { data: post, error, isLoading } = useBlogPost(id!);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (error) return;
   if (isLoading) return <h1>Loading...</h1>;
 
