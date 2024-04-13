@@ -7,8 +7,8 @@ import {
   addDoc,
   DocumentData,
 } from "firebase/firestore";
-import { db } from "../db";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { db } from "../db";
 
 class APIClient {
   endpoint: string;
@@ -17,7 +17,9 @@ class APIClient {
   }
 
   getAll = () => {
-    return getDocs(query(collection(db, this.endpoint)));
+    return getDocs(query(collection(db, this.endpoint))).then(
+      (res) => res.docs
+    );
   };
 
   get = (id: string) => {

@@ -8,9 +8,10 @@ const BlogPostsOverview = () => {
 
   if (error) return <ErrorPage />;
   if (isLoading) return <h1>Loading...</h1>;
+
   return (
     <div className="col-12 col-md-8">
-      {posts?.docs.map((doc) => (
+      {posts?.map((doc) => (
         <BlogOverviewCard doc={doc} key={doc.id} />
       ))}
       <BlogOverviewButtons />

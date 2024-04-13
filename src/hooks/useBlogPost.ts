@@ -5,7 +5,7 @@ const apiClient = new APIClient("posts");
 
 const useBlogPost = (id: string) => {
   return useQuery({
-    queryKey: ["post"],
+    queryKey: ["post", id],
     queryFn: () => apiClient.get(id),
   });
 };

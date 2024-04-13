@@ -13,8 +13,8 @@ const ServicesCard = ({ service: { id, title, img } }: Props) => {
       data-bs-toggle="modal"
       data-bs-target={`#modal-${id}`}
     >
-      <div className="card card-cover h-100 overflow-hidden rounded-4 shadow-lg">
-        <div className="layer d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+      <div className="card card-cover h-100 overflow-hidden border-0 shadow-lg">
+        <div className="layer d-flex flex-column left-0 top-0 w-100 h-100 p-5 pb-3 text-light text-shadow-1">
           <h4 className="display-6 lh-1 fw-bold text-center px-2">
             <FaPlus />
           </h4>
