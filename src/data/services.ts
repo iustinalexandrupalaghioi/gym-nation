@@ -1,4 +1,4 @@
-export const services = [
+const services = [
   {
     id: 1,
     title: "Antrenamente în sală",
@@ -42,3 +42,4 @@ export const services = [
     img: "/images/justhealthy.jpg",
   },
 ];
+export default services;

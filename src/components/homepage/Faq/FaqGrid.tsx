@@ -1,4 +1,4 @@
-import { faq } from "../../../data/faq";
+import faq from "../../../data/faq";
 import CollapseFaq from "./CollapseFaq";
 
 import "./FaqGrid.css";

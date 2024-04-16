@@ -11,7 +11,7 @@ const iconsMapping: { [key: string]: IconType } = {
   linkedin: FaLinkedin,
 };
 
-export const people = [
+const people = [
   {
     id: 1,
     lname: "Palaghioi",
@@ -52,3 +52,4 @@ export const people = [
     ],
   },
 ];
+export default people;

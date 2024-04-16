@@ -16,7 +16,7 @@ const iconsMapping: { [key: string]: IconType } = {
   comunitate: BiGroup,
   "antrenamente-live": BiBarChart,
 };
-export const features = [
+const features = [
   {
     id: 1,
     title: "Planuri personalizate de antrenament",
@@ -75,9 +75,4 @@ export const features = [
     icon: iconsMapping["comunitate"],
   },
 ];
-export interface Feature {
-  id: number;
-  title: string;
-  description: string;
-  icon: IconType;
-}
+export default features;

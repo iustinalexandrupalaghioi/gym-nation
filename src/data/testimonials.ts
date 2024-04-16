@@ -1,4 +1,4 @@
-export const testimonials = [
+const testimonials = [
   {
     id: 1,
     name: "Alex",
@@ -49,10 +49,4 @@ export const testimonials = [
   },
 ];
 
-export interface Testimonial {
-  id: number;
-  name: string;
-  content: string;
-  stars: number;
-  img: string;
-}
+export default testimonials;

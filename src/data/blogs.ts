@@ -1,4 +1,4 @@
-export const categoriiArticole = [
+const categoriiArticole = [
   {
     name: "Toate categoriile",
     slug: "",
@@ -86,3 +86,5 @@ export const categoriiArticole = [
     ],
   },
 ];
+
+export default categoriiArticole;

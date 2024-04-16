@@ -1,4 +1,4 @@
-export const faq = [
+const faq = [
   {
     id: 1,
     question:
@@ -28,3 +28,4 @@ export const faq = [
       "În afara sesiunilor de antrenament, oferim o varietate de resurse educaționale și suport pentru a te ajuta să îți atingi obiectivele de fitness și să îți menții motivația. Acestea includ bloguri informative despre sănătate, fitness și nutriție, sesiuni de întrebări și răspunsuri cu specialiștii noștri, precum și interacțiunea cu alți membri ai comunității noastre online pentru sprijin și împărtășirea experiențelor.",
   },
 ];
+export default faq;

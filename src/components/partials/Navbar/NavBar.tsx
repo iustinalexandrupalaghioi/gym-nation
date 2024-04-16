@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { links } from "../../../data/links";
+import links from "../../../data/links";
 import "./NavBar.css";
 import logo from "/images/logo1.png";
 
