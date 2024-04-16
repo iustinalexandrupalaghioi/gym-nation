@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { categoriiArticole } from "../../data/blogs";
+import categoriiArticole from "../../data/blogs";
 
 interface Props {
   handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
