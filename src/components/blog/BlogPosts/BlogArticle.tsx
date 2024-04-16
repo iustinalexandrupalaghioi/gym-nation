@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useBlogPost from "../../hooks/useBlogPost";
+import useBlogPost from "../../../hooks/useBlogPost";
 import DOMPurify from "dompurify";
 import { useEffect } from "react";
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import categoriiArticole from "../../data/blogs";
+import categoriiArticole from "../../../data/blogs";
 
 const BlogPostsCategories = () => {
   return (

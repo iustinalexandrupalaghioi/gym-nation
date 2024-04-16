@@ -8,6 +8,7 @@ const NewBlogImage = ({ handleChange }: Props) => {
         <label htmlFor="image">Adaugă o imagine reprezentativă</label>
         <input
           type="file"
+          name="file"
           className="form-control"
           id="image"
           onChange={handleChange}

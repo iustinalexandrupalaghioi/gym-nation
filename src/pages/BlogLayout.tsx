@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import BlogPostsCategories from "../components/blog/BlogPostsCategories";
+import BlogPostsCategories from "../components/blog/BlogPosts/BlogPostsCategories";
 import BlogPostsGrid from "./BlogPostsPage";
 
 const BlogLayout = () => {

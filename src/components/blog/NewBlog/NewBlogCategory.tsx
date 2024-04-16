@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import categoriiArticole from "../../data/blogs";
+import categoriiArticole from "../../../data/blogs";
 
 interface Props {
   handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -11,6 +11,7 @@ const NewBlogCategory = ({ handleChange }: Props) => {
       <select
         className="form-select"
         id="category"
+        name="category"
         aria-label="Alege o categorie"
         onChange={handleChange}
       >

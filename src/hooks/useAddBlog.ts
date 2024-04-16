@@ -19,21 +19,22 @@ const useAddBlog = () => {
   });
   const navigate = useNavigate();
 
-  //handle title input changes
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPost((prev) => ({ ...prev, title: event.target.value }));
-  };
-
-  //handle category select changes
-  const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setPost((prev) => ({ ...prev, category: event.target.value }));
-  };
-
-  //handle image input file changes
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      setPost((prev) => ({ ...prev, image: files[0] }));
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    if (name === "title") {
+      setPost((prev) => ({ ...prev, title: value }));
+    } else if (name === "category") {
+      setPost((prev) => ({ ...prev, category: value }));
+    } else if (
+      event.target instanceof HTMLInputElement &&
+      event.target.type === "file"
+    ) {
+      const files = event.target.files;
+      if (files && files.length > 0) {
+        setPost((prev) => ({ ...prev, image: files[0] }));
+      }
     }
   };
 
@@ -59,9 +60,7 @@ const useAddBlog = () => {
     post,
     value,
     setValue,
-    handleTitleChange,
-    handleCategoryChange,
-    handleImageChange,
+    handleChange,
     handleSubmit,
   };
 };

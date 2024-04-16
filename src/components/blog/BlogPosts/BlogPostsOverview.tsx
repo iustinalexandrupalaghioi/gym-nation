@@ -1,5 +1,5 @@
-import useBlogPosts from "../../hooks/useBlogPosts";
-import ErrorPage from "../../pages/ErrorPage";
+import useBlogPosts from "../../../hooks/useBlogPosts";
+import ErrorPage from "../../../pages/ErrorPage";
 import BlogOverviewButtons from "./BlogOverviewButtons";
 import BlogOverviewCard from "./BlogOverviewCard";
 

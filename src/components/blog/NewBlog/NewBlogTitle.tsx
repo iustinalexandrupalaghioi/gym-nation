@@ -11,6 +11,7 @@ const NewBlogTitle = ({ title, handleChange }: Props) => {
       <input
         id="title"
         type="text"
+        name="title"
         className="form-control"
         placeholder="Scrie un titlu pentru postarea ta"
         value={title}
