@@ -10,20 +10,6 @@ const iconsMapping: { [key: string]: IconType } = {
   instagram: FaInstagramSquare,
   linkedin: FaLinkedin,
 };
-interface Platform {
-  id: number;
-  name: string;
-  icon: IconType;
-  link: string;
-}
-export interface Person {
-  id: number;
-  lname: string;
-  fname: string;
-  profession: string;
-  img: string;
-  social: Platform[];
-}
 
 export const people = [
   {

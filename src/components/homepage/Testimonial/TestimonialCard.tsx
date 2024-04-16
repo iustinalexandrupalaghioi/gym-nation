@@ -1,6 +1,6 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
-import { Testimonial } from "../../data/testimonials";
-import getRating from "../../utilities/getRating";
+import Testimonial from "../../../entities/Testimonial";
+import getRating from "../../../utilities/getRating";
 
 interface Props {
   testimonial: Testimonial;

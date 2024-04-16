@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { links } from "../../data/links";
+import { links } from "../../../data/links";
 
 const CoverContent = () => {
   const { pathname } = useLocation();

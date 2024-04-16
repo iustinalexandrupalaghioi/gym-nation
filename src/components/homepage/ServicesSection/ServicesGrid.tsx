@@ -1,5 +1,5 @@
 import React from "react";
-import { services } from "../../data/services";
+import { services } from "../../../data/services";
 import ServicesCard from "./ServicesCard";
 import ServicesModal from "./ServicesModal";
 

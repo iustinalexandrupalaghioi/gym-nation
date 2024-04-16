@@ -1,6 +1,6 @@
-import React from "react";
-import { Person } from "../../data/people";
-import "../../assets/styles/TeamCard.css";
+import { createElement } from "react";
+import Person from "../../../entities/Person";
+import "./TeamCard.css";
 interface Props {
   person: Person;
 }
@@ -19,7 +19,7 @@ const TeamCard = ({
         <div className="media-icons d-flex align-items-center flex-column gap-1 position-absolute mt-2">
           {social.map(({ id, icon, link }) => (
             <a key={id} href={link} target="_blank" className="text-white fs-5">
-              {React.createElement(icon)}
+              {createElement(icon)}
             </a>
           ))}
         </div>

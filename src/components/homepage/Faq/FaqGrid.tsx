@@ -1,7 +1,7 @@
-import { faq } from "../../data/faq";
+import { faq } from "../../../data/faq";
 import CollapseFaq from "./CollapseFaq";
 
-import "../../assets/styles/FaqGrid.css";
+import "./FaqGrid.css";
 
 const FaqGrid = () => {
   return (

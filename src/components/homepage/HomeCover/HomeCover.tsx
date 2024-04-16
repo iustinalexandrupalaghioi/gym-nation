@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "../../assets/styles/HomeCover.css";
+import "./HomeCover.css";
 
 const HomeCover = ({ children }: { children: ReactNode }) => {
   return (

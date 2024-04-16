@@ -1,16 +1,16 @@
 import AboutSection from "../components/homepage/About";
-import ContactGrid from "../components/homepage/ContactGrid";
-import FaqGrid from "../components/homepage/FaqGrid";
-import FeaturesGrid from "../components/homepage/FeaturesGrid";
-import HomeCover from "../components/homepage/HomeCover";
-import HomeCoverContent from "../components/homepage/HomeCoverContent";
+import ContactGrid from "../components/homepage/Contact/ContactGrid";
+import FaqGrid from "../components/homepage/Faq/FaqGrid";
+import FeaturesGrid from "../components/homepage/Features/FeaturesGrid";
+import HomeCover from "../components/homepage/HomeCover/HomeCover";
+import HomeCoverContent from "../components/homepage/HomeCover/HomeCoverContent";
 import ScrollToButton from "../components/homepage/ScrollToButton";
 import Section from "../components/homepage/Section";
-import ServicesGrid from "../components/homepage/ServicesGrid";
-import TeamGrid from "../components/homepage/TeamGrid";
-import TestimonialsGrid from "../components/homepage/TestimonialsGrid";
+import ServicesGrid from "../components/homepage/ServicesSection/ServicesGrid";
+import TeamGrid from "../components/homepage/Team/TeamGrid";
+import TestimonialsGrid from "../components/homepage/Testimonial/TestimonialsGrid";
 import Footer from "../components/partials/Footer";
-import NavBar from "../components/partials/NavBar";
+import NavBar from "../components/partials/Navbar/NavBar";
 
 const Home = () => {
   return (

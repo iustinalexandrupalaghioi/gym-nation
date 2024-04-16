@@ -1,5 +1,5 @@
-import { Service } from "../../data/services";
-import "../../assets/styles/ServicesCard.css";
+import Service from "../../../entities/Service";
+import "./ServicesCard.css";
 import { FaPlus } from "react-icons/fa";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "../../assets/styles/Cover.css";
+import "./Cover.css";
 
 const Cover = ({ children }: { children: ReactNode }) => {
   return (

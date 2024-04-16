@@ -42,9 +42,3 @@ export const services = [
     img: "/images/justhealthy.jpg",
   },
 ];
-export interface Service {
-  id: number;
-  title: string;
-  description: string;
-  img: string;
-}
