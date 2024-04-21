@@ -10,7 +10,7 @@ interface BlogQueryStore {
 }
 
 const useBlogQueryStore = create<BlogQueryStore>((set) => ({
-  blogQuery: {} as blogQuery,
+  blogQuery: { category: "" } as blogQuery,
   setCategory: (categorySlug) =>
     set(() => ({ blogQuery: { category: categorySlug } })),
 }));

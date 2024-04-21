@@ -12,9 +12,7 @@ const BlogPostsOverview = () => {
     data: posts,
     error,
     isLoading,
-  } = categorySlug
-    ? useFetchPostsBy("category.slug", categorySlug)
-    : useFetchPosts();
+  } = useFetchPostsBy("category.slug", categorySlug);
 
   if (error) return <ErrorPage />;
   if (isLoading) return <h1>Loading...</h1>;

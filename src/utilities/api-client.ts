@@ -22,20 +22,25 @@ class APIClient {
 
   getAll = async () => {
     const q = query(collection(db, this.endpoint));
+
     const res = await getDocs(q);
     const result = res.docs;
 
     const snapshot = await getCountFromServer(q);
     const count = snapshot.data().count;
+
     return { result, count };
   };
 
   get = async (field: string, id: string) => {
     const q = query(collection(db, this.endpoint), where(field, "==", id));
+
     const res = await getDocs(q);
     const result = res.docs;
+
     const snapshot = await getCountFromServer(q);
     const count = snapshot.data().count;
+
     return { result, count };
   };
 
@@ -43,10 +48,10 @@ class APIClient {
     return addDoc(collection(db, this.endpoint), data);
   };
 
-  getImageURL = async (image: File | null) => {
+  getImageURL = async (file: File | null) => {
     const storage = getStorage();
     const storageRef = ref(storage, this.endpoint);
-    await uploadBytes(storageRef, image!);
+    await uploadBytes(storageRef, file!);
     return await getDownloadURL(storageRef);
   };
 }

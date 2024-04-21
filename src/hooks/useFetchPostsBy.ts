@@ -9,7 +9,13 @@ const useFetchPostsBy = (field: string, id: string) => {
   const blogQuery = useBlogQueryStore((s) => s.blogQuery);
   return useQuery({
     queryKey: ["posts", blogQuery],
-    queryFn: () => apiClient.get(field, id),
+    queryFn: () => {
+      if (blogQuery.category) {
+        return apiClient.get(field, id);
+      } else {
+        return apiClient.getAll();
+      }
+    },
     staleTime: ms("24h"),
   });
 };
