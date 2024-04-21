@@ -9,27 +9,27 @@ const BlogCategoriesSkeleton = () => {
         </div>
         <div className="card-body">
           <ul className="list-unstyled d-flex flex-column gap-3`">
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-6"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-7"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-8"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-5"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-7"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>
-            <li className="d-flex justify-content-between">
+            <li className="d-flex justify-content-between mb-3">
               <span className="placeholder glow col-6"></span>
               <a className=" disabled placeholder col-1"></a>
             </li>

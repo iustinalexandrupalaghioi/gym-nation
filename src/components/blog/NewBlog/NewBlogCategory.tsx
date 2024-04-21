@@ -1,10 +1,11 @@
 import { ChangeEvent } from "react";
-import categoriiArticole from "../../../data/blogs";
+import useCategories from "../../../hooks/useCategories";
 
 interface Props {
   handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 const NewBlogCategory = ({ handleChange }: Props) => {
+  const { data: categories } = useCategories();
   return (
     <div className="form-group mb-3">
       <label htmlFor="category">Categorie</label>
@@ -16,11 +17,11 @@ const NewBlogCategory = ({ handleChange }: Props) => {
         onChange={handleChange}
       >
         <option value="">{"Alege o categorie din listă"}</option>
-        {categoriiArticole.map(
+        {categories?.result.map(
           (option, index) =>
-            option.slug !== "" && (
-              <option key={index} value={option.slug}>
-                {option.name}
+            option.data().slug !== "" && (
+              <option key={index} value={option.data().slug}>
+                {option.data().name}
               </option>
             )
         )}

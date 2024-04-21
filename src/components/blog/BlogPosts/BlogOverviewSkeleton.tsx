@@ -1,3 +1,4 @@
+import placeholder from "/images/placeholder.webp";
 const BlogOverviewSkeleton = () => {
   return (
     <div className="card border-0 rounded-4 shadow mb-5" aria-hidden="true">
@@ -25,7 +26,7 @@ const BlogOverviewSkeleton = () => {
 
         <div className="col-lg-4 d-flex align-items-center">
           <img
-            src="/images/placeholder.webp"
+            src={placeholder}
             className="img-fluid rounded-4 pe-md-2"
             alt="..."
           />
