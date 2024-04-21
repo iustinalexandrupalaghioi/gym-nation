@@ -2,14 +2,10 @@ import {
   getDocs,
   query,
   collection,
-  getDoc,
-  doc,
   addDoc,
   DocumentData,
   where,
   getCountFromServer,
-  or,
-  QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../db";

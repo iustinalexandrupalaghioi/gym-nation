@@ -1,4 +1,3 @@
-import useFetchPosts from "../../../hooks/useFetchPosts";
 import useFetchPostsBy from "../../../hooks/useFetchPostsBy";
 import ErrorPage from "../../../pages/ErrorPage";
 import useBlogQueryStore from "../../../utilities/blogQueryStore";
