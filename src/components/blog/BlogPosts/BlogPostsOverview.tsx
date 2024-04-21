@@ -1,10 +1,20 @@
 import useFetchPosts from "../../../hooks/useFetchPosts";
+import useFetchPostsBy from "../../../hooks/useFetchPostsBy";
 import ErrorPage from "../../../pages/ErrorPage";
+import useBlogQueryStore from "../../../utilities/blogQueryStore";
 import BlogOverviewButtons from "./BlogOverviewButtons";
 import BlogOverviewCard from "./BlogOverviewCard";
 
 const BlogPostsOverview = () => {
-  const { data: posts, error, isLoading } = useFetchPosts();
+  const categorySlug = useBlogQueryStore((s) => s.blogQuery.category);
+
+  const {
+    data: posts,
+    error,
+    isLoading,
+  } = categorySlug
+    ? useFetchPostsBy("category.slug", categorySlug)
+    : useFetchPosts();
 
   if (error) return <ErrorPage />;
   if (isLoading) return <h1>Loading...</h1>;

@@ -6,10 +6,10 @@ import useBlogQueryStore from "../utilities/blogQueryStore";
 const apiClient = new APIClient("/posts");
 
 const useFetchPosts = () => {
-  const category = useBlogQueryStore((s) => s.blogQuery);
+  const blogQuery = useBlogQueryStore((s) => s.blogQuery);
   return useQuery({
-    queryKey: ["posts", category],
-    queryFn: () => apiClient.getAll(),
+    queryKey: ["posts", blogQuery],
+    queryFn: apiClient.getAll,
     staleTime: ms("24h"),
   });
 };

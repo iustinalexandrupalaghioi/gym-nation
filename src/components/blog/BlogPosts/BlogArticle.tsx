@@ -1,44 +1,40 @@
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { useEffect } from "react";
-import useFetchPost from "../../../hooks/useFetchPost";
+
+import usePost from "../../../hooks/usePost";
 
 const BlogArticle = () => {
   const { slug } = useParams();
-  const { data, error, isLoading } = useFetchPost(
-    "article",
-    "titleSlug",
-    slug!
-  );
-  const post = data?.result[0].data();
+  const post = usePost(slug!);
+  const data = post?.data();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  if (error) return;
-  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="col-12 col-md-8">
       <div className="mb-3 d-flex flex-column gap-2">
         <img
-          src={post?.image}
+          src={data?.image}
           className="card-img-top rounded-2 shadow-lg"
-          alt={post?.title}
+          alt={data?.title}
         />
         <div className="card-body">
-          <h3 className="card-title">{post?.title}</h3>
+          <h3 className="card-title">{data?.title}</h3>
           <div className="d-inline-flex my-2 bg-primary rounded text-light px-3 py-2">
-            <p className="mb-0 fs-xs">{post?.category.name}</p>
+            <p className="mb-0 fs-xs">{data?.category.name}</p>
           </div>
           <p className="card-text">
             <small className="text-body-secondary">
-              Postat la data de: {post?.createdAt}
+              Postat la data de: {data?.createdAt}
             </small>
           </p>
           <div
             className="card-text"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(post?.htmlContent),
+              __html: DOMPurify.sanitize(data?.htmlContent),
             }}
           ></div>
         </div>

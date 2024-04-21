@@ -30,10 +30,7 @@ class APIClient {
     return { result, count };
   };
 
-  get = async (
-    field: string,
-    id: string | QueryDocumentSnapshot<DocumentData, DocumentData>
-  ) => {
+  get = async (field: string, id: string) => {
     const q = query(collection(db, this.endpoint), where(field, "==", id));
     const res = await getDocs(q);
     const result = res.docs;

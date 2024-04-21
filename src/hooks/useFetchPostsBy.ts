@@ -1,20 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../utilities/api-client";
 import ms from "ms";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import useBlogQueryStore from "../utilities/blogQueryStore";
 
 const apiClient = new APIClient("posts");
 
-const useFetchPost = (
-  key: string,
-  field: string,
-  id: string | QueryDocumentSnapshot<DocumentData, DocumentData>
-) => {
+const useFetchPostsBy = (field: string, id: string) => {
+  const blogQuery = useBlogQueryStore((s) => s.blogQuery);
   return useQuery({
-    queryKey: [key, id],
+    queryKey: ["posts", blogQuery],
     queryFn: () => apiClient.get(field, id),
     staleTime: ms("24h"),
   });
 };
 
-export default useFetchPost;
+export default useFetchPostsBy;

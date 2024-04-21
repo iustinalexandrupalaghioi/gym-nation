@@ -1,9 +1,7 @@
 import useCategories from "../../../hooks/useCategories";
-import useBlogQueryStore from "../../../utilities/blogQueryStore";
-import PostsNumber from "./PostsNumber";
+import CategoryListItem from "./CategoryListItem";
 
 const BlogPostsCategories = () => {
-  const setCategory = useBlogQueryStore((s) => s.setCategory);
   const { data: categories, error, isLoading } = useCategories();
 
   if (error) return null;
@@ -18,18 +16,7 @@ const BlogPostsCategories = () => {
         <div className="card-body">
           <ul className="list-unstyled d-flex flex-column">
             {categories?.result.map((doc) => (
-              <li
-                key={doc.id}
-                className="d-flex justify-content-between align-items-center"
-              >
-                <button
-                  className="nav-link"
-                  onClick={() => setCategory(doc.data().slug)}
-                >
-                  {doc.data().name}
-                </button>
-                <PostsNumber slug={doc.data().slug} />
-              </li>
+              <CategoryListItem key={doc.id} doc={doc} />
             ))}
           </ul>
         </div>
