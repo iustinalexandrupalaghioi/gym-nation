@@ -1,17 +1,11 @@
-import { Link, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
-import { useEffect } from "react";
-
+import { useParams } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 
 const BlogArticle = () => {
   const { slug } = useParams();
   const post = usePost(slug!);
   const data = post?.data();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="col-12 col-md-8">

@@ -17,24 +17,27 @@ class APIClient {
   }
 
   getAll = async () => {
-    const q = query(collection(db, this.endpoint));
+    const queryString = query(collection(db, this.endpoint));
 
-    const res = await getDocs(q);
+    const res = await getDocs(queryString);
     const result = res.docs;
 
-    const snapshot = await getCountFromServer(q);
+    const snapshot = await getCountFromServer(queryString);
     const count = snapshot.data().count;
 
     return { result, count };
   };
 
   get = async (field: string, id: string) => {
-    const q = query(collection(db, this.endpoint), where(field, "==", id));
+    const queryString = query(
+      collection(db, this.endpoint),
+      where(field, "==", id)
+    );
 
-    const res = await getDocs(q);
+    const res = await getDocs(queryString);
     const result = res.docs;
 
-    const snapshot = await getCountFromServer(q);
+    const snapshot = await getCountFromServer(queryString);
     const count = snapshot.data().count;
 
     return { result, count };

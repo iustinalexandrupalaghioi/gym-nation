@@ -1,11 +1,12 @@
 import useCategories from "../../../hooks/useCategories";
+import BlogCategoriesSkeleton from "./BlogCategoriesSkeleton";
 import CategoryListItem from "./CategoryListItem";
 
 const BlogPostsCategories = () => {
   const { data: categories, error, isLoading } = useCategories();
 
   if (error) return null;
-  if (isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <BlogCategoriesSkeleton />;
 
   return (
     <div className="col-0 col-md-4 d-none d-md-block">
