@@ -6,8 +6,8 @@ const apiClient = new APIClient("/categories");
 
 const useCategories = () => {
   return useQuery({
-    queryKey: ["posts"],
-    queryFn: () => apiClient.getAll(),
+    queryKey: ["categories"],
+    queryFn: apiClient.getAll,
     staleTime: ms("24h"),
   });
 };

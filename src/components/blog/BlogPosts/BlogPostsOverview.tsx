@@ -11,7 +11,7 @@ const BlogPostsOverview = () => {
 
   return (
     <div className="col-12 col-md-8">
-      {posts?.map((doc) => (
+      {posts?.result.map((doc) => (
         <BlogOverviewCard post={doc} key={doc.id} />
       ))}
       <BlogOverviewButtons />

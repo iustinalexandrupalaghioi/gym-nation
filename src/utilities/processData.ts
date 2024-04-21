@@ -2,7 +2,6 @@ import { RefObject } from "react";
 import ReactQuill from "react-quill";
 import useImage from "../hooks/useImage";
 import slugify from "slugify";
-import useCategory from "../hooks/useCategory";
 
 const processData = async (
   image: File | null,
@@ -23,7 +22,8 @@ const processData = async (
     replacement: "-",
     lower: true,
   });
-  const categoryName = useCategory(category);
+  // Find category in database
+  const categoryName = category;
   return {
     title: title,
     titleSlug: titleSlug,

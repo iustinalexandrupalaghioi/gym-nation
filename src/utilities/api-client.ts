@@ -20,21 +20,26 @@ class APIClient {
     this.endpoint = endpoint;
   }
 
-  getAll = () => {
-    return getDocs(query(collection(db, this.endpoint))).then(
-      (res) => res.docs
-    );
+  getAll = async () => {
+    const q = query(collection(db, this.endpoint));
+    const res = await getDocs(q);
+    const result = res.docs;
+
+    const snapshot = await getCountFromServer(q);
+    const count = snapshot.data().count;
+    return { result, count };
   };
 
   get = async (
     field: string,
     id: string | QueryDocumentSnapshot<DocumentData, DocumentData>
   ) => {
-    const response = await getDocs(
-      query(collection(db, this.endpoint), where(field, "==", id))
-    );
-    const snapshot = await getCountFromServer(collection(db, this.endpoint));
-    return { response, snapshot };
+    const q = query(collection(db, this.endpoint), where(field, "==", id));
+    const res = await getDocs(q);
+    const result = res.docs;
+    const snapshot = await getCountFromServer(q);
+    const count = snapshot.data().count;
+    return { result, count };
   };
 
   post = (data: DocumentData) => {

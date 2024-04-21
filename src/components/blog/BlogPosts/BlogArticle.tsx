@@ -5,8 +5,12 @@ import useFetchPost from "../../../hooks/useFetchPost";
 
 const BlogArticle = () => {
   const { slug } = useParams();
-  const { data, error, isLoading } = useFetchPost("titleSlug", slug!);
-  const post = data?.response.docs[0].data();
+  const { data, error, isLoading } = useFetchPost(
+    "article",
+    "titleSlug",
+    slug!
+  );
+  const post = data?.result[0].data();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

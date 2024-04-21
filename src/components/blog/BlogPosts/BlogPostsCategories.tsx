@@ -1,5 +1,6 @@
 import useCategories from "../../../hooks/useCategories";
 import useBlogQueryStore from "../../../utilities/blogQueryStore";
+import PostsNumber from "./PostsNumber";
 
 const BlogPostsCategories = () => {
   const setCategory = useBlogQueryStore((s) => s.setCategory);
@@ -16,7 +17,7 @@ const BlogPostsCategories = () => {
         </div>
         <div className="card-body">
           <ul className="list-unstyled d-flex flex-column">
-            {categories?.map((doc) => (
+            {categories?.result.map((doc) => (
               <li
                 key={doc.id}
                 className="d-flex justify-content-between align-items-center"
@@ -27,7 +28,7 @@ const BlogPostsCategories = () => {
                 >
                   {doc.data().name}
                 </button>
-                <p className="text-primary fw-bold">21</p>
+                <PostsNumber slug={doc.data().slug} />
               </li>
             ))}
           </ul>
