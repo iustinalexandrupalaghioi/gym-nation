@@ -6,6 +6,10 @@ import {
   doc,
   addDoc,
   DocumentData,
+  where,
+  getCountFromServer,
+  or,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../db";
@@ -22,8 +26,15 @@ class APIClient {
     );
   };
 
-  get = (id: string) => {
-    return getDoc(doc(db, this.endpoint, id));
+  get = async (
+    field: string,
+    id: string | QueryDocumentSnapshot<DocumentData, DocumentData>
+  ) => {
+    const response = await getDocs(
+      query(collection(db, this.endpoint), where(field, "==", id))
+    );
+    const snapshot = await getCountFromServer(collection(db, this.endpoint));
+    return { response, snapshot };
   };
 
   post = (data: DocumentData) => {

@@ -1,6 +1,7 @@
-import categoriiArticole from "../data/blogs";
+import useCategories from "./useCategories";
 
 const useCategory = (slug: string) => {
-  return categoriiArticole.find((c) => c.slug === slug);
+  const { data: categories } = useCategories();
+  return categories?.find((category) => category.data().slug === slug);
 };
 export default useCategory;

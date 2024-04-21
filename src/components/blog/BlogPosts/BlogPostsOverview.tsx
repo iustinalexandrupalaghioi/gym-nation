@@ -1,10 +1,10 @@
-import useBlogPosts from "../../../hooks/useBlogPosts";
+import useFetchPosts from "../../../hooks/useFetchPosts";
 import ErrorPage from "../../../pages/ErrorPage";
 import BlogOverviewButtons from "./BlogOverviewButtons";
 import BlogOverviewCard from "./BlogOverviewCard";
 
 const BlogPostsOverview = () => {
-  const { data: posts, error, isLoading } = useBlogPosts();
+  const { data: posts, error, isLoading } = useFetchPosts();
 
   if (error) return <ErrorPage />;
   if (isLoading) return <h1>Loading...</h1>;
@@ -12,7 +12,7 @@ const BlogPostsOverview = () => {
   return (
     <div className="col-12 col-md-8">
       {posts?.map((doc) => (
-        <BlogOverviewCard doc={doc} key={doc.id} />
+        <BlogOverviewCard post={doc} key={doc.id} />
       ))}
       <BlogOverviewButtons />
     </div>
