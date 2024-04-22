@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../utilities/api-client";
+import APIClient from "../utilities/firebase-client";
 import ms from "ms";
 import useBlogQueryStore from "../utilities/blogQueryStore";
 

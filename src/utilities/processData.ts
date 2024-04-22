@@ -12,13 +12,16 @@ const processData = async (
   value: string
 ) => {
   let imageURL = await useImage(image);
+
   let textContent = quillRef.current
     ? quillRef.current.getEditor().getText()
     : null;
+
   let date = new Date();
   let createdAt = `${date.getDate()}/${
     date.getMonth() + 1
   }/${date.getFullYear()}`;
+
   let titleSlug = slugify(title, {
     replacement: "-",
     lower: true,

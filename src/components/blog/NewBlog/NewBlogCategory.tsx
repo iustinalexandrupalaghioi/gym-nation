@@ -6,6 +6,7 @@ interface Props {
 }
 const NewBlogCategory = ({ handleChange }: Props) => {
   const { data: categories } = useCategories();
+
   return (
     <div className="form-group mb-3">
       <label htmlFor="category">Categorie</label>

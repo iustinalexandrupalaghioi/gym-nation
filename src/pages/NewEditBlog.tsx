@@ -1,10 +1,10 @@
-import NewBlogGrid from "../components/blog/NewBlog/NewBlogGrid";
-import NewBlogPreview from "../components/blog/NewBlog/NewBlogPreview";
 import NewBlogButtons from "../components/blog/NewBlog/NewBlogButtons";
+import NewBlogCategory from "../components/blog/NewBlog/NewBlogCategory";
+import NewBlogGrid from "../components/blog/NewBlog/NewBlogGrid";
+import NewBlogImage from "../components/blog/NewBlog/NewBlogImage";
+import NewBlogPreview from "../components/blog/NewBlog/NewBlogPreview";
 import NewBlogQuill from "../components/blog/NewBlog/NewBlogQuill";
 import NewBlogTitle from "../components/blog/NewBlog/NewBlogTitle";
-import NewBlogImage from "../components/blog/NewBlog/NewBlogImage";
-import NewBlogCategory from "../components/blog/NewBlog/NewBlogCategory";
 import useAddBlog from "../hooks/useAddBlog";
 
 const NewEditBlog = () => {

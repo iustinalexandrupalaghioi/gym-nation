@@ -47,7 +47,7 @@ class APIClient {
     return addDoc(collection(db, this.endpoint), data);
   };
 
-  getImageURL = async (file: File | null) => {
+  getFileURL = async (file: File | null) => {
     const storage = getStorage();
     const storageRef = ref(storage, this.endpoint);
     await uploadBytes(storageRef, file!);

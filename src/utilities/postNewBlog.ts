@@ -1,5 +1,5 @@
 import { DocumentData } from "firebase/firestore";
-import APIClient from "./api-client";
+import APIClient from "./firebase-client";
 import { queryClient } from "../main";
 
 const apiClient = new APIClient("/posts");
