@@ -1,5 +1,5 @@
 .cover {
   background: url("/images/background-home.avif");
   background-size: cover;
-  background-position: top;
+  background-position: center;
 }
