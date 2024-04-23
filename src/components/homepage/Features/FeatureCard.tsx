@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { Feature } from "../../../data/features";
+import Feature from "../../../entities/Feature";
 
 interface Props {
   feature: Feature;
