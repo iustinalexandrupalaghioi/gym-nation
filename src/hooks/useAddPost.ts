@@ -1,8 +1,12 @@
-import { useState, createRef, ChangeEvent } from "react";
+import { useState, createRef, ChangeEvent, RefObject } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
-import postNewBlog from "../utilities/postNewBlog";
-import processData from "../utilities/processData";
+import APIClient from "../utilities/firebase-client";
+import { DocumentData } from "firebase/firestore";
+import { queryClient } from "../main";
+import slugify from "slugify";
+import useCategory from "./useCategory";
+import useImage from "./useImage";
 
 interface BlogPost {
   title: string;
@@ -10,7 +14,7 @@ interface BlogPost {
   category: string;
 }
 const useAddPost = () => {
-  //managing state for blog
+  //managing state for blog inputs
   const [value, setValue] = useState("");
   const [post, setPost] = useState<BlogPost>({
     title: "",
@@ -18,6 +22,59 @@ const useAddPost = () => {
     category: "",
   });
   const navigate = useNavigate();
+
+  //process data user inputs
+  const processData = async (
+    image: File | null,
+    quillRef: RefObject<ReactQuill>,
+    title: string,
+    categorySlug: string,
+    value: string
+  ) => {
+    let imageURL = await useImage(image);
+
+    let textContent = quillRef.current
+      ? quillRef.current.getEditor().getText()
+      : null;
+
+    let date = new Date();
+    let createdAt = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
+
+    let titleSlug = slugify(title, {
+      replacement: "-",
+      lower: true,
+    });
+
+    const category = useCategory(categorySlug);
+    return {
+      title: title,
+      titleSlug: titleSlug,
+      category: category,
+      image: imageURL,
+      htmlContent: value,
+      textContent: textContent,
+      createdAt: createdAt,
+    };
+  };
+
+  //upload post
+  const apiClient = new APIClient("/posts");
+  const postNewBlog = async (data: DocumentData) => {
+    await apiClient
+      .post(data)
+      .then(() => {
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
+        alert("Articolul a fost postat cu succes!");
+      })
+      .catch((err) => {
+        console.error(err.message);
+        alert(
+          "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu."
+        );
+      });
+  };
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>

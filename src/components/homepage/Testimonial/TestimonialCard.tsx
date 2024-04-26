@@ -1,6 +1,5 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import Testimonial from "../../../entities/Testimonial";
-import getRating from "../../../utilities/getRating";
 
 interface Props {
   testimonial: Testimonial;
@@ -8,7 +7,16 @@ interface Props {
 const TestimonialCard = ({
   testimonial: { id, name, content, img, stars },
 }: Props) => {
-  const { regStars, starNumber } = getRating(stars);
+  let starNumber = [];
+  let regStars = [];
+  if (stars < 5) {
+    for (let i = 0; i < 5 - stars; i++) {
+      regStars[i] = i;
+    }
+  }
+  for (let i = 0; i < stars; i++) {
+    starNumber[i] = i;
+  }
   return (
     <div
       className="card h-100 p-4 rounded-4 border-0 shadow d-flex flex-column justify-content-between"
@@ -27,12 +35,8 @@ const TestimonialCard = ({
           <h5 className="card-title">{name}</h5>
           <div className="d-flex">
             <p className="text-primary">
-              {starNumber.map((star) => (
-                <FaStar key={star} />
-              ))}
-              {regStars.map((star) => (
-                <FaRegStar key={star} />
-              ))}
+              {starNumber && starNumber.map((star) => <FaStar key={star} />)}
+              {regStars && regStars.map((star) => <FaRegStar key={star} />)}
             </p>
           </div>
         </div>
