@@ -9,7 +9,7 @@ interface BlogPost {
   image: File | null;
   category: string;
 }
-const useAddBlog = () => {
+const useAddPost = () => {
   //managing state for blog
   const [value, setValue] = useState("");
   const [post, setPost] = useState<BlogPost>({
@@ -64,4 +64,4 @@ const useAddBlog = () => {
     handleSubmit,
   };
 };
-export default useAddBlog;
+export default useAddPost;

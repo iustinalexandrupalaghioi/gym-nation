@@ -10,13 +10,18 @@ const BlogOverviewCard = ({ post }: Props) => {
   return (
     <div className="card border-0 rounded-4 shadow mb-5">
       <div className="row g-0 justify-content-between">
+        <div className="col-lg-4 d-flex align-items-center">
+          <img
+            src={image}
+            className="img-fluid rounded-4 max-w-100 max-h-100 ps-lg-2"
+            alt={title}
+          />
+        </div>
         <div className="col-12 col-lg-8">
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text mb-0">
-              <small className="text-body-secondary">
-                Postat la data de: {createdAt}
-              </small>
+              <small className="text-body-secondary">Postat: {createdAt}</small>
             </p>
             <div className="d-inline-flex my-2 bg-primary rounded text-light px-3 py-2">
               <p className="mb-0 fs-xs">{category.name}</p>
@@ -25,14 +30,6 @@ const BlogOverviewCard = ({ post }: Props) => {
 
             <Link to={`/blog/${titleSlug}`}>Citește articolul {">>"}</Link>
           </div>
-        </div>
-
-        <div className="col-lg-4 d-flex align-items-center">
-          <img
-            src={image}
-            className="img-fluid rounded-4 pe-md-2"
-            alt={title}
-          />
         </div>
       </div>
     </div>

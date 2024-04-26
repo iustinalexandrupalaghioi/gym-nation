@@ -26,7 +26,7 @@ const BlogArticle = () => {
           </div>
           <p className="card-text">
             <small className="text-body-secondary">
-              Postat la data de: {data?.createdAt}
+              Postat: {data?.createdAt}
             </small>
           </p>
           <div

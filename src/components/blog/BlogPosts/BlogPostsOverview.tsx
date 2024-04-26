@@ -17,7 +17,7 @@ const BlogPostsOverview = () => {
   if (error) return <ErrorPage />;
   if (isLoading)
     return (
-      <div className="col-12 col-md-8">
+      <div className="col-12 col-md-6 col-lg-8">
         {skeletons.map((skeleton) => (
           <BlogOverviewSkeleton key={skeleton} />
         ))}
@@ -25,7 +25,7 @@ const BlogPostsOverview = () => {
     );
 
   return (
-    <div className="col-12 col-md-8">
+    <div className="col-12 col-md-6 col-lg-8">
       {posts?.result.map((doc) => (
         <BlogOverviewCard post={doc} key={doc.id} />
       ))}

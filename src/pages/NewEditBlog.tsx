@@ -5,11 +5,11 @@ import NewBlogImage from "../components/blog/NewBlog/NewBlogImage";
 import NewBlogPreview from "../components/blog/NewBlog/NewBlogPreview";
 import NewBlogQuill from "../components/blog/NewBlog/NewBlogQuill";
 import NewBlogTitle from "../components/blog/NewBlog/NewBlogTitle";
-import useAddBlog from "../hooks/useAddBlog";
+import useAddPost from "../hooks/useAddPost";
 
 const NewEditBlog = () => {
   const { quillRef, post, value, setValue, handleChange, handleSubmit } =
-    useAddBlog();
+    useAddPost();
 
   return (
     <NewBlogGrid>

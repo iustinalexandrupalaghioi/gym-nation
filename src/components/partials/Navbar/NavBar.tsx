@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import links from "../../../data/links";
 import "./NavBar.css";
 import logo from "/images/logo1.png";
@@ -8,9 +8,9 @@ const NavBar = () => {
   return (
     <nav className={`navbar container-fluid navbar-expand-lg navbar-dark`}>
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/">
           <img src={logo} className="img-fluid" style={{ height: "55px" }} />
-        </Link>
+        </NavLink>
         <button
           className="navbar-toggler border-0"
           type="button"
@@ -24,22 +24,26 @@ const NavBar = () => {
         </button>
         <div className="collapse navbar-collapse " id="navbarNav">
           <ul className="navbar-nav fs-5 fw-bold ms-auto align-items-lg-center align-items-end">
-            {links.map((link) => (
-              <li key={link.id} className="nav-item">
-                <Link
-                  className={
-                    link.path === "/login"
-                      ? "btn btn-primary text-light"
-                      : pathname === link.path
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                  to={link.path}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            <li className="nav-item">
+              <NavLink to="/" className="nav-link">
+                Acasă
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/blog" className="nav-link">
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/servicii" className="nav-link">
+                Servicii
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-primary text-light">
+                Autentificare
+              </button>
+            </li>
           </ul>
         </div>
       </div>

@@ -41,13 +41,22 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
               </div>
             </div>
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer justify-content-between">
             <button
               type="button"
-              className="btn btn-primary text-light"
-              data-bs-dismiss="modal"
+              className="btn btn-outline-primary btnOutline"
+              data-bs-target={`#modal-${id - 1}`}
+              data-bs-toggle="modal"
             >
               Înapoi
+            </button>
+
+            <button
+              className="btn btn-primary text-light"
+              data-bs-target={`#modal-${id + 1}`}
+              data-bs-toggle="modal"
+            >
+              Următorul
             </button>
           </div>
         </div>

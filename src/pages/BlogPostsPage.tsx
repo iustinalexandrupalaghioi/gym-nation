@@ -8,9 +8,9 @@ const BlogPostsPage = () => {
       <Link className="btn btn-primary text-light" to="/blog/new">
         New Post
       </Link>
-      <div className="row mt-3">
-        <BlogPostsOverview />
+      <div className="row flex-md-row-reverse mt-3">
         <BlogPostsCategories />
+        <BlogPostsOverview />
       </div>
     </div>
   );
