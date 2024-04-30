@@ -3,17 +3,15 @@ interface Props {
 }
 const NewBlogImage = ({ handleChange }: Props) => {
   return (
-    <div className="row my-3">
-      <div className="form-group">
-        <label htmlFor="image">Adaugă o imagine reprezentativă</label>
-        <input
-          type="file"
-          name="file"
-          className="form-control"
-          id="image"
-          onChange={handleChange}
-        />
-      </div>
+    <div className="form-group mb-3">
+      <label htmlFor="image">Adaugă o imagine reprezentativă</label>
+      <input
+        type="file"
+        name="file"
+        className="form-control"
+        id="image"
+        onChange={handleChange}
+      />
     </div>
   );
 };

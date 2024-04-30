@@ -23,14 +23,14 @@ const useAddPost = () => {
   });
   const navigate = useNavigate();
 
-  //process data user inputs
-  const processData = async (
+  //process user inputs function
+  async function processData(
     image: File | null,
     quillRef: RefObject<ReactQuill>,
     title: string,
     categorySlug: string,
     value: string
-  ) => {
+  ) {
     let imageURL = await useImage(image);
 
     let textContent = quillRef.current
@@ -57,11 +57,11 @@ const useAddPost = () => {
       textContent: textContent,
       createdAt: createdAt,
     };
-  };
+  }
 
-  //upload post
+  //upload post to firebase function
   const apiClient = new APIClient("/posts");
-  const postNewBlog = async (data: DocumentData) => {
+  async function postNewBlog(data: DocumentData) {
     await apiClient
       .post(data)
       .then(() => {
@@ -74,11 +74,12 @@ const useAddPost = () => {
           "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu."
         );
       });
-  };
+  }
 
-  const handleChange = (
+  //handle change events on form
+  function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  ) {
     const { name, value } = event.target;
     if (name === "title") {
       setPost((prev) => ({ ...prev, title: value }));
@@ -93,24 +94,17 @@ const useAddPost = () => {
         setPost((prev) => ({ ...prev, image: files[0] }));
       }
     }
-  };
+  }
 
   // reference quill
   const quillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
 
-  const handleSubmit = async () => {
-    //pregatirea datelor pentru inserarea in baza de date
-    const data = await processData(
-      post.image,
-      quillRef,
-      post.title,
-      post.category,
-      value
-    );
-
-    //incarcarea articolului in baza de date
+  //handle form submit
+  async function handleSubmit() {
+    const { title, category, image } = post;
+    const data = await processData(image, quillRef, title, category, value);
     postNewBlog(data).then(() => navigate("/blog"));
-  };
+  }
 
   return {
     quillRef,

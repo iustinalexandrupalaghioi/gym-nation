@@ -42,6 +42,7 @@ const NewBlogQuill = ({ value, setValue, blogQuillRef }: Props) => {
         <label htmlFor="quill">Conținutul articolului</label>
         <ReactQuill
           ref={blogQuillRef}
+          id="quill"
           className="blog-quill"
           modules={modules}
           formats={formats}
