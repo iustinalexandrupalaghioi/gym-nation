@@ -6,6 +6,7 @@ import NewEditBlog from "./pages/NewEditBlog";
 import ErrorPage from "./pages/ErrorPage";
 import BlogPostsPage from "./pages/BlogPostsPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
+import Services from "./pages/Services";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
       },
       { path: "/blog/new", element: <NewEditBlog /> },
     ],
+  },
+  {
+    path: "/workouts",
+    element: <Layout />,
+    children: [{ index: true, element: <Services /> }],
   },
 ]);
 export default router;
