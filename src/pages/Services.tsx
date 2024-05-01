@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../components/workouts/workout-card.css";
+import WorkoutCard from "../components/workouts/WorkoutCard/WorkoutCard";
 
 const Services = () => {
   return (
@@ -15,21 +15,7 @@ const Services = () => {
       <div className="row mt-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
         <div className="col">
           <Link to="/workouts/:id" className="text-decoration-none">
-            <div className="card workout-card" style={{ width: "18rem" }}>
-              <img
-                src="/images/placeholder.webp"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h4 className="card-title fw-bold">Antrenament de spate</h4>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <h5 className="card-text fw-bold">200 de lei</h5>
-              </div>
-            </div>
+            <WorkoutCard />
           </Link>
         </div>
       </div>

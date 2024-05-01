@@ -5,9 +5,8 @@ import { useEffect } from "react";
 
 const BlogArticle = () => {
   const { slug } = useParams();
-  const post = usePost(slug!);
-  const data = post?.data();
-
+  const response = usePost(slug!);
+  const data = response?.data();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
