@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
 }
-const NewBlogGrid = ({ children }: Props) => {
+const NewItemForm = ({ children }: Props) => {
   return (
     <div className="container px-4 py-5 vh-100">
       <form className="form card border-0 shadow p-4 rounded-4">
@@ -13,4 +13,4 @@ const NewBlogGrid = ({ children }: Props) => {
   );
 };
 
-export default NewBlogGrid;
+export default NewItemForm;

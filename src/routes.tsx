@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import BlogPostsPage from "./pages/BlogPostsPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import Services from "./pages/Services";
+import NewWorkout from "./pages/NewWorkout";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -30,7 +31,10 @@ const router = createBrowserRouter([
     path: "/workouts",
     element: <Layout />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Services /> }],
+    children: [
+      { index: true, element: <Services /> },
+      { path: "/workouts/new", element: <NewWorkout /> },
+    ],
   },
 ]);
 export default router;
