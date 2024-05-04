@@ -1,12 +1,12 @@
 import { useState, createRef, ChangeEvent, RefObject } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
-import APIClient from "../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
 import { queryClient } from "../main";
 import slugify from "slugify";
 import useCategory from "./useCategory";
 import useImage from "./useImage";
+import FirebaseClient from "../utilities/firebase-client";
 
 interface BlogPost {
   title: string;
@@ -60,9 +60,9 @@ const useAddPost = () => {
   }
 
   //upload post to firebase function
-  const apiClient = new APIClient("/posts");
+  const firebaseClient = new FirebaseClient("/posts");
   async function postNewBlog(data: DocumentData) {
-    await apiClient
+    await firebaseClient
       .post(data)
       .then(() => {
         queryClient.invalidateQueries({ queryKey: ["posts"] });

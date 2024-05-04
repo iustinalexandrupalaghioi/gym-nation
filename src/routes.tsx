@@ -29,6 +29,7 @@ const router = createBrowserRouter([
   {
     path: "/workouts",
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [{ index: true, element: <Services /> }],
   },
 ]);

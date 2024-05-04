@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../utilities/firebase-client";
 import ms from "ms";
+import FirebaseClient from "../utilities/firebase-client";
 
-const apiClient = new APIClient("/categories");
+const firebaseClient = new FirebaseClient("/categories");
 
 const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
-    queryFn: apiClient.getAll,
+    queryFn: firebaseClient.getAll,
     staleTime: ms("24h"),
   });
 };

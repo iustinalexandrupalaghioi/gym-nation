@@ -10,7 +10,7 @@ import {
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../db";
 
-class APIClient {
+class FirebaseClient {
   endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
@@ -55,4 +55,4 @@ class APIClient {
   };
 }
 
-export default APIClient;
+export default FirebaseClient;

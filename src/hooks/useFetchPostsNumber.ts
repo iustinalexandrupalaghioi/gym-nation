@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../utilities/firebase-client";
 import ms from "ms";
+import FirebaseClient from "../utilities/firebase-client";
 
-const apiClient = new APIClient("/posts");
+const firebaseClient = new FirebaseClient("/posts");
 const useFetchPostsNumber = (slug: string) => {
   return useQuery({
     queryKey: ["postsNumber", slug],
     queryFn: () => {
       if (slug) {
-        return apiClient.get("category.slug", slug);
+        return firebaseClient.get("category.slug", slug);
       } else {
-        return apiClient.getAll();
+        return firebaseClient.getAll();
       }
     },
     staleTime: ms("24h"),
