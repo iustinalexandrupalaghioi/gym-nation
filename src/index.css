@@ -6,3 +6,6 @@
 .btnOutline:hover {
   color: #fff;
 }
+.btnOutline:active {
+  color: #fff !important;
+}

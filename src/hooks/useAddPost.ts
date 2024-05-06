@@ -31,7 +31,7 @@ const useAddPost = () => {
     categorySlug: string,
     value: string
   ) {
-    let imageURL = await useImage(image);
+    let imageURL = await useImage(image, "blogImages");
 
     let textContent = quillRef.current
       ? quillRef.current.getEditor().getText()
