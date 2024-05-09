@@ -1,20 +1,18 @@
 import { NavLink } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../db.ts";
 
 import "./NavBar.css";
 import logo from "/images/logo1.png";
-import { signOut } from "firebase/auth";
-import useAuth from "../../../hooks/useAuth";
 
 const NavBar = () => {
-  const auth = useAuth();
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Succesfully logged out");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("User loged out");
+    } catch (err: any) {
+      console.error("User could not be loged out", err.message);
+    }
   };
   return (
     <nav className={`navbar container-fluid navbar-expand-lg navbar-dark`}>

@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { DocumentData } from "firebase/firestore";
 import { queryClient } from "../main";
 import slugify from "slugify";
-import useCategory from "./useCategory";
 import useImage from "./useImage";
 import FirebaseClient from "../utilities/firebase-client";
+import useCategories from "./useCategories";
 
 interface BlogPost {
   title: string;
@@ -21,6 +21,7 @@ const useAddPost = () => {
     image: null,
     category: "",
   });
+  const { data: categories } = useCategories();
   const navigate = useNavigate();
 
   //process user inputs function
@@ -47,7 +48,10 @@ const useAddPost = () => {
       lower: true,
     });
 
-    const category = useCategory(categorySlug);
+    const categoryDoc = categories?.result.find(
+      (c) => c.data().slug === categorySlug
+    );
+    const category = categoryDoc?.data();
     return {
       title: title,
       titleSlug: titleSlug,

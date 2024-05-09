@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import useImage from "./useImage";
 import slugify from "slugify";
-import useMuscle from "./useMuscle";
 import FirebaseClient from "../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import useMuscles from "./useMuscles";
 
 interface Workout {
   title: string;
@@ -18,6 +18,7 @@ const useAddWorkout = () => {
     image: null,
   });
   const navigate = useNavigate();
+  const { data: muscles } = useMuscles();
 
   async function processWorkoutData(
     title: string,
@@ -28,8 +29,8 @@ const useAddWorkout = () => {
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
 
-    const muscleGroup = useMuscle(muscleSlug);
-
+    const muscleDoc = muscles?.result.find((m) => m.data().slug === muscleSlug);
+    const muscleGroup = muscleDoc?.data();
     return { title, titleSlug, muscleGroup, imageURL };
   }
   const firebaseClient = new FirebaseClient("/workouts");
