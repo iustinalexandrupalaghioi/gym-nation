@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useImage from "./useImage";
 import slugify from "slugify";
 import useMuscle from "./useMuscle";
@@ -65,7 +65,8 @@ const useAddWorkout = () => {
     }
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     const { title, muscleSlug, image } = workout;
 
     const data = await processWorkoutData(title, muscleSlug, image);

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useMuscles from "../../../hooks/useMuscles";
 import useAddWorkout from "../../../hooks/useAddWorkout";
+import { FormEvent } from "react";
 
 const NewWorkoutForm = () => {
   const { data: muscles } = useMuscles();
@@ -10,7 +11,10 @@ const NewWorkoutForm = () => {
     handleSubmit,
   } = useAddWorkout();
   return (
-    <form className="form card border-0 shadow p-4 rounded-4">
+    <form
+      className="form card border-0 shadow p-4 rounded-4"
+      onSubmit={(event: FormEvent<HTMLFormElement>) => handleSubmit(event)}
+    >
       <div className="form-group mb-3">
         <label htmlFor="title">Titlul exercițiului</label>
         <input
@@ -58,7 +62,7 @@ const NewWorkoutForm = () => {
         <Link className="btn btn-outline-primary btnOutline" to={"/workouts"}>
           Anulează
         </Link>
-        <button className="btn btn-primary text-light" onClick={handleSubmit}>
+        <button className="btn btn-primary text-light" type="submit">
           Adaugă
         </button>
       </div>

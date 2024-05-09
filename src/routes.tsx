@@ -8,9 +8,11 @@ import BlogPostsPage from "./pages/BlogPostsPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import Services from "./pages/Services";
 import NewWorkout from "./pages/NewWorkout";
+import LoginPage from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
+  { path: "/login", element: <LoginPage /> },
   {
     path: "/blog",
     element: <Layout />,

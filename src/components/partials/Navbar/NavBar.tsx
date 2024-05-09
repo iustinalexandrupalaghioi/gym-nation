@@ -1,10 +1,21 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-import links from "../../../data/links";
+import { NavLink } from "react-router-dom";
+
 import "./NavBar.css";
 import logo from "/images/logo1.png";
+import { signOut } from "firebase/auth";
+import useAuth from "../../../hooks/useAuth";
 
 const NavBar = () => {
-  const { pathname } = useLocation();
+  const auth = useAuth();
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Succesfully logged out");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <nav className={`navbar container-fluid navbar-expand-lg navbar-dark`}>
       <div className="container">
@@ -40,9 +51,18 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <button className="btn btn-primary text-light">
-                Autentificare
-              </button>
+              {auth.currentUser ? (
+                <button
+                  className="btn btn-primary text-light"
+                  onClick={handleSignOut}
+                >
+                  Deloghează-te
+                </button>
+              ) : (
+                <NavLink className="btn btn-primary text-light" to="/login">
+                  Autentificare
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
