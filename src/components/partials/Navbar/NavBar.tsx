@@ -1,17 +1,36 @@
-import { NavLink } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { NavLink, useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../db.ts";
 
 import "./NavBar.css";
 import logo from "/images/logo1.png";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
+  const [authBtnText, setAuthBtnText] = useState("Autentificare");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthBtnText("Deconectare");
+      } else {
+        setAuthBtnText("Autentificare");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      console.log("User loged out");
-    } catch (err: any) {
-      console.error("User could not be loged out", err.message);
+    if (auth.currentUser) {
+      try {
+        await signOut(auth);
+        navigate("/");
+      } catch (err: any) {
+        console.error("User could not be loged out", err.message);
+      }
+    } else {
+      navigate("/login");
     }
   };
   return (
@@ -45,22 +64,16 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <NavLink to="/workouts" className="nav-link">
-                Servicii
+                Antrenamente
               </NavLink>
             </li>
             <li className="nav-item">
-              {auth.currentUser ? (
-                <button
-                  className="btn btn-primary text-light"
-                  onClick={handleSignOut}
-                >
-                  Deloghează-te
-                </button>
-              ) : (
-                <NavLink className="btn btn-primary text-light" to="/login">
-                  Autentificare
-                </NavLink>
-              )}
+              <button
+                className="btn btn-primary text-light"
+                onClick={handleSignOut}
+              >
+                {authBtnText}
+              </button>
             </li>
           </ul>
         </div>

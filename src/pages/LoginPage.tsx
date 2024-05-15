@@ -1,6 +1,7 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../db.ts";
 interface Credentials {
   email: string;
   password: string;
@@ -13,7 +14,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   async function handleSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const auth = getAuth();
     const { email, password } = credentials;
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -84,7 +84,7 @@ const LoginPage = () => {
               />
             </div>
             <button className="w-100 btn btn-primary text-light" type="submit">
-              Loghează-te
+              Conectare
             </button>
           </form>
         </div>
