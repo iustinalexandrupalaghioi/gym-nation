@@ -1,8 +1,5 @@
 import { Link } from "react-router-dom";
-import { RiAddCircleLine } from "react-icons/ri";
-import { RiAddLine } from "react-icons/ri";
 import { GrFormAdd } from "react-icons/gr";
-import { IoAddCircleOutline } from "react-icons/io5";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
 
