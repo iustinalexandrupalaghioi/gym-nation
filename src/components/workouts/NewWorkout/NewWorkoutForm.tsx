@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { RiAddCircleLine } from "react-icons/ri";
+import { RiAddLine } from "react-icons/ri";
+import { GrFormAdd } from "react-icons/gr";
+import { IoAddCircleOutline } from "react-icons/io5";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
 
@@ -16,7 +20,7 @@ const NewWorkoutForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="form-group mb-3">
-        <label htmlFor="title">Titlul exercițiului</label>
+        <label htmlFor="title">Titlul antrenamentului</label>
         <input
           id="title"
           type="text"
@@ -36,7 +40,7 @@ const NewWorkoutForm = () => {
           id="muscles"
           name="muscle"
         >
-          <option value="">{"Alege o grupă musculară din listă"}</option>
+          <option value="">{"Alege din listă"}</option>
           {muscles?.result.map(
             (option, index) =>
               option.data().slug !== "" && (
@@ -48,7 +52,7 @@ const NewWorkoutForm = () => {
         </select>
       </div>
       <div className="form-group mb-3">
-        <label htmlFor="image">Adaugă o imagine reprezentativă</label>
+        <label htmlFor="image">Adaugă o imagine</label>
         <input
           onChange={handleChange}
           type="file"
@@ -58,13 +62,22 @@ const NewWorkoutForm = () => {
         />
       </div>
 
-      <div className="buttons d-flex gap-2 justify-content-end">
-        <Link className="btn btn-outline-primary btnOutline" to={"/workouts"}>
-          Anulează
-        </Link>
-        <button className="btn btn-primary text-light" type="submit">
-          Adaugă
+      <div className="buttons d-flex gap-2 justify-content-between">
+        <button
+          className="btn btn-primary align-self-start text-light d-inline-flex align-items-center"
+          data-bs-toggle="modal"
+          data-bs-target="#newExercise"
+        >
+          <GrFormAdd size={"24px"} /> Exerciții
         </button>
+        <div className="action-buttons d-flex gap-2">
+          <Link className="btn btn-outline-primary btnOutline" to={"/workouts"}>
+            Anulează
+          </Link>
+          <button className="btn btn-primary text-light" type="submit">
+            Salvare
+          </button>
+        </div>
       </div>
     </form>
   );

@@ -52,11 +52,11 @@ const LoginPage = () => {
             }
           >
             <div className="form-group mb-3">
-              <label htmlFor="floatingInput">Adresă de email</label>
+              <label htmlFor="email">Adresă de email</label>
               <input
                 type="email"
                 className="form-control"
-                id="floatingInput"
+                id="email"
                 placeholder="nume@exemplu.com"
                 value={credentials.email}
                 onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -68,11 +68,11 @@ const LoginPage = () => {
               />
             </div>
             <div className="form-group mb-3">
-              <label htmlFor="floatingPassword">Parolă</label>
+              <label htmlFor="password">Parolă</label>
               <input
                 type="password"
                 className="form-control"
-                id="floatingPassword"
+                id="password"
                 placeholder="Parolă"
                 value={credentials.password}
                 onChange={(event: ChangeEvent<HTMLInputElement>) =>
