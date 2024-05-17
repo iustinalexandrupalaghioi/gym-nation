@@ -21,7 +21,7 @@ const NavBar = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleSignOut = async () => {
+  const handleAuth = async () => {
     if (auth.currentUser) {
       try {
         await signOut(auth);
@@ -70,7 +70,7 @@ const NavBar = () => {
             <li className="nav-item">
               <button
                 className="btn btn-primary text-light"
-                onClick={handleSignOut}
+                onClick={handleAuth}
               >
                 {authBtnText}
               </button>
