@@ -14,6 +14,7 @@ const NewBlogForm = () => {
     handleChange,
     handleSubmit,
   } = useAddPost();
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -41,6 +42,7 @@ const NewBlogForm = () => {
     "indent",
     "link",
   ];
+
   return (
     <div className="container px-4 py-5 vh-100">
       <form
