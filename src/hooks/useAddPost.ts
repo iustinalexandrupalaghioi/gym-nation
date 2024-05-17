@@ -1,4 +1,4 @@
-import { useState, createRef, ChangeEvent, RefObject } from "react";
+import { useState, createRef, ChangeEvent, RefObject, FormEvent } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
 import { DocumentData } from "firebase/firestore";
@@ -104,7 +104,8 @@ const useAddPost = () => {
   const quillRef: React.RefObject<ReactQuill> = createRef<ReactQuill>();
 
   //handle form submit
-  async function handleSubmit() {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     const { title, category, image } = post;
     const data = await processData(image, quillRef, title, category, value);
     postNewBlog(data).then(() => navigate("/blog"));

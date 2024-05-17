@@ -12,7 +12,7 @@ import TestimonialsGrid from "../components/homepage/Testimonial/TestimonialsGri
 import Footer from "../components/partials/Footer";
 import NavBar from "../components/partials/Navbar/NavBar";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <HomeCover>
@@ -47,4 +47,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

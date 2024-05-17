@@ -1,17 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "./pages/Home";
 import Layout from "./pages/Layout";
-import NewEditBlog from "./pages/NewEditBlog";
 import ErrorPage from "./pages/ErrorPage";
 import BlogPostsPage from "./pages/BlogPostsPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
-import Services from "./pages/Services";
-import NewWorkout from "./pages/NewWorkout";
 import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import NewBlogPage from "./pages/NewBlogPage";
+import WorkoutsPage from "./pages/WorkoutsPage";
+import NewWorkoutPage from "./pages/NewWorkoutPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
+  { path: "/", element: <HomePage /> },
   { path: "/login", element: <LoginPage /> },
   {
     path: "/blog",
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "/blog/:slug",
         element: <BlogArticlePage />,
       },
-      { path: "/blog/new", element: <NewEditBlog /> },
+      { path: "/blog/new", element: <NewBlogPage /> },
     ],
   },
   {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Services /> },
-      { path: "/workouts/new", element: <NewWorkout /> },
+      { index: true, element: <WorkoutsPage /> },
+      { path: "/workouts/new", element: <NewWorkoutPage /> },
     ],
   },
 ]);

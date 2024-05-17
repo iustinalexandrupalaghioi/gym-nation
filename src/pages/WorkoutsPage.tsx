@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import WorkoutCard from "../components/workouts/WorkoutCard/WorkoutCard";
 
-const Services = () => {
+const WorkoutsPage = () => {
   return (
     <div className="container px-4 py-5">
       <h1 className="border-bottom pb-2 text-center">
@@ -26,4 +26,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default WorkoutsPage;
