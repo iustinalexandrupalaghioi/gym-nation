@@ -1,3 +1,8 @@
+:root {
+  --grenOpac: rgba(34, 165, 153, 0.8);
+  --primary: rgb(34, 166, 153);
+  --info: #f9f9f9;
+}
 .slick-arrow::before {
   color: var(--primary);
   background-color: #fff;
@@ -35,5 +40,5 @@
 
 .slick-dots li button::before {
   color: var(--grenOpac) !important;
-  font-size: 10px;
+  font-size: 16px;
 }
