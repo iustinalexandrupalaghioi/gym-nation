@@ -5,33 +5,35 @@ import FirebaseClient from "../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useMuscles from "./useMuscles";
+import { Exercise } from "./useAddExercise";
 
 interface Workout {
   title: string;
+  desc: string;
   muscleSlug: string;
   image: File | null;
+  exercises: Exercise[];
 }
 const useAddWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({
     title: "",
+    desc: "",
     muscleSlug: "",
     image: null,
+    exercises: [],
   });
   const navigate = useNavigate();
   const { data: muscles } = useMuscles();
 
-  async function processWorkoutData(
-    title: string,
-    muscleSlug: string,
-    image: File | null
-  ) {
+  async function processWorkoutData(workout: Workout) {
+    const { title, desc, muscleSlug, image, exercises } = workout;
     let imageURL = await useImage(image, "workoutImages");
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
 
     const muscleDoc = muscles?.result.find((m) => m.data().slug === muscleSlug);
     const muscleGroup = muscleDoc?.data();
-    return { title, titleSlug, muscleGroup, imageURL };
+    return { title, desc, titleSlug, muscleGroup, imageURL, exercises };
   }
   const firebaseClient = new FirebaseClient("/workouts");
   async function postNewWorkout(data: DocumentData) {
@@ -55,9 +57,12 @@ const useAddWorkout = () => {
       setWorkout((prev) => ({ ...prev, title: value }));
     } else if (name === "muscle") {
       setWorkout((prev) => ({ ...prev, muscleSlug: value }));
+    } else if (name === "description") {
+      setWorkout((prev) => ({ ...prev, desc: value }));
     } else if (
       event.target instanceof HTMLInputElement &&
-      event.target.type === "file"
+      event.target.type === "file" &&
+      name === "workoutVideo"
     ) {
       const files = event.target.files;
       if (files && files.length > 0) {
@@ -68,9 +73,7 @@ const useAddWorkout = () => {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { title, muscleSlug, image } = workout;
-
-    const data = await processWorkoutData(title, muscleSlug, image);
+    const data = await processWorkoutData(workout);
     await postNewWorkout(data);
     navigate("/workouts");
   }

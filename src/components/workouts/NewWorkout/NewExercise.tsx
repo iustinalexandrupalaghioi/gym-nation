@@ -1,4 +1,7 @@
+import useWorkouts from "../../../hooks/useWorkouts";
+
 const NewExercise = () => {
+  const { data: workouts } = useWorkouts();
   return (
     <div
       className="modal fade"
@@ -22,6 +25,19 @@ const NewExercise = () => {
           <div className="modal-body">
             <form>
               <div className="form-group mb-3">
+                <label htmlFor="muscles">
+                  Alege antrenamentul pentru a adăuga exerciții
+                </label>
+                <select className="form-select" id="muscles" name="muscle">
+                  <option value="">{"Alege din listă"}</option>
+                  {workouts?.result.map((workout) => (
+                    <option value={workout.data().titleSlug}>
+                      {workout.data().title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group mb-3">
                 <label htmlFor="exerciseName">
                   Introdu numele exercițiului
                 </label>
@@ -37,6 +53,7 @@ const NewExercise = () => {
                 <input
                   type="text"
                   className="form-control"
+                  name="exerciseDescription"
                   id="instructions"
                   placeholder="...."
                 />
@@ -48,6 +65,7 @@ const NewExercise = () => {
                 <input
                   type="file"
                   className="form-control"
+                  name="exerciseThubnail"
                   id="exerciseThubnail"
                 />
               </div>

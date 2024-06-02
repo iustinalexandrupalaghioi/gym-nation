@@ -6,7 +6,7 @@ import useMuscles from "../../../hooks/useMuscles";
 const NewWorkoutForm = () => {
   const { data: muscles } = useMuscles();
   const {
-    workout: { title },
+    workout: { title, desc },
     handleChange,
     handleSubmit,
   } = useAddWorkout();
@@ -25,6 +25,18 @@ const NewWorkoutForm = () => {
           className="form-control"
           placeholder="ex: Antrenament pentru spate"
           value={title}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group mb-3">
+        <label htmlFor="description">Descrierea antrenamentului</label>
+        <input
+          id="description"
+          type="text"
+          name="description"
+          className="form-control"
+          placeholder="ex: Antrenament cuprinzator format din 5 exercitii..."
+          value={desc}
           onChange={handleChange}
         />
       </div>
