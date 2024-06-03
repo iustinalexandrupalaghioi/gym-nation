@@ -62,9 +62,11 @@ const useAddExercise = (
   const processExercise = async (exercise: Exercise) => {
     // take exercise object properties and provide name slug and links for images and videos
     const { name, exerciseDescription, image, video, videoURL } = exercise;
+
     let imageURL = await useImage(image!, "workoutImages");
     let videoLink = video ? await useVideo(video, "exerciseVideos") : "";
     let nameSlug = slugify(name, { replacement: "-", lower: true });
+
     //return final exercise
     return {
       name,
@@ -93,9 +95,11 @@ const useAddExercise = (
         video: null,
         videoURL: "",
       });
+
       if (fileInputRefImage.current) {
         fileInputRefImage.current.value = "";
       }
+
       if (fileInputRefVideo.current) {
         fileInputRefVideo.current.value = "";
       }
