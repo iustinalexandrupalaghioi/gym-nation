@@ -1,7 +1,23 @@
-import useWorkouts from "../../../hooks/useWorkouts";
+import { SetStateAction } from "react";
+import useAddExercise from "../../../hooks/useAddExercise";
+import Workout from "../../../entities/Workout";
+import Exercise from "../../../entities/Exercise";
 
-const NewExercise = () => {
-  const { data: workouts } = useWorkouts();
+interface Props {
+  exercise: Exercise;
+  setExercise: React.Dispatch<SetStateAction<Exercise>>;
+  setWorkout: React.Dispatch<SetStateAction<Workout>>;
+}
+const NewExercise: React.FC<Props> = ({
+  exercise,
+  setExercise,
+  setWorkout,
+}) => {
+  const {
+    exercise: { name, exerciseDescription, videoURL },
+    handleChange,
+    handleSubmit,
+  } = useAddExercise(exercise, setExercise, setWorkout);
   return (
     <div
       className="modal fade"
@@ -23,20 +39,7 @@ const NewExercise = () => {
             ></button>
           </div>
           <div className="modal-body">
-            <form>
-              <div className="form-group mb-3">
-                <label htmlFor="muscles">
-                  Alege antrenamentul pentru a adăuga exerciții
-                </label>
-                <select className="form-select" id="muscles" name="muscle">
-                  <option value="">{"Alege din listă"}</option>
-                  {workouts?.result.map((workout) => (
-                    <option value={workout.data().titleSlug}>
-                      {workout.data().title}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <form onSubmit={handleSubmit}>
               <div className="form-group mb-3">
                 <label htmlFor="exerciseName">
                   Introdu numele exercițiului
@@ -44,7 +47,10 @@ const NewExercise = () => {
                 <input
                   type="text"
                   className="form-control"
+                  name="exerciseName"
                   id="exerciseName"
+                  onChange={handleChange}
+                  value={name}
                   placeholder="Ridicări laterale"
                 />
               </div>
@@ -54,6 +60,8 @@ const NewExercise = () => {
                   type="text"
                   className="form-control"
                   name="exerciseDescription"
+                  onChange={handleChange}
+                  value={exerciseDescription}
                   id="instructions"
                   placeholder="...."
                 />
@@ -65,6 +73,7 @@ const NewExercise = () => {
                 <input
                   type="file"
                   className="form-control"
+                  onChange={handleChange}
                   name="exerciseThubnail"
                   id="exerciseThubnail"
                 />
@@ -74,6 +83,7 @@ const NewExercise = () => {
                 <input
                   type="file"
                   className="form-control"
+                  onChange={handleChange}
                   id="exerciseVideo"
                 />
               </div>
@@ -89,23 +99,26 @@ const NewExercise = () => {
                 <input
                   type="text"
                   className="form-control"
+                  onChange={handleChange}
+                  value={videoURL}
                   placeholder="ex: https://exemplu.com"
                   id="linkExerciseVideo"
+                  name="linkExerciseVideo"
                 />
               </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary btnOutline"
+                  data-bs-dismiss="modal"
+                >
+                  Anulează
+                </button>
+                <button type="submit" className="btn btn-primary text-light">
+                  Adaugă
+                </button>
+              </div>
             </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-outline-primary btnOutline"
-              data-bs-dismiss="modal"
-            >
-              Anulează
-            </button>
-            <button type="button" className="btn btn-primary text-light">
-              Adaugă
-            </button>
           </div>
         </div>
       </div>

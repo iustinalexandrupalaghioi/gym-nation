@@ -1,20 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-export interface Exercise {
-  name: string;
-  exerciseDescription: string;
-  image: File | null;
-  video: File | string | null;
-}
-const useAddExercise = () => {
-  const [exercise, setExercise] = useState<Exercise>({
-    name: "",
-    exerciseDescription: "",
-    image: null,
-    video: null,
-  });
-  const navigate = useNavigate();
+import { ChangeEvent, FormEvent, SetStateAction } from "react";
+import slugify from "slugify";
+import useImage from "./useImage";
+import useVideo from "./useVideo";
+import Workout from "../entities/Workout";
+import Exercise from "../entities/Exercise";
 
+const useAddExercise = (
+  exercise: Exercise,
+  setExercise: React.Dispatch<SetStateAction<Exercise>>,
+  setWorkout: React.Dispatch<SetStateAction<Workout>>
+) => {
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
@@ -33,7 +28,7 @@ const useAddExercise = () => {
         setExercise((prev) => ({ ...prev, video: files[0] }));
       }
     } else if (name === "linkExerciseVideo") {
-      setExercise((prev) => ({ ...prev, video: value }));
+      setExercise((prev) => ({ ...prev, videoURL: value }));
     } else if (
       event.target instanceof HTMLInputElement &&
       event.target.type === "file" &&
@@ -46,10 +41,38 @@ const useAddExercise = () => {
     }
   }
 
+  async function processExercise(exercise: Exercise) {
+    const { name, exerciseDescription, image, video, videoURL } = exercise;
+    let imageURL = await useImage(image!, "workoutImages");
+    let videoLink = await useVideo(video!, "exerciseVideos");
+    let nameSlug = slugify(name, { replacement: "-", lower: true });
+    return {
+      name,
+      nameSlug,
+      exerciseDescription,
+      imageURL,
+      videoURL,
+      videoLink,
+    };
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const data = await processExercise(exercise);
 
-    navigate("/workouts");
+    if (data.name && data.exerciseDescription) {
+      setWorkout((prev) => ({ ...prev, exercises: [...prev.exercises, data] }));
+      alert("Exercitiul a fost adaugat cu succes!");
+
+      setExercise({
+        name: "",
+        exerciseDescription: "",
+        image: null,
+        video: null,
+      });
+    } else {
+      alert("Please fill in all exercise details.");
+    }
   }
 
   return { exercise, handleChange, handleSubmit };

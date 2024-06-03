@@ -1,27 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, SetStateAction } from "react";
 import useImage from "./useImage";
 import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useMuscles from "./useMuscles";
-import { Exercise } from "./useAddExercise";
+import Workout from "../entities/Workout";
 
-interface Workout {
-  title: string;
-  desc: string;
-  muscleSlug: string;
-  image: File | null;
-  exercises: Exercise[];
-}
-const useAddWorkout = () => {
-  const [workout, setWorkout] = useState<Workout>({
-    title: "",
-    desc: "",
-    muscleSlug: "",
-    image: null,
-    exercises: [],
-  });
+const useAddWorkout = (
+  workout: Workout,
+  setWorkout: React.Dispatch<SetStateAction<Workout>>
+) => {
   const navigate = useNavigate();
   const { data: muscles } = useMuscles();
 
@@ -33,7 +22,14 @@ const useAddWorkout = () => {
 
     const muscleDoc = muscles?.result.find((m) => m.data().slug === muscleSlug);
     const muscleGroup = muscleDoc?.data();
-    return { title, desc, titleSlug, muscleGroup, imageURL, exercises };
+    return {
+      title,
+      desc,
+      titleSlug,
+      muscleGroup,
+      imageURL,
+      exercises,
+    };
   }
   const firebaseClient = new FirebaseClient("/workouts");
   async function postNewWorkout(data: DocumentData) {

@@ -3,13 +3,20 @@ import { GrFormAdd } from "react-icons/gr";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
 
-const NewWorkoutForm = () => {
+import { SetStateAction } from "react";
+import Workout from "../../../entities/Workout";
+
+interface Props {
+  workout: Workout;
+  setWorkout: React.Dispatch<SetStateAction<Workout>>;
+}
+const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const { data: muscles } = useMuscles();
   const {
     workout: { title, desc },
     handleChange,
     handleSubmit,
-  } = useAddWorkout();
+  } = useAddWorkout(workout, setWorkout);
 
   return (
     <form
@@ -76,6 +83,7 @@ const NewWorkoutForm = () => {
           className="btn btn-primary align-self-start text-light d-inline-flex align-items-center"
           data-bs-toggle="modal"
           data-bs-target="#newExercise"
+          type="button"
         >
           <GrFormAdd size={"24px"} /> Exerciții
         </button>
