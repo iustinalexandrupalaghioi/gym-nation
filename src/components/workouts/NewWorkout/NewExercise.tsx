@@ -8,11 +8,7 @@ interface Props {
   setExercise: React.Dispatch<SetStateAction<Exercise>>;
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
 }
-const NewExercise: React.FC<Props> = ({
-  exercise,
-  setExercise,
-  setWorkout,
-}) => {
+const NewExercise = ({ exercise, setExercise, setWorkout }: Props) => {
   const {
     exercise: { name, exerciseDescription, videoURL },
     fileInputRefImage,
