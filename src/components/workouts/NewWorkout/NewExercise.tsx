@@ -15,9 +15,12 @@ const NewExercise: React.FC<Props> = ({
 }) => {
   const {
     exercise: { name, exerciseDescription, videoURL },
+    fileInputRefImage,
+    fileInputRefVideo,
     handleChange,
     handleSubmit,
   } = useAddExercise(exercise, setExercise, setWorkout);
+
   return (
     <div
       className="modal fade"
@@ -71,6 +74,7 @@ const NewExercise: React.FC<Props> = ({
                   Încarcă o imagine de prezentare
                 </label>
                 <input
+                  ref={fileInputRefImage}
                   type="file"
                   className="form-control"
                   onChange={handleChange}
@@ -82,6 +86,7 @@ const NewExercise: React.FC<Props> = ({
                 <label htmlFor="exerciseVideo">Încarcă un video</label>
                 <input
                   type="file"
+                  ref={fileInputRefVideo}
                   className="form-control"
                   onChange={handleChange}
                   id="exerciseVideo"
