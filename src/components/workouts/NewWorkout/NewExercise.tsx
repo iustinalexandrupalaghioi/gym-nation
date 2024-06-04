@@ -59,7 +59,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   onChange={handleChange}
                   value={exerciseDescription}
                   id="instructions"
-                  placeholder="...."
+                  placeholder="Ridicări laterale: Execută mișcarea încet și regulat. "
                 />
               </div>
               <div className="form-group mb-3">

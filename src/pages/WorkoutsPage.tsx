@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import WorkoutCard from "../components/workouts/WorkoutCard/WorkoutCard";
 import useWorkouts from "../hooks/useWorkouts";
 import ErrorPage from "./ErrorPage";
+import WorkoutCardSkeleton from "../components/workouts/WorkoutCardSkeleton";
 
 const WorkoutsPage = () => {
   const { data, isLoading, error } = useWorkouts();
-
+  const skeletons = [1, 2, 3, 4];
   if (error) return <ErrorPage />;
-  if (isLoading) return <h1>Is Loading...</h1>;
 
   return (
     <div className="container px-4 py-5">
@@ -23,13 +23,11 @@ const WorkoutsPage = () => {
         New Workout
       </Link>
       <div className="row mt-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-        {data?.result.map((workout) => (
-          <div className="col mb-5 mb-xl-0" key={workout.id}>
-            <Link to="/workouts/:id" className="text-decoration-none">
-              <WorkoutCard workout={workout} />
-            </Link>
-          </div>
-        ))}
+        {isLoading
+          ? skeletons.map((skeleton) => <WorkoutCardSkeleton key={skeleton} />)
+          : data?.result.map((workout) => (
+              <WorkoutCard workout={workout} key={workout.id} />
+            ))}
       </div>
     </div>
   );

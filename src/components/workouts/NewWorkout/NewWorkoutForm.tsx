@@ -86,7 +86,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           onChange={handleChange}
           type="file"
           name="workoutImage"
-          className="form-control"
+          className="form-control custom-file-input"
           id="image"
         />
       </div>
@@ -105,7 +105,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             Anulează
           </Link>
           <button className="btn btn-primary text-light" type="submit">
-            Salvare
+            Salvează
           </button>
         </div>
       </div>
