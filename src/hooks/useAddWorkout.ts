@@ -52,18 +52,32 @@ const useAddWorkout = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
+
+    //set title of workout
     if (name === "title") {
       setWorkout((prev) => ({ ...prev, title: value }));
-    } else if (name === "muscle") {
+    }
+
+    //set targeted muscle group
+    else if (name === "muscle") {
       setWorkout((prev) => ({ ...prev, muscleSlug: value }));
-    } else if (name === "description") {
+    }
+
+    //set description for workout
+    else if (name === "description") {
       setWorkout((prev) => ({ ...prev, desc: value }));
-    } else if (name === "price") {
+    }
+
+    //set price of workout
+    else if (name === "price") {
       setWorkout((prev) => ({ ...prev, price: value }));
-    } else if (
+    }
+
+    //set image of workout
+    else if (
       event.target instanceof HTMLInputElement &&
       event.target.type === "file" &&
-      name === "workoutVideo"
+      name === "workoutImage"
     ) {
       const files = event.target.files;
       if (files && files.length > 0) {

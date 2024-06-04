@@ -85,7 +85,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         <input
           onChange={handleChange}
           type="file"
-          name="file"
+          name="workoutImage"
           className="form-control"
           id="image"
         />

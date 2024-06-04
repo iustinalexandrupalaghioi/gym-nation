@@ -1,8 +1,9 @@
 .workout-card {
-  transition: 0.3s;
+  transition: 0.5s;
   border: none;
   &:hover {
     border: 0.5px solid #22a699ad;
+    transform: scale(105%);
   }
 }
 
