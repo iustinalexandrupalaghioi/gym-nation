@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { GrFormAdd } from "react-icons/gr";
+import { SetStateAction } from "react";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
-
-import { SetStateAction } from "react";
 import Workout from "../../../entities/Workout";
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const { data: muscles } = useMuscles();
   const {
-    workout: { title, desc },
+    workout: { title, desc, price },
     handleChange,
     handleSubmit,
   } = useAddWorkout(workout, setWorkout);
@@ -35,6 +34,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           onChange={handleChange}
         />
       </div>
+
       <div className="form-group mb-3">
         <label htmlFor="description">Descrierea antrenamentului</label>
         <input
@@ -44,6 +44,19 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           className="form-control"
           placeholder="ex: Antrenament cuprinzator format din 5 exercitii..."
           value={desc}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="form-group mb-3">
+        <label htmlFor="price">Prețul antrenamentului (lei)</label>
+        <input
+          id="price"
+          type="number"
+          name="price"
+          className="form-control"
+          placeholder="ex: 255"
+          value={price}
           onChange={handleChange}
         />
       </div>

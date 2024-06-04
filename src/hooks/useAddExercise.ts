@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, SetStateAction, useRef } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  SetStateAction,
+  useRef,
+  useState,
+} from "react";
 import slugify from "slugify";
 import useImage from "./useImage";
 import useVideo from "./useVideo";
@@ -6,10 +12,15 @@ import Workout from "../entities/Workout";
 import Exercise from "../entities/Exercise";
 
 const useAddExercise = (
-  exercise: Exercise,
-  setExercise: React.Dispatch<SetStateAction<Exercise>>,
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
+  const [exercise, setExercise] = useState<Exercise>({
+    name: "",
+    exerciseDescription: "",
+    image: null,
+    video: null,
+    videoURL: "",
+  });
   const fileInputRefImage = useRef<HTMLInputElement>(null);
   const fileInputRefVideo = useRef<HTMLInputElement>(null);
 

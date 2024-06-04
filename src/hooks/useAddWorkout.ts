@@ -15,16 +15,19 @@ const useAddWorkout = (
   const { data: muscles } = useMuscles();
 
   async function processWorkoutData(workout: Workout) {
-    const { title, desc, muscleSlug, image, exercises } = workout;
+    const { title, desc, price, muscleSlug, image, exercises } = workout;
     let imageURL = await useImage(image, "workoutImages");
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
-
+    if (parseInt(price) <= 0) {
+      return alert("Prețul antrenamentului trebuie să fie un număr pozitiv.");
+    }
     const muscleDoc = muscles?.result.find((m) => m.data().slug === muscleSlug);
     const muscleGroup = muscleDoc?.data();
     return {
       title,
       desc,
+      price,
       titleSlug,
       muscleGroup,
       imageURL,
@@ -55,6 +58,8 @@ const useAddWorkout = (
       setWorkout((prev) => ({ ...prev, muscleSlug: value }));
     } else if (name === "description") {
       setWorkout((prev) => ({ ...prev, desc: value }));
+    } else if (name === "price") {
+      setWorkout((prev) => ({ ...prev, price: value }));
     } else if (
       event.target instanceof HTMLInputElement &&
       event.target.type === "file" &&
@@ -70,8 +75,10 @@ const useAddWorkout = (
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = await processWorkoutData(workout);
-    await postNewWorkout(data);
-    navigate("/workouts");
+    if (data) {
+      await postNewWorkout(data);
+      navigate("/workouts");
+    }
   }
 
   return { workout, handleChange, handleSubmit };

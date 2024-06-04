@@ -1,21 +1,18 @@
 import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
 import Workout from "../../../entities/Workout";
-import Exercise from "../../../entities/Exercise";
 
 interface Props {
-  exercise: Exercise;
-  setExercise: React.Dispatch<SetStateAction<Exercise>>;
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
 }
-const NewExercise = ({ exercise, setExercise, setWorkout }: Props) => {
+const NewExercise = ({ setWorkout }: Props) => {
   const {
     exercise: { name, exerciseDescription, videoURL },
     fileInputRefImage,
     fileInputRefVideo,
     handleChange,
     handleSubmit,
-  } = useAddExercise(exercise, setExercise, setWorkout);
+  } = useAddExercise(setWorkout);
 
   return (
     <div
