@@ -75,10 +75,9 @@ const useAddWorkout = (
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = await processWorkoutData(workout);
-    if (data) {
-      await postNewWorkout(data);
-      navigate("/workouts");
-    }
+    if (!data) return;
+    await postNewWorkout(data);
+    navigate("/workouts");
   }
 
   return { workout, handleChange, handleSubmit };
