@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, SetStateAction } from "react";
-import useImage from "./useImage";
+import useGetFileURL from "./useGetFileURL";
 import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
@@ -16,7 +16,7 @@ const useAddWorkout = (
 
   async function processWorkoutData(workout: Workout) {
     const { title, desc, price, muscleSlug, image, exercises } = workout;
-    let imageURL = await useImage(image, "workoutImages");
+    let imageURL = await useGetFileURL(image, "workoutImages");
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
     if (parseInt(price) <= 0) {

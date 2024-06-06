@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { DocumentData } from "firebase/firestore";
 import { queryClient } from "../main";
 import slugify from "slugify";
-import useImage from "./useImage";
 import FirebaseClient from "../utilities/firebase-client";
 import useCategories from "./useCategories";
+import useGetFileURL from "./useGetFileURL";
 
 interface BlogPost {
   title: string;
@@ -32,7 +32,7 @@ const useAddPost = () => {
     categorySlug: string,
     value: string
   ) {
-    let imageURL = await useImage(image, "blogImages");
+    let imageURL = await useGetFileURL(image, "blogImages");
 
     let textContent = quillRef.current
       ? quillRef.current.getEditor().getText()

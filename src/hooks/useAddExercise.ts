@@ -6,10 +6,9 @@ import {
   useState,
 } from "react";
 import slugify from "slugify";
-import useImage from "./useImage";
-import useVideo from "./useVideo";
 import Workout from "../entities/Workout";
 import Exercise from "../entities/Exercise";
+import useGetFileURL from "./useGetFileURL";
 
 const useAddExercise = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
@@ -74,8 +73,8 @@ const useAddExercise = (
     // take exercise object properties and provide name slug and links for images and videos
     const { name, exerciseDescription, image, video, videoURL } = exercise;
 
-    let imageURL = await useImage(image!, "workoutImages");
-    let videoLink = video ? await useVideo(video, "exerciseVideos") : "";
+    let imageURL = await useGetFileURL(image!, "workoutImages");
+    let videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     let nameSlug = slugify(name, { replacement: "-", lower: true });
 
     //return final exercise
