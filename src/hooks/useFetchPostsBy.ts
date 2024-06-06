@@ -12,7 +12,7 @@ const useFetchPostsBy = (field: string, id: string) => {
       if (blogQuery.category) {
         return firebaseClient.get(field, id);
       } else {
-        return firebaseClient.getAll();
+        return firebaseClient.get();
       }
     },
     staleTime: ms("24h"),

@@ -10,7 +10,7 @@ const useFetchPostsNumber = (slug: string) => {
       if (slug) {
         return firebaseClient.get("category.slug", slug);
       } else {
-        return firebaseClient.getAll();
+        return firebaseClient.get();
       }
     },
     staleTime: ms("24h"),

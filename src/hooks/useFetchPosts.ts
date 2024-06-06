@@ -9,7 +9,7 @@ const useFetchPosts = () => {
   const blogQuery = useBlogQueryStore((s) => s.blogQuery);
   return useQuery({
     queryKey: ["posts", blogQuery],
-    queryFn: firebaseClient.getAll,
+    queryFn: () => firebaseClient.get(),
     staleTime: ms("24h"),
   });
 };

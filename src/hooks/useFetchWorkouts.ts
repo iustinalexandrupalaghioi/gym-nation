@@ -6,7 +6,7 @@ const firebaseClient = new FirebaseClient("/workouts");
 const useFetchWorkouts = () => {
   return useQuery({
     queryKey: ["workouts"],
-    queryFn: firebaseClient.getAll,
+    queryFn: () => firebaseClient.get(),
     staleTime: ms("24h"),
   });
 };

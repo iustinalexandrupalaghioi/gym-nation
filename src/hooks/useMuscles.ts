@@ -7,7 +7,7 @@ const firebaseClient = new FirebaseClient("/muscles");
 const useMuscles = () => {
   return useQuery({
     queryKey: ["muscles"],
-    queryFn: firebaseClient.getAll,
+    queryFn: () => firebaseClient.get(),
     staleTime: ms("24h"),
   });
 };
