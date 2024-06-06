@@ -34,7 +34,7 @@ const NavBar = () => {
     }
   };
   return (
-    <nav className={`navbar container-fluid navbar-expand-lg navbar-dark`}>
+    <nav className={`navbar container-fluid navbar-expand-lg`}>
       <div className="container">
         <NavLink className="navbar-brand" to="/">
           <img src={logo} className="img-fluid" style={{ height: "55px" }} />

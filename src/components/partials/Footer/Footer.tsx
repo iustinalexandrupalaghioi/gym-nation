@@ -1,6 +1,8 @@
 import { createElement } from "react";
 import { FaInstagram, FaFacebookSquare, FaTiktok } from "react-icons/fa";
 import logo from "/images/logo1.png";
+import "./footer.css";
+
 const Footer = () => {
   const icnonsMap = {
     facebook: FaFacebookSquare,
@@ -29,7 +31,11 @@ const Footer = () => {
       <ul className="col-md-4 justify-content-center  align-items-center list-unstyled d-flex gap-2 fs-4">
         {socialMedia.map(({ id, link, name, icon }) => (
           <li key={id} className="nav-item">
-            <a href={link} className="nav-link" aria-label={name}>
+            <a
+              href={link}
+              className="text-body-secondary hover-light"
+              aria-label={name}
+            >
               {createElement(icon)}
             </a>
           </li>

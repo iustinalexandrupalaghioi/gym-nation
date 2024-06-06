@@ -17,9 +17,9 @@ const CategoryListItem = ({ doc }: Props) => {
     <li className="d-flex justify-content-between align-items-center mb-2">
       <Link
         to="/blog"
-        className={`nav-link ${
+        className={`text-decoration-none ${
           category === doc.data().slug
-            ? "active fw-bold"
+            ? "active fw-bold text-light"
             : "text-body-secondary"
         }`}
         onClick={() => setCategory(doc.data().slug)}

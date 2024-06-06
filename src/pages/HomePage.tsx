@@ -9,7 +9,7 @@ import Section from "../components/homepage/Section";
 import ServicesGrid from "../components/homepage/ServicesSection/ServicesGrid";
 import TeamGrid from "../components/homepage/Team/TeamGrid";
 import TestimonialsGrid from "../components/homepage/Testimonial/TestimonialsGrid";
-import Footer from "../components/partials/Footer";
+import Footer from "../components/partials/Footer/Footer";
 import NavBar from "../components/partials/Navbar/NavBar";
 
 const HomePage = () => {
