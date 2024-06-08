@@ -1,7 +1,7 @@
 interface Props {
-  source: string;
+  video: string;
 }
-const ExerciseVideoContent = ({ source }: Props) => {
+const ExerciseVideoContent = ({ video }: Props) => {
   const isYouTubeUrl = (url: string) => {
     return url.match(
       /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
@@ -10,21 +10,23 @@ const ExerciseVideoContent = ({ source }: Props) => {
 
   return (
     <div className="col-12 col-md-8">
-      <div className="rounded-4 p-2">
-        {isYouTubeUrl(source) ? (
+      <div className="shadow rounded-4">
+        {isYouTubeUrl(video) ? (
           <iframe
-            className="w-100 border-0 rounded-4"
+            className="w-100 rounded-4"
             height="650px"
-            src={source}
+            src={video}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title="YouTube video player"
           ></iframe>
         ) : (
-          <video controls className="w-100 border-0 rounded-4" height="650px">
-            <source src={source} type="video/mp4" />
-            <p>Your browser cannot play the provided video file.</p>
-          </video>
+          <video
+            controls
+            src={video}
+            className="rounded-4 w-100"
+            height="650px"
+          />
         )}
       </div>
     </div>

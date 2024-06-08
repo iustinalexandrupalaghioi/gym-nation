@@ -83,6 +83,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   className="form-control"
                   onChange={handleChange}
                   id="exerciseVideo"
+                  name="exerciseVideo"
                 />
               </div>
               <div className="separator d-flex align-items-center mb-3">

@@ -12,13 +12,20 @@ const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises = workouts?.result?.[0].data().exercises;
+  const isYouTubeUrl = (url: string) =>
+    url.match(
+      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    );
 
   const [video, setVideo] = useState<string>("");
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
       const firstExercise = workouts.result[0].data().exercises[0];
       if (firstExercise) {
-        setVideo(firstExercise.videoURL);
+        const url = firstExercise.videoURL
+          ? firstExercise.videoURL
+          : firstExercise.videoLink;
+        setVideo(url);
       }
     }
   }, [workouts]);
@@ -36,11 +43,11 @@ const SingleWorkoutPage = () => {
               <ExerciseListItem
                 exercise={exercise}
                 key={exercise.name}
-                handleClick={setVideo}
+                setVideo={setVideo}
               />
             ))}
           </WorkoutExercise>
-          <ExerciseVideoContent source={video} />
+          <ExerciseVideoContent video={video} />
         </div>
       </main>
     </>
