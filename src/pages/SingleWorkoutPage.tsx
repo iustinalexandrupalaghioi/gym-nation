@@ -12,10 +12,6 @@ const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises = workouts?.result?.[0].data().exercises;
-  const isYouTubeUrl = (url: string) =>
-    url.match(
-      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-    );
 
   const [video, setVideo] = useState<string>("");
   useEffect(() => {
@@ -31,24 +27,31 @@ const SingleWorkoutPage = () => {
   }, [workouts]);
 
   if (error) return <ErrorPage />;
-  if (isLoading) return <h1>is Loading...</h1>;
 
   return (
     <>
       <Header />
       <main className="px-4 py-5">
-        <div className="row row-cols-1 row-cols-md-2">
-          <WorkoutExercise>
-            {exercises.map((exercise: Exercise) => (
-              <ExerciseListItem
-                exercise={exercise}
-                key={exercise.name}
-                setVideo={setVideo}
-              />
-            ))}
-          </WorkoutExercise>
-          <ExerciseVideoContent video={video} />
-        </div>
+        {isLoading ? (
+          <div className="text-center vh-100 d-flex align-items-center justify-content-center">
+            <div className="spinner-border" role="status">
+              <span>Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <div className="row row-cols-1 row-cols-md-2">
+            <WorkoutExercise>
+              {exercises.map((exercise: Exercise) => (
+                <ExerciseListItem
+                  exercise={exercise}
+                  key={exercise.name}
+                  setVideo={setVideo}
+                />
+              ))}
+            </WorkoutExercise>
+            <ExerciseVideoContent video={video} />
+          </div>
+        )}
       </main>
     </>
   );

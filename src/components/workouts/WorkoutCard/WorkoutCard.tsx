@@ -8,14 +8,19 @@ interface Props {
 const WorkoutCard = ({ workout }: Props) => {
   const { title, desc, price, imageURL, titleSlug } = workout.data();
   return (
-    <div className="col mb-5 mb-xl-0">
+    <div className="col mb-5">
       <Link
         key={workout.id}
         to={`/workouts/${titleSlug}`}
         className="text-decoration-none"
       >
         <div className="card workout-card w-100 h-100">
-          <img src={imageURL} className="card-img-top" alt={title} />
+          <img
+            src={imageURL}
+            className="card-img-top"
+            height={"200px"}
+            alt={title}
+          />
           <div className="card-body">
             <h4 className="card-title fw-bold">{title}</h4>
             <p className="card-text">{desc}</p>
