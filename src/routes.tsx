@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import NewBlogPage from "./pages/NewBlogPage";
 import WorkoutsPage from "./pages/WorkoutsPage";
 import NewWorkoutPage from "./pages/NewWorkoutPage";
+import SingleWorkoutPage from "./pages/SingleWorkoutPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -38,5 +39,6 @@ const router = createBrowserRouter([
       { path: "/workouts/new", element: <NewWorkoutPage /> },
     ],
   },
+  { path: "/workouts/:slug", element: <SingleWorkoutPage /> },
 ]);
 export default router;

@@ -11,22 +11,26 @@ const CategoryListItem = ({ doc }: Props) => {
     blogQuery: { category },
     setCategory,
   } = blogStore;
+
+  const { slug, name } = doc.data();
+
   const { data: posts } = useFetchPostsNumber(doc.data().slug);
+  const count = posts?.count;
 
   return (
     <li className="d-flex justify-content-between align-items-center mb-2">
       <Link
         to="/blog"
         className={`text-decoration-none ${
-          category === doc.data().slug
+          category === slug
             ? "active fw-bold text-light"
             : "text-body-secondary"
         }`}
-        onClick={() => setCategory(doc.data().slug)}
+        onClick={() => setCategory(slug)}
       >
-        {doc.data().name}
+        {name}
       </Link>
-      <p className="text-primary fw-bold mb-0">{posts?.count}</p>
+      <p className="text-primary fw-bold mb-0">{count}</p>
     </li>
   );
 };
