@@ -4,3 +4,6 @@
 .hover-light:hover {
   color: #fff !important;
 }
+.cursor-pointer {
+  cursor: pointer;
+}

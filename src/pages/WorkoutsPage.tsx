@@ -26,7 +26,13 @@ const WorkoutsPage = () => {
         {isLoading
           ? skeletons.map((skeleton) => <WorkoutCardSkeleton key={skeleton} />)
           : data?.result.map((workout) => (
-              <WorkoutCard workout={workout} key={workout.id} />
+              <Link
+                key={workout.id}
+                to={`/workouts/${workout.data().titleSlug}`}
+                className="text-decoration-none"
+              >
+                <WorkoutCard workout={workout} />
+              </Link>
             ))}
       </div>
     </div>

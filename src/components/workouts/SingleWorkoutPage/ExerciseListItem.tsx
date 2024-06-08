@@ -1,13 +1,17 @@
-import { Link } from "react-router-dom";
 interface Props {
   exercise: any;
+  handleClick: React.Dispatch<React.SetStateAction<string>>;
 }
-const ExerciseListItem = ({ exercise }: Props) => {
+import "./singleWorkout.css";
+const ExerciseListItem = ({ exercise, handleClick }: Props) => {
   return (
-    <li className="d-flex justify-content-between align-items-center mb-2">
-      <Link to="/blog" className={`text-decoration-none`}>
-        {exercise.name}
-      </Link>
+    <li
+      onClick={() => {
+        handleClick(exercise.videoURL);
+      }}
+      className="text-decoration-none list-group-item text-body-secondary hover-light cursor-pointer d-flex justify-content-between align-items-center mb-2"
+    >
+      {exercise.name}
     </li>
   );
 };

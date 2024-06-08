@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div className="container-fluid">
+        <div className="container-fluid px-4 py-2">
           <button
             className="navbar-toggler"
             type="button"

@@ -1,26 +1,46 @@
 import { useParams } from "react-router-dom";
-import useWorkout from "../hooks/useWorkout";
-import Exercise from "../entities/Exercise";
 import Header from "../components/workouts/SingleWorkoutPage/Header";
 import ExerciseListItem from "../components/workouts/SingleWorkoutPage/ExerciseListItem";
+import WorkoutExercise from "../components/workouts/SingleWorkoutPage/WorkoutExercise";
+import ExerciseVideoContent from "../components/workouts/SingleWorkoutPage/ExerciseVideoContent";
+import Exercise from "../entities/Exercise";
+import useWorkout from "../hooks/useWorkout";
+import ErrorPage from "./ErrorPage";
+import { useEffect, useState } from "react";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
-  const response = useWorkout(slug!);
-  const exercises: Exercise[] = response?.data().exercises;
+  const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
+  const exercises = workouts?.result?.[0].data().exercises;
+
+  const [video, setVideo] = useState<string>("");
+  useEffect(() => {
+    if (workouts && workouts.result && workouts.result.length > 0) {
+      const firstExercise = workouts.result[0].data().exercises[0];
+      if (firstExercise) {
+        setVideo(firstExercise.videoURL);
+      }
+    }
+  }, [workouts]);
+
+  if (error) return <ErrorPage />;
+  if (isLoading) return <h1>is Loading...</h1>;
+
   return (
     <>
       <Header />
       <main className="px-4 py-5">
         <div className="row row-cols-1 row-cols-md-2">
-          <aside className="col-12 col-md-4">
-            <ul className="list-group">
-              {exercises.map((exercise: Exercise) => (
-                <ExerciseListItem exercise={exercise} />
-              ))}
-            </ul>
-          </aside>
-          <div className="col-12 col-md-8">Continut</div>
+          <WorkoutExercise>
+            {exercises.map((exercise: Exercise) => (
+              <ExerciseListItem
+                exercise={exercise}
+                key={exercise.name}
+                handleClick={setVideo}
+              />
+            ))}
+          </WorkoutExercise>
+          <ExerciseVideoContent source={video} />
         </div>
       </main>
     </>
