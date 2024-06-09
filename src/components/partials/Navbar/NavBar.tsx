@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../../firebase-confg.ts";
+import { auth } from "../../../firebase-config.ts";
 
 import "./NavBar.css";
 import logo from "/images/logo1.png";

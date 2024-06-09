@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase-confg.ts";
+import { auth } from "../firebase-config.ts";
 interface Credentials {
   email: string;
   password: string;
