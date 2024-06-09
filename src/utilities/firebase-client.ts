@@ -8,7 +8,7 @@ import {
   getCountFromServer,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { db } from "../db";
+import { db } from "../firebase-confg";
 
 class FirebaseClient {
   endpoint: string;
