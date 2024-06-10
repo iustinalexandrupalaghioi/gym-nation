@@ -18,7 +18,7 @@ const CategoryListItem = ({ doc }: Props) => {
   const count = posts?.count;
 
   return (
-    <li className="d-flex justify-content-between align-items-center mb-2">
+    <li className="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
       <Link
         to="/blog"
         className={`text-decoration-none ${

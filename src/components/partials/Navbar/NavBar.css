@@ -1,4 +1,4 @@
-.nav-link::after {
+.nav-item .nav-link::after {
   content: "";
   width: 0%;
   height: 2px;
@@ -7,6 +7,6 @@
   margin: auto;
   transition: 0.5s;
 }
-.nav-link:hover::after {
+.nav-item .nav-link:hover::after {
   width: 100%;
 }

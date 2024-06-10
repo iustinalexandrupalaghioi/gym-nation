@@ -1,27 +1,32 @@
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Header from "../components/workouts/SingleWorkoutPage/Header";
 import ExerciseListItem from "../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import WorkoutExercise from "../components/workouts/SingleWorkoutPage/WorkoutExercise";
-import ExerciseVideoContent from "../components/workouts/SingleWorkoutPage/ExerciseVideoContent";
 import Exercise from "../entities/Exercise";
 import useWorkout from "../hooks/useWorkout";
 import ErrorPage from "./ErrorPage";
-import { useEffect, useState } from "react";
+import ExerciseContent from "../components/workouts/SingleWorkoutPage/ExerciseContent";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises = workouts?.result?.[0].data().exercises;
+  const workout = workouts?.result?.[0];
 
-  const [video, setVideo] = useState<string>("");
+  const [video, setVideo] = useState<string | undefined>("");
+  const [activeExercise, setExercise] = useState<Exercise | undefined>(
+    {} as Exercise
+  );
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
-      const firstExercise = workouts.result[0].data().exercises[0];
+      const firstExercise: Exercise = workouts.result[0].data().exercises[0];
       if (firstExercise) {
         const url = firstExercise.videoURL
           ? firstExercise.videoURL
           : firstExercise.videoLink;
         setVideo(url);
+        setExercise(firstExercise);
       }
     }
   }, [workouts]);
@@ -39,17 +44,23 @@ const SingleWorkoutPage = () => {
             </div>
           </div>
         ) : (
-          <div className="row row-cols-1 row-cols-md-2">
+          <div className="row row-cols-1 row-cols-md-2 p-0 py-lg-4 px-lg-2">
             <WorkoutExercise>
               {exercises.map((exercise: Exercise) => (
                 <ExerciseListItem
                   exercise={exercise}
                   key={exercise.name}
+                  activeExercise={activeExercise}
                   setVideo={setVideo}
+                  setExercise={setExercise}
                 />
               ))}
             </WorkoutExercise>
-            <ExerciseVideoContent video={video} />
+            <ExerciseContent
+              video={video}
+              workout={workout}
+              exercise={activeExercise}
+            />
           </div>
         )}
       </main>
