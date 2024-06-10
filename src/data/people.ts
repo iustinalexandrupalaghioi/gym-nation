@@ -1,13 +1,9 @@
 import { IconType } from "react-icons";
-import {
-  FaFacebookSquare,
-  FaInstagramSquare,
-  FaLinkedin,
-} from "react-icons/fa";
+import { FaFacebookSquare, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const iconsMapping: { [key: string]: IconType } = {
   facebook: FaFacebookSquare,
-  instagram: FaInstagramSquare,
+  instagram: FaInstagram,
   linkedin: FaLinkedin,
 };
 

@@ -26,5 +26,4 @@ dist-ssr
 
 
 .vercel
-# Ignore firebase-config.ts file
-src/firebase-config.ts
+

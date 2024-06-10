@@ -2,32 +2,26 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import Exercise from "../../../entities/Exercise";
 
 interface Props {
-  video: string | undefined;
   workout: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined;
-  exercise: Exercise | undefined;
+  activeExercise: Exercise | undefined;
 }
-const ExerciseContent = ({ video, workout, exercise }: Props) => {
+const ExerciseContent = ({ workout, activeExercise }: Props) => {
   const { title, desc } = workout?.data()!;
-  const { name, exerciseDescription } = exercise!;
-
-  const isYouTubeUrl = (url: string) => {
-    return url.match(
-      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-    );
-  };
+  const { name, exerciseDescription, videoURL, videoLink } = activeExercise!;
+  console.log(videoURL);
 
   return (
-    <div className="col-12 col-md-8">
+    <div className="col-12 col-md-8 mt-3 mt-md-0">
       <div className="row mb-2">
         <h3>{title}</h3>
         <p className="text-body-secondary">{desc}</p>
       </div>
       <div className="shadow rounded-4 mb-2">
-        {isYouTubeUrl(video!) ? (
+        {videoURL ? (
           <iframe
             className="w-100 rounded-4"
             height="600px"
-            src={video}
+            src={videoURL}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -36,7 +30,7 @@ const ExerciseContent = ({ video, workout, exercise }: Props) => {
         ) : (
           <video
             controls
-            src={video}
+            src={videoLink}
             className="rounded-4 w-100"
             height="600px"
           />

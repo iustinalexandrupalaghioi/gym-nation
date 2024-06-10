@@ -14,20 +14,13 @@ const SingleWorkoutPage = () => {
   const exercises = workouts?.result?.[0].data().exercises;
   const workout = workouts?.result?.[0];
 
-  const [video, setVideo] = useState<string | undefined>("");
   const [activeExercise, setExercise] = useState<Exercise | undefined>(
     {} as Exercise
   );
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
       const firstExercise: Exercise = workouts.result[0].data().exercises[0];
-      if (firstExercise) {
-        const url = firstExercise.videoURL
-          ? firstExercise.videoURL
-          : firstExercise.videoLink;
-        setVideo(url);
-        setExercise(firstExercise);
-      }
+      firstExercise && setExercise(firstExercise);
     }
   }, [workouts]);
 
@@ -40,7 +33,7 @@ const SingleWorkoutPage = () => {
   return (
     <>
       <Header />
-      <main className="px-4 py-5">
+      <main className="px-4 py-5 mt-5 mt-md-0">
         {isLoading ? (
           <div className="text-center vh-100 d-flex align-items-center justify-content-center">
             <div className="spinner-border" role="status">
@@ -53,17 +46,15 @@ const SingleWorkoutPage = () => {
               {exercises.map((exercise: Exercise) => (
                 <ExerciseListItem
                   exercise={exercise}
-                  key={exercise.name}
                   activeExercise={activeExercise}
-                  setVideo={setVideo}
+                  key={exercise.name}
                   setExercise={setExercise}
                 />
               ))}
             </WorkoutExercise>
             <ExerciseContent
-              video={video}
               workout={workout}
-              exercise={activeExercise}
+              activeExercise={activeExercise}
             />
           </div>
         )}
