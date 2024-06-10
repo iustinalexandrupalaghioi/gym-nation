@@ -67,6 +67,13 @@ const NavBar = () => {
                 Antrenamente
               </NavLink>
             </li>
+            {auth.currentUser && (
+              <li className="nav-item">
+                <NavLink to="/workouts/user" className="nav-link">
+                  Antrenamentele mele
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
               <button
                 className="btn btn-primary text-light"

@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 const BlogArticle = () => {
   const { slug } = useParams();
-  console.log(slug);
 
   const { data: posts, isLoading } = usePost("titleSlug", slug!);
   const article = posts?.result?.[0].data()!;
@@ -13,6 +12,7 @@ const BlogArticle = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div className="col-12 col-md-8">
       {isLoading ? (

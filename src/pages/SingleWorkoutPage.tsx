@@ -31,6 +31,10 @@ const SingleWorkoutPage = () => {
     }
   }, [workouts]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (error) return <ErrorPage />;
 
   return (
