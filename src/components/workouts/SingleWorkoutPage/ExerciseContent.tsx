@@ -28,9 +28,10 @@ const ExerciseContent = ({ video, workout, exercise }: Props) => {
             className="w-100 rounded-4"
             height="600px"
             src={video}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
             title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
         ) : (
           <video
