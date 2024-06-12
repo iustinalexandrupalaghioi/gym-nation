@@ -64,7 +64,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
       <div className="form-group mb-3">
         <label htmlFor="muscles">Alege partea corpului corespunzătoare</label>
         <select
-          className="form-select"
+          className="form-select dropdown"
           onChange={handleChange}
           id="muscles"
           name="muscle"

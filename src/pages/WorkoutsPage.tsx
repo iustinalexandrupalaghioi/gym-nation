@@ -12,12 +12,13 @@ const WorkoutsPage = () => {
   return (
     <div className="container px-4 py-5">
       <h1 className="border-bottom pb-2 text-center">
-        Antrenează-te ca un profesionist oriunde
+        Antrenează-te ca un <span className="text-primary">profesionist</span>
       </h1>
       <p className="lead text-center">
-        Descoperă instruiri video de înaltă calitate pentru sală, acasă sau aer
-        liber.
-        <br /> Obține rezultatele dorite, oriunde te-ai afla!
+        Descoperă instruiri <span className="text-primary">video</span>
+        de înaltă calitate pentru sală, acasă sau aer liber.
+        <br /> Obține rezultatele dorite,{" "}
+        <span className="text-primary">oriunde</span> te-ai afla!
       </p>
       <Link className="btn btn-primary text-light" to="/workouts/new">
         New Workout

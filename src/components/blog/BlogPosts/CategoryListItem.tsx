@@ -12,6 +12,10 @@ const CategoryListItem = ({ doc }: Props) => {
     setCategory,
   } = blogStore;
 
+  const goToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   const { slug, name } = doc.data();
 
   const { data: posts } = useFetchPostsNumber(doc.data().slug);
@@ -26,7 +30,10 @@ const CategoryListItem = ({ doc }: Props) => {
             ? "active fw-bold text-light"
             : "text-body-secondary"
         }`}
-        onClick={() => setCategory(slug)}
+        onClick={() => {
+          setCategory(slug);
+          goToTop();
+        }}
       >
         {name}
       </Link>

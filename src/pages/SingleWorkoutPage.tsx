@@ -12,7 +12,7 @@ import useExerciseQueryStore from "../utilities/exerciseQueryStore";
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
-  const exercises = workouts?.result?.[0].data().exercises;
+  const exercises: Exercise[] = workouts?.result?.[0].data().exercises;
   const workout = workouts?.result?.[0];
 
   const setExercise = useExerciseQueryStore((s) => s.setExercise);

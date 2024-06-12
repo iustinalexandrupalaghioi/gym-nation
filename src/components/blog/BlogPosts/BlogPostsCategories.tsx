@@ -9,8 +9,8 @@ const BlogPostsCategories = () => {
   if (isLoading) return <BlogCategoriesSkeleton />;
 
   return (
-    <div className="col-12 col-md-6 col-lg-4 ">
-      <div className="card border-0 shadow">
+    <div className="col-12 col-md-6 col-lg-4">
+      <div className="card border-0 shadow position-fixed w-25">
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>

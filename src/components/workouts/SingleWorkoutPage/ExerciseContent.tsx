@@ -10,15 +10,15 @@ const ExerciseContent = ({ workout }: Props) => {
     (s) => s.exerciseQuery
   );
   const { name, videoLink, exerciseDescription } = activeExercise;
-  const { title, desc } = workout?.data()!;
+  const { title, workoutDescription } = workout?.data()!;
 
   return (
     <div className="col-12 col-md-8 mt-3 mt-md-0">
-      <div className="row mb-2">
+      <div className="row">
         <h3>{title}</h3>
-        <p className="text-body-secondary">{desc}</p>
+        <p className="text-body-secondary">{workoutDescription}</p>
       </div>
-      <div className="rounded-4">
+      <div className="rounded-4 mb-2">
         <video
           controls
           src={videoLink}
