@@ -4,6 +4,5 @@ export default interface Exercise {
   exerciseDescription: string;
   image?: File | null;
   video?: File | null;
-  videoURL?: string;
   videoLink?: string;
 }

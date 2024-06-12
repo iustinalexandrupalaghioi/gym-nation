@@ -12,7 +12,7 @@ interface Props {
 const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const { data: muscles } = useMuscles();
   const {
-    workout: { title, desc, price },
+    workout: { title, workoutDescription, price },
     handleChange,
     handleSubmit,
   } = useAddWorkout(workout, setWorkout);
@@ -43,7 +43,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           name="description"
           className="form-control"
           placeholder="ex: Antrenament cuprinzator format din 5 exercitii..."
-          value={desc}
+          value={workoutDescription}
           onChange={handleChange}
         />
       </div>

@@ -2,7 +2,7 @@ import Exercise from "./Exercise";
 
 export default interface Workout {
   title: string;
-  desc: string;
+  workoutDescription: string;
   price: string;
   muscleSlug: string;
   image: File | null;

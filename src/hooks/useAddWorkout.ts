@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, SetStateAction } from "react";
 import useGetFileURL from "./useGetFileURL";
 import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useMuscles from "./useMuscles";
 import Workout from "../entities/Workout";
@@ -15,18 +15,22 @@ const useAddWorkout = (
   const { data: muscles } = useMuscles();
 
   async function processWorkoutData(workout: Workout) {
-    const { title, desc, price, muscleSlug, image, exercises } = workout;
-    let imageURL = await useGetFileURL(image, "workoutImages");
+    const { title, workoutDescription, price, muscleSlug, image, exercises } =
+      workout;
+    let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
     if (parseInt(price) <= 0) {
       return alert("Prețul antrenamentului trebuie să fie un număr pozitiv.");
     }
-    const muscleDoc = muscles?.result.find((m) => m.data().slug === muscleSlug);
+    const muscleDoc = muscleSlug
+      ? muscles?.result.find((m) => m.data().slug === muscleSlug)
+      : ({} as QueryDocumentSnapshot);
     const muscleGroup = muscleDoc?.data();
+    if (!muscleDoc) return alert("Selecteaza o grupa musculara mai intai.");
     return {
       title,
-      desc,
+      workoutDescription,
       price,
       titleSlug,
       muscleGroup,

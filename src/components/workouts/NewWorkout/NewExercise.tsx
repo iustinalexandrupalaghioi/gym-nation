@@ -7,7 +7,7 @@ interface Props {
 }
 const NewExercise = ({ setWorkout }: Props) => {
   const {
-    exercise: { name, exerciseDescription, videoURL },
+    exercise: { name, exerciseDescription },
     fileInputRefImage,
     fileInputRefVideo,
     handleChange,
@@ -86,25 +86,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   name="exerciseVideo"
                 />
               </div>
-              <div className="separator d-flex align-items-center mb-3">
-                <hr style={{ margin: "0 10px", flex: 1 }} />
-                <span>sau</span>
-                <hr style={{ margin: "0 10px", flex: 1 }} />
-              </div>
-              <div className="form-group mb-3">
-                <label htmlFor="linkExerciseVideo">
-                  Adaugă un link către video
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  onChange={handleChange}
-                  value={videoURL}
-                  placeholder="ex: https://exemplu.com"
-                  id="linkExerciseVideo"
-                  name="linkExerciseVideo"
-                />
-              </div>
+
               <div className="modal-footer">
                 <button
                   type="button"

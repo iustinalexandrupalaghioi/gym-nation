@@ -18,7 +18,6 @@ const useAddExercise = (
     exerciseDescription: "",
     image: null,
     video: null,
-    videoURL: "",
   });
   const fileInputRefImage = useRef<HTMLInputElement>(null);
   const fileInputRefVideo = useRef<HTMLInputElement>(null);
@@ -62,18 +61,13 @@ const useAddExercise = (
         setExercise((prev) => ({ ...prev, video: files[0] }));
       }
     }
-
-    // set exercise video link
-    else if (name === "linkExerciseVideo") {
-      setExercise((prev) => ({ ...prev, videoURL: value }));
-    }
   };
 
   const processExercise = async (exercise: Exercise) => {
     // take exercise object properties and provide name slug and links for images and videos
-    const { name, exerciseDescription, image, video, videoURL } = exercise;
+    const { name, exerciseDescription, image, video } = exercise;
 
-    let imageURL = await useGetFileURL(image!, "workoutImages");
+    let imageURL = image ? await useGetFileURL(image!, "workoutImages") : "";
     let videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     let nameSlug = slugify(name, { replacement: "-", lower: true });
 
@@ -83,7 +77,6 @@ const useAddExercise = (
       nameSlug,
       exerciseDescription,
       imageURL,
-      videoURL,
       videoLink,
     };
   };
@@ -91,8 +84,8 @@ const useAddExercise = (
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = await processExercise(exercise);
-
-    if (data.name && data.exerciseDescription && data.imageURL) {
+    const { name, exerciseDescription, imageURL } = data;
+    if (name && exerciseDescription && imageURL) {
       //set exercise for workout on submit
       setWorkout((prev) => ({ ...prev, exercises: [...prev.exercises, data] }));
       alert("Exercitiul a fost adaugat cu succes!");
@@ -103,7 +96,6 @@ const useAddExercise = (
         exerciseDescription: "",
         image: null,
         video: null,
-        videoURL: "",
       });
 
       if (fileInputRefImage.current) {
