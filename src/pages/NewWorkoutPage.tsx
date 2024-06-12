@@ -6,7 +6,7 @@ import Workout from "../entities/Workout";
 const NewWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({
     title: "",
-    desc: "",
+    workoutDescription: "",
     price: "",
     muscleSlug: "",
     image: null,

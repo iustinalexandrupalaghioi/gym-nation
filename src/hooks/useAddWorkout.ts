@@ -68,8 +68,8 @@ const useAddWorkout = (
     }
 
     //set description for workout
-    else if (name === "description") {
-      setWorkout((prev) => ({ ...prev, desc: value }));
+    else if (name === "workoutDescription") {
+      setWorkout((prev) => ({ ...prev, workoutDescription: value }));
     }
 
     //set price of workout

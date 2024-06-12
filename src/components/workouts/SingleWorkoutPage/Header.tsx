@@ -23,7 +23,7 @@ const Header = () => {
                 <NavLink
                   className="d-flex align-items-center gap-1 fs-4 hover-light text-body-secondary"
                   aria-disabled="true"
-                  to="/workouts"
+                  to="/"
                 >
                   <FaHome />
                 </NavLink>

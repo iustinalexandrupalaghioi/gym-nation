@@ -9,7 +9,7 @@ const ExerciseContent = ({ workout }: Props) => {
   const { exercise: activeExercise } = useExerciseQueryStore(
     (s) => s.exerciseQuery
   );
-  const { name, videoURL, videoLink, exerciseDescription } = activeExercise;
+  const { name, videoLink, exerciseDescription } = activeExercise;
   const { title, desc } = workout?.data()!;
 
   return (
@@ -18,23 +18,15 @@ const ExerciseContent = ({ workout }: Props) => {
         <h3>{title}</h3>
         <p className="text-body-secondary">{desc}</p>
       </div>
-      <div className="shadow rounded-4 mb-2">
-        {videoURL ? (
-          <iframe
-            className="w-100 rounded-4"
-            height="600px"
-            src={videoURL}
-            title="YouTube video player"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <video
-            controls
-            src={videoLink}
-            className="rounded-4 w-100"
-            height="600px"
-          />
-        )}
+      <div className="rounded-4">
+        <video
+          controls
+          src={videoLink}
+          className="rounded-4 w-100"
+          height="100%"
+          autoPlay={true}
+          muted={true}
+        />
       </div>
       <div className="row">
         <h5>Instrucțiuni pentru exercițiul {name}:</h5>

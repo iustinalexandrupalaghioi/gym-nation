@@ -40,7 +40,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         <input
           id="description"
           type="text"
-          name="description"
+          name="workoutDescription"
           className="form-control"
           placeholder="ex: Antrenament cuprinzator format din 5 exercitii..."
           value={workoutDescription}
