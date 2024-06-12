@@ -1,14 +1,16 @@
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import Exercise from "../../../entities/Exercise";
+import useExerciseQueryStore from "../../../utilities/exerciseQueryStore";
 
 interface Props {
   workout: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined;
-  activeExercise: Exercise | undefined;
 }
-const ExerciseContent = ({ workout, activeExercise }: Props) => {
+
+const ExerciseContent = ({ workout }: Props) => {
+  const { exercise: activeExercise } = useExerciseQueryStore(
+    (s) => s.exerciseQuery
+  );
+  const { name, videoURL, videoLink, exerciseDescription } = activeExercise;
   const { title, desc } = workout?.data()!;
-  const { name, exerciseDescription, videoURL, videoLink } = activeExercise!;
-  console.log(videoURL);
 
   return (
     <div className="col-12 col-md-8 mt-3 mt-md-0">
@@ -23,8 +25,6 @@ const ExerciseContent = ({ workout, activeExercise }: Props) => {
             height="600px"
             src={videoURL}
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
         ) : (

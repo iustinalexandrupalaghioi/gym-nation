@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../components/workouts/SingleWorkoutPage/Header";
 import ExerciseListItem from "../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import WorkoutExercise from "../components/workouts/SingleWorkoutPage/WorkoutExercise";
@@ -7,6 +7,7 @@ import Exercise from "../entities/Exercise";
 import useWorkout from "../hooks/useWorkout";
 import ErrorPage from "./ErrorPage";
 import ExerciseContent from "../components/workouts/SingleWorkoutPage/ExerciseContent";
+import useExerciseQueryStore from "../utilities/exerciseQueryStore";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
@@ -14,9 +15,8 @@ const SingleWorkoutPage = () => {
   const exercises = workouts?.result?.[0].data().exercises;
   const workout = workouts?.result?.[0];
 
-  const [activeExercise, setExercise] = useState<Exercise | undefined>(
-    {} as Exercise
-  );
+  const setExercise = useExerciseQueryStore((s) => s.setExercise);
+
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
       const firstExercise: Exercise = workouts.result[0].data().exercises[0];
@@ -44,18 +44,10 @@ const SingleWorkoutPage = () => {
           <div className="row row-cols-1 row-cols-md-2 p-0 py-lg-4 px-lg-2">
             <WorkoutExercise>
               {exercises.map((exercise: Exercise) => (
-                <ExerciseListItem
-                  exercise={exercise}
-                  activeExercise={activeExercise}
-                  key={exercise.name}
-                  setExercise={setExercise}
-                />
+                <ExerciseListItem exercise={exercise} key={exercise.name} />
               ))}
             </WorkoutExercise>
-            <ExerciseContent
-              workout={workout}
-              activeExercise={activeExercise}
-            />
+            <ExerciseContent workout={workout} />
           </div>
         )}
       </main>
