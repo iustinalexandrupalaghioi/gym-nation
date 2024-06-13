@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase-config.ts";
 
 import "./NavBar.css";
@@ -7,16 +7,13 @@ import logo from "/images/logo1.png";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
-  const [authBtnText, setAuthBtnText] = useState("Autentificare");
   const navigate = useNavigate();
   const [isLogged, setLogged] = useState<boolean>(false);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setAuthBtnText("Deconectare");
         setLogged(true);
       } else {
-        setAuthBtnText("Autentificare");
         setLogged(false);
       }
     });
@@ -25,12 +22,7 @@ const NavBar = () => {
 
   const handleAuth = async () => {
     if (auth.currentUser) {
-      try {
-        await signOut(auth);
-        navigate("/");
-      } catch (err: any) {
-        console.error("User could not be loged out", err.message);
-      }
+      navigate("/private/account");
     } else {
       navigate("/login");
     }
@@ -81,7 +73,7 @@ const NavBar = () => {
                 className="btn btn-primary text-light"
                 onClick={handleAuth}
               >
-                {authBtnText}
+                Contul meu
               </button>
             </li>
           </ul>

@@ -8,17 +8,28 @@ interface Credentials {
   email: string;
   password: string;
 }
+
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
   });
+  let { email, password } = credentials;
 
-  const navigate = useNavigate();
+  // update credentials state for user inputs
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setCredentials((prev) => ({ ...prev, email: value }));
+    } else {
+      setCredentials((prev) => ({ ...prev, password: value }));
+    }
+  };
 
+  // handle sign in with email and password
   const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { email, password } = credentials;
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -28,7 +39,7 @@ const LoginPage = () => {
       const user = userCredential.user;
       console.log("User signed in: ", user);
       setCredentials({ email: "", password: "" });
-      navigate("/");
+      navigate("/private/account");
     } catch (error: any) {
       const errorMessage = error.message;
       console.log(errorMessage);
@@ -36,12 +47,13 @@ const LoginPage = () => {
     }
   };
 
+  // handle sign in with google
   const handleSignInWithPopup = async () => {
     try {
       const userCredentials = await signInWithPopup(auth, provider);
       const user = userCredentials.user;
       console.log("User signed in: ", user);
-      navigate("/");
+      navigate("/private/account");
     } catch (err: any) {
       const errorMessage = err.message;
       console.log(errorMessage);
@@ -59,32 +71,24 @@ const LoginPage = () => {
           <label htmlFor="email">Adresă de email</label>
           <input
             type="email"
+            name="email"
             className="form-control"
             id="email"
             placeholder="nume@exemplu.com"
-            value={credentials.email}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setCredentials((prev) => ({
-                ...prev,
-                email: event.target.value,
-              }))
-            }
+            value={email}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group mb-3">
           <label htmlFor="password">Parolă</label>
           <input
             type="password"
+            name="password"
             className="form-control"
             id="password"
             placeholder="Parolă"
-            value={credentials.password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setCredentials((prev) => ({
-                ...prev,
-                password: event.target.value,
-              }))
-            }
+            value={password}
+            onChange={handleChange}
           />
         </div>
         <button className="w-100 btn btn-primary text-light mb-2" type="submit">
