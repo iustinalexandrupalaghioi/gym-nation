@@ -9,11 +9,10 @@ const useFetchPostsBy = (field: string, id: string) => {
   return useQuery({
     queryKey: ["posts", blogQuery],
     queryFn: () => {
-      if (blogQuery.category) {
-        return firebaseClient.get(field, id);
-      } else {
+      if (!blogQuery.category) {
         return firebaseClient.get();
       }
+      return firebaseClient.get(field, id);
     },
     staleTime: ms("24h"),
   });
