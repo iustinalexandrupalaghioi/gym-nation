@@ -1,15 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-
-import Layout from "./pages/Layout";
-import ErrorPage from "./pages/ErrorPage";
-import BlogPostsPage from "./pages/BlogPostsPage";
-import BlogArticlePage from "./pages/BlogArticlePage";
+import HomePage from "./pages/Client/HomePage";
 import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
-import NewBlogPage from "./pages/NewBlogPage";
-import WorkoutsPage from "./pages/WorkoutsPage";
-import NewWorkoutPage from "./pages/NewWorkoutPage";
-import SingleWorkoutPage from "./pages/SingleWorkoutPage";
+import Layout from "./pages/Client/Layout";
+import NewBlogPage from "./pages/Admin/NewBlogPage";
+import NewWorkoutPage from "./pages/Admin/NewWorkoutPage";
+import BlogArticlePage from "./pages/Client/BlogArticlePage";
+import BlogPostsPage from "./pages/Client/BlogPostsPage";
+import ErrorPage from "./pages/Client/ErrorPage";
+import SingleWorkoutPage from "./pages/Client/SingleWorkoutPage";
+import WorkoutsPage from "./pages/Client/WorkoutsPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },

@@ -1,5 +1,5 @@
 import useFetchPostsBy from "../../../hooks/useFetchPostsBy";
-import ErrorPage from "../../../pages/ErrorPage";
+import ErrorPage from "../../../pages/Client/ErrorPage";
 import useBlogQueryStore from "../../../stores/blogQueryStore";
 import BlogOverviewCard from "./BlogOverviewCard";
 import BlogOverviewSkeleton from "./BlogOverviewSkeleton";

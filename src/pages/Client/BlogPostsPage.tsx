@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import BlogPostsOverview from "../../components/blog/BlogPosts/BlogPostsOverview";
 import BlogPostsCategories from "../../components/blog/BlogPosts/BlogPostsCategories";
+import BlogPostsOverview from "../../components/blog/BlogPosts/BlogPostsOverview";
 
 const BlogPostsPage = () => {
   return (

@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import Header from "../../components/workouts/SingleWorkoutPage/Header";
-import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
-import WorkoutExercise from "../../components/workouts/SingleWorkoutPage/WorkoutExercise";
-import ErrorPage from "./ErrorPage";
+import { useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
-import useExerciseQueryStore from "../../stores/exerciseQueryStore";
+import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
+import Header from "../../components/workouts/SingleWorkoutPage/Header";
+import WorkoutExercise from "../../components/workouts/SingleWorkoutPage/WorkoutExercise";
 import Exercise from "../../entities/Exercise";
 import useWorkout from "../../hooks/useWorkout";
+import useExerciseQueryStore from "../../stores/exerciseQueryStore";
+import ErrorPage from "./ErrorPage";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
