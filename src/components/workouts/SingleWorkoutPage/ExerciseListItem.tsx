@@ -1,5 +1,5 @@
 import Exercise from "../../../entities/Exercise";
-import useExerciseQueryStore from "../../../utilities/exerciseQueryStore";
+import useExerciseQueryStore from "../../../stores/exerciseQueryStore";
 import "./singleWorkout.css";
 
 interface Props {

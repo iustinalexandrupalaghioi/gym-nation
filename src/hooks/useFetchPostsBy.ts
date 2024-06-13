@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-import useBlogQueryStore from "../utilities/blogQueryStore";
+import useBlogQueryStore from "../stores/blogQueryStore";
 import FirebaseClient from "../utilities/firebase-client";
 const firebaseClient = new FirebaseClient("/posts");
 

@@ -7,7 +7,7 @@ import Exercise from "../entities/Exercise";
 import useWorkout from "../hooks/useWorkout";
 import ErrorPage from "./ErrorPage";
 import ExerciseContent from "../components/workouts/SingleWorkoutPage/ExerciseContent";
-import useExerciseQueryStore from "../utilities/exerciseQueryStore";
+import useExerciseQueryStore from "../stores/exerciseQueryStore";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();

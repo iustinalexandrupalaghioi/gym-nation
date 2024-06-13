@@ -1,5 +1,5 @@
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import useExerciseQueryStore from "../../../utilities/exerciseQueryStore";
+import useExerciseQueryStore from "../../../stores/exerciseQueryStore";
 
 interface Props {
   workout: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined;
