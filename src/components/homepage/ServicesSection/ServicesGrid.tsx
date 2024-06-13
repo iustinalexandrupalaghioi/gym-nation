@@ -9,7 +9,7 @@ const ServicesGrid = () => {
       {services.map((service, index) => (
         <React.Fragment key={index}>
           <ServicesCard service={service} />
-          <ServicesModal service={service} />
+          <ServicesModal service={service} numberOfServices={services.length} />
         </React.Fragment>
       ))}
     </div>

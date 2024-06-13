@@ -2,8 +2,12 @@ import Service from "../../../entities/Service";
 
 interface Props {
   service: Service;
+  numberOfServices: number;
 }
-const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
+const ServicesModal = ({
+  service: { id, title, description, img },
+  numberOfServices,
+}: Props) => {
   return (
     <div
       className="modal mt-0 fade"
@@ -45,7 +49,9 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
             <button
               type="button"
               className="btn btn-outline-primary btnOutline"
-              data-bs-target={`#modal-${id - 1}`}
+              data-bs-target={`#modal-${
+                id - 1 < 1 ? numberOfServices - 1 : id - 1
+              }`}
               data-bs-toggle="modal"
             >
               Înapoi
@@ -53,7 +59,9 @@ const ServicesModal = ({ service: { id, title, description, img } }: Props) => {
 
             <button
               className="btn btn-primary text-light"
-              data-bs-target={`#modal-${id + 1}`}
+              data-bs-target={`#modal-${
+                id + 1 <= numberOfServices - 1 ? id + 1 : 1
+              }`}
               data-bs-toggle="modal"
             >
               Următorul

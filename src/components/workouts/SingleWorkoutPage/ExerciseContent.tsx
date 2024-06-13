@@ -23,7 +23,6 @@ const ExerciseContent = ({ workout }: Props) => {
           controls
           src={videoLink}
           className="rounded-4 w-100"
-          height="100%"
           autoPlay={true}
           muted={true}
         />
