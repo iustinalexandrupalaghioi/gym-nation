@@ -10,7 +10,12 @@ const Footer = () => {
     tiktok: FaTiktok,
   };
   const socialMedia = [
-    { id: 1, link: "", name: "Facebook", icon: icnonsMap["facebook"] },
+    {
+      id: 1,
+      link: "",
+      name: "Facebook",
+      icon: icnonsMap["facebook"],
+    },
     { id: 2, link: "", name: "Instagram", icon: icnonsMap["instagram"] },
     { id: 3, link: "", name: "TikTok", icon: icnonsMap["tiktok"] },
   ];
@@ -24,7 +29,7 @@ const Footer = () => {
       </div>
       <div className="col-md-4 d-flex align-items-center justify-content-center  text-center fs-5">
         <span className="mb-3">
-          © {new Date().getFullYear()} Gym nation România
+          © {new Date().getFullYear()} Gym Nation România
         </span>
       </div>
 
@@ -32,6 +37,7 @@ const Footer = () => {
         {socialMedia.map(({ id, link, name, icon }) => (
           <li key={id} className="nav-item">
             <a
+              target="_blank"
               href={link}
               className="text-body-secondary hover-light"
               aria-label={name}

@@ -15,8 +15,8 @@ const WorkoutsPage = () => {
         Antrenează-te ca un <span className="text-primary">profesionist</span>
       </h1>
       <p className="lead text-center">
-        Descoperă instruiri <span className="text-primary">video</span>
-        de înaltă calitate pentru sală, acasă sau aer liber.
+        Descoperă instruiri <span className="text-primary">video</span> de
+        înaltă calitate pentru sală, acasă sau aer liber.
         <br /> Obține rezultatele dorite,{" "}
         <span className="text-primary">oriunde</span> te-ai afla!
       </p>

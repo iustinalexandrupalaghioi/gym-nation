@@ -4,7 +4,6 @@ import FaqGrid from "../../components/homepage/Faq/FaqGrid";
 import FeaturesGrid from "../../components/homepage/Features/FeaturesGrid";
 import HomeCover from "../../components/homepage/HomeCover/HomeCover";
 import HomeCoverContent from "../../components/homepage/HomeCover/HomeCoverContent";
-import NavLinks from "../../components/homepage/NavLinks/NavLinks";
 import ScrollToButton from "../../components/homepage/ScrollToButton";
 import Section from "../../components/homepage/Section";
 import ServicesGrid from "../../components/homepage/ServicesSection/ServicesGrid";
@@ -17,9 +16,7 @@ const HomePage = () => {
   return (
     <>
       <HomeCover>
-        <NavBar>
-          <NavLinks />
-        </NavBar>
+        <NavBar />
         <HomeCoverContent />
       </HomeCover>
       <main>

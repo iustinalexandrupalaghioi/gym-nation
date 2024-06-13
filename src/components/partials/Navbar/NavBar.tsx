@@ -4,21 +4,20 @@ import { auth } from "../../../firebase-config.ts";
 
 import "./NavBar.css";
 import logo from "/images/logo1.png";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface Props {
-  children: ReactNode;
-}
-const NavBar = ({ children }: Props) => {
+const NavBar = () => {
   const [authBtnText, setAuthBtnText] = useState("Autentificare");
   const navigate = useNavigate();
-
+  const [isLogged, setLogged] = useState<boolean>(false);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthBtnText("Deconectare");
+        setLogged(true);
       } else {
         setAuthBtnText("Autentificare");
+        setLogged(false);
       }
     });
     return () => unsubscribe();
@@ -55,7 +54,28 @@ const NavBar = ({ children }: Props) => {
         </button>
         <div className="collapse navbar-collapse " id="navbarNav">
           <ul className="navbar-nav fs-5 fw-bold ms-auto align-items-lg-center align-items-end">
-            {children}
+            <li className="nav-item">
+              <NavLink to="/" className="nav-link">
+                Acasă
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/blog" className="nav-link">
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/workouts" className="nav-link">
+                Antrenamente
+              </NavLink>
+            </li>
+            {isLogged && (
+              <li className="nav-item">
+                <NavLink to="/workouts/user" className="nav-link">
+                  Antrenamentele mele
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
               <button
                 className="btn btn-primary text-light"
