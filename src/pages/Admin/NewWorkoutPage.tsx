@@ -1,7 +1,7 @@
 import { useState } from "react";
-import NewExercise from "../components/workouts/NewWorkout/NewExercise";
-import NewWorkoutForm from "../components/workouts/NewWorkout/NewWorkoutForm";
-import Workout from "../entities/Workout";
+import NewWorkoutForm from "../../components/workouts/NewWorkout/NewWorkoutForm";
+import NewExercise from "../../components/workouts/NewWorkout/NewExercise";
+import Workout from "../../entities/Workout";
 
 const NewWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({

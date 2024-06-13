@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import WorkoutCard from "../components/workouts/WorkoutCard/WorkoutCard";
+import WorkoutCard from "../../components/workouts/WorkoutCard/WorkoutCard";
 import ErrorPage from "./ErrorPage";
-import WorkoutCardSkeleton from "../components/workouts/WorkoutCardSkeleton";
-import useFetchWorkouts from "../hooks/useFetchWorkouts";
+import WorkoutCardSkeleton from "../../components/workouts/WorkoutCardSkeleton";
+import useFetchWorkouts from "../../hooks/useFetchWorkouts";
 
 const WorkoutsPage = () => {
   const { data, isLoading, error } = useFetchWorkouts();

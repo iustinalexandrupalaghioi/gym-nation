@@ -1,4 +1,4 @@
-import NewBlogForm from "../components/blog/NewBlog/NewBlogForm";
+import NewBlogForm from "../../components/blog/NewBlog/NewBlogForm";
 
 const NewBlogPage = () => {
   return <NewBlogForm />;

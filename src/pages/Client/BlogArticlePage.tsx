@@ -1,5 +1,5 @@
-import BlogPostsCategories from "../components/blog/BlogPosts/BlogPostsCategories";
-import BlogArticle from "../components/blog/BlogPosts/BlogArticle";
+import BlogPostsCategories from "../../components/blog/BlogPosts/BlogPostsCategories";
+import BlogArticle from "../../components/blog/BlogPosts/BlogArticle";
 
 const BlogArticlePage = () => {
   return (
