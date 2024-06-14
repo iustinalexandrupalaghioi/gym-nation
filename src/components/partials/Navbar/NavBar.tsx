@@ -22,7 +22,7 @@ const NavBar = () => {
 
   const handleAuth = async () => {
     if (auth.currentUser) {
-      navigate("/private/account");
+      navigate("/account");
     } else {
       navigate("/login");
     }

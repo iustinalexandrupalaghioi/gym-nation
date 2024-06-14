@@ -10,15 +10,13 @@ import ErrorPage from "./pages/Client/ErrorPage";
 import SingleWorkoutPage from "./pages/Client/SingleWorkoutPage";
 import WorkoutsPage from "./pages/Client/WorkoutsPage";
 import Account from "./pages/Account";
-import PrivateRoutes from "./pages/PrivateRoutes";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
   { path: "/login", element: <LoginPage /> },
   {
-    path: "/private",
-    element: <PrivateRoutes />,
-    children: [{ path: "/private/account", element: <Account /> }],
+    path: "/account",
+    element: <Account />,
   },
   {
     path: "/blog",

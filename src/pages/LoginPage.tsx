@@ -39,7 +39,7 @@ const LoginPage = () => {
       const user = userCredential.user;
       console.log("User signed in: ", user);
       setCredentials({ email: "", password: "" });
-      navigate("/private/account");
+      navigate("/account");
     } catch (error: any) {
       const errorMessage = error.message;
       console.log(errorMessage);
@@ -53,7 +53,7 @@ const LoginPage = () => {
       const userCredentials = await signInWithPopup(auth, provider);
       const user = userCredentials.user;
       console.log("User signed in: ", user);
-      navigate("/private/account");
+      navigate("/account");
     } catch (err: any) {
       const errorMessage = err.message;
       console.log(errorMessage);
