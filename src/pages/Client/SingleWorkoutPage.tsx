@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
 import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import Header from "../../components/workouts/SingleWorkoutPage/Header";
@@ -8,14 +8,15 @@ import Exercise from "../../entities/Exercise";
 import useWorkout from "../../hooks/useWorkout";
 import useExerciseQueryStore from "../../stores/exerciseQueryStore";
 import ErrorPage from "./ErrorPage";
+import useUserStatusStore from "../../stores/userStore";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises: Exercise[] = workouts?.result?.[0].data().exercises;
   const workout = workouts?.result?.[0];
-
   const setExercise = useExerciseQueryStore((s) => s.setExercise);
+  const isPremium = useUserStatusStore((s) => s.userStatus.isPremium);
 
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
@@ -30,6 +31,10 @@ const SingleWorkoutPage = () => {
 
   if (error) return <ErrorPage />;
 
+  if (!isPremium) {
+    alert("You have to be a premium member to access workouts");
+    return <Navigate to="/account" />;
+  }
   return (
     <>
       <Header />

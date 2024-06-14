@@ -7,6 +7,7 @@ import ErrorPage from "./ErrorPage";
 const WorkoutsPage = () => {
   const { data, isLoading, error } = useFetchWorkouts();
   const skeletons = [1, 2, 3, 4];
+
   if (error) return <ErrorPage />;
 
   return (

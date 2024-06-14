@@ -1,23 +1,26 @@
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
-import logo from "/images/logo1.png";
 import { signOut } from "firebase/auth";
 import { getCheckoutUrl, getPortalUrl } from "../utilities/stripeSubscription";
 import { useEffect, useState } from "react";
+import useUserStatusStore from "../stores/userStore";
+import logo from "/images/logo1.png";
 import getPremiumStatus from "../utilities/getPremiumStatus";
 
 const Account = () => {
   const navigate = useNavigate();
-  const [isPremium, setPremium] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const {
+    userStatus: { isPremium },
+    setStatus,
+  } = useUserStatusStore();
 
   // check premium status function
   const checkPremiumStatus = async () => {
     const newPremiumStatus = auth.currentUser
       ? await getPremiumStatus()
       : false;
-    setPremium(newPremiumStatus);
-    setLoading(false);
+    setStatus(newPremiumStatus);
   };
 
   // check if current user is a premium or standard member
@@ -98,7 +101,6 @@ const Account = () => {
           onClick={async () => {
             setLoading(true);
             await premiumBtnFunction();
-            await checkPremiumStatus();
           }}
         >
           {premiumBtnText}
