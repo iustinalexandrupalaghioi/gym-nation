@@ -2,36 +2,23 @@ import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { signOut } from "firebase/auth";
 import { getCheckoutUrl, getPortalUrl } from "../utilities/stripeSubscription";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useUserStatusStore from "../stores/userStore";
 import logo from "/images/logo1.png";
-import getPremiumStatus from "../utilities/getPremiumStatus";
 
 const Account = () => {
-  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     userStatus: { isPremium },
     setStatus,
   } = useUserStatusStore();
 
-  // check premium status function
-  const checkPremiumStatus = async () => {
-    const newPremiumStatus = auth.currentUser
-      ? await getPremiumStatus()
-      : false;
-    setStatus(newPremiumStatus);
-  };
-
-  // check if current user is a premium or standard member
-  useEffect(() => {
-    checkPremiumStatus();
-  }, [auth.currentUser?.uid]);
-
   // log out function
   const handleSignOut = async () => {
     if (auth.currentUser) {
       await signOut(auth);
+      setStatus(false);
       navigate("/");
     }
   };
@@ -61,14 +48,19 @@ const Account = () => {
     }
   };
 
-  const premiumBtnText = isPremium ? "Modifică abonamentul" : "Abonează-te";
-  const premiumBtnFunction = isPremium ? manageSubscription : upgradeToPremium;
+  const premiumBtnText = isPremium
+    ? "Modifică abonamentul"
+    : "Actualizează la Premium";
+
+  const BtnFunction = isPremium ? manageSubscription : upgradeToPremium;
+
   if (!auth.currentUser) {
     return <Navigate to="/login" />;
   }
+
   return (
     <div className="container d-flex flex-column justify-content-center align-items-center text-center col-xl-10 col-xxl-8 px-4 py-5 vh-100 gap-3">
-      <NavLink className="navbar-brand" to="/">
+      <NavLink className="navbar-brand" to="/" title="Pagina principala">
         <img src={logo} className="img-fluid" style={{ height: "60px" }} />
       </NavLink>
       <p className="text-body-secondary m-0">
@@ -100,7 +92,7 @@ const Account = () => {
           type="button"
           onClick={async () => {
             setLoading(true);
-            await premiumBtnFunction();
+            await BtnFunction();
           }}
         >
           {premiumBtnText}

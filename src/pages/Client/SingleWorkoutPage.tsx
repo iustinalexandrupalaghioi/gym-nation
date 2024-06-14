@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
 import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import Header from "../../components/workouts/SingleWorkoutPage/Header";
@@ -11,13 +11,22 @@ import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
 
 const SingleWorkoutPage = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises: Exercise[] = workouts?.result?.[0].data().exercises;
   const workout = workouts?.result?.[0];
   const setExercise = useExerciseQueryStore((s) => s.setExercise);
-  const isPremium = useUserStatusStore((s) => s.userStatus.isPremium);
+  const {
+    userStatus: { isPremium },
+  } = useUserStatusStore();
 
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  //set first exercise to be active
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
       const firstExercise: Exercise = workouts.result[0].data().exercises[0];
@@ -25,16 +34,29 @@ const SingleWorkoutPage = () => {
     }
   }, [workouts]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   if (error) return <ErrorPage />;
 
   if (!isPremium) {
-    alert("You have to be a premium member to access workouts");
-    return <Navigate to="/account" />;
+    return (
+      <div className="container d-flex justify-content-center mt-5">
+        <div
+          className="alert alert-primary alert-dismissible fade show w-50"
+          role="alert"
+        >
+          You have to be a premium member to access workouts. Please upgrade
+          your membership!
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+            onClick={() => navigate("/account")}
+          ></button>
+        </div>
+      </div>
+    );
   }
+
   return (
     <>
       <Header />

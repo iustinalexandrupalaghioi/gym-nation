@@ -1,8 +1,11 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase-config";
+import getUserStatus from "../utilities/getUserStatus";
+import useUserStatusStore from "../stores/userStore";
+import logo from "/images/logo1.png";
 
 interface Credentials {
   email: string;
@@ -11,6 +14,8 @@ interface Credentials {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const setStatus = useUserStatusStore((s) => s.setStatus);
+
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
@@ -31,38 +36,37 @@ const LoginPage = () => {
   const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      console.log("User signed in: ", user);
+      await signInWithEmailAndPassword(auth, email, password);
+      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
+      setStatus(newUserStatus);
       setCredentials({ email: "", password: "" });
-      navigate("/account");
+      navigate("/");
     } catch (error: any) {
       const errorMessage = error.message;
-      console.log(errorMessage);
-      alert("username sau parola gresite");
+      console.error(errorMessage);
+      alert("Nu s-a putut realiza autentificarea.");
     }
   };
 
   // handle sign in with google
   const handleSignInWithPopup = async () => {
     try {
-      const userCredentials = await signInWithPopup(auth, provider);
-      const user = userCredentials.user;
-      console.log("User signed in: ", user);
-      navigate("/account");
+      await signInWithPopup(auth, provider);
+      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
+      setStatus(newUserStatus);
+      navigate("/");
     } catch (err: any) {
       const errorMessage = err.message;
-      console.log(errorMessage);
+      console.error(errorMessage);
       alert("Nu s-a putut realiza autentificarea.");
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center col-xl-10 col-xxl-8 px-4 py-5 vh-100">
+    <div className="container d-flex flex-column justify-content-center align-items-center col-xl-10 col-xxl-8 px-4 py-5 vh-100">
+      <NavLink className="navbar-brand mb-3" to="/" title="Pagina principala">
+        <img src={logo} className="img-fluid" style={{ height: "60px" }} />
+      </NavLink>
       <form
         className="p-4 p-md-5 border rounded-3 bg-body-tertiary"
         onSubmit={(event: FormEvent<HTMLFormElement>) => handleSignIn(event)}
@@ -99,7 +103,7 @@ const LoginPage = () => {
           type="button"
           className="w-100 d-flex align-items-center justify-content-center gap-1 btn btn-outline-info"
         >
-          <FcGoogle /> Autentificare cu Contul Google
+          <FcGoogle /> Autentificare cu Google
         </button>
       </form>
     </div>

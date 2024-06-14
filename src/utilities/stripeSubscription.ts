@@ -29,7 +29,6 @@ export const getCheckoutUrl = async (priceId: string): Promise<string> => {
         reject(new Error(`An error occured: ${error.message}`));
       }
       if (url) {
-        console.log("Stripe Checkout URL: ", url);
         unsubscribe();
         resolve(url);
       }
@@ -51,7 +50,6 @@ export const getPortalUrl = async (): Promise<string> => {
       returnUrl: window.location.origin,
     });
     dataWithUrl = data as { url: string };
-    console.log("Reroute to Stripe Portal: ", dataWithUrl.url);
   } catch (error) {
     console.error(error);
   }
