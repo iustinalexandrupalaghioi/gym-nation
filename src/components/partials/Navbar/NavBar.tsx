@@ -1,32 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase-config.ts";
-
-import "./NavBar.css";
 import logo from "/images/logo1.png";
-import { useEffect, useState } from "react";
+import "./NavBar.css";
+import SubscriptionButton from "../../account/SubscriptionButton.tsx";
+import { useState } from "react";
+import LoadingButton from "../../account/LoadingButton.tsx";
+import SignOutButton from "../../account/SignOutButton.tsx";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [isLogged, setLogged] = useState<boolean>(false);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setLogged(true);
-      } else {
-        setLogged(false);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  const [isLoading, setLoading] = useState(false);
 
-  const handleAuth = async () => {
-    if (auth.currentUser) {
-      navigate("/account");
-    } else {
-      navigate("/login");
-    }
-  };
   return (
     <nav className={`navbar container-fluid navbar-expand-lg`}>
       <div className="container">
@@ -61,20 +45,47 @@ const NavBar = () => {
                 Antrenamente
               </NavLink>
             </li>
-            {isLogged && (
-              <li className="nav-item">
-                <NavLink to="/workouts/user" className="nav-link">
-                  Antrenamentele mele
-                </NavLink>
-              </li>
-            )}
-            <li className="nav-item">
-              <button
-                className="btn btn-primary text-light"
-                onClick={handleAuth}
-              >
-                Contul meu
-              </button>
+
+            <li className="nav-item dropdown">
+              {auth.currentUser ? (
+                <button
+                  className="btn btn-outline-info dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {auth.currentUser.displayName
+                    ? auth.currentUser.displayName
+                    : auth.currentUser.email}
+                </button>
+              ) : (
+                <button
+                  className="btn btn-outline-info"
+                  onClick={() => navigate("/login")}
+                >
+                  Autentificare
+                </button>
+              )}
+
+              <ul className="dropdown-menu dropdown-menu-dark">
+                <li className="mb-2">
+                  <NavLink to="/account" className="dropdown-item">
+                    Contul meu
+                  </NavLink>
+                </li>
+                <li className="mb-2">
+                  {isLoading ? (
+                    <LoadingButton styleClass="dropdown-item" />
+                  ) : (
+                    <SubscriptionButton
+                      styleClass="dropdown-item"
+                      setLoading={setLoading}
+                    />
+                  )}
+                </li>
+                <li className="mb-2">
+                  <SignOutButton styleClass="dropdown-item text-danger text-active-light" />
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

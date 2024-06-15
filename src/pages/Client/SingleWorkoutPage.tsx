@@ -43,8 +43,8 @@ const SingleWorkoutPage = () => {
           className="alert alert-primary alert-dismissible fade show w-50"
           role="alert"
         >
-          You have to be a premium member to access workouts. Please upgrade
-          your membership!
+          Doar membrii <strong>Premium</strong> au acces la aceste resurse.
+          Actualizează-ți abonamentul pentru a vizualiza antrenamentele.
           <button
             type="button"
             className="btn-close"

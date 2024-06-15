@@ -10,3 +10,7 @@
 .nav-item .nav-link:hover::after {
   width: 100%;
 }
+
+.text-active-light:active {
+  color: #f9f9f9 !important;
+}
