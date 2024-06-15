@@ -31,17 +31,17 @@ const NavBar = () => {
         <div className="collapse navbar-collapse " id="navbarNav">
           <ul className="navbar-nav fs-5 fw-bold ms-auto align-items-lg-center align-items-end">
             <li className="nav-item">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/" className="nav-link custom-nav-link">
                 Acasă
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/blog" className="nav-link">
+              <NavLink to="/blog" className="nav-link custom-nav-link">
                 Blog
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/workouts" className="nav-link">
+              <NavLink to="/workouts" className="nav-link custom-nav-link">
                 Antrenamente
               </NavLink>
             </li>

@@ -10,6 +10,8 @@ import ErrorPage from "./pages/Client/ErrorPage";
 import SingleWorkoutPage from "./pages/Client/SingleWorkoutPage";
 import WorkoutsPage from "./pages/Client/WorkoutsPage";
 import Account from "./pages/Client/Account";
+import AdminLayout from "./pages/Admin/AdminLayout";
+import Home from "./pages/Admin/Home";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -17,6 +19,11 @@ const router = createBrowserRouter([
   {
     path: "/account",
     element: <Account />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [{ index: true, element: <Home /> }],
   },
   {
     path: "/blog",
