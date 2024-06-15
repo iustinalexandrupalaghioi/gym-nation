@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashboardBody = () => {
+  const [expanded, setExpand] = useState<boolean>(false);
   return (
     <div className="container-fluid">
       <div className="row">
@@ -29,11 +32,54 @@ const DashboardBody = () => {
               <ul className="nav flex-column">
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link d-flex align-items-center gap-2 active"
+                    className="nav-link text-body-secondary hover-light d-flex align-items-center gap-2 active"
                     to="/admin"
                   >
                     Acasă
                   </NavLink>
+                </li>
+                <li className="nav-item">
+                  <div className="p-0 d-flex flex-column">
+                    <button
+                      className="bg-body-tertiary border-0 d-flex flex-row justify-content-between text-sm-start align-items-center gap-1"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#blogMenu"
+                      aria-expanded="false"
+                      aria-controls="collapseWidthExample"
+                      onClick={() => setExpand(!expanded)}
+                    >
+                      <p
+                        className={`mb-0 px-2 ${
+                          expanded
+                            ? "text-primary fw-bold"
+                            : "text-body-secondary"
+                        }`}
+                      >
+                        Blog
+                      </p>
+                      {expanded ? (
+                        <p className="mb-0 fs-3">
+                          <IoIosArrowUp />
+                        </p>
+                      ) : (
+                        <p className="mb-0 fs-3">
+                          <IoIosArrowDown />
+                        </p>
+                      )}
+                    </button>
+                    <div
+                      className="collapse collapse-vertical w-100"
+                      id="blogMenu"
+                    >
+                      <NavLink
+                        className="nav-link text-body-secondary hover-light d-flex align-items-center gap-2 active"
+                        to="/admin/blog/new"
+                      >
+                        Articol Nou
+                      </NavLink>
+                    </div>
+                  </div>
                 </li>
               </ul>
 

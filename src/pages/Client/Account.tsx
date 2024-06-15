@@ -10,7 +10,9 @@ import SignOutButton from "../../components/account/SignOutButton";
 
 const Account = () => {
   const [isLoading, setLoading] = useState(false);
+
   const isPremium = useUserStatusStore((s) => s.userStatus.isPremium);
+  const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
 
   if (!auth.currentUser) {
     return <Navigate to="/login" />;
@@ -30,20 +32,25 @@ const Account = () => {
         className="card bg-body-tertiary flex align-items-center justify-content-center p-5"
         style={{ height: "100px" }}
       >
-        {isPremium ? "Abonament Premium" : "Membru standard"}
+        {isAdmin
+          ? "Admin"
+          : isPremium
+          ? "Abonament Premium"
+          : "Membru standard"}
       </div>
-
-      {isLoading ? (
-        <LoadingButton
-          textContent="Redirecționare..."
-          styleClass="btn btn-primary text-light p-3"
-        />
-      ) : (
-        <SubscriptionButton
-          styleClass="btn btn-primary text-light p-3"
-          setLoading={setLoading}
-        />
-      )}
+      {!isAdmin ? (
+        isLoading ? (
+          <LoadingButton
+            textContent="Redirecționare..."
+            styleClass="btn btn-primary text-light p-3"
+          />
+        ) : (
+          <SubscriptionButton
+            styleClass="btn btn-primary text-light p-3"
+            setLoading={setLoading}
+          />
+        )
+      ) : null}
 
       <SignOutButton styleClass="btn btn-outline-danger" />
     </div>

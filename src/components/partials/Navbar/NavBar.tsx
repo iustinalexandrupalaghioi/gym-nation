@@ -6,10 +6,12 @@ import SubscriptionButton from "../../account/SubscriptionButton.tsx";
 import { useState } from "react";
 import LoadingButton from "../../account/LoadingButton.tsx";
 import SignOutButton from "../../account/SignOutButton.tsx";
+import useUserStatusStore from "../../../stores/userStore.ts";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
 
   return (
     <nav className={`navbar container-fluid navbar-expand-lg`}>
@@ -45,6 +47,13 @@ const NavBar = () => {
                 Antrenamente
               </NavLink>
             </li>
+            {isAdmin && (
+              <li className="nav-item">
+                <NavLink to="/admin" className="nav-link custom-nav-link">
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
 
             {isLoading ? (
               <li className="nav-item dropdown">

@@ -6,6 +6,7 @@ import { auth, provider } from "../firebase-config";
 import getUserStatus from "../utilities/getUserStatus";
 import useUserStatusStore from "../stores/userStore";
 import logo from "/images/logo1.png";
+import getUserRole from "../utilities/getUserRole";
 
 interface Credentials {
   email: string;
@@ -15,6 +16,7 @@ interface Credentials {
 const LoginPage = () => {
   const navigate = useNavigate();
   const setStatus = useUserStatusStore((s) => s.setStatus);
+  const setRole = useUserStatusStore((s) => s.setRole);
 
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
@@ -37,8 +39,16 @@ const LoginPage = () => {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+
+      //check user status
       const newUserStatus = auth.currentUser ? await getUserStatus() : false;
       setStatus(newUserStatus);
+
+      //check user role
+      const newUserRole = auth.currentUser
+        ? getUserRole(auth.currentUser.uid)
+        : false;
+      setRole(newUserRole);
       setCredentials({ email: "", password: "" });
       navigate("/");
     } catch (error: any) {
@@ -52,8 +62,16 @@ const LoginPage = () => {
   const handleSignInWithPopup = async () => {
     try {
       await signInWithPopup(auth, provider);
+
+      //check user status
       const newUserStatus = auth.currentUser ? await getUserStatus() : false;
       setStatus(newUserStatus);
+
+      //check user role
+      const newUserRole = auth.currentUser
+        ? getUserRole(auth.currentUser.uid)
+        : false;
+      setRole(newUserRole);
       navigate("/");
     } catch (err: any) {
       const errorMessage = err.message;

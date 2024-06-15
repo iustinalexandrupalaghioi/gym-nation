@@ -18,8 +18,9 @@ const SingleWorkoutPage = () => {
   const workout = workouts?.result?.[0];
   const setExercise = useExerciseQueryStore((s) => s.setExercise);
   const {
-    userStatus: { isPremium },
+    userStatus: { isPremium, isAdmin },
   } = useUserStatusStore();
+  console.log(isAdmin);
 
   //scroll to top
   useEffect(() => {
@@ -36,49 +37,49 @@ const SingleWorkoutPage = () => {
 
   if (error) return <ErrorPage />;
 
-  if (!isPremium) {
+  if (isAdmin || isPremium) {
     return (
-      <div className="container d-flex justify-content-center mt-5">
-        <div
-          className="alert alert-primary alert-dismissible fade show w-50"
-          role="alert"
-        >
-          Doar membrii <strong>Premium</strong> au acces la aceste resurse.
-          Actualizează-ți abonamentul pentru a vizualiza antrenamentele.
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-            onClick={() => navigate("/account")}
-          ></button>
-        </div>
-      </div>
+      <>
+        <Header />
+        <main className="px-4 py-5 mt-5 mt-md-0">
+          {isLoading ? (
+            <div className="text-center vh-100 d-flex align-items-center justify-content-center">
+              <div className="spinner-border" role="status">
+                <span>Loading...</span>
+              </div>
+            </div>
+          ) : (
+            <div className="row row-cols-1 row-cols-md-2 p-0 py-lg-4 px-lg-2">
+              <WorkoutExercise>
+                {exercises.map((exercise: Exercise) => (
+                  <ExerciseListItem exercise={exercise} key={exercise.name} />
+                ))}
+              </WorkoutExercise>
+              <ExerciseContent workout={workout} />
+            </div>
+          )}
+        </main>
+      </>
     );
   }
 
   return (
-    <>
-      <Header />
-      <main className="px-4 py-5 mt-5 mt-md-0">
-        {isLoading ? (
-          <div className="text-center vh-100 d-flex align-items-center justify-content-center">
-            <div className="spinner-border" role="status">
-              <span>Loading...</span>
-            </div>
-          </div>
-        ) : (
-          <div className="row row-cols-1 row-cols-md-2 p-0 py-lg-4 px-lg-2">
-            <WorkoutExercise>
-              {exercises.map((exercise: Exercise) => (
-                <ExerciseListItem exercise={exercise} key={exercise.name} />
-              ))}
-            </WorkoutExercise>
-            <ExerciseContent workout={workout} />
-          </div>
-        )}
-      </main>
-    </>
+    <div className="container d-flex justify-content-center mt-5">
+      <div
+        className="alert alert-primary alert-dismissible fade show w-50"
+        role="alert"
+      >
+        Doar membrii <strong>Premium</strong> au acces la aceste resurse.
+        Actualizează-ți abonamentul pentru a vizualiza antrenamentele.
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+          onClick={() => navigate("/account")}
+        ></button>
+      </div>
+    </div>
   );
 };
 

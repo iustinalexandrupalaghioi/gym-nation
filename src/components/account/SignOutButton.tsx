@@ -8,12 +8,14 @@ interface Props {
 const SignOutButton = ({ styleClass }: Props) => {
   const navigate = useNavigate();
   const setStatus = useUserStatusStore((s) => s.setStatus);
+  const setRole = useUserStatusStore((s) => s.setRole);
 
   // log out function
   const handleSignOut = async () => {
     if (auth.currentUser) {
       await signOut(auth);
       setStatus(false);
+      setRole(false);
       navigate("/");
     }
   };
