@@ -44,7 +44,7 @@ const NewBlogForm = () => {
   ];
 
   return (
-    <div className="container px-4 py-5 vh-100">
+    <div className="container px-4 py-5">
       <form
         className="form card border-0 shadow p-4 rounded-4"
         onSubmit={handleSubmit}

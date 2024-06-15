@@ -23,7 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLayout />,
-    children: [{ index: true, element: <Home /> }],
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/admin/blog/new", element: <NewBlogPage /> },
+    ],
   },
   {
     path: "/blog",
@@ -38,7 +41,6 @@ const router = createBrowserRouter([
         path: "/blog/:slug",
         element: <BlogArticlePage />,
       },
-      { path: "/blog/new", element: <NewBlogPage /> },
     ],
   },
   {
