@@ -1,11 +1,12 @@
 import { NavLink, Navigate } from "react-router-dom";
-import { auth } from "../firebase-config";
 import { useState } from "react";
-import useUserStatusStore from "../stores/userStore";
-import SubscriptionButton from "../components/account/SubscriptionButton";
-import LoadingButton from "../components/account/LoadingButton";
-import SignOutButton from "../components/account/SignOutButton";
+
 import logo from "/images/logo1.png";
+import useUserStatusStore from "../../stores/userStore";
+import { auth } from "../../firebase-config";
+import LoadingButton from "../../components/account/LoadingButton";
+import SubscriptionButton from "../../components/account/SubscriptionButton";
+import SignOutButton from "../../components/account/SignOutButton";
 
 const Account = () => {
   const [isLoading, setLoading] = useState(false);
