@@ -9,7 +9,7 @@ import BlogPostsPage from "./pages/Client/BlogPostsPage";
 import ErrorPage from "./pages/Client/ErrorPage";
 import SingleWorkoutPage from "./pages/Client/SingleWorkoutPage";
 import WorkoutsPage from "./pages/Client/WorkoutsPage";
-import Account from "./pages/Account";
+import Account from "./pages/Client/Account";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },

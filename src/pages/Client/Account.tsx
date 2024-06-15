@@ -34,7 +34,10 @@ const Account = () => {
       </div>
 
       {isLoading ? (
-        <LoadingButton styleClass="btn btn-primary text-light p-3" />
+        <LoadingButton
+          textContent="Redirecționare..."
+          styleClass="btn btn-primary text-light p-3"
+        />
       ) : (
         <SubscriptionButton
           styleClass="btn btn-primary text-light p-3"

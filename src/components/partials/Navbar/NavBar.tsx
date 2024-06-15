@@ -46,47 +46,52 @@ const NavBar = () => {
               </NavLink>
             </li>
 
-            <li className="nav-item dropdown">
-              {auth.currentUser ? (
-                <button
-                  className="btn btn-outline-info dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {auth.currentUser.displayName
-                    ? auth.currentUser.displayName
-                    : auth.currentUser.email}
-                </button>
-              ) : (
-                <button
-                  className="btn btn-outline-info"
-                  onClick={() => navigate("/login")}
-                >
-                  Autentificare
-                </button>
-              )}
+            {isLoading ? (
+              <li className="nav-item dropdown">
+                <LoadingButton
+                  textContent="Redirecționare..."
+                  styleClass="dropdown-toggle btn btn-outline-info"
+                />
+              </li>
+            ) : (
+              <li className="nav-item dropdown">
+                {auth.currentUser?.uid ? (
+                  <button
+                    className="btn btn-outline-info dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {auth.currentUser.displayName
+                      ? auth.currentUser.displayName
+                      : auth.currentUser.email}
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-info"
+                    onClick={() => navigate("/login")}
+                  >
+                    Autentificare
+                  </button>
+                )}
 
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li className="mb-2">
-                  <NavLink to="/account" className="dropdown-item">
-                    Contul meu
-                  </NavLink>
-                </li>
-                <li className="mb-2">
-                  {isLoading ? (
-                    <LoadingButton styleClass="dropdown-item" />
-                  ) : (
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  <li className="mb-2">
+                    <NavLink to="/account" className="dropdown-item">
+                      Contul meu
+                    </NavLink>
+                  </li>
+                  <li className="mb-2">
                     <SubscriptionButton
                       styleClass="dropdown-item"
                       setLoading={setLoading}
                     />
-                  )}
-                </li>
-                <li className="mb-2">
-                  <SignOutButton styleClass="dropdown-item text-danger text-active-light" />
-                </li>
-              </ul>
-            </li>
+                  </li>
+                  <li className="mb-2">
+                    <SignOutButton styleClass="dropdown-item text-danger text-active-light" />
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
         </div>
       </div>

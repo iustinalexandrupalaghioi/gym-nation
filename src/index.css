@@ -9,3 +9,6 @@
 .btnOutline:active {
   color: #fff !important;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
