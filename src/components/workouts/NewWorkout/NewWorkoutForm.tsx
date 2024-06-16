@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { GrFormAdd } from "react-icons/gr";
 import { SetStateAction } from "react";
 import useAddWorkout from "../../../hooks/useAddWorkout";
@@ -112,9 +111,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             <GrFormAdd size={"24px"} /> Exerciții
           </button>
           <div className="action-buttons d-flex gap-2">
-            <Link className="btn btn-outline-info" to={"/workouts"}>
-              Anulează
-            </Link>
             <button className="btn btn-primary text-light" type="submit">
               Salvează
             </button>

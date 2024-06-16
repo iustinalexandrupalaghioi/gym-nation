@@ -1,7 +1,6 @@
 import ReactQuill from "react-quill";
 import useCategories from "../../../hooks/useCategories";
 import "react-quill/dist/quill.snow.css";
-import { Link } from "react-router-dom";
 import { ChangeEvent, FormEvent, RefObject } from "react";
 import BlogPost from "../../../entities/BlogPost";
 
@@ -117,9 +116,6 @@ const NewBlogForm = ({
           </div>
         </div>
         <div className="container-fluid mt-3 d-flex justify-content-end gap-2">
-          <Link to="/blog" className="btn btn-outline-info">
-            Anulează
-          </Link>
           <button className="btn btn-primary align-self-end text-light">
             Postează
           </button>
