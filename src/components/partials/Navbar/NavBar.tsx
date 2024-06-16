@@ -50,7 +50,7 @@ const NavBar = () => {
             {isAdmin && (
               <li className="nav-item">
                 <NavLink to="/admin" className="nav-link custom-nav-link">
-                  Dashboard
+                  Panou de Control
                 </NavLink>
               </li>
             )}

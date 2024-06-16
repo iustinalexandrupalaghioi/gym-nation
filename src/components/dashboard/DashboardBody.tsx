@@ -1,6 +1,7 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import CollapseMenuItem from "./CollapseMenuItem";
 import NavItem from "./NavItem";
+import SignOutButton from "../account/SignOutButton";
 
 const DashboardBody = () => {
   const { pathname } = useLocation();
@@ -33,26 +34,26 @@ const DashboardBody = () => {
               <ul className="nav flex-column">
                 <li className="nav-item">
                   <NavItem pathname={pathname} targetPath="/admin">
-                    Acasă
+                    Panou de Control
                   </NavItem>
                 </li>
                 <CollapseMenuItem menuId="blogMenu" menuTitle="Blog">
                   <NavItem pathname={pathname} targetPath="/admin/blog/new">
-                    Articol nou
+                    Adaugă Articol Nou
+                  </NavItem>
+                </CollapseMenuItem>
+                <CollapseMenuItem menuId="workoutMenu" menuTitle="Antrenamente">
+                  <NavItem pathname={pathname} targetPath="/admin/workouts/new">
+                    Adaugă Antrenament Nou
                   </NavItem>
                 </CollapseMenuItem>
               </ul>
 
               {/* sign out button */}
               <hr className="my-3" />
-              <ul className="nav flex-column mb-auto">
+              <ul className="nav flex-column mb-3">
                 <li className="nav-item">
-                  <a
-                    className="nav-link d-flex align-items-center gap-2"
-                    href="#"
-                  >
-                    Sign out
-                  </a>
+                  <SignOutButton styleClass="btn btn-outline-danger ms-2" />
                 </li>
               </ul>
             </div>

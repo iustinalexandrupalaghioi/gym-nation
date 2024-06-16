@@ -12,3 +12,12 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.hover {
+  transition: 0.3s;
+}
+.hover-light:hover {
+  color: #fff !important;
+}
+.hover-primary:hover {
+  color: #22a699 !important;
+}

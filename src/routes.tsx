@@ -26,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
+      { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
     ],
   },
   {
@@ -47,10 +48,7 @@ const router = createBrowserRouter([
     path: "/workouts",
     element: <Layout />,
     errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <WorkoutsPage /> },
-      { path: "/workouts/new", element: <NewWorkoutPage /> },
-    ],
+    children: [{ index: true, element: <WorkoutsPage /> }],
   },
   { path: "/workouts/:slug", element: <SingleWorkoutPage /> },
 ]);

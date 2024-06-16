@@ -1,7 +1,6 @@
 import { createElement } from "react";
 import { FaInstagram, FaFacebookSquare, FaTiktok } from "react-icons/fa";
 import logo from "/images/logo1.png";
-import "./footer.css";
 
 const Footer = () => {
   const icnonsMap = {
@@ -39,7 +38,7 @@ const Footer = () => {
             <a
               target="_blank"
               href={link}
-              className="text-body-secondary hover-light"
+              className="text-body-secondary hover hover-light"
               aria-label={name}
             >
               {createElement(icon)}

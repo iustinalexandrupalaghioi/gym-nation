@@ -1,6 +1,5 @@
 import { ReactNode, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { NavLink } from "react-router-dom";
 
 interface Props {
   menuTitle: string;
@@ -24,17 +23,17 @@ const CollapseMenuItem = ({ menuTitle, menuId, children }: Props) => {
         >
           <p
             className={`mb-0 px-2 ${
-              expanded ? "text-primary" : "text-body-secondary"
+              expanded ? "text-light" : "text-body-secondary"
             }`}
           >
             {menuTitle}
           </p>
           {expanded ? (
-            <p className="mb-0 fs-3">
+            <p className="mb-0 fs-5">
               <IoIosArrowUp />
             </p>
           ) : (
-            <p className="mb-0 fs-3">
+            <p className="mb-0 fs-5">
               <IoIosArrowDown />
             </p>
           )}
