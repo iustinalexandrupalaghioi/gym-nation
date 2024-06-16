@@ -62,18 +62,16 @@ const useAddPost = () => {
   //upload post to firebase function
   const firebaseClient = new FirebaseClient("/posts");
   async function postNewBlog(data: DocumentData) {
-    await firebaseClient
-      .post(data)
-      .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["posts"] });
-        alert("Articolul a fost postat cu succes!");
-      })
-      .catch((err) => {
-        console.error(err.message);
-        alert(
-          "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu."
-        );
-      });
+    try {
+      await firebaseClient.post(data);
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      alert("Articolul a fost postat cu succes!");
+    } catch (error: any) {
+      console.error(error.message);
+      alert(
+        "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu."
+      );
+    }
   }
 
   //handle change events on form

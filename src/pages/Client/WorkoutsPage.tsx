@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import WorkoutCard from "../../components/workouts/WorkoutCard/WorkoutCard";
 import WorkoutCardSkeleton from "../../components/workouts/WorkoutCardSkeleton";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";

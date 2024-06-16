@@ -6,6 +6,8 @@ import {
   DocumentData,
   where,
   getCountFromServer,
+  setDoc,
+  doc,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../firebase-config";
@@ -31,8 +33,12 @@ class FirebaseClient {
     return { result, count };
   };
 
-  post = (data: DocumentData) => {
-    return addDoc(collection(db, this.endpoint), data);
+  post = async (data: DocumentData, customId?: string) => {
+    if (customId) {
+      await setDoc(doc(db, this.endpoint, customId), data);
+    } else {
+      await addDoc(collection(db, this.endpoint), data);
+    }
   };
 
   getFileURL = async (file: File | null) => {

@@ -2,14 +2,17 @@ import { Outlet, useLocation } from "react-router-dom";
 import CollapseMenuItem from "./CollapseMenuItem";
 import NavItem from "./NavItem";
 import SignOutButton from "../account/SignOutButton";
+import { useState } from "react";
+import NewCategoryModal from "../blog/Categories/NewCategoryModal";
 
 const DashboardBody = () => {
   const { pathname } = useLocation();
+  const [isActive, setActive] = useState(false);
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+        <div className="sidebar border border-right col-md-4 col-lg-3 col-xl-2 p-0 bg-body-tertiary">
           <div
             className="offcanvas-md offcanvas-end bg-body-tertiary"
             tabIndex={-1}
@@ -41,6 +44,17 @@ const DashboardBody = () => {
                   <NavItem pathname={pathname} targetPath="/admin/blog/new">
                     Adaugă Articol Nou
                   </NavItem>
+                  <button
+                    className={`nav-link hover hover-primary gap-1 ${
+                      isActive ? "text-primary" : "text-body-secondary"
+                    }`}
+                    onClick={() => setActive(true)}
+                    data-bs-toggle="modal"
+                    data-bs-target="#newCategoryModal"
+                  >
+                    Adaugă Categorie Nouă
+                  </button>
+                  <NewCategoryModal isActive setActive={setActive} />
                 </CollapseMenuItem>
                 <CollapseMenuItem menuId="workoutMenu" menuTitle="Antrenamente">
                   <NavItem pathname={pathname} targetPath="/admin/workouts/new">
