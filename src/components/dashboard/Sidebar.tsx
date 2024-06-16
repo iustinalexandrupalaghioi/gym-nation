@@ -41,9 +41,6 @@ const Sidebar = ({ pathname }: Props) => {
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
                 Adaugă Articol
               </NavItem>
-              <NavItem pathname={pathname} targetPath="/admin/blog/delete">
-                Șterge Articol
-              </NavItem>
               <NewCategoryModal />
             </CollapseMenuItem>
             <CollapseMenuItem menuId="workoutMenu" menuTitle="Antrenamente">

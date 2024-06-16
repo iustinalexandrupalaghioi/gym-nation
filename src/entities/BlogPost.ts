@@ -1,5 +1,10 @@
 export default interface BlogPost {
   title: string;
-  image: File | null;
+  titleSlug?: string;
   category: string;
+  image: File | null;
+  imageURL?: string;
+  htmlContent?: string;
+  textContent?: string;
+  createdAt?: string;
 }
