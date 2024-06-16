@@ -1,19 +1,29 @@
-import useAddPost from "../../../hooks/useAddPost";
 import ReactQuill from "react-quill";
 import useCategories from "../../../hooks/useCategories";
 import "react-quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
+import { ChangeEvent, FormEvent, RefObject } from "react";
+import BlogPost from "../../../entities/BlogPost";
 
-const NewBlogForm = () => {
+interface Props {
+  quillRef: RefObject<ReactQuill>;
+  post: BlogPost;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  handleChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+}
+const NewBlogForm = ({
+  quillRef,
+  post: { title },
+  value,
+  setValue,
+  handleChange,
+  handleSubmit,
+}: Props) => {
   const { data: categories } = useCategories();
-  const {
-    quillRef,
-    post: { title },
-    value,
-    setValue,
-    handleChange,
-    handleSubmit,
-  } = useAddPost();
 
   const modules = {
     toolbar: [

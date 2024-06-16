@@ -7,12 +7,8 @@ import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
 import useCategories from "./useCategories";
 import useGetFileURL from "./useGetFileURL";
+import BlogPost from "../entities/BlogPost";
 
-interface BlogPost {
-  title: string;
-  image: File | null;
-  category: string;
-}
 const useAddPost = () => {
   //managing state for blog inputs
   const [value, setValue] = useState("");

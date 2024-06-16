@@ -2,14 +2,25 @@ import { Navigate } from "react-router-dom";
 import NewBlogForm from "../../components/blog/NewBlog/NewBlogForm";
 import PageContent from "../../components/dashboard/PageContent";
 import useUserStatusStore from "../../stores/userStore";
+import NewBlogPreview from "../../components/blog/NewBlog/NewBlogPreview";
+import useAddPost from "../../hooks/useAddPost";
 
 const NewBlogPage = () => {
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
-
+  const { quillRef, post, value, setValue, handleChange, handleSubmit } =
+    useAddPost();
   if (isAdmin) {
     return (
       <PageContent pageTitle="Scrie un nou articol de blog">
-        <NewBlogForm />
+        <NewBlogForm
+          quillRef={quillRef}
+          post={post}
+          value={value}
+          setValue={setValue}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        {value && value != "<p><br></p>" && <NewBlogPreview value={value} />}
       </PageContent>
     );
   }

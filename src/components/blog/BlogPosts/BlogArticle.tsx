@@ -22,7 +22,7 @@ const BlogArticle = () => {
           </div>
         </div>
       ) : (
-        <div className="mb-3 d-flex flex-column gap-2">
+        <div className="mb-3 d-flex flex-column gap-2" id="article">
           <img
             src={article?.image}
             className="card-img-top rounded-2 shadow-lg mb-2 w-100 h-50"
