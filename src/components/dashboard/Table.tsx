@@ -1,28 +1,37 @@
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import useCustomersSubcription from "../../hooks/useCustomersSubscriptions";
 
-interface Props {
-  customers: QueryDocumentSnapshot<DocumentData, DocumentData>[] | undefined;
-}
-const Table = ({ customers }: Props) => {
+const CustomersTable = () => {
+  const { data: customers, isLoading } = useCustomersSubcription();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <table className="table table-stripped mt-5">
+    <table className="table">
       <thead>
         <tr>
           <th>Stripe ID</th>
           <th>Email</th>
-          <th>Name</th>
-          <th>Subscriber</th>
-          <th>Status</th>
+          <th>Start</th>
+          <th>End</th>
         </tr>
       </thead>
       <tbody>
         {customers?.map((customer) => (
           <tr key={customer.id}>
-            <td>{customer.data().stripeId}</td>
-            <td>{customer.data().email}</td>
-            <td>{customer.data().name}</td>
-            <td>{customer.data().subscriptions ? "Yes" : "No"}</td>
-            <td>{customer.data().subscriptions}</td>
+            <td>{customer.id}</td>
+            <td>{customer.data.email}</td>
+            <td>
+              {customer.subscriptions && customer.subscriptions.length > 0
+                ? "Yes"
+                : "No"}
+            </td>
+            <td className="text-primary">
+              {customer.subscriptions &&
+                customer.subscriptions.length > 0 &&
+                customer.subscriptions[0].subscriptionStatus}
+            </td>
           </tr>
         ))}
       </tbody>
@@ -30,4 +39,4 @@ const Table = ({ customers }: Props) => {
   );
 };
 
-export default Table;
+export default CustomersTable;
