@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import CollapseMenuItem from "./CollapseMenuItem";
+import NavItem from "./NavItem";
 
 const DashboardBody = () => {
-  const [expanded, setExpand] = useState<boolean>(false);
+  const { pathname } = useLocation();
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -31,56 +32,15 @@ const DashboardBody = () => {
             <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
               <ul className="nav flex-column">
                 <li className="nav-item">
-                  <NavLink
-                    className="nav-link text-body-secondary hover-light d-flex align-items-center gap-2 active"
-                    to="/admin"
-                  >
+                  <NavItem pathname={pathname} targetPath="/admin">
                     Acasă
-                  </NavLink>
+                  </NavItem>
                 </li>
-                <li className="nav-item">
-                  <div className="p-0 d-flex flex-column">
-                    <button
-                      className="bg-body-tertiary border-0 d-flex flex-row justify-content-between text-sm-start align-items-center gap-1"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#blogMenu"
-                      aria-expanded="false"
-                      aria-controls="collapseWidthExample"
-                      onClick={() => setExpand(!expanded)}
-                    >
-                      <p
-                        className={`mb-0 px-2 ${
-                          expanded
-                            ? "text-primary fw-bold"
-                            : "text-body-secondary"
-                        }`}
-                      >
-                        Blog
-                      </p>
-                      {expanded ? (
-                        <p className="mb-0 fs-3">
-                          <IoIosArrowUp />
-                        </p>
-                      ) : (
-                        <p className="mb-0 fs-3">
-                          <IoIosArrowDown />
-                        </p>
-                      )}
-                    </button>
-                    <div
-                      className="collapse collapse-vertical w-100"
-                      id="blogMenu"
-                    >
-                      <NavLink
-                        className="nav-link text-body-secondary hover-light d-flex align-items-center gap-2 active"
-                        to="/admin/blog/new"
-                      >
-                        Articol Nou
-                      </NavLink>
-                    </div>
-                  </div>
-                </li>
+                <CollapseMenuItem menuId="blogMenu" menuTitle="Blog">
+                  <NavItem pathname={pathname} targetPath="/admin/blog/new">
+                    Articol nou
+                  </NavItem>
+                </CollapseMenuItem>
               </ul>
 
               {/* sign out button */}
