@@ -3,16 +3,15 @@ import slugify from "slugify";
 import FirebaseClient from "../../../utilities/firebase-client";
 import useCategories from "../../../hooks/useCategories";
 import { queryClient } from "../../../main";
-
-interface Props {
-  isActive: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import ToggleModalButton from "../../dashboard/ToggleModalButton";
+import Modal from "../../dashboard/Modal";
 
 const firebaseClient = new FirebaseClient("/categories");
 
-const NewCategoryModal = ({ setActive }: Props) => {
+const NewCategoryModal = () => {
   const [category, setCategory] = useState<string>("");
+  const [isActive, setActive] = useState(false);
+
   const { data: categories } = useCategories();
 
   const newId = categories?.result ? categories.result.length : 999;
@@ -37,66 +36,35 @@ const NewCategoryModal = ({ setActive }: Props) => {
   };
 
   return (
-    <div
-      className="modal fade"
-      id="newCategoryModal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabIndex={-1}
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <form
-            onSubmit={(event: FormEvent<HTMLFormElement>) =>
-              handleSubmit(event)
+    <>
+      <ToggleModalButton
+        isActive={isActive}
+        setActive={setActive}
+        textContent="Adaugă Categorie"
+        modalId="newCategoryModal"
+      />
+
+      <Modal
+        modalId="newCategoryModal"
+        modalTitle="Adaugă o Categorie Nouă"
+        handleSubmit={handleSubmit}
+        setActive={setActive}
+      >
+        <div className="form-group mb-3">
+          <label htmlFor="newCategory">Denumire:</label>
+          <input
+            value={category}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setCategory(event.target.value)
             }
-          >
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Adaugă o Categorie Nouă
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={() => setActive(false)}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="form-group mb-3">
-                <label htmlFor="newCategory">Denumire:</label>
-                <input
-                  value={category}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setCategory(event.target.value)
-                  }
-                  type="text"
-                  className="form-control"
-                  id="newCategory"
-                  placeholder="ex: Sport de performanță"
-                />
-              </div>
-            </div>
-            <div className="modal-footer d-flex align-items-end gap-1">
-              <button
-                type="button"
-                className="btn btn-outline-info"
-                data-bs-dismiss="modal"
-                onClick={() => setActive(false)}
-              >
-                Anulează
-              </button>
-              <button type="submit" className="btn btn-primary text-light">
-                Adaugă
-              </button>
-            </div>
-          </form>
+            type="text"
+            className="form-control"
+            id="newCategory"
+            placeholder="ex: Sport de performanță"
+          />
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 

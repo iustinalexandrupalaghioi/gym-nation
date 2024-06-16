@@ -19,40 +19,46 @@ const Account = () => {
   }
 
   return (
-    <div className="container d-flex flex-column justify-content-center align-items-center text-center col-xl-10 col-xxl-8 px-4 py-5 vh-100 gap-3">
-      <NavLink className="navbar-brand" to="/" title="Pagina principala">
-        <img src={logo} className="img-fluid" style={{ height: "60px" }} />
-      </NavLink>
-      <p className="text-body-secondary m-0">
-        Conectat ca {auth.currentUser?.displayName}
-      </p>
-      <p className="m-0">{auth.currentUser?.email}</p>
+    <div className="vh-100">
+      <header className="navbar bg-dark flex-md-nowrap shadow">
+        <div className="container-fluid">
+          <NavLink className="navbar-brand" to="/">
+            <img src={logo} className="img-fluid" style={{ height: "55px" }} />
+          </NavLink>
+        </div>
+      </header>
+      <div className="container d-flex flex-column justify-content-center align-items-center text-center col-xl-10 col-xxl-8 px-4 py-5 gap-3 h-75">
+        <p className="text-body-secondary m-0">
+          Conectat ca {auth.currentUser?.displayName}
+        </p>
+        <p className="m-0">{auth.currentUser?.email}</p>
 
-      <div
-        className="card bg-body-tertiary flex align-items-center justify-content-center p-5"
-        style={{ height: "100px" }}
-      >
-        {isAdmin
-          ? "Admin"
-          : isPremium
-          ? "Abonament Premium"
-          : "Membru standard"}
+        <div
+          className="card bg-body-tertiary flex align-items-center justify-content-center p-5"
+          style={{ height: "100px" }}
+        >
+          {isAdmin
+            ? "Admin"
+            : isPremium
+            ? "Abonament Premium"
+            : "Membru standard"}
+        </div>
+        {!isAdmin ? (
+          isLoading ? (
+            <LoadingButton
+              textContent="Redirecționare..."
+              styleClass="btn btn-primary text-light p-3"
+            />
+          ) : (
+            <SubscriptionButton
+              styleClass="btn btn-primary text-light p-3"
+              setLoading={setLoading}
+            />
+          )
+        ) : null}
+
+        <SignOutButton styleClass="btn btn-outline-danger" />
       </div>
-      {!isAdmin ? (
-        isLoading ? (
-          <LoadingButton
-            textContent="Redirecționare..."
-            styleClass="btn btn-primary text-light p-3"
-          />
-        ) : (
-          <SubscriptionButton
-            styleClass="btn btn-primary text-light p-3"
-            setLoading={setLoading}
-          />
-        )
-      ) : null}
-
-      <SignOutButton styleClass="btn btn-outline-danger" />
     </div>
   );
 };
