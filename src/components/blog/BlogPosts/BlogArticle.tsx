@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import { useParams } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import { useEffect } from "react";
+import LoadingStatus from "../../LoadingStatus";
 
 const BlogArticle = () => {
   const { slug } = useParams();
@@ -16,11 +17,7 @@ const BlogArticle = () => {
   return (
     <div className="col-12 col-md-8">
       {isLoading ? (
-        <div className="text-center vh-100 d-flex align-items-center justify-content-center">
-          <div className="spinner-border" role="status">
-            <span>Loading...</span>
-          </div>
-        </div>
+        <LoadingStatus />
       ) : (
         <div className="mb-3 d-flex flex-column gap-2" id="article">
           <img

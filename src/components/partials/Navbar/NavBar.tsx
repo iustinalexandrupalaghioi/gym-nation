@@ -47,13 +47,6 @@ const NavBar = () => {
                 Antrenamente
               </NavLink>
             </li>
-            {isAdmin && (
-              <li className="nav-item">
-                <NavLink to="/admin" className="nav-link custom-nav-link">
-                  Panou de Control
-                </NavLink>
-              </li>
-            )}
 
             {isLoading ? (
               <li className="nav-item dropdown">
@@ -89,12 +82,20 @@ const NavBar = () => {
                       Contul meu
                     </NavLink>
                   </li>
-                  <li className="mb-2">
-                    <SubscriptionButton
-                      styleClass="dropdown-item"
-                      setLoading={setLoading}
-                    />
-                  </li>
+                  {isAdmin ? (
+                    <li className="mb-2">
+                      <NavLink to="/admin" className="dropdown-item">
+                        Panou de Control
+                      </NavLink>
+                    </li>
+                  ) : (
+                    <li className="mb-2">
+                      <SubscriptionButton
+                        styleClass="dropdown-item"
+                        setLoading={setLoading}
+                      />
+                    </li>
+                  )}
                   <li className="mb-2">
                     <SignOutButton styleClass="dropdown-item text-danger text-active-light" />
                   </li>

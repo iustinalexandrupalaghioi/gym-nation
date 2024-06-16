@@ -12,6 +12,7 @@ import WorkoutsPage from "./pages/Client/WorkoutsPage";
 import Account from "./pages/Client/Account";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import Home from "./pages/Admin/Home";
+import CustomersPage from "./pages/Admin/CustomersPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
+      { path: "/admin/customers", element: <CustomersPage /> },
     ],
   },
   {

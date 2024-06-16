@@ -5,7 +5,6 @@ import ErrorPage from "./ErrorPage";
 
 const WorkoutsPage = () => {
   const { data, isLoading, error } = useFetchWorkouts();
-  const skeletons = [1, 2, 3, 4];
 
   if (error) return <ErrorPage />;
 
@@ -21,11 +20,13 @@ const WorkoutsPage = () => {
         <span className="text-primary">oriunde</span> te-ai afla!
       </p>
       <div className="row mt-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-        {isLoading
-          ? skeletons.map((skeleton) => <WorkoutCardSkeleton key={skeleton} />)
-          : data?.result.map((workout) => (
-              <WorkoutCard workout={workout} key={workout.id} />
-            ))}
+        {isLoading ? (
+          <WorkoutCardSkeleton />
+        ) : (
+          data?.result.map((workout) => (
+            <WorkoutCard workout={workout} key={workout.id} />
+          ))
+        )}
       </div>
     </div>
   );

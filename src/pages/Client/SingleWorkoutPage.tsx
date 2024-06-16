@@ -9,6 +9,7 @@ import useWorkout from "../../hooks/useWorkout";
 import useExerciseQueryStore from "../../stores/exerciseQueryStore";
 import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
+import LoadingStatus from "../../components/LoadingStatus";
 
 const SingleWorkoutPage = () => {
   const navigate = useNavigate();
@@ -43,11 +44,7 @@ const SingleWorkoutPage = () => {
         <Header />
         <main className="px-4 py-5 mt-5 mt-md-0">
           {isLoading ? (
-            <div className="text-center vh-100 d-flex align-items-center justify-content-center">
-              <div className="spinner-border" role="status">
-                <span>Loading...</span>
-              </div>
-            </div>
+            <LoadingStatus />
           ) : (
             <div className="row row-cols-1 row-cols-md-2 p-0 py-lg-4 px-lg-2">
               <WorkoutExercise>
