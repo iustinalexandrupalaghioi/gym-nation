@@ -9,7 +9,7 @@ interface Props {
 }
 const Sidebar = ({ pathname }: Props) => {
   return (
-    <div className="sidebar border border-right col-md-4 col-lg-3 col-xl-2 p-0 bg-body-tertiary">
+    <div className="sidebar border-0 col-md-4 col-lg-3 col-xl-2 p-0 bg-body-tertiary">
       <div
         className="offcanvas-md offcanvas-end bg-body-tertiary"
         tabIndex={-1}
@@ -40,6 +40,9 @@ const Sidebar = ({ pathname }: Props) => {
             <CollapseMenuItem menuId="blogMenu" menuTitle="Blog">
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
                 Adaugă Articol
+              </NavItem>
+              <NavItem pathname={pathname} targetPath="/admin/blog/delete">
+                Șterge Articol
               </NavItem>
               <NewCategoryModal />
             </CollapseMenuItem>

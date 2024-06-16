@@ -60,7 +60,7 @@ const NewCategoryModal = () => {
               setCategory(event.target.value)
             }
             type="text"
-            className="form-control"
+            className="form-control border-0"
             id="newCategory"
             placeholder="ex: Sport de performanță"
           />

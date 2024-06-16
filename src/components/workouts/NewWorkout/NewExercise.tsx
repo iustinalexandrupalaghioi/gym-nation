@@ -34,7 +34,7 @@ const NewExercise = ({ setWorkout }: Props) => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
+          <div className="modal-body bg-body-tertiary">
             <form onSubmit={handleSubmit}>
               <div className="form-group mb-3">
                 <label className="text-body-secondary" htmlFor="exerciseName">
@@ -42,7 +42,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control border-0"
                   name="exerciseName"
                   id="exerciseName"
                   onChange={handleChange}
@@ -56,7 +56,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control border-0"
                   name="exerciseDescription"
                   onChange={handleChange}
                   value={exerciseDescription}
@@ -74,7 +74,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                 <input
                   ref={fileInputRefImage}
                   type="file"
-                  className="form-control"
+                  className="form-control border-0"
                   onChange={handleChange}
                   name="exerciseThubnail"
                   id="exerciseThubnail"
@@ -87,7 +87,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                 <input
                   type="file"
                   ref={fileInputRefVideo}
-                  className="form-control"
+                  className="form-control border-0"
                   onChange={handleChange}
                   id="exerciseVideo"
                   name="exerciseVideo"

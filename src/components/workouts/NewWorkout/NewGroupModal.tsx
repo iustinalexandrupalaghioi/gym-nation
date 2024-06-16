@@ -50,7 +50,7 @@ const NewGroupModal = () => {
               setMuscleGroup(event.target.value)
             }
             type="text"
-            className="form-control"
+            className="form-control border-0"
             id="muscleGroup"
             placeholder="ex: Biceps femural"
           />

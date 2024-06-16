@@ -24,26 +24,32 @@ const Modal = ({
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <form
-            onSubmit={(event: FormEvent<HTMLFormElement>) =>
-              handleSubmit(event)
-            }
-          >
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                {modalTitle}
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={() => setActive(false)}
-              ></button>
-            </div>
-            <div className="modal-body">{children}</div>
+      <div className="modal-dialog ">
+        <div className="modal-content ">
+          <div className="modal-header">
+            <h1
+              className="modal-title text-light fs-5"
+              id="staticBackdropLabel"
+            >
+              {modalTitle}
+            </h1>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              onClick={() => setActive(false)}
+            ></button>
+          </div>
+          <div className="modal-body bg-body-tertiary">
+            <form
+              className="mb-4"
+              onSubmit={(event: FormEvent<HTMLFormElement>) =>
+                handleSubmit(event)
+              }
+            >
+              {children}
+            </form>
             <div className="modal-footer d-flex align-items-end gap-1">
               <button
                 type="button"
@@ -57,7 +63,7 @@ const Modal = ({
                 Adaugă
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
