@@ -51,7 +51,9 @@ const NewCategoryModal = () => {
         setActive={setActive}
       >
         <div className="form-group mb-3">
-          <label htmlFor="newCategory">Denumire:</label>
+          <label className="text-body-secondary" htmlFor="newCategory">
+            Denumire:
+          </label>
           <input
             value={category}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>

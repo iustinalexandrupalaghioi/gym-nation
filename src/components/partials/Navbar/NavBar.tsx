@@ -8,13 +8,20 @@ import LoadingButton from "../../account/LoadingButton.tsx";
 import SignOutButton from "../../account/SignOutButton.tsx";
 import useUserStatusStore from "../../../stores/userStore.ts";
 
-const NavBar = () => {
+interface Props {
+  styleClass?: string;
+}
+const NavBar = ({ styleClass }: Props) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
 
   return (
-    <nav className={`navbar container-fluid navbar-expand-lg`}>
+    <nav
+      className={`navbar container-fluid navbar-expand-lg ${
+        styleClass && styleClass
+      }`}
+    >
       <div className="container">
         <NavLink className="navbar-brand" to="/">
           <img src={logo} className="img-fluid" style={{ height: "55px" }} />

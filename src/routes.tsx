@@ -13,10 +13,12 @@ import Account from "./pages/Client/Account";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import Home from "./pages/Admin/Home";
 import CustomersPage from "./pages/Admin/CustomersPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
   { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
   {
     path: "/account",
     element: <Account />,

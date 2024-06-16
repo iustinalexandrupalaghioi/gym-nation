@@ -1,82 +1,73 @@
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState, FormEvent, ChangeEvent } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth, provider } from "../firebase-config";
-import getUserStatus from "../utilities/getUserStatus";
-import useUserStatusStore from "../stores/userStore";
+
 import logo from "/images/logo1.png";
-import getUserRole from "../utilities/getUserRole";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase-config";
 
 interface Credentials {
+  name: { fname: string; lname: string };
   email: string;
   password: string;
 }
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
-  const setStatus = useUserStatusStore((s) => s.setStatus);
-  const setRole = useUserStatusStore((s) => s.setRole);
-
   const [credentials, setCredentials] = useState<Credentials>({
+    name: { fname: "", lname: "" },
     email: "",
     password: "",
   });
-  let { email, password } = credentials;
+  let { name, email, password } = credentials;
 
   // update credentials state for user inputs
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "email") {
       setCredentials((prev) => ({ ...prev, email: value }));
-    } else {
+    } else if (name === "password") {
       setCredentials((prev) => ({ ...prev, password: value }));
+    } else if (name === "fname") {
+      setCredentials((prev) => ({
+        ...prev,
+        name: { ...prev.name, fname: value },
+      }));
+    } else if (name === "lname") {
+      setCredentials((prev) => ({
+        ...prev,
+        name: { ...prev.name, lname: value },
+      }));
     }
   };
 
-  // handle sign in with email and password
-  const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      event.preventDefault();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: `${name.fname} ${name.lname}`,
+      });
 
-      //check user status
-      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
-      setStatus(newUserStatus);
+      setCredentials({
+        name: { fname: "", lname: "" },
+        email: "",
+        password: "",
+      });
 
-      //check user role
-      const newUserRole = auth.currentUser
-        ? getUserRole(auth.currentUser.uid)
-        : false;
-      setRole(newUserRole);
-      setCredentials({ email: "", password: "" });
-      navigate("/");
-    } catch (error: any) {
-      const errorMessage = error.message;
-      console.error(errorMessage);
-      alert("Nu s-a putut realiza autentificarea.");
-    }
-  };
-
-  // handle sign in with google
-  const handleSignInWithPopup = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-
-      //check user status
-      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
-      setStatus(newUserStatus);
-
-      //check user role
-      const newUserRole = auth.currentUser
-        ? getUserRole(auth.currentUser.uid)
-        : false;
-      setRole(newUserRole);
-      navigate("/");
-    } catch (err: any) {
-      const errorMessage = err.message;
-      console.error(errorMessage);
-      alert("Nu s-a putut realiza autentificarea.");
+      alert("Te-ai înregistrat cu succes!");
+      navigate("/login");
+    } catch (error) {
+      setCredentials({
+        name: { fname: "", lname: "" },
+        email: "",
+        password: "",
+      });
+      alert("Ceva nu a funcșionat");
     }
   };
 
@@ -92,8 +83,38 @@ const LoginPage = () => {
       <div className="container d-flex flex-column justify-content-center align-items-center col-xl-10 col-xxl-8 px-4 py-5 h-75">
         <form
           className="p-4 p-md-5 border-0 shadow rounded-3 bg-body-tertiary"
-          onSubmit={(event: FormEvent<HTMLFormElement>) => handleSignIn(event)}
+          onSubmit={(event: FormEvent<HTMLFormElement>) => handleSubmit(event)}
         >
+          <div className="d-flex gap-2 flex-column flex-md-row">
+            <div className="form-group mb-3">
+              <label className="text-body-secondary" htmlFor="fname">
+                Nume
+              </label>
+              <input
+                type="text"
+                name="fname"
+                className="form-control"
+                id="fname"
+                placeholder="Popescu"
+                value={name.fname}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label className="text-body-secondary" htmlFor="lname">
+                Prenume
+              </label>
+              <input
+                type="text"
+                name="lname"
+                className="form-control"
+                id="lname"
+                placeholder="Marian"
+                value={name.lname}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="email">
               Adresă de email
@@ -123,13 +144,13 @@ const LoginPage = () => {
             />
           </div>
           <p className="text-body-secondary" style={{ fontSize: "0.8rem" }}>
-            Nu ai cont?{" "}
+            Ai deja un cont?{" "}
             <span>
               <NavLink
-                to="/register"
+                to="/login"
                 className="d-inline-flex nav-link text-light hover hover-primary"
               >
-                Înregistrează-te
+                Autentifică-te
               </NavLink>
             </span>
           </p>
@@ -137,14 +158,7 @@ const LoginPage = () => {
             className="w-100 btn btn-primary text-light mb-2"
             type="submit"
           >
-            Conectare
-          </button>
-          <button
-            onClick={handleSignInWithPopup}
-            type="button"
-            className="w-100 d-flex align-items-center justify-content-center gap-1 btn btn-outline-info"
-          >
-            <FcGoogle /> Conectare cu Google
+            Înregistrează-te
           </button>
         </form>
       </div>
@@ -152,4 +166,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

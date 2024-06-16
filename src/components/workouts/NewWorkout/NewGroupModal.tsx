@@ -41,7 +41,9 @@ const NewGroupModal = () => {
         setActive={setActive}
       >
         <div className="form-group mb-3">
-          <label htmlFor="muscleGroup">Denumire:</label>
+          <label className="text-body-secondary" htmlFor="muscleGroup">
+            Denumire:
+          </label>
           <input
             value={muscleGroup}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>

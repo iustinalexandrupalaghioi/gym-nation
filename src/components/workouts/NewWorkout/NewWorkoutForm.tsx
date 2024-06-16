@@ -23,7 +23,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
       onSubmit={handleSubmit}
     >
       <div className="form-group mb-3">
-        <label htmlFor="title">Titlul antrenamentului</label>
+        <label className="text-body-secondary" htmlFor="title">
+          Titlul antrenamentului
+        </label>
         <input
           id="title"
           type="text"
@@ -36,7 +38,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
       </div>
 
       <div className="form-group mb-3">
-        <label htmlFor="description">Descrierea antrenamentului</label>
+        <label className="text-body-secondary" htmlFor="description">
+          Descrierea antrenamentului
+        </label>
         <input
           id="description"
           type="text"
@@ -49,7 +53,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
       </div>
 
       <div className="form-group mb-3">
-        <label htmlFor="price">Prețul antrenamentului (lei)</label>
+        <label className="text-body-secondary" htmlFor="price">
+          Prețul antrenamentului (lei)
+        </label>
         <input
           id="price"
           type="number"
@@ -62,7 +68,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
       </div>
 
       <div className="form-group mb-3">
-        <label htmlFor="muscles">Alege partea corpului corespunzătoare</label>
+        <label className="text-body-secondary" htmlFor="muscles">
+          Alege partea corpului corespunzătoare
+        </label>
         <select
           className="form-select"
           onChange={handleChange}
@@ -81,7 +89,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         </select>
       </div>
       <div className="form-group mb-3">
-        <label htmlFor="image">Adaugă o imagine</label>
+        <label className="text-body-secondary" htmlFor="image">
+          Adaugă o imagine
+        </label>
         <input
           onChange={handleChange}
           type="file"

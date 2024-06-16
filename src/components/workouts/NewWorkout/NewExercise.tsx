@@ -37,7 +37,7 @@ const NewExercise = ({ setWorkout }: Props) => {
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group mb-3">
-                <label htmlFor="exerciseName">
+                <label className="text-body-secondary" htmlFor="exerciseName">
                   Introdu numele exercițiului
                 </label>
                 <input
@@ -51,7 +51,9 @@ const NewExercise = ({ setWorkout }: Props) => {
                 />
               </div>
               <div className="form-group mb-3">
-                <label htmlFor="instructions">Descrie modul de execuție</label>
+                <label className="text-body-secondary" htmlFor="instructions">
+                  Descrie modul de execuție
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -63,7 +65,10 @@ const NewExercise = ({ setWorkout }: Props) => {
                 />
               </div>
               <div className="form-group mb-3">
-                <label htmlFor="exerciseThumbnail">
+                <label
+                  className="text-body-secondary"
+                  htmlFor="exerciseThumbnail"
+                >
                   Încarcă o imagine de prezentare
                 </label>
                 <input
@@ -76,7 +81,9 @@ const NewExercise = ({ setWorkout }: Props) => {
                 />
               </div>
               <div className="form-group mb-3">
-                <label htmlFor="exerciseVideo">Încarcă un video</label>
+                <label className="text-body-secondary" htmlFor="exerciseVideo">
+                  Încarcă un video
+                </label>
                 <input
                   type="file"
                   ref={fileInputRefVideo}
