@@ -117,7 +117,7 @@ const NewBlogForm = ({
           </div>
         </div>
         <div className="container-fluid mt-3 d-flex justify-content-end gap-2">
-          <Link to="/blog" className="btn btn-outline-primary btnOutline">
+          <Link to="/blog" className="btn btn-outline-info">
             Anulează
           </Link>
           <button className="btn btn-primary align-self-end text-light">

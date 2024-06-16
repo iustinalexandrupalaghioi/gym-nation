@@ -48,24 +48,24 @@ const NewCategoryModal = ({ setActive }: Props) => {
     >
       <div className="modal-dialog">
         <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="staticBackdropLabel">
-              Adaugă o Categorie Nouă
-            </h1>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              onClick={() => setActive(false)}
-            ></button>
-          </div>
-          <div className="modal-body">
-            <form
-              onSubmit={(event: FormEvent<HTMLFormElement>) =>
-                handleSubmit(event)
-              }
-            >
+          <form
+            onSubmit={(event: FormEvent<HTMLFormElement>) =>
+              handleSubmit(event)
+            }
+          >
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                Adaugă o Categorie Nouă
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={() => setActive(false)}
+              ></button>
+            </div>
+            <div className="modal-body">
               <div className="form-group mb-3">
                 <label htmlFor="newCategory">Denumire:</label>
                 <input
@@ -79,21 +79,21 @@ const NewCategoryModal = ({ setActive }: Props) => {
                   placeholder="ex: Sport de performanță"
                 />
               </div>
-              <div className="modal-footer d-flex align-items-end gap-1">
-                <button
-                  type="button"
-                  className="btn btn-outline-info"
-                  data-bs-dismiss="modal"
-                  onClick={() => setActive(false)}
-                >
-                  Anulează
-                </button>
-                <button type="submit" className="btn btn-primary text-light">
-                  Adaugă
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div className="modal-footer d-flex align-items-end gap-1">
+              <button
+                type="button"
+                className="btn btn-outline-info"
+                data-bs-dismiss="modal"
+                onClick={() => setActive(false)}
+              >
+                Anulează
+              </button>
+              <button type="submit" className="btn btn-primary text-light">
+                Adaugă
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

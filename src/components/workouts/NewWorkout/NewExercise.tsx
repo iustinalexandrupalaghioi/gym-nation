@@ -90,7 +90,7 @@ const NewExercise = ({ setWorkout }: Props) => {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-outline-primary btnOutline"
+                  className="btn btn-outline-info"
                   data-bs-dismiss="modal"
                 >
                   Anulează

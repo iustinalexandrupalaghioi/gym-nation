@@ -101,7 +101,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           <GrFormAdd size={"24px"} /> Exerciții
         </button>
         <div className="action-buttons d-flex gap-2">
-          <Link className="btn btn-outline-primary btnOutline" to={"/workouts"}>
+          <Link className="btn btn-outline-info" to={"/workouts"}>
             Anulează
           </Link>
           <button className="btn btn-primary text-light" type="submit">
