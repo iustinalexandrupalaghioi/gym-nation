@@ -7,6 +7,8 @@ import getUserStatus from "../utilities/getUserStatus";
 import useUserStatusStore from "../stores/userStore";
 import logo from "/images/logo1.png";
 import getUserRole from "../utilities/getUserRole";
+import showToast, { Method } from "../utilities/showToast";
+import ToastAlert from "../components/ToastAlert";
 
 interface Credentials {
   email: string;
@@ -50,11 +52,15 @@ const LoginPage = () => {
         : false;
       setRole(newUserRole);
       setCredentials({ email: "", password: "" });
-      navigate("/");
+      const message = "Te-ai autentificat cu succes";
+      const method = Method.Success;
+      showToast(message, method, () => navigate("/"));
     } catch (error: any) {
       const errorMessage = error.message;
       console.error(errorMessage);
-      alert("Nu s-a putut realiza autentificarea.");
+      const message = "Nu s-a putut realiza autentificarea.";
+      const method = Method.Error;
+      showToast(message, method);
     }
   };
 
@@ -62,21 +68,24 @@ const LoginPage = () => {
   const handleSignInWithPopup = async () => {
     try {
       await signInWithPopup(auth, provider);
-
       //check user status
       const newUserStatus = auth.currentUser ? await getUserStatus() : false;
       setStatus(newUserStatus);
-
       //check user role
       const newUserRole = auth.currentUser
         ? getUserRole(auth.currentUser.uid)
         : false;
       setRole(newUserRole);
-      navigate("/");
+      const message = "Te-ai autentificat cu succes";
+      const method = Method.Success;
+      const onClose = () => navigate("/");
+      showToast(message, method, onClose);
     } catch (err: any) {
       const errorMessage = err.message;
       console.error(errorMessage);
-      alert("Nu s-a putut realiza autentificarea.");
+      const message = "Nu s-a putut realiza autentificarea.";
+      const method = Method.Error;
+      showToast(message, method);
     }
   };
 
@@ -94,6 +103,7 @@ const LoginPage = () => {
           className="p-4 p-md-5 border-0 shadow rounded-3 bg-body-tertiary"
           onSubmit={(event: FormEvent<HTMLFormElement>) => handleSignIn(event)}
         >
+          <ToastAlert />
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="email">
               Adresă de email

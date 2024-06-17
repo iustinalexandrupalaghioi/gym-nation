@@ -1,9 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
-import logo from "/images/logo1.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase-config";
+import logo from "/images/logo1.png";
+import ToastAlert from "../components/ToastAlert";
+import showToast, { Method } from "../utilities/showToast";
 
 interface Credentials {
   name: { fname: string; lname: string };
@@ -58,16 +59,18 @@ const RegisterPage = () => {
         email: "",
         password: "",
       });
-
-      alert("Te-ai înregistrat cu succes!");
-      navigate("/login");
+      const message = "Te-ai înregistrat cu succes";
+      const method = Method.Success;
+      showToast(message, method, () => navigate("/login"));
     } catch (error) {
       setCredentials({
         name: { fname: "", lname: "" },
         email: "",
         password: "",
       });
-      alert("Ceva nu a funcșionat");
+      const message = "Ceva nu a funcționat. Te rugăm să încerci mai târziu!";
+      const method = Method.Error;
+      showToast(message, method);
     }
   };
 
@@ -85,6 +88,7 @@ const RegisterPage = () => {
           className="p-4 p-md-5 border-0 shadow rounded-3 bg-body-tertiary"
           onSubmit={(event: FormEvent<HTMLFormElement>) => handleSubmit(event)}
         >
+          <ToastAlert />
           <div className="d-flex gap-2 flex-column flex-md-row">
             <div className="form-group mb-3">
               <label className="text-body-secondary" htmlFor="fname">
