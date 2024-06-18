@@ -14,7 +14,7 @@ const BlogPostsCategories = () => {
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>
-        <div className="card-body px-0">
+        <div className="card-body p-0">
           <ul className="list-group">
             {categories?.result.map((doc) => (
               <CategoryListItem key={doc.id} doc={doc} />

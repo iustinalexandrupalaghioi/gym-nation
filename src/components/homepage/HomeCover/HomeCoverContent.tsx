@@ -20,7 +20,7 @@ const HomeCoverContent = () => {
         </button>
         <Link
           type="button"
-          className="btn btn-primary px-4  gap-3 text-light"
+          className="btn btn-primary text-light px-4"
           to="/workouts"
         >
           Începe Acum <FaArrowRightLong />

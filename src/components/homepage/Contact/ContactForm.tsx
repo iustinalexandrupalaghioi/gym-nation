@@ -113,7 +113,7 @@ const ContactForm = () => {
         </div>
         <div className="form-group mb-3 text-body-secondary">
           <label htmlFor="floatingTextarea" className="text-body-secondary">
-            Cu ce te putem ajuta?
+            Mesaj
           </label>
           <textarea
             className="form-control border-0"
