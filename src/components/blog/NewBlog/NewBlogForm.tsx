@@ -3,6 +3,7 @@ import useCategories from "../../../hooks/useCategories";
 import "react-quill/dist/quill.snow.css";
 import { ChangeEvent, FormEvent, RefObject } from "react";
 import BlogPost from "../../../entities/BlogPost";
+import ToastAlert from "../../ToastAlert";
 
 interface Props {
   quillRef: RefObject<ReactQuill>;
@@ -54,6 +55,7 @@ const NewBlogForm = ({
 
   return (
     <div className="container-fluid px-md-4 py-md-5 p-0">
+      <ToastAlert />
       <form
         className="form bg-body-tertiary shadow p-4 rounded-4"
         onSubmit={handleSubmit}

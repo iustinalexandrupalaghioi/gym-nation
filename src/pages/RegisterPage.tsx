@@ -59,18 +59,20 @@ const RegisterPage = () => {
         email: "",
         password: "",
       });
-      const message = "Te-ai înregistrat cu succes";
-      const method = Method.Success;
-      showToast(message, method, () => navigate("/login"));
+
+      showToast("Te-ai înregistrat cu succes", Method.Success, () =>
+        navigate("/login")
+      );
     } catch (error) {
       setCredentials({
         name: { fname: "", lname: "" },
         email: "",
         password: "",
       });
-      const message = "Ceva nu a funcționat. Te rugăm să încerci mai târziu!";
-      const method = Method.Error;
-      showToast(message, method);
+      showToast(
+        "Ceva nu a funcționat. Te rugăm să încerci mai târziu!",
+        Method.Error
+      );
     }
   };
 
@@ -97,7 +99,7 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="fname"
-                className="form-control"
+                className="form-control border-0"
                 id="fname"
                 placeholder="Popescu"
                 value={name.fname}
@@ -111,7 +113,7 @@ const RegisterPage = () => {
               <input
                 type="text"
                 name="lname"
-                className="form-control"
+                className="form-control border-0"
                 id="lname"
                 placeholder="Marian"
                 value={name.lname}
@@ -126,7 +128,7 @@ const RegisterPage = () => {
             <input
               type="email"
               name="email"
-              className="form-control"
+              className="form-control border-0"
               id="email"
               placeholder="nume@exemplu.com"
               value={email}
@@ -140,7 +142,7 @@ const RegisterPage = () => {
             <input
               type="password"
               name="password"
-              className="form-control"
+              className="form-control border-0"
               id="password"
               placeholder="Parolă"
               value={password}

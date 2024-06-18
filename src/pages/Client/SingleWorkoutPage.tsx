@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
 import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import Header from "../../components/workouts/SingleWorkoutPage/Header";
@@ -10,6 +10,9 @@ import useExerciseQueryStore from "../../stores/exerciseQueryStore";
 import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
 import LoadingStatus from "../../components/LoadingStatus";
+import ToastAlert from "../../components/ToastAlert";
+import showToast, { Method } from "../../utilities/showToast";
+import { auth } from "../../firebase-config";
 
 const SingleWorkoutPage = () => {
   const navigate = useNavigate();
@@ -59,25 +62,7 @@ const SingleWorkoutPage = () => {
       </>
     );
   }
-
-  return (
-    <div className="container d-flex justify-content-center mt-5">
-      <div
-        className="alert alert-primary alert-dismissible fade show w-50"
-        role="alert"
-      >
-        Doar membrii <strong>Premium</strong> au acces la aceste resurse.
-        Actualizează-ți abonamentul pentru a vizualiza antrenamentele.
-        <button
-          type="button"
-          className="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-          onClick={() => navigate("/account")}
-        ></button>
-      </div>
-    </div>
-  );
+  return <Navigate to="/account" />;
 };
 
 export default SingleWorkoutPage;

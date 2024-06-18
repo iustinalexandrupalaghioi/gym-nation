@@ -12,7 +12,7 @@ const showToast = (
   const options: ToastOptions = {
     position: "top-center",
     autoClose: 2000,
-    className: "bg-body-tertiary shadow mt-3",
+    className: "bg-body-tertiary shadow",
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

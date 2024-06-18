@@ -52,15 +52,13 @@ const LoginPage = () => {
         : false;
       setRole(newUserRole);
       setCredentials({ email: "", password: "" });
-      const message = "Te-ai autentificat cu succes";
-      const method = Method.Success;
-      showToast(message, method, () => navigate("/"));
+      showToast("Te-ai autentificat cu succes", Method.Success, () =>
+        navigate("/")
+      );
     } catch (error: any) {
       const errorMessage = error.message;
       console.error(errorMessage);
-      const message = "Nu s-a putut realiza autentificarea.";
-      const method = Method.Error;
-      showToast(message, method);
+      showToast("Nu s-a putut realiza autentificarea.", Method.Error);
     }
   };
 
@@ -76,16 +74,13 @@ const LoginPage = () => {
         ? getUserRole(auth.currentUser.uid)
         : false;
       setRole(newUserRole);
-      const message = "Te-ai autentificat cu succes";
-      const method = Method.Success;
-      const onClose = () => navigate("/");
-      showToast(message, method, onClose);
+      showToast("Te-ai autentificat cu succes", Method.Success, () =>
+        navigate("/")
+      );
     } catch (err: any) {
       const errorMessage = err.message;
       console.error(errorMessage);
-      const message = "Nu s-a putut realiza autentificarea.";
-      const method = Method.Error;
-      showToast(message, method);
+      showToast("Nu s-a putut realiza autentificarea.", Method.Error);
     }
   };
 
@@ -111,7 +106,7 @@ const LoginPage = () => {
             <input
               type="email"
               name="email"
-              className="form-control"
+              className="form-control border-0"
               id="email"
               placeholder="nume@exemplu.com"
               value={email}
@@ -125,7 +120,7 @@ const LoginPage = () => {
             <input
               type="password"
               name="password"
-              className="form-control"
+              className="form-control border-0"
               id="password"
               placeholder="Parolă"
               value={password}
@@ -144,7 +139,7 @@ const LoginPage = () => {
             </span>
           </p>
           <button
-            className="w-100 btn btn-primary text-light mb-2"
+            className="w-100 btn btn-primary text-light mb-3"
             type="submit"
           >
             Conectare

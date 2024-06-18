@@ -1,6 +1,7 @@
 import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
 import Workout from "../../../entities/Workout";
+import ToastAlert from "../../ToastAlert";
 
 interface Props {
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
@@ -21,6 +22,7 @@ const NewExercise = ({ setWorkout }: Props) => {
       tabIndex={-1}
       aria-hidden="true"
     >
+      <ToastAlert />
       <div className="modal-dialog  modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">

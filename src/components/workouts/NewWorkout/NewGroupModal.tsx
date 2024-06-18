@@ -4,6 +4,8 @@ import { queryClient } from "../../../main";
 import FirebaseClient from "../../../utilities/firebase-client";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
+import ToastAlert from "../../ToastAlert";
+import showToast, { Method } from "../../../utilities/showToast";
 
 const firebaseClient = new FirebaseClient("/muscles");
 const NewGroupModal = () => {
@@ -20,9 +22,9 @@ const NewGroupModal = () => {
       await firebaseClient.post({ name: muscleGroup, slug: muscleGroupSlug });
       await queryClient.invalidateQueries({ queryKey: ["muscles"] });
       setMuscleGroup("");
-      alert("Grupa de mușschi a fost adaugata cu succes!");
+      showToast("Grupa de mușschi a fost adaugata cu succes!", Method.Success);
     } catch (error: any) {
-      alert("Eroare la adaugarea noii grupe musculare.");
+      showToast("Eroare la adaugarea noii grupe musculare.", Method.Error);
     }
   };
   return (
@@ -40,6 +42,7 @@ const NewGroupModal = () => {
         handleSubmit={handleSubmit}
         setActive={setActive}
       >
+        <ToastAlert />
         <div className="form-group mb-3">
           <label className="text-body-secondary" htmlFor="muscleGroup">
             Denumire:

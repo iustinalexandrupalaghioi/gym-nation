@@ -6,6 +6,7 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useMuscles from "./useMuscles";
 import Workout from "../entities/Workout";
+import showToast, { Method } from "../utilities/showToast";
 
 const useAddWorkout = (
   workout: Workout,
@@ -21,13 +22,20 @@ const useAddWorkout = (
 
     let titleSlug = slugify(title, { replacement: "-", lower: true });
     if (parseInt(price) <= 0) {
-      return alert("Prețul antrenamentului trebuie să fie un număr pozitiv.");
+      return showToast(
+        "Prețul antrenamentului trebuie să fie un număr pozitiv.",
+        Method.Warning
+      );
     }
     const muscleDoc = muscleSlug
       ? muscles?.result.find((m) => m.data().slug === muscleSlug)
       : ({} as QueryDocumentSnapshot);
     const muscleGroup = muscleDoc?.data();
-    if (!muscleDoc) return alert("Selecteaza o grupa musculara mai intai.");
+    if (!muscleDoc)
+      return showToast(
+        "Selecteaza o grupa musculara mai intai.",
+        Method.Warning
+      );
     return {
       title,
       workoutDescription,
@@ -44,11 +52,14 @@ const useAddWorkout = (
       .post(data)
       .then(() => {
         // queryClient.invalidateQueries({ queryKey: ["workouts"] });
-        alert("Antrenamentul a fost adaugat cu succces");
+        showToast("Antrenamentul a fost adaugat cu succces", Method.Success);
       })
       .catch((err) => {
         console.error(err.message);
-        alert("Antrenamentul nu a putut fi adaugat. Incercati mai tarziu.");
+        showToast(
+          "Antrenamentul nu a putut fi adaugat. Incercati mai tarziu.",
+          Method.Error
+        );
       });
   }
 

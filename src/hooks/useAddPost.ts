@@ -8,6 +8,7 @@ import FirebaseClient from "../utilities/firebase-client";
 import useCategories from "./useCategories";
 import useGetFileURL from "./useGetFileURL";
 import BlogPost from "../entities/BlogPost";
+import showToast, { Method } from "../utilities/showToast";
 
 const useAddPost = () => {
   //managing state for blog inputs
@@ -65,11 +66,14 @@ const useAddPost = () => {
     try {
       await firebaseClient.post(data);
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
-      alert("Articolul a fost postat cu succes!");
+      showToast("Articolul a fost postat cu succes!", Method.Success, () =>
+        navigate("/blog")
+      );
     } catch (error: any) {
       console.error(error.message);
-      alert(
-        "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu."
+      showToast(
+        "Articolul nu a putut fi publicat. Te rugam sa incerci mai tarziu.",
+        Method.Error
       );
     }
   }
@@ -102,7 +106,7 @@ const useAddPost = () => {
     event.preventDefault();
     const { title, category, image } = post;
     const data = await processData(image, quillRef, title, category, value);
-    postNewBlog(data).then(() => navigate("/blog"));
+    postNewBlog(data);
   }
 
   return {

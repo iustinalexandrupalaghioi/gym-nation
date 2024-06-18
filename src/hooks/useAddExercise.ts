@@ -9,6 +9,7 @@ import slugify from "slugify";
 import Workout from "../entities/Workout";
 import Exercise from "../entities/Exercise";
 import useGetFileURL from "./useGetFileURL";
+import showToast, { Method } from "../utilities/showToast";
 
 const useAddExercise = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
@@ -82,31 +83,37 @@ const useAddExercise = (
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = await processExercise(exercise);
-    const { name, exerciseDescription, imageURL } = data;
-    if (name && exerciseDescription && imageURL) {
-      //set exercise for workout on submit
-      setWorkout((prev) => ({ ...prev, exercises: [...prev.exercises, data] }));
-      alert("Exercitiul a fost adaugat cu succes!");
+    try {
+      event.preventDefault();
+      const data = await processExercise(exercise);
+      const { name, exerciseDescription, imageURL } = data;
+      if (name && exerciseDescription && imageURL) {
+        //set exercise for workout on submit
+        setWorkout((prev) => ({
+          ...prev,
+          exercises: [...prev.exercises, data],
+        }));
 
-      // clear state for exercise form
-      setExercise({
-        name: "",
-        exerciseDescription: "",
-        image: null,
-        video: null,
-      });
+        // clear state for exercise form
+        setExercise({
+          name: "",
+          exerciseDescription: "",
+          image: null,
+          video: null,
+        });
 
-      if (fileInputRefImage.current) {
-        fileInputRefImage.current.value = "";
-      }
+        if (fileInputRefImage.current) {
+          fileInputRefImage.current.value = "";
+        }
 
-      if (fileInputRefVideo.current) {
-        fileInputRefVideo.current.value = "";
-      }
-    } else {
-      alert("Please fill in all exercise details.");
+        if (fileInputRefVideo.current) {
+          fileInputRefVideo.current.value = "";
+        }
+
+        showToast("Exercițiul a fost adăugat cu succes!", Method.Success);
+      } else showToast("Ceva nu a funcționat.", Method.Error);
+    } catch (error) {
+      showToast("Ceva nu a funcționat.", Method.Error);
     }
   };
 

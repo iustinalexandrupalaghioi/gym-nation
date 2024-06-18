@@ -1,3 +1,4 @@
+import ToastAlert from "../../components/ToastAlert";
 import WorkoutCard from "../../components/workouts/WorkoutCard/WorkoutCard";
 import WorkoutCardSkeleton from "../../components/workouts/WorkoutCardSkeleton";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
@@ -10,6 +11,7 @@ const WorkoutsPage = () => {
 
   return (
     <div className="container px-4 py-5">
+      <ToastAlert />
       <h1 className="border-bottom pb-2 text-center">
         Antrenează-te ca un <span className="text-primary">profesionist</span>
       </h1>

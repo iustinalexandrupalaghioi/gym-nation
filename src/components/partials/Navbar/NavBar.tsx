@@ -70,9 +70,7 @@ const NavBar = ({ styleClass }: Props) => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {auth.currentUser.displayName
-                      ? auth.currentUser.displayName
-                      : auth.currentUser.email}
+                    Setările contului
                   </button>
                 ) : (
                   <button

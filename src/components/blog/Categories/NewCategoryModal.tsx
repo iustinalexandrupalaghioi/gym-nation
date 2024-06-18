@@ -5,6 +5,8 @@ import useCategories from "../../../hooks/useCategories";
 import { queryClient } from "../../../main";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
+import ToastAlert from "../../ToastAlert";
+import showToast, { Method } from "../../../utilities/showToast";
 
 const firebaseClient = new FirebaseClient("/categories");
 
@@ -29,9 +31,9 @@ const NewCategoryModal = () => {
       );
       await queryClient.invalidateQueries({ queryKey: ["categories"] });
       setCategory("");
-      alert("Categoria a fost adaugata cu succes!");
+      showToast("Categoria a fost adaugata cu succes!", Method.Success);
     } catch (error: any) {
-      alert("Eroare la adaugarea noii categorii.");
+      showToast("Eroare la adaugarea noii categorii.", Method.Error);
     }
   };
 
@@ -50,6 +52,7 @@ const NewCategoryModal = () => {
         handleSubmit={handleSubmit}
         setActive={setActive}
       >
+        <ToastAlert />
         <div className="form-group mb-3">
           <label className="text-body-secondary" htmlFor="newCategory">
             Denumire:
