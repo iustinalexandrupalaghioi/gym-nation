@@ -30,7 +30,7 @@ const SignInWithGoogleButton = () => {
     } catch (err: any) {
       const errorMessage = err.message;
       console.error(errorMessage);
-      showToast("Nu s-a putut realiza autentificarea.", Method.Error);
+      showToast("Emailul sau Parola introdusă este greșită.", Method.Error);
     }
   };
   return (

@@ -7,6 +7,7 @@ import { useState } from "react";
 import LoadingButton from "../../account/LoadingButton.tsx";
 import SignOutButton from "../../account/SignOutButton.tsx";
 import useUserStatusStore from "../../../stores/userStore.ts";
+import { FaSliders } from "react-icons/fa6";
 
 interface Props {
   styleClass?: string;
@@ -66,11 +67,11 @@ const NavBar = ({ styleClass }: Props) => {
               <li className="nav-item dropdown">
                 {auth.currentUser?.uid ? (
                   <button
-                    className="btn btn-outline-info dropdown-toggle"
+                    className="btn btn-outline-info"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Setările contului
+                    <FaSliders /> Seările Contului
                   </button>
                 ) : (
                   <button
