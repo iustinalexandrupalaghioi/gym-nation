@@ -1,6 +1,7 @@
 import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
 import Workout from "../../../entities/Workout";
+import LoadingButton from "../../account/LoadingButton";
 
 interface Props {
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
@@ -12,6 +13,7 @@ const NewExercise = ({ setWorkout }: Props) => {
     fileInputRefImage,
     fileInputRefVideo,
     handleChange,
+    isLoading,
     handleSubmit,
   } = useAddExercise(setWorkout);
 
@@ -109,9 +111,16 @@ const NewExercise = ({ setWorkout }: Props) => {
                 >
                   Anulează
                 </button>
-                <button type="submit" className="btn btn-primary text-light">
-                  Adaugă
-                </button>
+                {isLoading ? (
+                  <LoadingButton
+                    textContent="Procesare.."
+                    styleClass="btn btn-primary text-light"
+                  />
+                ) : (
+                  <button type="submit" className="btn btn-primary text-light">
+                    Adaugă
+                  </button>
+                )}
               </div>
             </form>
           </div>

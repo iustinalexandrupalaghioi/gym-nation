@@ -28,6 +28,8 @@ const useAddExercise = (
     video: null,
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const initialErrorState: Errors = {
     name: "",
     exerciseDescription: "",
@@ -87,7 +89,6 @@ const useAddExercise = (
   };
 
   const processExercise = async (exercise: Exercise) => {
-    // take exercise object properties and provide name slug and links for images and videos
     const { name, exerciseDescription, image, video } = exercise;
 
     setErrors(initialErrorState);
@@ -143,6 +144,7 @@ const useAddExercise = (
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     try {
       event.preventDefault();
       const data = await processExercise(exercise);
@@ -173,6 +175,8 @@ const useAddExercise = (
       }
     } catch (error) {
       showToast("Ceva nu a funcționat.", Method.Error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -181,6 +185,7 @@ const useAddExercise = (
     errors,
     fileInputRefImage,
     fileInputRefVideo,
+    isLoading,
     handleChange,
     handleSubmit,
   };

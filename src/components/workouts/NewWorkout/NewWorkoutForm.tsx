@@ -5,6 +5,7 @@ import useMuscles from "../../../hooks/useMuscles";
 import Workout from "../../../entities/Workout";
 import ToastAlert from "../../ToastAlert";
 import showToast, { Method } from "../../../utilities/showToast";
+import LoadingButton from "../../account/LoadingButton";
 
 interface Props {
   workout: Workout;
@@ -16,6 +17,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const {
     workout: { title, workoutDescription, price },
     errors,
+    fileInputRefImage,
+    selectInputRef,
+    isLoading,
     handleChange,
     handleSubmit,
   } = useAddWorkout(workout, setWorkout);
@@ -90,6 +94,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           <select
             className="form-select border-0"
             onChange={handleChange}
+            ref={selectInputRef}
             id="muscles"
             name="muscleSlug"
           >
@@ -113,6 +118,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             Adaugă o imagine
           </label>
           <input
+            ref={fileInputRefImage}
             onChange={handleChange}
             type="file"
             name="image"
@@ -133,9 +139,16 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           </button>
 
           <div className="action-buttons d-flex gap-2">
-            <button className="btn btn-primary text-light" type="submit">
-              Salvează
-            </button>
+            {isLoading ? (
+              <LoadingButton
+                textContent="Procesare.."
+                styleClass="btn btn-primary text-light"
+              />
+            ) : (
+              <button type="submit" className="btn btn-primary text-light">
+                Salvează
+              </button>
+            )}
           </div>
         </div>
       </form>
