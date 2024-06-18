@@ -8,7 +8,7 @@ const TeamCard = ({
   person: { fname, lname, profession, img, social },
 }: Props) => {
   return (
-    <div className="card h-100 border-0 rounded-4 position-relative shadow">
+    <div className="card bg-body-tertiary h-100 border-0 rounded-4 position-relative shadow">
       <div className="card-content rounded-5 d-flex flex-column align-items-center p-3 position-relative h-100">
         <img
           className="object-fit-cover rounded-circle border border-4 mt-3 border-light"

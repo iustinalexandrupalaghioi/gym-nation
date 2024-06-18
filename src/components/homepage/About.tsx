@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import heroImage from "/images/crossfit1.avif";
+import { FaArrowRightLong } from "react-icons/fa6";
+import scrollToSection from "../../utilities/scrollToSection";
 
 const AboutSection = () => {
   return (
@@ -24,14 +26,21 @@ const AboutSection = () => {
             musculară sau să îți îmbunătățești sănătatea generală, creăm un plan
             personalizat care să se potrivească nevoilor tale specifice.
           </p>
-
-          <Link
-            type="button"
-            className="btn btn-primary text-light"
-            to="/members"
-          >
-            Începe Acum
-          </Link>
+          <div className="d-flex gap-2 flex-column flex-md-row">
+            <button
+              className="btn btn-outline-info"
+              onClick={() => scrollToSection("contactSection")}
+            >
+              Contactează-ne
+            </button>
+            <Link
+              type="button"
+              className="btn btn-primary text-light"
+              to="/antrenamente"
+            >
+              Începe Acum <FaArrowRightLong />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

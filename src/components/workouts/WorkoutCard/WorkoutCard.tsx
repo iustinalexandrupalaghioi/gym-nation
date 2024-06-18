@@ -25,7 +25,7 @@ const WorkoutCard = ({ workout }: Props) => {
   };
   return (
     <div className="col-8 col-md-6 mb-5 cursor-pointer" onClick={handleClick}>
-      <div className="card workout-card h-100">
+      <div className="card bg-body-tertiary workout-card h-100">
         <img
           src={imageURL}
           className="card-img-top"

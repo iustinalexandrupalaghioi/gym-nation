@@ -8,7 +8,7 @@ const BlogOverviewCard = ({ post }: Props) => {
   const { title, textContent, createdAt, category, titleSlug, image } =
     post.data();
   return (
-    <div className="card border-0 rounded-4 shadow mb-5">
+    <div className="card bg-body-tertiary border-0 rounded-4 shadow mb-5">
       <div className="row g-0 justify-content-between">
         <div className="col-lg-4 d-flex align-items-center">
           <img

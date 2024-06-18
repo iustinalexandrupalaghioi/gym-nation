@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
 import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
 import Header from "../../components/workouts/SingleWorkoutPage/Header";

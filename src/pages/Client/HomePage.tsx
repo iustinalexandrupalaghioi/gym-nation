@@ -39,9 +39,7 @@ const HomePage = () => {
         <Section title="Întrebări frecvente" sectionId="faq">
           <FaqGrid />
         </Section>
-        <Section title="Contactează-ne" sectionId="contact">
-          <ContactGrid />
-        </Section>
+        <ContactGrid />
         <ScrollToButton sectionId="header" />
       </main>
       <Footer />

@@ -3,7 +3,6 @@ import { SetStateAction, useEffect } from "react";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
 import Workout from "../../../entities/Workout";
-import ToastAlert from "../../ToastAlert";
 import showToast, { Method } from "../../../utilities/showToast";
 import LoadingButton from "../../account/LoadingButton";
 
