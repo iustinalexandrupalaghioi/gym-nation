@@ -1,21 +1,30 @@
 import { GrFormAdd } from "react-icons/gr";
-import { SetStateAction } from "react";
+import { SetStateAction, useEffect } from "react";
 import useAddWorkout from "../../../hooks/useAddWorkout";
 import useMuscles from "../../../hooks/useMuscles";
 import Workout from "../../../entities/Workout";
 import ToastAlert from "../../ToastAlert";
+import showToast, { Method } from "../../../utilities/showToast";
 
 interface Props {
   workout: Workout;
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
 }
+
 const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const { data: muscles } = useMuscles();
   const {
     workout: { title, workoutDescription, price },
+    errors,
     handleChange,
     handleSubmit,
   } = useAddWorkout(workout, setWorkout);
+
+  useEffect(() => {
+    if (errors.exercises) {
+      showToast(errors.exercises, Method.Warning);
+    }
+  }, [errors.exercises]);
 
   return (
     <div className="container-fluid px-md-4 py-md-5 p-0">
@@ -37,6 +46,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             value={title}
             onChange={handleChange}
           />
+          {errors.title && <p className="text-danger">{errors.title}</p>}
         </div>
 
         <div className="form-group mb-3">
@@ -52,6 +62,9 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             value={workoutDescription}
             onChange={handleChange}
           />
+          {errors.workoutDescription && (
+            <p className="text-danger">{errors.workoutDescription}</p>
+          )}
         </div>
 
         <div className="form-group mb-3">
@@ -67,6 +80,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             value={price}
             onChange={handleChange}
           />
+          {errors.price && <p className="text-danger">{errors.price}</p>}
         </div>
 
         <div className="form-group mb-3">
@@ -77,7 +91,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
             className="form-select border-0"
             onChange={handleChange}
             id="muscles"
-            name="muscle"
+            name="muscleSlug"
           >
             <option value="">{"Alege din listă"}</option>
             {muscles?.result.map(
@@ -89,7 +103,11 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                 )
             )}
           </select>
+          {errors.muscleSlug && (
+            <p className="text-danger">{errors.muscleSlug}</p>
+          )}
         </div>
+
         <div className="form-group mb-3">
           <label className="text-body-secondary" htmlFor="image">
             Adaugă o imagine
@@ -97,10 +115,11 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           <input
             onChange={handleChange}
             type="file"
-            name="workoutImage"
+            name="image"
             className="form-control border-0"
             id="image"
           />
+          {errors.image && <p className="text-danger">{errors.image}</p>}
         </div>
 
         <div className="buttons d-flex gap-2 justify-content-between">
@@ -112,6 +131,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           >
             <GrFormAdd size={"24px"} /> Exerciții
           </button>
+
           <div className="action-buttons d-flex gap-2">
             <button className="btn btn-primary text-light" type="submit">
               Salvează

@@ -1,7 +1,6 @@
 import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
 import Workout from "../../../entities/Workout";
-import ToastAlert from "../../ToastAlert";
 
 interface Props {
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
@@ -9,6 +8,7 @@ interface Props {
 const NewExercise = ({ setWorkout }: Props) => {
   const {
     exercise: { name, exerciseDescription },
+    errors,
     fileInputRefImage,
     fileInputRefVideo,
     handleChange,
@@ -22,7 +22,6 @@ const NewExercise = ({ setWorkout }: Props) => {
       tabIndex={-1}
       aria-hidden="true"
     >
-      <ToastAlert />
       <div className="modal-dialog  modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
@@ -51,6 +50,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   value={name}
                   placeholder="Ridicări laterale"
                 />
+                {errors.name && <p className="text-danger">{errors.name}</p>}
               </div>
               <div className="form-group mb-3">
                 <label className="text-body-secondary" htmlFor="instructions">
@@ -65,6 +65,9 @@ const NewExercise = ({ setWorkout }: Props) => {
                   id="instructions"
                   placeholder="Ridicări laterale: Execută mișcarea încet și regulat. "
                 />
+                {errors.exerciseDescription && (
+                  <p className="text-danger">{errors.exerciseDescription}</p>
+                )}
               </div>
               <div className="form-group mb-3">
                 <label
@@ -81,6 +84,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   name="exerciseThubnail"
                   id="exerciseThubnail"
                 />
+                {errors.image && <p className="text-danger">{errors.image}</p>}
               </div>
               <div className="form-group mb-3">
                 <label className="text-body-secondary" htmlFor="exerciseVideo">
@@ -94,6 +98,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                   id="exerciseVideo"
                   name="exerciseVideo"
                 />
+                {errors.video && <p className="text-danger">{errors.video}</p>}
               </div>
 
               <div className="modal-footer">

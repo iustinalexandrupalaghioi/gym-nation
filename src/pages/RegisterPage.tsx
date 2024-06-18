@@ -1,49 +1,40 @@
-import { useState, FormEvent, ChangeEvent } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase-config";
 import logo from "/images/logo1.png";
 import ToastAlert from "../components/ToastAlert";
 import showToast, { Method } from "../utilities/showToast";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 
-interface Credentials {
-  name: { fname: string; lname: string };
-  email: string;
-  password: string;
-}
+const schema = z.object({
+  lname: z
+    .string()
+    .min(3, { message: "Numele trebuie să fie de cel puțin 3 caractere" }),
+  fname: z
+    .string()
+    .min(3, { message: "Prenumele trebuie să fie de cel puțin 3 caractere" }),
+  email: z.string().email("Adresa de email introdusă nu este validă."),
+  password: z
+    .string()
+    .min(9, { message: "Parola trebuie să fie de cel puțin 9 caractere" }),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState<Credentials>({
-    name: { fname: "", lname: "" },
-    email: "",
-    password: "",
-  });
-  let { name, email, password } = credentials;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  // update credentials state for user inputs
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === "email") {
-      setCredentials((prev) => ({ ...prev, email: value }));
-    } else if (name === "password") {
-      setCredentials((prev) => ({ ...prev, password: value }));
-    } else if (name === "fname") {
-      setCredentials((prev) => ({
-        ...prev,
-        name: { ...prev.name, fname: value },
-      }));
-    } else if (name === "lname") {
-      setCredentials((prev) => ({
-        ...prev,
-        name: { ...prev.name, lname: value },
-      }));
-    }
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (data: FieldValues) => {
     try {
-      event.preventDefault();
+      let { name, email, password } = data;
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -54,21 +45,10 @@ const RegisterPage = () => {
         displayName: `${name.fname} ${name.lname}`,
       });
 
-      setCredentials({
-        name: { fname: "", lname: "" },
-        email: "",
-        password: "",
-      });
-
       showToast("Te-ai înregistrat cu succes", Method.Success, () =>
         navigate("/login")
       );
     } catch (error) {
-      setCredentials({
-        name: { fname: "", lname: "" },
-        email: "",
-        password: "",
-      });
       showToast(
         "Ceva nu a funcționat. Te rugăm să încerci mai târziu!",
         Method.Error
@@ -88,7 +68,7 @@ const RegisterPage = () => {
       <div className="container d-flex flex-column justify-content-center align-items-center col-xl-10 col-xxl-8 px-4 py-5 h-75">
         <form
           className="p-4 p-md-5 border-0 shadow rounded-3 bg-body-tertiary"
-          onSubmit={(event: FormEvent<HTMLFormElement>) => handleSubmit(event)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <ToastAlert />
           <div className="d-flex gap-2 flex-column flex-md-row">
@@ -98,13 +78,14 @@ const RegisterPage = () => {
               </label>
               <input
                 type="text"
-                name="fname"
                 className="form-control border-0"
-                id="fname"
+                id="lname"
                 placeholder="Popescu"
-                value={name.fname}
-                onChange={handleChange}
+                {...register("lname")}
               />
+              {errors.lname && (
+                <p className="text-danger"> {errors.lname.message} </p>
+              )}
             </div>
             <div className="form-group mb-3">
               <label className="text-body-secondary" htmlFor="lname">
@@ -112,13 +93,14 @@ const RegisterPage = () => {
               </label>
               <input
                 type="text"
-                name="lname"
                 className="form-control border-0"
-                id="lname"
+                id="fname"
                 placeholder="Marian"
-                value={name.lname}
-                onChange={handleChange}
+                {...register("fname")}
               />
+              {errors.fname && (
+                <p className="text-danger"> {errors.fname.message} </p>
+              )}
             </div>
           </div>
           <div className="form-group mb-3">
@@ -127,13 +109,14 @@ const RegisterPage = () => {
             </label>
             <input
               type="email"
-              name="email"
               className="form-control border-0"
               id="email"
               placeholder="nume@exemplu.com"
-              value={email}
-              onChange={handleChange}
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="text-danger"> {errors.email.message} </p>
+            )}
           </div>
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="password">
@@ -141,13 +124,14 @@ const RegisterPage = () => {
             </label>
             <input
               type="password"
-              name="password"
               className="form-control border-0"
               id="password"
               placeholder="Parolă"
-              value={password}
-              onChange={handleChange}
+              {...register("password")}
             />
+            {errors.password && (
+              <p className="text-danger"> {errors.password.message} </p>
+            )}
           </div>
           <p className="text-body-secondary" style={{ fontSize: "0.8rem" }}>
             Ai deja un cont?{" "}
@@ -161,11 +145,12 @@ const RegisterPage = () => {
             </span>
           </p>
           <button
-            className="w-100 btn btn-primary text-light mb-2"
+            className="w-100 btn btn-primary text-light mb-3"
             type="submit"
           >
             Înregistrează-te
           </button>
+          <SignInWithGoogleButton />
         </form>
       </div>
     </div>

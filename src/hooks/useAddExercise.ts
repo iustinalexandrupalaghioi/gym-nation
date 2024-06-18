@@ -11,6 +11,13 @@ import Exercise from "../entities/Exercise";
 import useGetFileURL from "./useGetFileURL";
 import showToast, { Method } from "../utilities/showToast";
 
+interface Errors {
+  name: string;
+  exerciseDescription: string;
+  image: string;
+  video: string;
+}
+
 const useAddExercise = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
@@ -20,6 +27,16 @@ const useAddExercise = (
     image: null,
     video: null,
   });
+
+  const initialErrorState: Errors = {
+    name: "",
+    exerciseDescription: "",
+    image: "",
+    video: "",
+  };
+
+  const [errors, setErrors] = useState<Errors>(initialErrorState);
+
   const fileInputRefImage = useRef<HTMLInputElement>(null);
   const fileInputRefVideo = useRef<HTMLInputElement>(null);
 
@@ -62,13 +79,56 @@ const useAddExercise = (
         setExercise((prev) => ({ ...prev, video: files[0] }));
       }
     }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const processExercise = async (exercise: Exercise) => {
     // take exercise object properties and provide name slug and links for images and videos
     const { name, exerciseDescription, image, video } = exercise;
 
-    let imageURL = image ? await useGetFileURL(image!, "workoutImages") : "";
+    setErrors(initialErrorState);
+
+    let hasError = false;
+
+    if (!name) {
+      setErrors((prev) => ({
+        ...prev,
+        name: "Numele exercițiului este obligatoriu.",
+      }));
+      hasError = true;
+    }
+
+    if (!exerciseDescription) {
+      setErrors((prev) => ({
+        ...prev,
+        exerciseDescription: "Descrierea antrenamentului este obligatorie.",
+      }));
+      hasError = true;
+    }
+
+    if (!image) {
+      setErrors((prev) => ({
+        ...prev,
+        image: "Este obligatorie adăugarea unei imagini.",
+      }));
+      hasError = true;
+    }
+
+    if (!video) {
+      setErrors((prev) => ({
+        ...prev,
+        video: "Este obligatorie adăugarea unui videoclip.",
+      }));
+      hasError = true;
+    }
+
+    if (hasError) return null;
+
+    let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
     let videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     let nameSlug = slugify(name, { replacement: "-", lower: true });
 
@@ -86,8 +146,7 @@ const useAddExercise = (
     try {
       event.preventDefault();
       const data = await processExercise(exercise);
-      const { name, exerciseDescription, imageURL } = data;
-      if (name && exerciseDescription && imageURL) {
+      if (data) {
         //set exercise for workout on submit
         setWorkout((prev) => ({
           ...prev,
@@ -111,7 +170,7 @@ const useAddExercise = (
         }
 
         showToast("Exercițiul a fost adăugat cu succes!", Method.Success);
-      } else showToast("Ceva nu a funcționat.", Method.Error);
+      }
     } catch (error) {
       showToast("Ceva nu a funcționat.", Method.Error);
     }
@@ -119,6 +178,7 @@ const useAddExercise = (
 
   return {
     exercise,
+    errors,
     fileInputRefImage,
     fileInputRefVideo,
     handleChange,

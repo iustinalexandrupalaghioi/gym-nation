@@ -9,7 +9,7 @@ interface Props {
 }
 const Sidebar = ({ pathname }: Props) => {
   return (
-    <div className="sidebar border-0 col-md-4 col-lg-3 col-xl-2 p-0 bg-body-tertiary">
+    <div className="sidebar border-0 col-md-4 col-xl-3 p-0 bg-body-tertiary">
       <div
         className="offcanvas-md offcanvas-end bg-body-tertiary"
         tabIndex={-1}

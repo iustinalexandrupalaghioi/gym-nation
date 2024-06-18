@@ -1,41 +1,101 @@
-import { ChangeEvent, FormEvent, SetStateAction } from "react";
+import { useState, ChangeEvent, FormEvent, SetStateAction } from "react";
 import useGetFileURL from "./useGetFileURL";
 import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import useMuscles from "./useMuscles";
 import Workout from "../entities/Workout";
 import showToast, { Method } from "../utilities/showToast";
+import Exercise from "../entities/Exercise";
+
+interface Errors {
+  title: string;
+  workoutDescription: string;
+  price: string;
+  muscleSlug: string;
+  image: string;
+  exercises: string;
+}
 
 const useAddWorkout = (
   workout: Workout,
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
-  const navigate = useNavigate();
   const { data: muscles } = useMuscles();
+  const initialErrorState = {
+    title: "",
+    workoutDescription: "",
+    price: "",
+    muscleSlug: "",
+    image: "",
+    exercises: "",
+  };
+
+  const [errors, setErrors] = useState<Errors>(initialErrorState);
 
   async function processWorkoutData(workout: Workout) {
     const { title, workoutDescription, price, muscleSlug, image, exercises } =
       workout;
-    let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
 
-    let titleSlug = slugify(title, { replacement: "-", lower: true });
-    if (parseInt(price) <= 0) {
-      return showToast(
-        "Prețul antrenamentului trebuie să fie un număr pozitiv.",
-        Method.Warning
-      );
+    setErrors(initialErrorState);
+
+    let hasError = false;
+
+    if (!title) {
+      setErrors((prev) => ({ ...prev, title: "Titlul este obligatoriu." }));
+      hasError = true;
     }
+
+    if (!workoutDescription) {
+      setErrors((prev) => ({
+        ...prev,
+        workoutDescription: "Descrierea antrenamentului este obligatorie.",
+      }));
+      hasError = true;
+    }
+
+    if (!price || isNaN(Number(price)) || Number(price) <= 0) {
+      setErrors((prev) => ({
+        ...prev,
+        price: "Prețul trebuie să fie un număr mai mare decât 0.",
+      }));
+      hasError = true;
+    }
+
+    if (!muscleSlug) {
+      setErrors((prev) => ({
+        ...prev,
+        muscleSlug: "Selectați o grupă musculară.",
+      }));
+      hasError = true;
+    }
+
+    if (!image) {
+      setErrors((prev) => ({
+        ...prev,
+        image: "Imaginea este obligatorie.",
+      }));
+      hasError = true;
+    }
+
+    if (exercises.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        exercises: "Adăugați cel puțin un exercițiu.",
+      }));
+      hasError = true;
+    }
+
+    if (hasError) return null;
+
+    let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
+    let titleSlug = slugify(title, { replacement: "-", lower: true });
+
     const muscleDoc = muscleSlug
       ? muscles?.result.find((m) => m.data().slug === muscleSlug)
       : ({} as QueryDocumentSnapshot);
     const muscleGroup = muscleDoc?.data();
-    if (!muscleDoc)
-      return showToast(
-        "Selecteaza o grupa musculara mai intai.",
-        Method.Warning
-      );
+
     return {
       title,
       workoutDescription,
@@ -46,21 +106,28 @@ const useAddWorkout = (
       exercises,
     };
   }
+
   const firebaseClient = new FirebaseClient("/workouts");
+
   async function postNewWorkout(data: DocumentData) {
-    await firebaseClient
-      .post(data)
-      .then(() => {
-        // queryClient.invalidateQueries({ queryKey: ["workouts"] });
-        showToast("Antrenamentul a fost adaugat cu succces", Method.Success);
-      })
-      .catch((err) => {
-        console.error(err.message);
-        showToast(
-          "Antrenamentul nu a putut fi adaugat. Incercati mai tarziu.",
-          Method.Error
-        );
+    try {
+      await firebaseClient.post(data);
+      setWorkout({
+        title: "",
+        workoutDescription: "",
+        price: "",
+        muscleSlug: "",
+        image: null,
+        exercises: [] as Exercise[],
       });
+      showToast("Antrenamentul a fost adăugat cu succes", Method.Success);
+    } catch (error: any) {
+      console.error(error.message);
+      showToast(
+        "Antrenamentul nu a putut fi adăugat. Încercați mai târziu.",
+        Method.Error
+      );
+    }
   }
 
   function handleChange(
@@ -68,48 +135,42 @@ const useAddWorkout = (
   ) {
     const { name, value } = event.target;
 
-    //set title of workout
-    if (name === "title") {
-      setWorkout((prev) => ({ ...prev, title: value }));
-    }
+    setWorkout((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-    //set targeted muscle group
-    else if (name === "muscle") {
-      setWorkout((prev) => ({ ...prev, muscleSlug: value }));
-    }
-
-    //set description for workout
-    else if (name === "workoutDescription") {
-      setWorkout((prev) => ({ ...prev, workoutDescription: value }));
-    }
-
-    //set price of workout
-    else if (name === "price") {
-      setWorkout((prev) => ({ ...prev, price: value }));
-    }
-
-    //set image of workout
-    else if (
+    if (
       event.target instanceof HTMLInputElement &&
       event.target.type === "file" &&
-      name === "workoutImage"
+      name === "image"
     ) {
       const files = event.target.files;
       if (files && files.length > 0) {
         setWorkout((prev) => ({ ...prev, image: files[0] }));
       }
     }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = await processWorkoutData(workout);
-    if (!data) return;
-    await postNewWorkout(data);
-    navigate("/workouts");
+    if (data) {
+      await postNewWorkout(data);
+    }
+    if (errors.exercises != "")
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        exercises: "",
+      }));
   }
 
-  return { workout, handleChange, handleSubmit };
+  return { workout, errors, handleChange, handleSubmit };
 };
 
 export default useAddWorkout;

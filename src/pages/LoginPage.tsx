@@ -1,16 +1,16 @@
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { useState, FormEvent, ChangeEvent } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth, provider } from "../firebase-config";
+import { auth } from "../firebase-config";
 import getUserStatus from "../utilities/getUserStatus";
 import useUserStatusStore from "../stores/userStore";
 import logo from "/images/logo1.png";
 import getUserRole from "../utilities/getUserRole";
 import showToast, { Method } from "../utilities/showToast";
 import ToastAlert from "../components/ToastAlert";
+import { FieldValues, useForm } from "react-hook-form";
+import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 
-interface Credentials {
+interface FormData {
   email: string;
   password: string;
 }
@@ -19,26 +19,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const setStatus = useUserStatusStore((s) => s.setStatus);
   const setRole = useUserStatusStore((s) => s.setRole);
-
-  const [credentials, setCredentials] = useState<Credentials>({
-    email: "",
-    password: "",
-  });
-  let { email, password } = credentials;
-
-  // update credentials state for user inputs
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === "email") {
-      setCredentials((prev) => ({ ...prev, email: value }));
-    } else {
-      setCredentials((prev) => ({ ...prev, password: value }));
-    }
-  };
+  const { register, handleSubmit } = useForm<FormData>();
 
   // handle sign in with email and password
-  const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSignIn = async (data: FieldValues) => {
+    const { email, password } = data;
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
@@ -51,34 +36,11 @@ const LoginPage = () => {
         ? getUserRole(auth.currentUser.uid)
         : false;
       setRole(newUserRole);
-      setCredentials({ email: "", password: "" });
       showToast("Te-ai autentificat cu succes", Method.Success, () =>
         navigate("/")
       );
     } catch (error: any) {
       const errorMessage = error.message;
-      console.error(errorMessage);
-      showToast("Nu s-a putut realiza autentificarea.", Method.Error);
-    }
-  };
-
-  // handle sign in with google
-  const handleSignInWithPopup = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      //check user status
-      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
-      setStatus(newUserStatus);
-      //check user role
-      const newUserRole = auth.currentUser
-        ? getUserRole(auth.currentUser.uid)
-        : false;
-      setRole(newUserRole);
-      showToast("Te-ai autentificat cu succes", Method.Success, () =>
-        navigate("/")
-      );
-    } catch (err: any) {
-      const errorMessage = err.message;
       console.error(errorMessage);
       showToast("Nu s-a putut realiza autentificarea.", Method.Error);
     }
@@ -96,7 +58,7 @@ const LoginPage = () => {
       <div className="container d-flex flex-column justify-content-center align-items-center col-xl-10 col-xxl-8 px-4 py-5 h-75">
         <form
           className="p-4 p-md-5 border-0 shadow rounded-3 bg-body-tertiary"
-          onSubmit={(event: FormEvent<HTMLFormElement>) => handleSignIn(event)}
+          onSubmit={handleSubmit(handleSignIn)}
         >
           <ToastAlert />
           <div className="form-group mb-3">
@@ -105,12 +67,10 @@ const LoginPage = () => {
             </label>
             <input
               type="email"
-              name="email"
               className="form-control border-0"
               id="email"
               placeholder="nume@exemplu.com"
-              value={email}
-              onChange={handleChange}
+              {...register("email")}
             />
           </div>
           <div className="form-group mb-3">
@@ -119,12 +79,10 @@ const LoginPage = () => {
             </label>
             <input
               type="password"
-              name="password"
               className="form-control border-0"
               id="password"
               placeholder="Parolă"
-              value={password}
-              onChange={handleChange}
+              {...register("password")}
             />
           </div>
           <p className="text-body-secondary" style={{ fontSize: "0.8rem" }}>
@@ -144,13 +102,7 @@ const LoginPage = () => {
           >
             Conectare
           </button>
-          <button
-            onClick={handleSignInWithPopup}
-            type="button"
-            className="w-100 d-flex align-items-center justify-content-center gap-1 btn btn-outline-info"
-          >
-            <FcGoogle /> Conectare cu Google
-          </button>
+          <SignInWithGoogleButton />
         </form>
       </div>
     </div>
