@@ -108,7 +108,7 @@ const RegisterPage = () => {
               Adresă de email
             </label>
             <input
-              type="email"
+              type="text"
               className="form-control border-0"
               id="email"
               placeholder="nume@exemplu.com"
