@@ -14,7 +14,7 @@ const ToggleModalButton = ({
 }: Props) => {
   return (
     <button
-      className={`nav-link hover hover-primary gap-1 ${
+      className={`nav-link hover hover-primary text-start  ${
         isActive ? "text-primary" : "text-body-secondary"
       }`}
       onClick={() => setActive(true)}

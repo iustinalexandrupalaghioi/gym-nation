@@ -38,7 +38,7 @@ const CollapseMenuItem = ({ menuTitle, menuId, children }: Props) => {
             </p>
           )}
         </button>
-        <div className="collapse collapse-vertical w-100" id={menuId}>
+        <div className="collapse collapse-vertical" id={menuId}>
           {children}
         </div>
       </div>

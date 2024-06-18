@@ -32,7 +32,7 @@ const NewGroupModal = () => {
       <ToggleModalButton
         isActive={isActive}
         setActive={setActive}
-        textContent="Adaugă Grupă de Mușchi"
+        textContent="Adaugă Grupă Musculară"
         modalId="newGroupModal"
       />
 
