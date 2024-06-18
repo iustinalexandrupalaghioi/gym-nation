@@ -1,3 +1,4 @@
+import ToastAlert from "../../components/ToastAlert";
 import AboutSection from "../../components/homepage/About";
 import ContactGrid from "../../components/homepage/Contact/ContactGrid";
 import FaqGrid from "../../components/homepage/Faq/FaqGrid";
@@ -15,6 +16,7 @@ import NavBar from "../../components/partials/Navbar/NavBar";
 const HomePage = () => {
   return (
     <>
+      <ToastAlert />
       <HomeCover>
         <NavBar />
         <HomeCoverContent />

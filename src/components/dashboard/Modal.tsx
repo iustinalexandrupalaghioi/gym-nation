@@ -1,5 +1,4 @@
 import React, { ReactNode, SetStateAction } from "react";
-import ToastAlert from "../ToastAlert";
 
 interface Props {
   modalId: string;
@@ -12,13 +11,12 @@ const Modal = ({ modalId, modalTitle, children, setActive }: Props) => {
     <div
       className="modal fade"
       id={modalId}
+      tabIndex={-1}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
-      tabIndex={-1}
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <ToastAlert />
       <div className="modal-dialog ">
         <div className="modal-content ">
           <div className="modal-header">

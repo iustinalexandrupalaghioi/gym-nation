@@ -1,16 +1,16 @@
-import { useState } from "react";
 import slugify from "slugify";
 import FirebaseClient from "../../../utilities/firebase-client";
 import useCategories from "../../../hooks/useCategories";
-import { queryClient } from "../../../main";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
 import showToast, { Method } from "../../../utilities/showToast";
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { queryClient } from "../../../main";
+import LoadingButton from "../../account/LoadingButton";
 
-const firebaseClient = new FirebaseClient("/categories");
 const schema = z.object({
   category: z.string().min(5, {
     message: "O categorie ar trebui să aibă cel puțin 5 caractere.",
@@ -18,32 +18,37 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
+const firebaseClient = new FirebaseClient("/categories");
 const NewCategoryModal = () => {
+  const [isActive, setActive] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-  const [isActive, setActive] = useState(false);
 
   const { data: categories } = useCategories();
-
   const newId = categories?.result ? categories.result.length : 999;
 
-  const onSubmit = async (data: FieldValues) => {
-    const category = data.category;
-    let categorySlug = slugify(category, {
+  const onSubmit = async (data: FormData) => {
+    let categorySlug = slugify(data.category, {
       replacement: "-",
       lower: true,
     });
     try {
       await firebaseClient.post(
-        { name: category, slug: categorySlug },
+        { name: data.category, slug: categorySlug },
         newId.toString()
       );
-      showToast("Categoria a fost adaugata cu succes!", Method.Success);
+      await queryClient.invalidateQueries({ queryKey: ["categories"] });
+      showToast("Categoria a fost adaugată cu succes!", Method.Success);
     } catch (error: any) {
       showToast("Eroare la adaugarea noii categorii.", Method.Error);
+    } finally {
+      reset();
     }
   };
 
@@ -61,7 +66,7 @@ const NewCategoryModal = () => {
         modalTitle="Adaugă o Categorie Nouă"
         setActive={setActive}
       >
-        <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="newCategory">
               Denumire:
@@ -86,9 +91,16 @@ const NewCategoryModal = () => {
             >
               Anulează
             </button>
-            <button type="submit" className="btn btn-primary text-light">
-              Adaugă
-            </button>
+            {isSubmitting ? (
+              <LoadingButton
+                styleClass="btn btn-primary text-light"
+                textContent="Procesare..."
+              />
+            ) : (
+              <button type="submit" className="btn btn-primary text-light">
+                Adaugă
+              </button>
+            )}
           </div>
         </form>
       </Modal>

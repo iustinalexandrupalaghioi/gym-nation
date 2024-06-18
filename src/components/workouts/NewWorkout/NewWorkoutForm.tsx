@@ -32,7 +32,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
 
   return (
     <div className="container-fluid px-md-4 py-md-5 p-0">
-      <ToastAlert />
       <form
         className="form bg-body-tertiary border-0 shadow p-4 rounded-4"
         onSubmit={handleSubmit}

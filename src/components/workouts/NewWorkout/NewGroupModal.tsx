@@ -1,13 +1,14 @@
-import { useState } from "react";
 import slugify from "slugify";
-import { queryClient } from "../../../main";
 import FirebaseClient from "../../../utilities/firebase-client";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
 import showToast, { Method } from "../../../utilities/showToast";
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { queryClient } from "../../../main";
+import LoadingButton from "../../account/LoadingButton";
 
 const schema = z.object({
   muscleGroup: z.string().min(5, {
@@ -24,9 +25,11 @@ const NewGroupModal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-  const onSubmit = async (data: FieldValues) => {
+
+  const onSubmit = async (data: FormData) => {
     let muscleGroupSlug = slugify(data.muscleGroup, {
       replacement: "-",
       lower: true,
@@ -37,9 +40,11 @@ const NewGroupModal = () => {
         slug: muscleGroupSlug,
       });
       await queryClient.invalidateQueries({ queryKey: ["muscles"] });
-      showToast("Grupa de mușschi a fost adaugata cu succes!", Method.Success);
+      showToast("Grupa de mușchi a fost adaugata cu succes!", Method.Success);
     } catch (error: any) {
       showToast("Eroare la adaugarea noii grupe musculare.", Method.Error);
+    } finally {
+      reset();
     }
   };
   return (
@@ -56,7 +61,7 @@ const NewGroupModal = () => {
         modalTitle="Adaugă o Grupă de Mușchi Nouă"
         setActive={setActive}
       >
-        <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="muscleGroup">
               Denumire:
@@ -81,9 +86,16 @@ const NewGroupModal = () => {
             >
               Anulează
             </button>
-            <button type="submit" className="btn btn-primary text-light">
-              Adaugă
-            </button>
+            {isSubmitting ? (
+              <LoadingButton
+                styleClass="btn btn-primary text-light"
+                textContent="Procesare..."
+              />
+            ) : (
+              <button type="submit" className="btn btn-primary text-light">
+                Adaugă
+              </button>
+            )}
           </div>
         </form>
       </Modal>

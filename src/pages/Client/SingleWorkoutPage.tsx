@@ -10,12 +10,8 @@ import useExerciseQueryStore from "../../stores/exerciseQueryStore";
 import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
 import LoadingStatus from "../../components/LoadingStatus";
-import ToastAlert from "../../components/ToastAlert";
-import showToast, { Method } from "../../utilities/showToast";
-import { auth } from "../../firebase-config";
 
 const SingleWorkoutPage = () => {
-  const navigate = useNavigate();
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
   const exercises: Exercise[] = workouts?.result?.[0].data().exercises;

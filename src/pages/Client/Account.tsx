@@ -7,6 +7,7 @@ import { auth } from "../../firebase-config";
 import LoadingButton from "../../components/account/LoadingButton";
 import SubscriptionButton from "../../components/account/SubscriptionButton";
 import SignOutButton from "../../components/account/SignOutButton";
+import ToastAlert from "../../components/ToastAlert";
 
 const Account = () => {
   const [isLoading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ const Account = () => {
 
   return (
     <div className="vh-100">
+      <ToastAlert />
       <header className="navbar bg-dark flex-md-nowrap shadow">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
