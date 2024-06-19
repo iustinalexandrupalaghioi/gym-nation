@@ -8,6 +8,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
+import LoadingButton from "../components/account/LoadingButton";
 
 const schema = z.object({
   lname: z
@@ -29,7 +30,8 @@ const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FieldValues) => {
@@ -53,6 +55,8 @@ const RegisterPage = () => {
         "Ceva nu a funcționat. Te rugăm să încerci mai târziu!",
         Method.Error
       );
+    } finally {
+      reset();
     }
   };
 
@@ -144,12 +148,20 @@ const RegisterPage = () => {
               </NavLink>
             </span>
           </p>
-          <button
-            className="w-100 btn btn-primary text-light mb-3"
-            type="submit"
-          >
-            Înregistrează-te
-          </button>
+          {isSubmitting ? (
+            <LoadingButton
+              styleClass="w-100 btn tbn-primary text-light mb-3"
+              textContent="Procesare..."
+            />
+          ) : (
+            <button
+              className="w-100 btn btn-primary text-light mb-3"
+              type="submit"
+            >
+              Înregistrează-te
+            </button>
+          )}
+
           <SignInWithGoogleButton />
         </form>
       </div>

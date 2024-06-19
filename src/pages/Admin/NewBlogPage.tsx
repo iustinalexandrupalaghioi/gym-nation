@@ -7,18 +7,34 @@ import useAddPost from "../../hooks/useAddPost";
 
 const NewBlogPage = () => {
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
-  const { quillRef, post, value, setValue, handleChange, handleSubmit } =
-    useAddPost();
+  const {
+    quillRef,
+    post,
+    value,
+    setValue,
+    handleChange,
+    handleSubmit,
+    handleFileSelect,
+    postErrors,
+    isLoading,
+    fileInputRefImage,
+    selectInputRef,
+  } = useAddPost();
   if (isAdmin) {
     return (
       <PageContent pageTitle="Scrie un nou articol de blog">
         <NewBlogForm
           quillRef={quillRef}
+          fileInputRef={fileInputRefImage}
+          selectInputRef={selectInputRef}
+          handleFileSelect={handleFileSelect}
           post={post}
           value={value}
           setValue={setValue}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          errors={postErrors}
+          isLoading={isLoading}
         />
         {value && value != "<p><br></p>" && <NewBlogPreview value={value} />}
       </PageContent>

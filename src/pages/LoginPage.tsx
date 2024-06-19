@@ -9,6 +9,7 @@ import showToast, { Method } from "../utilities/showToast";
 import ToastAlert from "../components/ToastAlert";
 import { FieldValues, useForm } from "react-hook-form";
 import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
+import LoadingButton from "../components/account/LoadingButton";
 
 interface FormData {
   email: string;
@@ -19,7 +20,12 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const setStatus = useUserStatusStore((s) => s.setStatus);
   const setRole = useUserStatusStore((s) => s.setRole);
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+    reset,
+  } = useForm<FormData>();
 
   // handle sign in with email and password
   const handleSignIn = async (data: FieldValues) => {
@@ -43,6 +49,8 @@ const LoginPage = () => {
       const errorMessage = error.message;
       console.error(errorMessage);
       showToast("Nu s-a putut realiza autentificarea.", Method.Error);
+    } finally {
+      reset();
     }
   };
 
@@ -96,12 +104,20 @@ const LoginPage = () => {
               </NavLink>
             </span>
           </p>
-          <button
-            className="w-100 btn btn-primary text-light mb-3"
-            type="submit"
-          >
-            Conectare
-          </button>
+          {isSubmitting ? (
+            <LoadingButton
+              styleClass="w-100 btn btn-primary text-light mb-3"
+              textContent="Conectare..."
+            />
+          ) : (
+            <button
+              className="w-100 btn btn-primary text-light mb-3"
+              type="submit"
+            >
+              Conectare
+            </button>
+          )}
+
           <SignInWithGoogleButton />
         </form>
       </div>
