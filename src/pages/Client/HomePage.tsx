@@ -5,6 +5,7 @@ import FaqGrid from "../../components/homepage/Faq/FaqGrid";
 import FeaturesGrid from "../../components/homepage/Features/FeaturesGrid";
 import HomeCover from "../../components/homepage/HomeCover/HomeCover";
 import HomeCoverContent from "../../components/homepage/HomeCover/HomeCoverContent";
+import PricingSection from "../../components/homepage/Preturi/PricingSection";
 import ScrollToButton from "../../components/homepage/ScrollToButton";
 import Section from "../../components/homepage/Section";
 import ServicesGrid from "../../components/homepage/ServicesSection/ServicesGrid";
@@ -27,7 +28,13 @@ const HomePage = () => {
           <ServicesGrid />
         </Section>
         <TeamGrid />
-        <Section title="De ce să lucrezi cu noi?" sectionId="features">
+        <Section
+          title="Alege varianta potrivită pentru tine"
+          sectionId="pricing"
+        >
+          <PricingSection />
+        </Section>
+        <Section title="De ce să ne alegi pe noi?" sectionId="features">
           <FeaturesGrid />
         </Section>
         <Section

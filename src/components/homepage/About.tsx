@@ -24,7 +24,7 @@ const AboutSection = () => {
             a-ți atinge obiectivele de fitness și a-ți transforma stilul de
             viață. Fie că îți dorești să slăbești, să-ți construiești masă
             musculară sau să îți îmbunătățești sănătatea generală, creăm un plan
-            personalizat care să se potrivească nevoilor tale specifice.
+            care să se potrivească nevoilor tale specifice.
           </p>
           <div className="d-flex gap-2 flex-column flex-md-row">
             <button
