@@ -50,7 +50,7 @@ const ServicesModal = ({
               type="button"
               className="btn btn-outline-info"
               data-bs-target={`#modal-${
-                id - 1 < 1 ? numberOfServices - 1 : id - 1
+                id - 1 === 0 ? numberOfServices : id - 1
               }`}
               data-bs-toggle="modal"
             >
@@ -60,11 +60,11 @@ const ServicesModal = ({
             <button
               className="btn btn-primary text-light"
               data-bs-target={`#modal-${
-                id + 1 <= numberOfServices - 1 ? id + 1 : 1
+                id + 1 == numberOfServices ? id + 1 : 1
               }`}
               data-bs-toggle="modal"
             >
-              Următorul
+              Înainte
             </button>
           </div>
         </div>
