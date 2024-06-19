@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 const PricingSection = () => {
   return (
     <div className="row row-cols-1 row-cols-md-3 mb-3 text-center justify-content-center py-5">
-      <div className="col" style={{ minHeight: "max-content", width: "22rem" }}>
+      <div
+        className="col mb-3"
+        style={{ minHeight: "max-content", width: "22rem" }}
+      >
         <div className="card bg-body-tertiary border-0 shadow mb-4 rounded-3 h-100 w-100">
           <div className="card-header py-3">
             <h4 className="my-0 fw-normal">Gratuit</h4>
@@ -28,7 +31,10 @@ const PricingSection = () => {
           </div>
         </div>
       </div>
-      <div className="col" style={{ minHeight: "max-content", width: "22rem" }}>
+      <div
+        className="col mb-3"
+        style={{ minHeight: "max-content", width: "22rem" }}
+      >
         <div className="card mb-4 rounded-3  bg-body-tertiary border-0 shadow  h-100 w-100">
           <div className="card-header py-3">
             <h4 className="my-0 fw-normal">Consultație Nutriție</h4>
@@ -54,7 +60,10 @@ const PricingSection = () => {
           </div>
         </div>
       </div>
-      <div className="col" style={{ minHeight: "max-content", width: "22rem" }}>
+      <div
+        className="col mb-3"
+        style={{ minHeight: "max-content", width: "22rem" }}
+      >
         <div className="card mb-4 rounded-3 bg-body-tertiary border-0 shadow border-primary h-100 w-100">
           <div className="card-header py-3 text-bg-primary border-primary">
             <h4 className="my-0 fw-normal text-light">Premium</h4>
@@ -66,9 +75,8 @@ const PricingSection = () => {
             </h1>
             <ul className="list-unstyled mt-3 mb-4">
               <li>Acces la antrenamentele video</li>
-              <li>Planuri de antrenament personalizate</li>
               <li>Acces la resursele gratuite din blog</li>
-              <li>Acces la comunitate</li>
+              <li>Suport prin email</li>
             </ul>
             <Link
               to={"/account"}

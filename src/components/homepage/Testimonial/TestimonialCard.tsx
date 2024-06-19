@@ -1,12 +1,11 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
-import Testimonial from "../../../entities/Testimonial";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 interface Props {
-  testimonial: Testimonial;
+  testimonial: QueryDocumentSnapshot<DocumentData, DocumentData>;
 }
-const TestimonialCard = ({
-  testimonial: { id, name, content, img, stars },
-}: Props) => {
+const TestimonialCard = ({ testimonial }: Props) => {
+  const { fname, lname, feedback, stars } = testimonial.data();
   let starNumber = [];
   let regStars = [];
   if (stars < 5) {
@@ -20,19 +19,14 @@ const TestimonialCard = ({
   return (
     <div
       className="card bg-body-tertiary h-100 p-4 rounded-4 border-0 shadow d-flex flex-column justify-content-between"
-      id={`testimonial-${id}`}
+      id={`testimonial-${testimonial.id}`}
     >
-      <p className="">{content}</p>
+      <p className="">{feedback}</p>
       <div className=" d-flex gap-2 align-items-center">
-        <img
-          src={img}
-          className="rounded-circle"
-          alt={`picture with ${name}`}
-          style={{ width: "70px", height: "70px" }}
-        />
-
         <div className="author d-flex flex-column">
-          <h5 className="card-title">{name}</h5>
+          <h5 className="card-title">
+            {fname} {lname}
+          </h5>
           <div className="d-flex">
             <p className="text-primary">
               {starNumber && starNumber.map((star) => <FaStar key={star} />)}
