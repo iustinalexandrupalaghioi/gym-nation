@@ -195,6 +195,8 @@ const useAddPost = () => {
     post,
     value,
     setValue,
+    setPost,
+    setPostErrors,
     handleChange,
     handleFileSelect,
     handleSubmit,

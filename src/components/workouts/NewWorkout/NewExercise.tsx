@@ -2,6 +2,7 @@ import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
 import Workout from "../../../entities/Workout";
 import LoadingButton from "../../account/LoadingButton";
+import { FileUpload } from "primereact/fileupload";
 
 interface Props {
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
@@ -12,6 +13,7 @@ const NewExercise = ({ setWorkout }: Props) => {
     errors,
     fileInputRefImage,
     fileInputRefVideo,
+    handleFileSelect,
     handleChange,
     isLoading,
     handleSubmit,
@@ -72,33 +74,27 @@ const NewExercise = ({ setWorkout }: Props) => {
                 )}
               </div>
               <div className="form-group mb-3">
-                <label
-                  className="text-body-secondary"
-                  htmlFor="exerciseThumbnail"
-                >
-                  Încarcă o imagine de prezentare
-                </label>
-                <input
+                <FileUpload
+                  className="btn btn-dark"
+                  mode="basic"
+                  name="image"
+                  accept="image/*"
+                  maxFileSize={1000000}
+                  chooseLabel="&nbsp;Încarcă o imagine"
+                  onSelect={handleFileSelect}
                   ref={fileInputRefImage}
-                  type="file"
-                  className="form-control border-0"
-                  onChange={handleChange}
-                  name="exerciseThubnail"
-                  id="exerciseThubnail"
                 />
                 {errors.image && <p className="text-danger">{errors.image}</p>}
               </div>
               <div className="form-group mb-3">
-                <label className="text-body-secondary" htmlFor="exerciseVideo">
-                  Încarcă un video
-                </label>
-                <input
-                  type="file"
+                <FileUpload
+                  className="btn btn-dark"
+                  mode="basic"
+                  name="image"
+                  accept="video/*"
+                  chooseLabel="&nbsp;Încarcă un video"
+                  onSelect={handleFileSelect}
                   ref={fileInputRefVideo}
-                  className="form-control border-0"
-                  onChange={handleChange}
-                  id="exerciseVideo"
-                  name="exerciseVideo"
                 />
                 {errors.video && <p className="text-danger">{errors.video}</p>}
               </div>

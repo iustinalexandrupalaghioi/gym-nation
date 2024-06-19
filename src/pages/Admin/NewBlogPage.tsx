@@ -19,11 +19,15 @@ const NewBlogPage = () => {
     isLoading,
     fileInputRefImage,
     selectInputRef,
+    setPost,
+    setPostErrors,
   } = useAddPost();
   if (isAdmin) {
     return (
       <PageContent pageTitle="Scrie un nou articol de blog">
         <NewBlogForm
+          setPost={setPost}
+          setPostErrors={setPostErrors}
           quillRef={quillRef}
           fileInputRef={fileInputRefImage}
           selectInputRef={selectInputRef}

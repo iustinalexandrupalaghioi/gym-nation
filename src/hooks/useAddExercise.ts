@@ -10,6 +10,7 @@ import Workout from "../entities/Workout";
 import Exercise from "../entities/Exercise";
 import useGetFileURL from "./useGetFileURL";
 import showToast, { Method } from "../utilities/showToast";
+import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 
 interface Errors {
   name: string;
@@ -39,8 +40,8 @@ const useAddExercise = (
 
   const [errors, setErrors] = useState<Errors>(initialErrorState);
 
-  const fileInputRefImage = useRef<HTMLInputElement>(null);
-  const fileInputRefVideo = useRef<HTMLInputElement>(null);
+  const fileInputRefImage = useRef<FileUpload>(null);
+  const fileInputRefVideo = useRef<FileUpload>(null);
 
   // state management for exercise form
   const handleChange = (
@@ -58,34 +59,25 @@ const useAddExercise = (
       setExercise((prev) => ({ ...prev, exerciseDescription: value }));
     }
 
-    // set  image  for exercise
-    else if (
-      event.target instanceof HTMLInputElement &&
-      event.target.type === "file" &&
-      name === "exerciseThubnail"
-    ) {
-      const files = event.target.files;
-      if (files && files.length > 0) {
-        setExercise((prev) => ({ ...prev, image: files[0] }));
-      }
-    }
-
-    // set exercise video file
-    else if (
-      event.target instanceof HTMLInputElement &&
-      event.target.type === "file" &&
-      name === "exerciseVideo"
-    ) {
-      const files = event.target.files;
-      if (files && files.length > 0) {
-        setExercise((prev) => ({ ...prev, video: files[0] }));
-      }
-    }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
+  };
+
+  const handleFileSelect = (event: FileUploadSelectEvent) => {
+    if (fileInputRefImage.current) {
+      const files = event.files;
+      if (files && files.length > 0) {
+        setExercise((prev) => ({ ...prev, image: files[0] }));
+      }
+    }
+    if (fileInputRefVideo.current) {
+      const files = event.files;
+      if (files && files.length > 0) {
+        setExercise((prev) => ({ ...prev, video: files[0] }));
+      }
+    }
   };
 
   const processExercise = async (exercise: Exercise) => {
@@ -164,11 +156,11 @@ const useAddExercise = (
         });
 
         if (fileInputRefImage.current) {
-          fileInputRefImage.current.value = "";
+          fileInputRefImage.current.setFiles([]);
         }
 
         if (fileInputRefVideo.current) {
-          fileInputRefVideo.current.value = "";
+          fileInputRefVideo.current.setFiles([]);
         }
 
         showToast("Exercițiul a fost adăugat cu succes!", Method.Success);
@@ -188,6 +180,7 @@ const useAddExercise = (
     isLoading,
     handleChange,
     handleSubmit,
+    handleFileSelect,
   };
 };
 

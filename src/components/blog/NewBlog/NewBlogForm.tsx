@@ -1,7 +1,13 @@
 import ReactQuill from "react-quill";
 import useCategories from "../../../hooks/useCategories";
 import "react-quill/dist/quill.snow.css";
-import { ChangeEvent, FormEvent, RefObject, useEffect } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  RefObject,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 import BlogPost from "../../../entities/BlogPost";
 import ToastAlert from "../../ToastAlert";
@@ -22,6 +28,8 @@ interface Props {
   fileInputRef: RefObject<FileUpload>;
   errors: PostErrors;
   isLoading: boolean;
+  setPostErrors: React.Dispatch<SetStateAction<PostErrors>>;
+  setPost: React.Dispatch<SetStateAction<BlogPost>>;
 }
 const NewBlogForm = ({
   quillRef,
@@ -35,6 +43,8 @@ const NewBlogForm = ({
   selectInputRef,
   errors,
   isLoading,
+  setPost,
+  setPostErrors,
 }: Props) => {
   const { data: categories } = useCategories();
   const modules = {
@@ -76,12 +86,14 @@ const NewBlogForm = ({
         onSubmit={handleSubmit}
       >
         <div className="form-group mb-3">
-          <label htmlFor="title">Titlul articolului</label>
+          <label htmlFor="title" className="text-body-secondary">
+            Titlul articolului
+          </label>
           <input
             id="title"
             type="text"
             name="title"
-            className="form-control"
+            className="form-control border-0"
             placeholder="Scrie un titlu pentru postarea ta"
             value={title}
             onChange={handleChange}
@@ -103,10 +115,12 @@ const NewBlogForm = ({
           {errors.image && <p className="text-danger">{errors.image}</p>}
         </div>
         <div className="form-group mb-3">
-          <label htmlFor="category">Categorie</label>
+          <label htmlFor="category" className="text-body-secondary">
+            Categorie
+          </label>
           <select
             ref={selectInputRef}
-            className="form-select"
+            className="form-select border-0"
             id="category"
             name="category"
             aria-label="Alege o categorie"
@@ -126,11 +140,13 @@ const NewBlogForm = ({
         </div>
         <div className="row">
           <div className="form-group">
-            <label htmlFor="quill">Conținutul articolului</label>
+            <label htmlFor="quill" className="text-body-secondary">
+              Conținutul articolului
+            </label>
             <ReactQuill
               ref={quillRef}
               id="quill"
-              className="blog-quill"
+              className="blog-quill bg-dark"
               modules={modules}
               formats={formats}
               theme="snow"
@@ -141,6 +157,24 @@ const NewBlogForm = ({
           </div>
         </div>
         <div className="container-fluid mt-3 d-flex justify-content-end gap-2">
+          <button
+            type="button"
+            className="btn btn-outline-info"
+            onClick={() => {
+              setPost({
+                title: "",
+                category: "",
+                image: null,
+                imageURL: "",
+                titleSlug: "",
+                createdAt: "",
+              });
+              setPostErrors({ title: "", category: "", image: "", value: "" });
+              setValue("");
+            }}
+          >
+            Anulează
+          </button>
           {isLoading ? (
             <LoadingButton
               styleClass="btn btn-primary align-self-end text-light"

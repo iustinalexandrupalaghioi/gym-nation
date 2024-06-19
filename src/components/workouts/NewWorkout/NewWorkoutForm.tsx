@@ -5,6 +5,7 @@ import useMuscles from "../../../hooks/useMuscles";
 import Workout from "../../../entities/Workout";
 import showToast, { Method } from "../../../utilities/showToast";
 import LoadingButton from "../../account/LoadingButton";
+import { FileUpload } from "primereact/fileupload";
 
 interface Props {
   workout: Workout;
@@ -21,6 +22,8 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
     isLoading,
     handleChange,
     handleSubmit,
+    handleSelectFile,
+    setErrors,
   } = useAddWorkout(workout, setWorkout);
 
   useEffect(() => {
@@ -112,16 +115,15 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         </div>
 
         <div className="form-group mb-3">
-          <label className="text-body-secondary" htmlFor="image">
-            Adaugă o imagine
-          </label>
-          <input
-            ref={fileInputRefImage}
-            onChange={handleChange}
-            type="file"
+          <FileUpload
+            className="btn btn-dark"
+            mode="basic"
             name="image"
-            className="form-control border-0"
-            id="image"
+            accept="image/*"
+            maxFileSize={1000000}
+            chooseLabel="&nbsp;Încarcă o imagine"
+            onSelect={handleSelectFile}
+            ref={fileInputRefImage}
           />
           {errors.image && <p className="text-danger">{errors.image}</p>}
         </div>
@@ -137,6 +139,30 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           </button>
 
           <div className="action-buttons d-flex gap-2">
+            <button
+              type="button"
+              className="btn btn-outline-info"
+              onClick={() => {
+                setWorkout({
+                  title: "",
+                  workoutDescription: "",
+                  price: "",
+                  muscleSlug: "",
+                  image: null,
+                  exercises: [],
+                });
+                setErrors({
+                  title: "",
+                  workoutDescription: "",
+                  price: "",
+                  muscleSlug: "",
+                  image: "",
+                  exercises: "",
+                });
+              }}
+            >
+              Anulează
+            </button>
             {isLoading ? (
               <LoadingButton
                 textContent="Procesare.."

@@ -12,6 +12,7 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import useMuscles from "./useMuscles";
 import Workout from "../entities/Workout";
 import showToast, { Method } from "../utilities/showToast";
+import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 interface Errors {
   title: string;
   workoutDescription: string;
@@ -36,7 +37,7 @@ const useAddWorkout = (
     exercises: "",
   };
 
-  const fileInputRefImage = useRef<HTMLInputElement>(null);
+  const fileInputRefImage = useRef<FileUpload>(null);
   const selectInputRef = useRef<HTMLSelectElement>(null);
 
   const [errors, setErrors] = useState<Errors>(initialErrorState);
@@ -130,7 +131,7 @@ const useAddWorkout = (
         exercises: [],
       });
       if (fileInputRefImage.current) {
-        fileInputRefImage.current.value = "";
+        fileInputRefImage.current.setFiles([]);
       }
       if (selectInputRef.current) {
         selectInputRef.current.value = "";
@@ -155,22 +156,18 @@ const useAddWorkout = (
       [name]: value,
     }));
 
-    if (
-      event.target instanceof HTMLInputElement &&
-      event.target.type === "file" &&
-      name === "image"
-    ) {
-      const files = event.target.files;
-      if (files && files.length > 0) {
-        setWorkout((prev) => ({ ...prev, image: files[0] }));
-      }
-    }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
   }
+
+  const handleSelectFile = (event: FileUploadSelectEvent) => {
+    const files = event.files;
+    if (files && files.length > 0) {
+      setWorkout((prev) => ({ ...prev, image: files[0] }));
+    }
+  };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -200,6 +197,8 @@ const useAddWorkout = (
     isLoading,
     handleChange,
     handleSubmit,
+    handleSelectFile,
+    setErrors,
   };
 };
 
