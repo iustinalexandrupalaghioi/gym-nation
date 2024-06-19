@@ -121,8 +121,8 @@ const useAddExercise = (
 
     if (hasError) return null;
 
-    let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
-    let videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
+    let imageURL = image && (await useGetFileURL(image, "workoutImages"));
+    let videoLink = video && (await useGetFileURL(video, "exerciseVideos"));
     let nameSlug = slugify(name, { replacement: "-", lower: true });
 
     //return final exercise
@@ -181,6 +181,8 @@ const useAddExercise = (
     handleChange,
     handleSubmit,
     handleFileSelect,
+    setExercise,
+    setErrors,
   };
 };
 

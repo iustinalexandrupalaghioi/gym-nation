@@ -17,6 +17,8 @@ const NewExercise = ({ setWorkout }: Props) => {
     handleChange,
     isLoading,
     handleSubmit,
+    setExercise,
+    setErrors,
   } = useAddExercise(setWorkout);
 
   return (
@@ -104,6 +106,22 @@ const NewExercise = ({ setWorkout }: Props) => {
                   type="button"
                   className="btn btn-outline-info"
                   data-bs-dismiss="modal"
+                  onClick={() => {
+                    setErrors({
+                      name: "",
+                      exerciseDescription: "",
+                      image: "",
+                      video: "",
+                    });
+                    setExercise({
+                      name: "",
+                      nameSlug: "",
+                      video: null,
+                      videoLink: "",
+                      image: null,
+                      exerciseDescription: "",
+                    });
+                  }}
                 >
                   Anulează
                 </button>

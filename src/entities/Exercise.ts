@@ -3,6 +3,7 @@ export default interface Exercise {
   exerciseDescription: string;
   nameSlug?: string;
   image?: File | null;
+  imageURL?: string | null | undefined;
   video?: File | null;
-  videoLink?: string;
+  videoLink?: string | null | undefined;
 }
