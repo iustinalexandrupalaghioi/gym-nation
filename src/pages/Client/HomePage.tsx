@@ -24,7 +24,7 @@ const HomePage = () => {
     const verifyUser = async () => {
       const newUserStatus = auth.currentUser ? await getUserStatus() : false;
       const newUserRole = auth.currentUser
-        ? getUserRole(auth.currentUser.uid)
+        ? await getUserRole(auth.currentUser.uid)
         : false;
       const setStatus = useUserStatusStore((s) => s.setStatus);
       const setRole = useUserStatusStore((s) => s.setRole);
