@@ -15,18 +15,14 @@ const SignInWithGoogleButton = () => {
   // handle sign in with google
   const handleSignInWithPopup = async () => {
     try {
-      const userCredential = await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
       //check user status
-      const newUserStatus =
-        userCredential.user === auth.currentUser
-          ? await getUserStatus(userCredential.user.uid)
-          : false;
+      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
       setStatus(newUserStatus);
       //check user role
-      const newUserRole =
-        userCredential.user === auth.currentUser
-          ? await getUserRole(userCredential.user.uid)
-          : false;
+      const newUserRole = auth.currentUser
+        ? await getUserRole(auth.currentUser.uid)
+        : false;
       setRole(newUserRole);
       showToast("Te-ai autentificat cu succes", Method.Success, () =>
         navigate("/")

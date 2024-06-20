@@ -1,7 +1,8 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
-const getUserStatus = async (userId?: string | undefined) => {
+const getUserStatus = async () => {
+  const userId = auth.currentUser?.uid;
   if (!userId) throw new Error("User not logged in");
 
   const subscriptionRef = collection(db, "customers", userId, "subscriptions");
