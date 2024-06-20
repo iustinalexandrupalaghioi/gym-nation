@@ -34,7 +34,9 @@ const LoginPage = () => {
       await signInWithEmailAndPassword(auth, email, password);
 
       //check user status
-      const newUserStatus = auth.currentUser ? await getUserStatus() : false;
+      const newUserStatus = auth.currentUser
+        ? await getUserStatus(auth.currentUser.uid)
+        : false;
       setStatus(newUserStatus);
 
       //check user role
