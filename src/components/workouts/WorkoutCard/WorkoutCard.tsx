@@ -24,8 +24,8 @@ const WorkoutCard = ({ workout }: Props) => {
     }
   };
   return (
-    <div className="col-8 col-md-6 mb-5">
-      <div className="card bg-body-tertiary workout-card h-100">
+    <div className="col-10 col-md-5 mb-5 mb-xl-0">
+      <div className="card workout-card w-100 h-100">
         <img
           src={imageURL}
           className="card-img-top"

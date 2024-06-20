@@ -21,7 +21,7 @@ const WorkoutsPage = () => {
         <br /> Obține rezultatele dorite,{" "}
         <span className="text-primary">oriunde</span> te-ai afla!
       </p>
-      <div className="row mt-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+      <div className="row mt-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 justify-content-center justify-content-md-start">
         {isLoading ? (
           <WorkoutCardSkeleton />
         ) : (
