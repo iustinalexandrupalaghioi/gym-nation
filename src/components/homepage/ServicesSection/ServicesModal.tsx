@@ -11,7 +11,7 @@ const ServicesModal = ({
 }: Props) => {
   // Calculate the target ID for the back and next buttons
   const previousServiceId = id === 1 ? numberOfServices : id - 1;
-  const nextServiceId = id === numberOfServices ? 1 : id + 1;
+  const nextServiceId = id === numberOfServices + 1 ? 1 : id + 1;
 
   return (
     <div
