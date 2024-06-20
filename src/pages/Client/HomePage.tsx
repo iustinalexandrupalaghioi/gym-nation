@@ -48,20 +48,8 @@ const HomePage = () => {
     // Fetch user status and role on component mount
     fetchUserStatusAndRole(auth.currentUser);
 
-    // Add visibility change event listener
-    const handleVisibilityChange = async () => {
-      if (document.visibilityState === "visible") {
-        await fetchUserStatusAndRole(auth.currentUser);
-      }
-    };
-
-    window.addEventListener("visibilitychange", handleVisibilityChange);
-
     // Cleanup subscription and event listener on unmount
-    return () => {
-      unsubscribe();
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+    return () => unsubscribe();
   }, [auth]);
 
   return (
