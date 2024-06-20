@@ -1,34 +1,63 @@
-import useFetchPostsBy from "../../../hooks/useFetchPostsBy";
-import ErrorPage from "../../../pages/Client/ErrorPage";
-import useBlogQueryStore from "../../../stores/blogQueryStore";
+import React from "react";
+import { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import BlogOverviewCard from "./BlogOverviewCard";
 import BlogOverviewSkeleton from "./BlogOverviewSkeleton";
+import ErrorPage from "../../../pages/Client/ErrorPage";
+
+import LoadingStatus from "../../LoadingStatus";
+import InfiniteScroll from "react-infinite-scroll-component";
+import useInfiniteFetchPosts from "../../../hooks/useInfiniteFetchPosts";
 
 const BlogPostsOverview = () => {
-  const categorySlug = useBlogQueryStore((s) => s.blogQuery.category);
-
   const {
-    data: posts,
+    data,
     error,
     isLoading,
-  } = useFetchPostsBy("category.slug", categorySlug);
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteFetchPosts();
 
-  const skeletons = [1, 2, 3, 4, 5];
-  if (error) return <ErrorPage />;
-  if (isLoading)
+  if (error) {
+    console.error("Firestore error:", error);
+    return <ErrorPage />;
+  }
+
+  if (isLoading && !data) {
     return (
       <div className="col-12 col-md-6 col-lg-8">
-        {skeletons.map((skeleton) => (
-          <BlogOverviewSkeleton key={skeleton} />
+        {[...Array(5)].map((_, index) => (
+          <BlogOverviewSkeleton key={index} />
         ))}
       </div>
     );
+  }
 
   return (
     <div className="col-12 col-md-6 col-lg-8">
-      {posts?.result.map((doc) => (
-        <BlogOverviewCard post={doc} key={doc.id} />
-      ))}
+      <InfiniteScroll
+        dataLength={
+          data?.pages.reduce((acc, page) => acc + page.posts.length, 0) || 0
+        }
+        next={() => fetchNextPage()}
+        hasMore={hasNextPage}
+        loader={<LoadingStatus />}
+      >
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page.posts.map((doc: QueryDocumentSnapshot<DocumentData>) => (
+              <BlogOverviewCard post={doc} key={doc.id} />
+            ))}
+          </React.Fragment>
+        ))}
+        {isFetchingNextPage && (
+          <React.Fragment>
+            {[...Array(5)].map((_, index) => (
+              <BlogOverviewSkeleton key={index} />
+            ))}
+          </React.Fragment>
+        )}
+      </InfiniteScroll>
     </div>
   );
 };
