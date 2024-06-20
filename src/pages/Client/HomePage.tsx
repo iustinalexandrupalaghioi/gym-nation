@@ -1,5 +1,5 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
+import { User, onAuthStateChanged } from "firebase/auth";
 import ToastAlert from "../../components/ToastAlert";
 import AboutSection from "../../components/homepage/About";
 import ContactGrid from "../../components/homepage/Contact/ContactGrid";
@@ -23,22 +23,33 @@ import getUserStatus from "../../utilities/getUserStatus";
 const HomePage = () => {
   const setStatus = useUserStatusStore((s) => s.setStatus);
   const setRole = useUserStatusStore((s) => s.setRole);
+
+  // Function to fetch user status and role
+  const fetchUserStatusAndRole = async (user: User | null) => {
+    if (user) {
+      const newUserStatus = await getUserStatus();
+      setStatus(newUserStatus);
+
+      const newUserRole = await getUserRole(user.uid);
+      setRole(newUserRole);
+    }
+  };
+
   // Check authentication state and fetch user status and role on page load
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // User is signed in, fetch user status and role
-        const newUserStatus = await getUserStatus();
-        setStatus(newUserStatus);
-
-        const newUserRole = await getUserRole(user.uid);
-        setRole(newUserRole);
+        await fetchUserStatusAndRole(user);
       }
     });
 
+    // Fetch user status and role on component mount
+    fetchUserStatusAndRole(auth.currentUser);
+
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [auth]);
+  }, [setStatus, setRole]);
+
   return (
     <>
       <ToastAlert />
