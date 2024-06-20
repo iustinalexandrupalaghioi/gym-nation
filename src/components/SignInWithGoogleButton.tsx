@@ -21,7 +21,7 @@ const SignInWithGoogleButton = () => {
       setStatus(newUserStatus);
       //check user role
       const newUserRole = auth.currentUser
-        ? getUserRole(auth.currentUser.uid)
+        ? await getUserRole(auth.currentUser.uid)
         : false;
       setRole(newUserRole);
       showToast("Te-ai autentificat cu succes", Method.Success, () =>
