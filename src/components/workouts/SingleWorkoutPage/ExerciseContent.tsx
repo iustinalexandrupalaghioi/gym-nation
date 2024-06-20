@@ -21,7 +21,7 @@ const ExerciseContent = ({ workout }: Props) => {
       <div className="rounded-4 mb-2">
         <video
           controls
-          src={videoLink}
+          src={videoLink!}
           className="rounded-4 w-100"
           autoPlay={true}
           muted={true}
