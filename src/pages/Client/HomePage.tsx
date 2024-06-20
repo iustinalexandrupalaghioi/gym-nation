@@ -62,7 +62,7 @@ const HomePage = () => {
       unsubscribe();
       window.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [setStatus, setRole]);
+  }, [auth]);
 
   return (
     <>
