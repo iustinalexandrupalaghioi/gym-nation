@@ -38,7 +38,7 @@ const HomePage = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [auth]);
+  }, [auth, setStatus, setRole]);
   return (
     <>
       <ToastAlert />
