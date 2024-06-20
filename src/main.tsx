@@ -15,10 +15,9 @@ import getUserRole from "./utilities/getUserRole.ts";
 import getUserStatus from "./utilities/getUserStatus.ts";
 export const queryClient = new QueryClient();
 const AppInitializer = ({ children }: { children: ReactNode }) => {
-  const setStatus = useUserStatusStore((state) => state.setStatus);
-  const setRole = useUserStatusStore((state) => state.setRole);
+  const setStatus = useUserStatusStore((s) => s.setStatus);
+  const setRole = useUserStatusStore((s) => s.setRole);
 
-  // Check authentication state and fetch user status and role on page load
   useEffect(() => {
     const handleAuthStateChange = async (user: User | null) => {
       const newUserStatus = user ? await getUserStatus() : false;
@@ -27,7 +26,9 @@ const AppInitializer = ({ children }: { children: ReactNode }) => {
       setRole(newUserRole);
     };
 
-    const unsubscribe = onAuthStateChanged(auth, handleAuthStateChange);
+    const unsubscribe = onAuthStateChanged(auth, () =>
+      handleAuthStateChange(auth.currentUser)
+    );
 
     // Cleanup subscription and event listener on unmount
     return () => unsubscribe();
