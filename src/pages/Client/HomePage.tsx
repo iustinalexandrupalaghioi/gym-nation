@@ -33,7 +33,7 @@ const HomePage = () => {
       setRole(newUserRole);
     };
     verifyUser();
-  }, [auth]);
+  }, []);
 
   return (
     <>
