@@ -37,18 +37,32 @@ const HomePage = () => {
 
   // Check authentication state and fetch user status and role on page load
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const handleAuthStateChange = async (user: User | null) => {
       if (user) {
         await fetchUserStatusAndRole(user);
       }
-    });
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, handleAuthStateChange);
 
     // Fetch user status and role on component mount
     fetchUserStatusAndRole(auth.currentUser);
 
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, [auth]);
+    // Add visibility change event listener
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === "visible") {
+        await fetchUserStatusAndRole(auth.currentUser);
+      }
+    };
+
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Cleanup subscription and event listener on unmount
+    return () => {
+      unsubscribe();
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [setStatus, setRole]);
 
   return (
     <>
