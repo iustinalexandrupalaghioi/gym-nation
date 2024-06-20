@@ -24,7 +24,7 @@ const WorkoutCard = ({ workout }: Props) => {
     }
   };
   return (
-    <div className="col-8 col-md-6 mb-5 cursor-pointer" onClick={handleClick}>
+    <div className="col-8 col-md-6 mb-5">
       <div className="card bg-body-tertiary workout-card h-100">
         <img
           src={imageURL}
@@ -33,7 +33,12 @@ const WorkoutCard = ({ workout }: Props) => {
           alt={title}
         />
         <div className="card-body">
-          <h4 className="card-title fw-bold">{title}</h4>
+          <h4
+            className="card-title fw-bold cursor-pointer"
+            onClick={handleClick}
+          >
+            {title}
+          </h4>
           <h5 className="card-text fw-bold">
             <span className="text-primary fw-bold">{price}</span> de lei
           </h5>
