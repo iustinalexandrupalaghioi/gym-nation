@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import getUserStatus from "../utilities/getUserStatus";
@@ -10,6 +10,7 @@ import ToastAlert from "../components/ToastAlert";
 import { FieldValues, useForm } from "react-hook-form";
 import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 import LoadingButton from "../components/account/LoadingButton";
+import { useEffect } from "react";
 
 interface FormData {
   email: string;
@@ -53,6 +54,22 @@ const LoginPage = () => {
       reset();
     }
   };
+  // Check authentication state and fetch user status and role on page load
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User is signed in, fetch user status and role
+        const newUserStatus = await getUserStatus();
+        setStatus(newUserStatus);
+
+        const newUserRole = await getUserRole(user.uid);
+        setRole(newUserRole);
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [setStatus, setRole]);
 
   return (
     <div className="vh-100">
