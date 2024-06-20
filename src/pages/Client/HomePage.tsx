@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ToastAlert from "../../components/ToastAlert";
 import AboutSection from "../../components/homepage/About";
 import ContactGrid from "../../components/homepage/Contact/ContactGrid";
