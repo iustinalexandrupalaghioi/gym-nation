@@ -19,24 +19,6 @@ const NavBar = ({ styleClass }: Props) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
-  const setStatus = useUserStatusStore((s) => s.setStatus);
-  const setRole = useUserStatusStore((s) => s.setRole);
-  // Check authentication state and fetch user status and role on page load
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // User is signed in, fetch user status and role
-        const newUserStatus = await getUserStatus();
-        setStatus(newUserStatus);
-
-        const newUserRole = await getUserRole(user.uid);
-        setRole(newUserRole);
-      }
-    });
-
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, [auth]);
 
   return (
     <nav

@@ -10,6 +10,10 @@ import useExerciseQueryStore from "../../stores/exerciseQueryStore";
 import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
 import LoadingStatus from "../../components/LoadingStatus";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase-config";
+import getUserRole from "../../utilities/getUserRole";
+import getUserStatus from "../../utilities/getUserStatus";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
@@ -34,6 +38,24 @@ const SingleWorkoutPage = () => {
       firstExercise && setExercise(firstExercise);
     }
   }, [workouts]);
+  const setStatus = useUserStatusStore((s) => s.setStatus);
+  const setRole = useUserStatusStore((s) => s.setRole);
+  // Check authentication state and fetch user status and role on page load
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User is signed in, fetch user status and role
+        const newUserStatus = await getUserStatus();
+        setStatus(newUserStatus);
+
+        const newUserRole = await getUserRole(user.uid);
+        setRole(newUserRole);
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [auth]);
 
   if (error) return <ErrorPage />;
 
