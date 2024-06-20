@@ -3,14 +3,11 @@ import { auth } from "../../../firebase-config.ts";
 import logo from "/images/logo1.png";
 import "./NavBar.css";
 import SubscriptionButton from "../../account/SubscriptionButton.tsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoadingButton from "../../account/LoadingButton.tsx";
 import SignOutButton from "../../account/SignOutButton.tsx";
 import useUserStatusStore from "../../../stores/userStore.ts";
 import { FaSliders } from "react-icons/fa6";
-import { onAuthStateChanged } from "firebase/auth";
-import getUserStatus from "../../../utilities/getUserStatus.ts";
-import getUserRole from "../../../utilities/getUserRole.ts";
 
 interface Props {
   styleClass?: string;
