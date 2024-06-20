@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import getUserStatus from "../utilities/getUserStatus";
@@ -10,7 +10,6 @@ import ToastAlert from "../components/ToastAlert";
 import { FieldValues, useForm } from "react-hook-form";
 import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 import LoadingButton from "../components/account/LoadingButton";
-import { useEffect } from "react";
 
 interface FormData {
   email: string;
