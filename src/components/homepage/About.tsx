@@ -36,7 +36,7 @@ const AboutSection = () => {
             <Link
               type="button"
               className="btn btn-primary text-light"
-              to="/antrenamente"
+              to="/workouts"
             >
               Începe Acum <FaArrowRightLong />
             </Link>

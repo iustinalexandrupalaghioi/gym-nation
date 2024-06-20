@@ -4,10 +4,15 @@ interface Props {
   service: Service;
   numberOfServices: number;
 }
+
 const ServicesModal = ({
   service: { id, title, description, img },
   numberOfServices,
 }: Props) => {
+  // Calculate the target ID for the back and next buttons
+  const previousServiceId = id === 1 ? numberOfServices : id - 1;
+  const nextServiceId = id === numberOfServices ? 1 : id + 1;
+
   return (
     <div
       className="modal mt-0 fade"
@@ -49,9 +54,7 @@ const ServicesModal = ({
             <button
               type="button"
               className="btn btn-outline-info"
-              data-bs-target={`#modal-${
-                id - 1 === 0 ? numberOfServices : id - 1
-              }`}
+              data-bs-target={`#modal-${previousServiceId}`}
               data-bs-toggle="modal"
             >
               Înapoi
@@ -59,9 +62,7 @@ const ServicesModal = ({
 
             <button
               className="btn btn-primary text-light"
-              data-bs-target={`#modal-${
-                id + 1 == numberOfServices ? id + 1 : 1
-              }`}
+              data-bs-target={`#modal-${nextServiceId}`}
               data-bs-toggle="modal"
             >
               Înainte
