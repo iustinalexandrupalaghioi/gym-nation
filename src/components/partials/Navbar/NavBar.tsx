@@ -67,7 +67,7 @@ const NavBar = ({ styleClass }: Props) => {
               <li className="nav-item dropdown">
                 {auth.currentUser?.uid ? (
                   <button
-                    className="btn btn-outline-info dropdown d-inline-flex align-items-center"
+                    className="btn btn-outline-info dropdown d-inline-flex align-items-center gap-1"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
