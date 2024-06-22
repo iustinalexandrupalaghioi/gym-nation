@@ -8,7 +8,7 @@ interface Props {
   workout: QueryDocumentSnapshot<DocumentData, DocumentData>;
 }
 const WorkoutCard = ({ workout }: Props) => {
-  const { title, price, imageURL, titleSlug } = workout.data();
+  const { title, imageURL, titleSlug } = workout.data();
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);
   const isPremium = useUserStatusStore((s) => s.userStatus.isPremium);
   const navigate = useNavigate();
