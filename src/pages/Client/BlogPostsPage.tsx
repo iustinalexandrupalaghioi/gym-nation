@@ -8,7 +8,7 @@ const BlogPostsPage = () => {
       <div className="row flex-md-row-reverse mt-3 gap-4 gap-md-0">
         <BlogPostsCategories />
         <BlogPostsOverview />
-        <ScrollToButton sectionId="categorySelect" />
+        <ScrollToButton sectionId="top" />
       </div>
     </div>
   );

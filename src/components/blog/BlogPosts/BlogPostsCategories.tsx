@@ -10,10 +10,9 @@ const BlogPostsCategories = () => {
   if (isLoading) return <BlogCategoriesSkeleton />;
 
   return (
-    <div className="col-12 col-md-6 col-lg-4">
+    <div className="col-12 col-md-6 col-lg-4" id="top">
       <select
         className="form-select border-0 shadow d-md-none"
-        id="categorySelect"
         name="category"
         onChange={(event) => setCategory(event.target.value)}
       >
@@ -24,10 +23,7 @@ const BlogPostsCategories = () => {
         ))}
       </select>
 
-      <div
-        className="card border-0 shadow d-none d-md-block"
-        id="categorySelect"
-      >
+      <div className="card border-0 shadow d-none d-md-block">
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>
