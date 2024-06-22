@@ -8,8 +8,7 @@ import {
 import useGetFileURL from "./useGetFileURL";
 import slugify from "slugify";
 import FirebaseClient from "../utilities/firebase-client";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import useMuscles from "./useMuscles";
+import { DocumentData } from "firebase/firestore";
 import Workout from "../entities/Workout";
 import showToast, { Method } from "../utilities/showToast";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
@@ -17,7 +16,6 @@ interface Errors {
   title: string;
   workoutDescription: string;
   price: string;
-  muscleSlug: string;
   image: string;
   sections: string;
   exercises: string;
@@ -28,12 +26,10 @@ const useAddWorkout = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const { data: muscles } = useMuscles();
   const initialErrorState = {
     title: "",
     workoutDescription: "",
     price: "",
-    muscleSlug: "",
     image: "",
     sections: "",
     exercises: "",
@@ -45,8 +41,7 @@ const useAddWorkout = (
   const [errors, setErrors] = useState<Errors>(initialErrorState);
 
   async function processWorkoutData(workout: Workout) {
-    const { title, workoutDescription, price, muscleSlug, image, sections } =
-      workout;
+    const { title, workoutDescription, price, image, sections } = workout;
     setErrors(initialErrorState);
 
     let hasError = false;
@@ -68,14 +63,6 @@ const useAddWorkout = (
       setErrors((prev) => ({
         ...prev,
         price: "Prețul trebuie să fie un număr mai mare decât 0.",
-      }));
-      hasError = true;
-    }
-
-    if (!muscleSlug) {
-      setErrors((prev) => ({
-        ...prev,
-        muscleSlug: "Selectează o grupă musculară.",
       }));
       hasError = true;
     }
@@ -113,17 +100,12 @@ const useAddWorkout = (
     let imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
     let titleSlug = slugify(title, { replacement: "-", lower: true });
 
-    const muscleDoc = muscleSlug
-      ? muscles?.result.find((m) => m.data().slug === muscleSlug)
-      : ({} as QueryDocumentSnapshot);
-    const muscleGroup = muscleDoc?.data();
-
     return {
       title,
       workoutDescription,
       price,
       titleSlug,
-      muscleGroup,
+
       imageURL,
       sections,
     };
@@ -138,7 +120,6 @@ const useAddWorkout = (
         title: "",
         workoutDescription: "",
         price: "",
-        muscleSlug: "",
         image: null,
         sections: [],
       });

@@ -11,9 +11,12 @@ import Exercise from "../entities/Exercise";
 import useGetFileURL from "./useGetFileURL";
 import showToast, { Method } from "../utilities/showToast";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+import { QueryDocumentSnapshot } from "firebase/firestore";
+import useMuscles from "./useMuscles";
 
 interface Errors {
   sectionId: string;
+  muscleSlug: string;
   exerciseName: string;
   exerciseDescription: string;
   image: string;
@@ -23,10 +26,12 @@ interface Errors {
 const useAddExercise = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
+  const { data: muscles } = useMuscles();
   const [exercise, setExercise] = useState<Exercise>({
     sectionId: "",
     exerciseName: "",
     exerciseDescription: "",
+    muscleSlug: "",
     image: null,
     video: null,
   });
@@ -35,6 +40,7 @@ const useAddExercise = (
 
   const initialErrorState: Errors = {
     sectionId: "",
+    muscleSlug: "",
     exerciseName: "",
     exerciseDescription: "",
     image: "",
@@ -45,7 +51,8 @@ const useAddExercise = (
 
   const fileInputRefImage = useRef<FileUpload>(null);
   const fileInputRefVideo = useRef<FileUpload>(null);
-  const selectInputRef = useRef<HTMLSelectElement>(null);
+  const selectInputRefSection = useRef<HTMLSelectElement>(null);
+  const selectInputRefMuscle = useRef<HTMLSelectElement>(null);
 
   // state management for exercise form
   const handleChange = (
@@ -77,8 +84,14 @@ const useAddExercise = (
   };
 
   const processExercise = async (exercise: Exercise) => {
-    const { sectionId, exerciseName, exerciseDescription, image, video } =
-      exercise;
+    const {
+      sectionId,
+      muscleSlug,
+      exerciseName,
+      exerciseDescription,
+      image,
+      video,
+    } = exercise;
 
     setErrors(initialErrorState);
 
@@ -87,6 +100,13 @@ const useAddExercise = (
       setErrors((prev) => ({
         ...prev,
         sectionId: "Selectează o secțiune.",
+      }));
+      hasError = true;
+    }
+    if (!muscleSlug) {
+      setErrors((prev) => ({
+        ...prev,
+        muscleSlug: "Selectează o grupă musculară.",
       }));
       hasError = true;
     }
@@ -128,9 +148,13 @@ const useAddExercise = (
     const imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
     const videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     const nameSlug = slugify(exerciseName, { replacement: "-", lower: true });
-
+    const muscleDoc = muscleSlug
+      ? muscles?.result.find((m) => m.data().slug === muscleSlug)
+      : ({} as QueryDocumentSnapshot);
+    const muscleGroup = muscleDoc?.data();
     return {
       sectionId,
+      muscleGroup,
       exerciseName,
       nameSlug,
       exerciseDescription,
@@ -149,7 +173,6 @@ const useAddExercise = (
           const sectionIndex = prev.sections.findIndex(
             (s) => s.id === Number(data.sectionId)
           );
-          console.log(sectionIndex);
 
           if (sectionIndex === -1) {
             return prev;
@@ -164,6 +187,7 @@ const useAddExercise = (
           setExercise({
             sectionId: "",
             exerciseName: "",
+            muscleSlug: "",
             exerciseDescription: "",
             image: null,
             video: null,
@@ -177,8 +201,12 @@ const useAddExercise = (
             fileInputRefVideo.current.setFiles([]);
           }
 
-          if (selectInputRef.current) {
-            selectInputRef.current.value = "";
+          if (selectInputRefSection.current) {
+            selectInputRefSection.current.value = "";
+          }
+
+          if (selectInputRefMuscle.current) {
+            selectInputRefMuscle.current.value = "";
           }
           return {
             ...prev,
@@ -196,7 +224,8 @@ const useAddExercise = (
   };
 
   return {
-    selectInputRef,
+    selectInputRefMuscle,
+    selectInputRefSection,
     exercise,
     errors,
     fileInputRefImage,

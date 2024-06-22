@@ -1,16 +1,30 @@
 import useCategories from "../../../hooks/useCategories";
+import useBlogQueryStore from "../../../stores/blogQueryStore";
 import BlogCategoriesSkeleton from "./BlogCategoriesSkeleton";
 import CategoryListItem from "./CategoryListItem";
 
 const BlogPostsCategories = () => {
   const { data: categories, error, isLoading } = useCategories();
-
+  const setCategory = useBlogQueryStore((s) => s.setCategory);
   if (error) return null;
   if (isLoading) return <BlogCategoriesSkeleton />;
 
   return (
     <div className="col-12 col-md-6 col-lg-4">
-      <div className="card border-0 shadow" id="categories">
+      <select
+        className="form-select border-0 d-md-none"
+        id="categoriesFilter"
+        name="category"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        {categories?.result.map((doc) => (
+          <option key={doc.id} value={doc.data().slug}>
+            {doc.data().name}
+          </option>
+        ))}
+      </select>
+
+      <div className="card border-0 shadow d-none d-md-block" id="categories">
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>

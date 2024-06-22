@@ -9,7 +9,6 @@ export default interface Workout {
   title: string;
   workoutDescription: string;
   price: string;
-  muscleSlug: string;
   image: File | null;
   sections: Section[];
 }

@@ -1,7 +1,6 @@
 import { GrFormAdd } from "react-icons/gr";
 import { SetStateAction, useEffect } from "react";
 import useAddWorkout from "../../../hooks/useAddWorkout";
-import useMuscles from "../../../hooks/useMuscles";
 import Workout from "../../../entities/Workout";
 import showToast, { Method } from "../../../utilities/showToast";
 import LoadingButton from "../../account/LoadingButton";
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
-  const { data: muscles } = useMuscles();
   const {
     workout: { title, workoutDescription, price },
     errors,
@@ -92,32 +90,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         </div>
 
         <div className="form-group mb-3">
-          <label className="text-body-secondary" htmlFor="muscles">
-            Alege partea corpului corespunzătoare
-          </label>
-          <select
-            className="form-select border-0"
-            onChange={handleChange}
-            ref={selectInputRef}
-            id="muscles"
-            name="muscleSlug"
-          >
-            <option value="">{"Alege din listă"}</option>
-            {muscles?.result.map(
-              (option, index) =>
-                option.data().slug !== "" && (
-                  <option key={index} value={option.data().slug}>
-                    {option.data().name}
-                  </option>
-                )
-            )}
-          </select>
-          {errors.muscleSlug && (
-            <p className="text-danger">{errors.muscleSlug}</p>
-          )}
-        </div>
-
-        <div className="form-group mb-3">
           <FileUpload
             className="btn btn-dark"
             mode="basic"
@@ -160,7 +132,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                   title: "",
                   workoutDescription: "",
                   price: "",
-                  muscleSlug: "",
                   image: null,
                   sections: [],
                 });
@@ -168,7 +139,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                   title: "",
                   workoutDescription: "",
                   price: "",
-                  muscleSlug: "",
                   image: "",
                   sections: "",
                   exercises: "",

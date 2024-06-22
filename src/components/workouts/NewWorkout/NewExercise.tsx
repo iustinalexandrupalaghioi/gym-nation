@@ -3,6 +3,7 @@ import useAddExercise from "../../../hooks/useAddExercise";
 import Workout, { Section } from "../../../entities/Workout";
 import LoadingButton from "../../account/LoadingButton";
 import { FileUpload } from "primereact/fileupload";
+import useMuscles from "../../../hooks/useMuscles";
 
 interface Props {
   sections: Section[];
@@ -10,8 +11,10 @@ interface Props {
 }
 
 const NewExercise = ({ sections, setWorkout }: Props) => {
+  const { data: muscles } = useMuscles();
   const {
-    selectInputRef,
+    selectInputRefMuscle,
+    selectInputRefSection,
     exercise: { exerciseName, exerciseDescription },
     errors,
     fileInputRefImage,
@@ -53,7 +56,7 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                 <select
                   className="form-select border-0"
                   onChange={handleChange}
-                  ref={selectInputRef}
+                  ref={selectInputRefSection}
                   id="sectionSelect"
                   name="sectionId"
                 >
@@ -66,6 +69,31 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                 </select>
                 {errors.sectionId && (
                   <p className="text-danger">{errors.sectionId}</p>
+                )}
+              </div>
+              <div className="form-group mb-3">
+                <label className="text-body-secondary" htmlFor="muscles">
+                  Alege partea corpului corespunzătoare
+                </label>
+                <select
+                  className="form-select border-0"
+                  onChange={handleChange}
+                  ref={selectInputRefMuscle}
+                  id="muscles"
+                  name="muscleSlug"
+                >
+                  <option value="">{"Alege din listă"}</option>
+                  {muscles?.result.map(
+                    (option, index) =>
+                      option.data().slug !== "" && (
+                        <option key={index} value={option.data().slug}>
+                          {option.data().name}
+                        </option>
+                      )
+                  )}
+                </select>
+                {errors.muscleSlug && (
+                  <p className="text-danger">{errors.muscleSlug}</p>
                 )}
               </div>
               <div className="form-group mb-3">
@@ -138,6 +166,7 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                       sectionId: "",
                       exerciseName: "",
                       exerciseDescription: "",
+                      muscleSlug: "",
                       image: "",
                       video: "",
                     });
@@ -156,8 +185,11 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                       fileInputRefVideo.current.setFiles([]);
                     }
 
-                    if (selectInputRef.current) {
-                      selectInputRef.current.value = "";
+                    if (selectInputRefMuscle.current) {
+                      selectInputRefMuscle.current.value = "";
+                    }
+                    if (selectInputRefSection.current) {
+                      selectInputRefSection.current.value = "";
                     }
                   }}
                 >
