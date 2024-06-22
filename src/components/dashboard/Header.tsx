@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 import logo from "/images/logo1.png";
+import { ReactNode } from "react";
 
-const Header = () => {
+const Header = ({ children }: { children?: ReactNode }) => {
   return (
-    <header className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <header className="navbar bg-dark flex-md-nowrap p-0 shadow">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           <img src={logo} className="img-fluid" style={{ height: "55px" }} />
@@ -23,6 +24,7 @@ const Header = () => {
             </button>
           </li>
         </ul>
+        {children}
       </div>
     </header>
   );
