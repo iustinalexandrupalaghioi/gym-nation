@@ -39,9 +39,6 @@ const WorkoutCard = ({ workout }: Props) => {
           >
             {title}
           </h4>
-          <h5 className="card-text fw-bold">
-            <span className="text-primary fw-bold">{price}</span> de lei
-          </h5>
         </div>
       </div>
     </div>

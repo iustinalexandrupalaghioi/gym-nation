@@ -13,7 +13,7 @@ const BlogPostsCategories = () => {
     <div className="col-12 col-md-6 col-lg-4">
       <select
         className="form-select border-0 shadow d-md-none"
-        id="categoriesFilter"
+        id="categorySelect"
         name="category"
         onChange={(event) => setCategory(event.target.value)}
       >
@@ -24,7 +24,10 @@ const BlogPostsCategories = () => {
         ))}
       </select>
 
-      <div className="card border-0 shadow d-none d-md-block" id="categories">
+      <div
+        className="card border-0 shadow d-none d-md-block"
+        id="categorySelect"
+      >
         <div className="card-header bg-primary text-light">
           <h4 className="card-title">Alege o categorie</h4>
         </div>
