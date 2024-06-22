@@ -1,5 +1,6 @@
 export default interface Exercise {
-  name: string;
+  sectionId: string;
+  exerciseName: string;
   exerciseDescription: string;
   nameSlug?: string;
   image?: File | null;

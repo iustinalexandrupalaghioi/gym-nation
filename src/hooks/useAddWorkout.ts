@@ -19,6 +19,7 @@ interface Errors {
   price: string;
   muscleSlug: string;
   image: string;
+  sections: string;
   exercises: string;
 }
 
@@ -34,6 +35,7 @@ const useAddWorkout = (
     price: "",
     muscleSlug: "",
     image: "",
+    sections: "",
     exercises: "",
   };
 
@@ -43,7 +45,7 @@ const useAddWorkout = (
   const [errors, setErrors] = useState<Errors>(initialErrorState);
 
   async function processWorkoutData(workout: Workout) {
-    const { title, workoutDescription, price, muscleSlug, image, exercises } =
+    const { title, workoutDescription, price, muscleSlug, image, sections } =
       workout;
     setErrors(initialErrorState);
 
@@ -86,13 +88,23 @@ const useAddWorkout = (
       hasError = true;
     }
 
-    if (exercises.length === 0) {
+    if (sections.length === 0) {
       setErrors((prev) => ({
         ...prev,
-        exercises: "Adăugați cel puțin un exercițiu.",
+        sections: "Adăugați cel puțin o secțiune cu exerciții.",
       }));
       hasError = true;
     }
+
+    sections.forEach((section) => {
+      if (section.exercises.length === 0) {
+        setErrors((prev) => ({
+          ...prev,
+          exercises: "Adăugați cel puțin un exercițiu pentru fiecare secțiune.",
+        }));
+        hasError = true;
+      }
+    });
 
     if (hasError) {
       return null;
@@ -113,7 +125,7 @@ const useAddWorkout = (
       titleSlug,
       muscleGroup,
       imageURL,
-      exercises,
+      sections,
     };
   }
 
@@ -128,7 +140,7 @@ const useAddWorkout = (
         price: "",
         muscleSlug: "",
         image: null,
-        exercises: [],
+        sections: [],
       });
       if (fileInputRefImage.current) {
         fileInputRefImage.current.setFiles([]);
@@ -177,11 +189,17 @@ const useAddWorkout = (
       if (data) {
         await postNewWorkout(data);
       }
-      if (errors.exercises != "")
+      if (errors.sections != "")
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          sections: "",
+        }));
+      if (errors.exercises != "") {
         setErrors((prevErrors) => ({
           ...prevErrors,
           exercises: "",
         }));
+      }
     } catch (error: any) {
       console.error(error.message);
     } finally {

@@ -27,10 +27,13 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   } = useAddWorkout(workout, setWorkout);
 
   useEffect(() => {
+    if (errors.sections) {
+      showToast(errors.sections, Method.Warning);
+    }
     if (errors.exercises) {
       showToast(errors.exercises, Method.Warning);
     }
-  }, [errors.exercises]);
+  }, [errors.sections, errors.exercises]);
 
   return (
     <div className="container-fluid px-md-4 py-md-5 p-0">
@@ -128,17 +131,27 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
           {errors.image && <p className="text-danger">{errors.image}</p>}
         </div>
 
-        <div className="buttons d-flex gap-2 justify-content-between">
-          <button
-            className="btn btn-primary align-self-start text-light d-inline-flex align-items-center"
-            data-bs-toggle="modal"
-            data-bs-target="#newExercise"
-            type="button"
-          >
-            <GrFormAdd size={"24px"} /> Exerciții
-          </button>
+        <div className="buttons d-flex flex-column flex-md-row gap-2 justify-content-between">
+          <div className="action-buttons d-flex flex-column flex-lg-row gap-2">
+            <button
+              className="btn btn-primary d-flex justify-content-center text-light align-items-center"
+              data-bs-toggle="modal"
+              data-bs-target="#newSection"
+              type="button"
+            >
+              <GrFormAdd size={"24px"} /> Secțiune nouă
+            </button>
+            <button
+              className="btn btn-primary d-flex justify-content-center text-light align-items-center"
+              data-bs-toggle="modal"
+              data-bs-target="#newExercise"
+              type="button"
+            >
+              <GrFormAdd size={"24px"} /> Adaugă Exerciții
+            </button>
+          </div>
 
-          <div className="action-buttons d-flex gap-2">
+          <div className="action-buttons d-flex gap-2 flex-column flex-lg-row">
             <button
               type="button"
               className="btn btn-outline-info"
@@ -149,7 +162,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                   price: "",
                   muscleSlug: "",
                   image: null,
-                  exercises: [],
+                  sections: [],
                 });
                 setErrors({
                   title: "",
@@ -157,8 +170,16 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                   price: "",
                   muscleSlug: "",
                   image: "",
+                  sections: "",
                   exercises: "",
                 });
+                if (fileInputRefImage.current) {
+                  fileInputRefImage.current.setFiles([]);
+                }
+
+                if (selectInputRef.current) {
+                  selectInputRef.current.value = "";
+                }
               }}
             >
               Anulează

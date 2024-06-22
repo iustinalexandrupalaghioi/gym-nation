@@ -1,15 +1,18 @@
 import { SetStateAction } from "react";
 import useAddExercise from "../../../hooks/useAddExercise";
-import Workout from "../../../entities/Workout";
+import Workout, { Section } from "../../../entities/Workout";
 import LoadingButton from "../../account/LoadingButton";
 import { FileUpload } from "primereact/fileupload";
 
 interface Props {
+  sections: Section[];
   setWorkout: React.Dispatch<SetStateAction<Workout>>;
 }
-const NewExercise = ({ setWorkout }: Props) => {
+
+const NewExercise = ({ sections, setWorkout }: Props) => {
   const {
-    exercise: { name, exerciseDescription },
+    selectInputRef,
+    exercise: { exerciseName, exerciseDescription },
     errors,
     fileInputRefImage,
     fileInputRefVideo,
@@ -44,6 +47,28 @@ const NewExercise = ({ setWorkout }: Props) => {
           <div className="modal-body bg-body-tertiary">
             <form onSubmit={handleSubmit}>
               <div className="form-group mb-3">
+                <label className="text-body-secondary" htmlFor="muscles">
+                  Alege secțiunea pentru care adaugi exerciții
+                </label>
+                <select
+                  className="form-select border-0"
+                  onChange={handleChange}
+                  ref={selectInputRef}
+                  id="sectionSelect"
+                  name="sectionId"
+                >
+                  <option value="">{"Alege din listă"}</option>
+                  {sections.map((option, index) => (
+                    <option key={index} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.sectionId && (
+                  <p className="text-danger">{errors.sectionId}</p>
+                )}
+              </div>
+              <div className="form-group mb-3">
                 <label className="text-body-secondary" htmlFor="exerciseName">
                   Introdu numele exercițiului
                 </label>
@@ -53,10 +78,12 @@ const NewExercise = ({ setWorkout }: Props) => {
                   name="exerciseName"
                   id="exerciseName"
                   onChange={handleChange}
-                  value={name}
+                  value={exerciseName}
                   placeholder="Ridicări laterale"
                 />
-                {errors.name && <p className="text-danger">{errors.name}</p>}
+                {errors.exerciseName && (
+                  <p className="text-danger">{errors.exerciseName}</p>
+                )}
               </div>
               <div className="form-group mb-3">
                 <label className="text-body-secondary" htmlFor="instructions">
@@ -92,7 +119,7 @@ const NewExercise = ({ setWorkout }: Props) => {
                 <FileUpload
                   className="btn btn-dark"
                   mode="basic"
-                  name="image"
+                  name="video"
                   accept="video/*"
                   chooseLabel="&nbsp;Încarcă un video"
                   onSelect={handleFileSelect}
@@ -108,19 +135,30 @@ const NewExercise = ({ setWorkout }: Props) => {
                   data-bs-dismiss="modal"
                   onClick={() => {
                     setErrors({
-                      name: "",
+                      sectionId: "",
+                      exerciseName: "",
                       exerciseDescription: "",
                       image: "",
                       video: "",
                     });
                     setExercise({
-                      name: "",
-                      nameSlug: "",
-                      video: null,
-                      videoLink: "",
-                      image: null,
+                      sectionId: "",
+                      exerciseName: "",
                       exerciseDescription: "",
+                      image: null,
+                      video: null,
                     });
+                    if (fileInputRefImage.current) {
+                      fileInputRefImage.current.setFiles([]);
+                    }
+
+                    if (fileInputRefVideo.current) {
+                      fileInputRefVideo.current.setFiles([]);
+                    }
+
+                    if (selectInputRef.current) {
+                      selectInputRef.current.value = "";
+                    }
                   }}
                 >
                   Anulează

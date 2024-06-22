@@ -13,7 +13,8 @@ import showToast, { Method } from "../utilities/showToast";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 
 interface Errors {
-  name: string;
+  sectionId: string;
+  exerciseName: string;
   exerciseDescription: string;
   image: string;
   video: string;
@@ -23,7 +24,8 @@ const useAddExercise = (
   setWorkout: React.Dispatch<SetStateAction<Workout>>
 ) => {
   const [exercise, setExercise] = useState<Exercise>({
-    name: "",
+    sectionId: "",
+    exerciseName: "",
     exerciseDescription: "",
     image: null,
     video: null,
@@ -32,7 +34,8 @@ const useAddExercise = (
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const initialErrorState: Errors = {
-    name: "",
+    sectionId: "",
+    exerciseName: "",
     exerciseDescription: "",
     image: "",
     video: "",
@@ -42,55 +45,56 @@ const useAddExercise = (
 
   const fileInputRefImage = useRef<FileUpload>(null);
   const fileInputRefVideo = useRef<FileUpload>(null);
+  const selectInputRef = useRef<HTMLSelectElement>(null);
 
   // state management for exercise form
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-
-    // set exercise name
-    if (name === "exerciseName") {
-      setExercise((prev) => ({ ...prev, name: value }));
-    }
-
-    // set exercise description
-    else if (name === "exerciseDescription") {
-      setExercise((prev) => ({ ...prev, exerciseDescription: value }));
-    }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
+
+    setExercise((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleFileSelect = (event: FileUploadSelectEvent) => {
-    if (fileInputRefImage.current) {
-      const files = event.files;
-      if (files && files.length > 0) {
-        setExercise((prev) => ({ ...prev, image: files[0] }));
+    const files = event.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (fileInputRefImage.current) {
+        setExercise((prev) => ({ ...prev, image: file }));
       }
-    }
-    if (fileInputRefVideo.current) {
-      const files = event.files;
-      if (files && files.length > 0) {
-        setExercise((prev) => ({ ...prev, video: files[0] }));
+      if (fileInputRefVideo.current) {
+        setExercise((prev) => ({ ...prev, video: file }));
       }
     }
   };
 
   const processExercise = async (exercise: Exercise) => {
-    const { name, exerciseDescription, image, video } = exercise;
+    const { sectionId, exerciseName, exerciseDescription, image, video } =
+      exercise;
 
     setErrors(initialErrorState);
 
     let hasError = false;
-
-    if (!name) {
+    if (!sectionId) {
       setErrors((prev) => ({
         ...prev,
-        name: "Numele exercițiului este obligatoriu.",
+        sectionId: "Selectează o secțiune.",
+      }));
+      hasError = true;
+    }
+
+    if (!exerciseName) {
+      setErrors((prev) => ({
+        ...prev,
+        exerciseName: "Numele exercițiului este obligatoriu.",
       }));
       hasError = true;
     }
@@ -121,13 +125,13 @@ const useAddExercise = (
 
     if (hasError) return null;
 
-    let imageURL = image && (await useGetFileURL(image, "workoutImages"));
-    let videoLink = video && (await useGetFileURL(video, "exerciseVideos"));
-    let nameSlug = slugify(name, { replacement: "-", lower: true });
+    const imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
+    const videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
+    const nameSlug = slugify(exerciseName, { replacement: "-", lower: true });
 
-    //return final exercise
     return {
-      name,
+      sectionId,
+      exerciseName,
       nameSlug,
       exerciseDescription,
       imageURL,
@@ -141,27 +145,46 @@ const useAddExercise = (
       event.preventDefault();
       const data = await processExercise(exercise);
       if (data) {
-        //set exercise for workout on submit
-        setWorkout((prev) => ({
-          ...prev,
-          exercises: [...prev.exercises, data],
-        }));
+        setWorkout((prev) => {
+          const sectionIndex = prev.sections.findIndex(
+            (s) => s.id === Number(data.sectionId)
+          );
+          console.log(sectionIndex);
 
-        // clear state for exercise form
-        setExercise({
-          name: "",
-          exerciseDescription: "",
-          image: null,
-          video: null,
+          if (sectionIndex === -1) {
+            return prev;
+          }
+
+          const newSections = [...prev.sections];
+          newSections[sectionIndex] = {
+            ...newSections[sectionIndex],
+            exercises: [...newSections[sectionIndex].exercises, data],
+          };
+
+          setExercise({
+            sectionId: "",
+            exerciseName: "",
+            exerciseDescription: "",
+            image: null,
+            video: null,
+          });
+
+          if (fileInputRefImage.current) {
+            fileInputRefImage.current.setFiles([]);
+          }
+
+          if (fileInputRefVideo.current) {
+            fileInputRefVideo.current.setFiles([]);
+          }
+
+          if (selectInputRef.current) {
+            selectInputRef.current.value = "";
+          }
+          return {
+            ...prev,
+            sections: newSections,
+          };
         });
-
-        if (fileInputRefImage.current) {
-          fileInputRefImage.current.setFiles([]);
-        }
-
-        if (fileInputRefVideo.current) {
-          fileInputRefVideo.current.setFiles([]);
-        }
 
         showToast("Exercițiul a fost adăugat cu succes!", Method.Success);
       }
@@ -173,6 +196,7 @@ const useAddExercise = (
   };
 
   return {
+    selectInputRef,
     exercise,
     errors,
     fileInputRefImage,
