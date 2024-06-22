@@ -8,7 +8,6 @@ export interface Section {
 export default interface Workout {
   title: string;
   workoutDescription: string;
-  price: string;
   image: File | null;
   sections: Section[];
 }

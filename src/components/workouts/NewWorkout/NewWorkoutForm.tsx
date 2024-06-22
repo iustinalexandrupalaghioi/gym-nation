@@ -13,7 +13,7 @@ interface Props {
 
 const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
   const {
-    workout: { title, workoutDescription, price },
+    workout: { title, workoutDescription },
     errors,
     fileInputRefImage,
     selectInputRef,
@@ -74,22 +74,6 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         </div>
 
         <div className="form-group mb-3">
-          <label className="text-body-secondary" htmlFor="price">
-            Prețul antrenamentului (lei)
-          </label>
-          <input
-            id="price"
-            type="number"
-            name="price"
-            className="form-control border-0"
-            placeholder="ex: 255"
-            value={price}
-            onChange={handleChange}
-          />
-          {errors.price && <p className="text-danger">{errors.price}</p>}
-        </div>
-
-        <div className="form-group mb-3">
           <FileUpload
             className="btn btn-dark"
             mode="basic"
@@ -131,14 +115,12 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
                 setWorkout({
                   title: "",
                   workoutDescription: "",
-                  price: "",
                   image: null,
                   sections: [],
                 });
                 setErrors({
                   title: "",
                   workoutDescription: "",
-                  price: "",
                   image: "",
                   sections: "",
                   exercises: "",

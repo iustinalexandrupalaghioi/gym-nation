@@ -9,7 +9,8 @@ const ExerciseContent = ({ workout }: Props) => {
   const { exercise: activeExercise } = useExerciseQueryStore(
     (s) => s.exerciseQuery
   );
-  const { name, videoLink, exerciseDescription } = activeExercise;
+  const { exerciseName, videoLink, exerciseDescription, muscleGroup } =
+    activeExercise;
   const { title, workoutDescription } = workout?.data()!;
 
   return (
@@ -28,9 +29,13 @@ const ExerciseContent = ({ workout }: Props) => {
       <div className="row py-2">
         <h5>
           Instrucțiuni pentru exercițiul{" "}
-          <span className="text-primary">{name}</span>:
+          <span className="text-primary">{exerciseName}</span>:
         </h5>
         <p className="text-body-secondary">{exerciseDescription}</p>
+        <p className="text-body-secondary">
+          Grupa de mușchi vizată:{" "}
+          <span className="text-primary">{muscleGroup?.name}</span>
+        </p>
       </div>
     </main>
   );

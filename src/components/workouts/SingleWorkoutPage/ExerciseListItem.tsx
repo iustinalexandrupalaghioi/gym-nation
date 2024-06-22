@@ -21,7 +21,7 @@ const ExerciseListItem = ({ exercise }: Props) => {
           : "text-body-secondary"
       }`}
     >
-      {exercise.name}
+      {exercise.exerciseName}
     </li>
   );
 };

@@ -37,7 +37,11 @@ const Sidebar = ({ pathname }: Props) => {
               </NavItem>
             </li>
 
-            <CollapseMenuItem menuId="blogMenu" menuTitle="Blog">
+            <CollapseMenuItem
+              styleClass="nav-item"
+              menuId="blogMenu"
+              menuTitle="Blog"
+            >
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
                 Adaugă Articol
               </NavItem>

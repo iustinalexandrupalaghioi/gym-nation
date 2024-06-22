@@ -22,11 +22,9 @@ const WorkoutExercise = ({ children }: Props) => {
           ></button>
         </div>
 
-        <div className="offcanvas-body d-md-flex flex-column overflow-y-auto p-0">
-          <ul className="nav flex-column list-group list-group-actions rounded-0">
-            {children}
-          </ul>
-        </div>
+        <ul className="offcanvas-body p-0 d-md-flex flex-column overflow-y-auto">
+          {children}
+        </ul>
       </div>
     </div>
   );

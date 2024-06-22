@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
-import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
-import WorkoutExercise from "../../components/workouts/SingleWorkoutPage/WorkoutExercise";
 import Exercise from "../../entities/Exercise";
 import useWorkout from "../../hooks/useWorkout";
 import useExerciseQueryStore from "../../stores/exerciseQueryStore";
@@ -10,17 +8,20 @@ import ErrorPage from "./ErrorPage";
 import useUserStatusStore from "../../stores/userStore";
 import LoadingStatus from "../../components/LoadingStatus";
 import Header from "../../components/dashboard/Header";
+import WorkoutExercise from "../../components/workouts/SingleWorkoutPage/WorkoutExercise";
+import CollapseMenuItem from "../../components/dashboard/CollapseMenuItem";
+import { Section } from "../../entities/Workout";
+import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();
   const { data: workouts, error, isLoading } = useWorkout("titleSlug", slug!);
-  const exercises: Exercise[] = workouts?.result?.[0].data().exercises;
+  const sections: Section[] = workouts?.result?.[0].data().sections;
   const workout = workouts?.result?.[0];
   const setExercise = useExerciseQueryStore((s) => s.setExercise);
   const {
     userStatus: { isPremium, isAdmin },
   } = useUserStatusStore();
-  console.log(isAdmin);
 
   //scroll to top
   useEffect(() => {
@@ -30,7 +31,7 @@ const SingleWorkoutPage = () => {
   //set first exercise to be active
   useEffect(() => {
     if (workouts && workouts.result && workouts.result.length > 0) {
-      const firstExercise: Exercise = workouts.result[0].data().exercises[0];
+      const firstExercise: Exercise = sections[0].exercises[0];
       firstExercise && setExercise(firstExercise);
     }
   }, [workouts]);
@@ -46,8 +47,22 @@ const SingleWorkoutPage = () => {
         ) : (
           <div className="row w-100">
             <WorkoutExercise>
-              {exercises.map((exercise: Exercise) => (
-                <ExerciseListItem exercise={exercise} key={exercise.name} />
+              {sections.map((section) => (
+                <CollapseMenuItem
+                  key={section.id}
+                  styleClass="p-2"
+                  menuId={`section-${section.id}`}
+                  menuTitle={section.name}
+                >
+                  <ul className="list-group list-group-actions rounded-0">
+                    {section.exercises.map((exercise: Exercise) => (
+                      <ExerciseListItem
+                        key={exercise.nameSlug}
+                        exercise={exercise}
+                      />
+                    ))}
+                  </ul>
+                </CollapseMenuItem>
               ))}
             </WorkoutExercise>
             <ExerciseContent workout={workout} />

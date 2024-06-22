@@ -15,7 +15,6 @@ import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 interface Errors {
   title: string;
   workoutDescription: string;
-  price: string;
   image: string;
   sections: string;
   exercises: string;
@@ -29,7 +28,6 @@ const useAddWorkout = (
   const initialErrorState = {
     title: "",
     workoutDescription: "",
-    price: "",
     image: "",
     sections: "",
     exercises: "",
@@ -41,7 +39,7 @@ const useAddWorkout = (
   const [errors, setErrors] = useState<Errors>(initialErrorState);
 
   async function processWorkoutData(workout: Workout) {
-    const { title, workoutDescription, price, image, sections } = workout;
+    const { title, workoutDescription, image, sections } = workout;
     setErrors(initialErrorState);
 
     let hasError = false;
@@ -55,14 +53,6 @@ const useAddWorkout = (
       setErrors((prev) => ({
         ...prev,
         workoutDescription: "Descrierea antrenamentului este obligatorie.",
-      }));
-      hasError = true;
-    }
-
-    if (!price || isNaN(Number(price)) || Number(price) <= 0) {
-      setErrors((prev) => ({
-        ...prev,
-        price: "Prețul trebuie să fie un număr mai mare decât 0.",
       }));
       hasError = true;
     }
@@ -103,9 +93,7 @@ const useAddWorkout = (
     return {
       title,
       workoutDescription,
-      price,
       titleSlug,
-
       imageURL,
       sections,
     };
@@ -119,7 +107,6 @@ const useAddWorkout = (
       setWorkout({
         title: "",
         workoutDescription: "",
-        price: "",
         image: null,
         sections: [],
       });

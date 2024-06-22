@@ -5,15 +5,21 @@ interface Props {
   menuTitle: string;
   menuId: string;
   children: ReactNode;
+  styleClass?: string;
 }
-const CollapseMenuItem = ({ menuTitle, menuId, children }: Props) => {
-  const [expanded, setExpand] = useState<boolean>(false);
+const CollapseMenuItem = ({
+  menuTitle,
+  menuId,
+  styleClass,
+  children,
+}: Props) => {
+  const [expanded, setExpand] = useState<boolean>(true);
 
   return (
     <li className="nav-item">
       <div className="p-0 d-flex flex-column">
         <button
-          className="bg-body-tertiary border-0 d-flex flex-row justify-content-between text-sm-start align-items-center gap-1"
+          className={`bg-body-tertiary border-0 d-flex flex-row justify-content-between text-sm-start align-items-center gap-1 ${styleClass}`}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target={`#${menuId}`}
@@ -38,7 +44,10 @@ const CollapseMenuItem = ({ menuTitle, menuId, children }: Props) => {
             </p>
           )}
         </button>
-        <div className="collapse collapse-vertical" id={menuId}>
+        <div
+          className={`collapse fade collapse-vertical ${expanded && "show"}`}
+          id={menuId}
+        >
           {children}
         </div>
       </div>
