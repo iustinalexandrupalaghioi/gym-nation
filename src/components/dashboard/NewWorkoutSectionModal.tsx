@@ -117,8 +117,6 @@ const NewWorkoutSectionModal = ({ numberOfSections, setWorkout }: Props) => {
                       setWorkout({
                         title: "",
                         workoutDescription: "",
-                        price: "",
-                        muscleSlug: "",
                         image: null,
                         sections: [],
                       });

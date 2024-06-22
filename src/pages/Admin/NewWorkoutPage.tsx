@@ -9,8 +9,6 @@ const NewWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({
     title: "",
     workoutDescription: "",
-    price: "",
-    muscleSlug: "",
     image: null,
     sections: [],
   });
