@@ -10,7 +10,7 @@ const WorkoutsPage = () => {
   if (error) return <ErrorPage />;
 
   return (
-    <div className="container px-4 py-5">
+    <div className="container px-4 py-5 min-vh-100">
       <ToastAlert />
       <h1 className="border-bottom pb-2 text-center">
         Antrenează-te ca un <span className="text-primary">profesionist</span>
