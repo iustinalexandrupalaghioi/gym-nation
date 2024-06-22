@@ -90,7 +90,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
         <div className="buttons d-flex flex-column flex-md-row gap-2 justify-content-between">
           <div className="action-buttons d-flex flex-column flex-lg-row gap-2">
             <button
-              className="btn btn-primary d-flex justify-content-center text-light align-items-center"
+              className="btn btn-outline-primary btnOutline d-flex justify-content-center text-light align-items-center"
               data-bs-toggle="modal"
               data-bs-target="#newSection"
               type="button"
@@ -98,7 +98,7 @@ const NewWorkoutForm = ({ workout, setWorkout }: Props) => {
               <GrFormAdd size={"24px"} /> Secțiune nouă
             </button>
             <button
-              className="btn btn-primary d-flex justify-content-center text-light align-items-center"
+              className="btn btn-outline-primary btnOutline btn-primary d-flex justify-content-center text-light align-items-center"
               data-bs-toggle="modal"
               data-bs-target="#newExercise"
               type="button"
