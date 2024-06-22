@@ -6,14 +6,18 @@ interface Props {
   menuId: string;
   children: ReactNode;
   styleClass?: string;
+  isExpanded?: boolean;
 }
 const CollapseMenuItem = ({
   menuTitle,
   menuId,
+  isExpanded,
   styleClass,
   children,
 }: Props) => {
-  const [expanded, setExpand] = useState<boolean>(true);
+  const [expanded, setExpand] = useState<boolean>(
+    isExpanded ? isExpanded : false
+  );
 
   return (
     <li className="nav-item">

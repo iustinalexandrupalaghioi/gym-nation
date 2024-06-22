@@ -53,6 +53,7 @@ const SingleWorkoutPage = () => {
                   styleClass="p-2"
                   menuId={`section-${section.id}`}
                   menuTitle={section.name}
+                  isExpanded={true}
                 >
                   <ul className="list-group list-group-actions rounded-0">
                     {section.exercises.map((exercise: Exercise) => (
