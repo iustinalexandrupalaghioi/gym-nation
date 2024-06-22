@@ -12,7 +12,7 @@ const BlogPostsCategories = () => {
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <select
-        className="form-select border-0 d-md-none"
+        className="form-select border-0 shadow d-md-none"
         id="categoriesFilter"
         name="category"
         onChange={(event) => setCategory(event.target.value)}
