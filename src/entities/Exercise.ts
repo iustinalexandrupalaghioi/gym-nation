@@ -7,8 +7,6 @@ export default interface Exercise {
   nameSlug?: string;
   muscleSlug?: string;
   muscleGroup?: DocumentData;
-  image?: File | null;
-  imageURL?: string | null | undefined;
   video?: File | null;
   videoLink?: string | null | undefined;
 }

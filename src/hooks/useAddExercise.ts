@@ -19,7 +19,6 @@ interface Errors {
   muscleSlug: string;
   exerciseName: string;
   exerciseDescription: string;
-  image: string;
   video: string;
 }
 
@@ -32,7 +31,6 @@ const useAddExercise = (
     exerciseName: "",
     exerciseDescription: "",
     muscleSlug: "",
-    image: null,
     video: null,
   });
 
@@ -43,13 +41,11 @@ const useAddExercise = (
     muscleSlug: "",
     exerciseName: "",
     exerciseDescription: "",
-    image: "",
     video: "",
   };
 
   const [errors, setErrors] = useState<Errors>(initialErrorState);
 
-  const fileInputRefImage = useRef<FileUpload>(null);
   const fileInputRefVideo = useRef<FileUpload>(null);
   const selectInputRefSection = useRef<HTMLSelectElement>(null);
   const selectInputRefMuscle = useRef<HTMLSelectElement>(null);
@@ -74,9 +70,6 @@ const useAddExercise = (
     const files = event.files;
     if (files && files.length > 0) {
       const file = files[0];
-      if (fileInputRefImage.current) {
-        setExercise((prev) => ({ ...prev, image: file }));
-      }
       if (fileInputRefVideo.current) {
         setExercise((prev) => ({ ...prev, video: file }));
       }
@@ -84,14 +77,8 @@ const useAddExercise = (
   };
 
   const processExercise = async (exercise: Exercise) => {
-    const {
-      sectionId,
-      muscleSlug,
-      exerciseName,
-      exerciseDescription,
-      image,
-      video,
-    } = exercise;
+    const { sectionId, muscleSlug, exerciseName, exerciseDescription, video } =
+      exercise;
 
     setErrors(initialErrorState);
 
@@ -127,14 +114,6 @@ const useAddExercise = (
       hasError = true;
     }
 
-    if (!image) {
-      setErrors((prev) => ({
-        ...prev,
-        image: "Este obligatorie adăugarea unei imagini.",
-      }));
-      hasError = true;
-    }
-
     if (!video) {
       setErrors((prev) => ({
         ...prev,
@@ -145,7 +124,6 @@ const useAddExercise = (
 
     if (hasError) return null;
 
-    const imageURL = image ? await useGetFileURL(image, "workoutImages") : "";
     const videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     const nameSlug = slugify(exerciseName, { replacement: "-", lower: true });
     const muscleDoc = muscleSlug
@@ -158,7 +136,6 @@ const useAddExercise = (
       exerciseName,
       nameSlug,
       exerciseDescription,
-      imageURL,
       videoLink,
     };
   };
@@ -189,13 +166,8 @@ const useAddExercise = (
             exerciseName: "",
             muscleSlug: "",
             exerciseDescription: "",
-            image: null,
             video: null,
           });
-
-          if (fileInputRefImage.current) {
-            fileInputRefImage.current.setFiles([]);
-          }
 
           if (fileInputRefVideo.current) {
             fileInputRefVideo.current.setFiles([]);
@@ -228,7 +200,6 @@ const useAddExercise = (
     selectInputRefSection,
     exercise,
     errors,
-    fileInputRefImage,
     fileInputRefVideo,
     isLoading,
     handleChange,

@@ -17,7 +17,6 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
     selectInputRefSection,
     exercise: { exerciseName, exerciseDescription },
     errors,
-    fileInputRefImage,
     fileInputRefVideo,
     handleFileSelect,
     handleChange,
@@ -130,19 +129,7 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                   <p className="text-danger">{errors.exerciseDescription}</p>
                 )}
               </div>
-              <div className="form-group mb-3">
-                <FileUpload
-                  className="btn btn-dark"
-                  mode="basic"
-                  name="image"
-                  accept="image/*"
-                  maxFileSize={1000000}
-                  chooseLabel="&nbsp;Încarcă o imagine"
-                  onSelect={handleFileSelect}
-                  ref={fileInputRefImage}
-                />
-                {errors.image && <p className="text-danger">{errors.image}</p>}
-              </div>
+
               <div className="form-group mb-3">
                 <FileUpload
                   className="btn btn-dark"
@@ -167,19 +154,16 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                       exerciseName: "",
                       exerciseDescription: "",
                       muscleSlug: "",
-                      image: "",
+
                       video: "",
                     });
                     setExercise({
                       sectionId: "",
                       exerciseName: "",
                       exerciseDescription: "",
-                      image: null,
+
                       video: null,
                     });
-                    if (fileInputRefImage.current) {
-                      fileInputRefImage.current.setFiles([]);
-                    }
 
                     if (fileInputRefVideo.current) {
                       fileInputRefVideo.current.setFiles([]);
