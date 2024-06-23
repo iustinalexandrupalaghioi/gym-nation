@@ -1,10 +1,10 @@
 import PageContent from "../../components/dashboard/PageContent";
-import Table from "../../components/dashboard/Table";
+import CustomersTable from "../../components/dashboard/CustomersTable";
 
 const CustomersPage = () => {
   return (
     <PageContent pageTitle="Clienți">
-      <Table />
+      <CustomersTable />
     </PageContent>
   );
 };

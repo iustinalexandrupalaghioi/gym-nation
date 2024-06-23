@@ -7,7 +7,7 @@ const firebaseClient = new FirebaseClient("/categories");
 const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
-    queryFn: () => firebaseClient.get(),
+    queryFn: () => firebaseClient.get(undefined, undefined, "name"),
     staleTime: ms("24h"),
   });
 };

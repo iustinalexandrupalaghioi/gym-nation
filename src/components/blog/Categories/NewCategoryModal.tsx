@@ -20,7 +20,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const firebaseClient = new FirebaseClient("/categories");
-const NewCategoryModal = () => {
+
+interface Props {
+  styleClass?: string;
+}
+const NewCategoryModal = ({ styleClass }: Props) => {
   const [isActive, setActive] = useState(false);
 
   const {
@@ -57,6 +61,7 @@ const NewCategoryModal = () => {
       <ToggleModalButton
         isActive={isActive}
         setActive={setActive}
+        styleClass={styleClass}
         textContent="Adaugă Categorie"
         modalId="newCategoryModal"
       />

@@ -18,8 +18,11 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+interface Props {
+  styleClass?: string;
+}
 const firebaseClient = new FirebaseClient("/muscles");
-const NewGroupModal = () => {
+const NewGroupModal = ({ styleClass }: Props) => {
   const [isActive, setActive] = useState(false);
 
   const {
@@ -54,6 +57,7 @@ const NewGroupModal = () => {
         setActive={setActive}
         textContent="Adaugă Grupă Musculară"
         modalId="newGroupModal"
+        styleClass={styleClass}
       />
 
       <Modal

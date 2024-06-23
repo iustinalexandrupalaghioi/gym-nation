@@ -8,6 +8,8 @@ import {
   getCountFromServer,
   setDoc,
   doc,
+  deleteDoc,
+  orderBy,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../firebase-config";
@@ -18,16 +20,19 @@ class FirebaseClient {
     this.endpoint = endpoint;
   }
 
-  get = async (field?: string, id?: string) => {
-    const queryString =
+  get = async (field?: string, id?: string, orderByField?: string) => {
+    let baseQuery =
       field && id
         ? query(collection(db, this.endpoint), where(field, "==", id))
+        : orderByField
+        ? query(collection(db, this.endpoint), orderBy(orderByField))
         : query(collection(db, this.endpoint));
 
-    const res = await getDocs(queryString);
-    const result = res.docs;
+    const querySnapshot = await getDocs(baseQuery);
 
-    const snapshot = await getCountFromServer(queryString);
+    const result = querySnapshot.docs;
+
+    const snapshot = await getCountFromServer(baseQuery);
     const count = snapshot.data().count;
 
     return { result, count };
@@ -38,6 +43,16 @@ class FirebaseClient {
       await setDoc(doc(db, this.endpoint, customId), data);
     } else {
       await addDoc(collection(db, this.endpoint), data);
+    }
+  };
+
+  delete = async (documentId: string): Promise<boolean> => {
+    try {
+      const docRef = doc(db, this.endpoint, documentId);
+      await deleteDoc(docRef);
+      return true; // Indicates successful deletion
+    } catch (error) {
+      return false; // Indicates deletion failure
     }
   };
 

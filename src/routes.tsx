@@ -14,6 +14,8 @@ import AdminLayout from "./pages/Admin/AdminLayout";
 import Home from "./pages/Admin/Home";
 import CustomersPage from "./pages/Admin/CustomersPage";
 import RegisterPage from "./pages/RegisterPage";
+import CategoriesPage from "./pages/Admin/CategoriesPage";
+import GroupMusclePage from "./pages/Admin/GroupMusclePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -29,7 +31,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
+      { path: "/admin/blog/categories", element: <CategoriesPage /> },
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
+      { path: "/admin/workouts/muscles", element: <GroupMusclePage /> },
       { path: "/admin/customers", element: <CustomersPage /> },
     ],
   },

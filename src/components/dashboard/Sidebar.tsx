@@ -45,11 +45,17 @@ const Sidebar = ({ pathname }: Props) => {
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
                 Adaugă Articol
               </NavItem>
+              <NavItem pathname={pathname} targetPath="/admin/blog/categories">
+                Vizualizare Categorii
+              </NavItem>
               <NewCategoryModal />
             </CollapseMenuItem>
             <CollapseMenuItem menuId="workoutMenu" menuTitle="Antrenamente">
               <NavItem pathname={pathname} targetPath="/admin/workouts/new">
                 Adaugă Antrenament
+              </NavItem>
+              <NavItem pathname={pathname} targetPath="/admin/workouts/muscles">
+                Vizualizare Grupe Musculare
               </NavItem>
               <NewGroupModal />
             </CollapseMenuItem>

@@ -1,13 +1,4 @@
-import useCustomersSubcription from "../../hooks/useCustomersSubscriptions";
-import LoadingStatus from "../LoadingStatus";
-
-const CustomersTable = () => {
-  const { data: customers, isLoading } = useCustomersSubcription();
-
-  if (isLoading) {
-    return <LoadingStatus />;
-  }
-
+const Table = () => {
   return (
     <table className="table">
       <thead>
@@ -19,25 +10,15 @@ const CustomersTable = () => {
         </tr>
       </thead>
       <tbody>
-        {customers?.map((customer) => (
-          <tr key={customer.id}>
-            <td className="text-body-secondary">{customer.id}</td>
-            <td className="text-body-secondary">{customer.data.email}</td>
-            <td className="text-body-secondary">
-              {customer.subscriptions && customer.subscriptions.length > 0
-                ? "Da"
-                : "Nu"}
-            </td>
-            <td className="text-primary">
-              {customer.subscriptions &&
-                customer.subscriptions.length > 0 &&
-                customer.subscriptions[0].subscriptionStatus}
-            </td>
-          </tr>
-        ))}
+        <tr>
+          <td className="text-body-secondary"></td>
+          <td className="text-body-secondary"></td>
+          <td className="text-body-secondary"></td>
+          <td className="text-primary"></td>
+        </tr>
       </tbody>
     </table>
   );
 };
 
-export default CustomersTable;
+export default Table;
