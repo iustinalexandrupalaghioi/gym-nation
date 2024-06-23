@@ -26,36 +26,42 @@ const CategoriesPage = () => {
           </tr>
         </thead>
         <tbody>
-          {categories?.result.map((category, index) => (
-            <tr>
-              <td>{index + 1}</td>
-              <td>{category.data().name}</td>
-              <td className="d-inline-flex gap-2">
-                <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5">
-                  <MdEdit />
-                </button>
-                <button
-                  onClick={async () => {
-                    const result = await firebaseClient.delete(category.id);
-                    if (result) {
-                      await queryClient.invalidateQueries({
-                        queryKey: ["categories"],
-                      });
-                      showToast("Categorie ștearsă cu succes!", Method.Success);
-                    } else {
-                      showToast(
-                        "Nu s-a putut efectua acțiunea de ștergere.",
-                        Method.Error
-                      );
-                    }
-                  }}
-                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
-                >
-                  <MdDeleteForever />
-                </button>
-              </td>
-            </tr>
-          ))}
+          {categories?.result.map(
+            (category, index) =>
+              category.data().slug && (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{category.data().name}</td>
+                  <td className="d-inline-flex gap-2">
+                    <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5">
+                      <MdEdit />
+                    </button>
+                    <button
+                      onClick={async () => {
+                        const result = await firebaseClient.delete(category.id);
+                        if (result) {
+                          await queryClient.invalidateQueries({
+                            queryKey: ["categories"],
+                          });
+                          showToast(
+                            "Categorie ștearsă cu succes!",
+                            Method.Success
+                          );
+                        } else {
+                          showToast(
+                            "Nu s-a putut efectua acțiunea de ștergere.",
+                            Method.Error
+                          );
+                        }
+                      }}
+                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </td>
+                </tr>
+              )
+          )}
         </tbody>
       </table>
     </PageContent>

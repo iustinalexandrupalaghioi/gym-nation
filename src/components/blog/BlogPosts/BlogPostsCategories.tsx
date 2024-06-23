@@ -6,6 +6,7 @@ import CategoryListItem from "./CategoryListItem";
 const BlogPostsCategories = () => {
   const { data: categories, error, isLoading } = useCategories();
   const setCategory = useBlogQueryStore((s) => s.setCategory);
+  const allCategoriesDoc = categories?.result.find((c) => c.data().slug === "");
   if (error) return null;
   if (isLoading) return <BlogCategoriesSkeleton />;
 
@@ -29,9 +30,11 @@ const BlogPostsCategories = () => {
         </div>
         <div className="card-body p-0">
           <ul className="list-group">
-            {categories?.result.map((doc) => (
-              <CategoryListItem key={doc.id} doc={doc} />
-            ))}
+            <CategoryListItem doc={allCategoriesDoc!} />
+            {categories?.result.map(
+              (doc) =>
+                doc.data().slug && <CategoryListItem key={doc.id} doc={doc} />
+            )}
           </ul>
         </div>
       </div>

@@ -41,7 +41,10 @@ const GroupMusclePage = () => {
                       await queryClient.invalidateQueries({
                         queryKey: ["muscles"],
                       });
-                      showToast("Categorie ștearsă cu succes!", Method.Success);
+                      showToast(
+                        "Grupă musculară ștearsă cu succes!",
+                        Method.Success
+                      );
                     } else {
                       showToast(
                         "Nu s-a putut efectua acțiunea de ștergere.",
