@@ -6,7 +6,7 @@ export enum Method {
 }
 const showToast = (
   message: string,
-  method: string,
+  method: Method,
   onClose?: (props?: any) => void
 ) => {
   const options: ToastOptions = {

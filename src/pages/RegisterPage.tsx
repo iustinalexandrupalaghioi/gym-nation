@@ -37,12 +37,11 @@ const RegisterPage = () => {
   const onSubmit = async (data: FieldValues) => {
     try {
       let { name, email, password } = data;
-      const userCredential = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const user = userCredential.user;
       await updateProfile(user, {
         displayName: `${name.fname} ${name.lname}`,
       });
