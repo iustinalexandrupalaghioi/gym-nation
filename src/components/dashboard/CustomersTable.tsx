@@ -23,7 +23,7 @@ const CustomersTable = () => {
           <tr key={customer.id}>
             <td className="text-body-secondary">{customer.id}</td>
             <td className="text-body-secondary">{customer.data.email}</td>
-            <td className="text-body-secondary">
+            <td>
               {customer.subscriptions && customer.subscriptions.length > 0
                 ? "Da"
                 : "Nu"}

@@ -16,6 +16,7 @@ import CustomersPage from "./pages/Admin/CustomersPage";
 import RegisterPage from "./pages/RegisterPage";
 import CategoriesPage from "./pages/Admin/CategoriesPage";
 import GroupMusclePage from "./pages/Admin/GroupMusclePage";
+import { BlogArticlesPage } from "./pages/Admin/BlogArticlesPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "/admin/blog", element: <BlogArticlesPage /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
       { path: "/admin/blog/categories", element: <CategoriesPage /> },
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },

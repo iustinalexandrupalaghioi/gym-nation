@@ -3,7 +3,7 @@ import ms from "ms";
 import FirebaseClient from "../utilities/firebase-client";
 
 const firebaseClient = new FirebaseClient("/posts");
-const useFetchPostsNumber = (slug: string) => {
+const useFetchPostsNumber = (slug?: string) => {
   return useQuery({
     queryKey: ["postsNumber", slug],
     queryFn: () => {

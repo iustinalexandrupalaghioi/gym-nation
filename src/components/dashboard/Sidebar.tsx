@@ -42,6 +42,9 @@ const Sidebar = ({ pathname }: Props) => {
               menuId="blogMenu"
               menuTitle="Blog"
             >
+              <NavItem pathname={pathname} targetPath="/admin/blog">
+                Vizualizare Articole
+              </NavItem>
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
                 Adaugă Articol
               </NavItem>

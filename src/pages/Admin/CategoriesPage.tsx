@@ -29,8 +29,8 @@ const CategoriesPage = () => {
           {categories?.result.map(
             (category, index) =>
               category.data().slug && (
-                <tr>
-                  <td>{index + 1}</td>
+                <tr key={category.id}>
+                  <td className="text-body-secondary">{index + 1}</td>
                   <td>{category.data().name}</td>
                   <td className="d-inline-flex gap-2">
                     <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5">

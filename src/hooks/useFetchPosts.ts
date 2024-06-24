@@ -5,11 +5,14 @@ import FirebaseClient from "../utilities/firebase-client";
 
 const firebaseClient = new FirebaseClient("/posts");
 
-const useFetchPosts = () => {
+const useFetchPosts = (orderByField?: string) => {
   const blogQuery = useBlogQueryStore((s) => s.blogQuery);
   return useQuery({
     queryKey: ["posts", blogQuery],
-    queryFn: () => firebaseClient.get(),
+    queryFn: () =>
+      blogQuery.category
+        ? firebaseClient.get("category.slug", blogQuery.category, orderByField)
+        : firebaseClient.get(undefined, undefined, orderByField),
     staleTime: ms("24h"),
   });
 };
