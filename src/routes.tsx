@@ -17,6 +17,7 @@ import RegisterPage from "./pages/RegisterPage";
 import CategoriesPage from "./pages/Admin/CategoriesPage";
 import GroupMusclePage from "./pages/Admin/GroupMusclePage";
 import { BlogArticlesPage } from "./pages/Admin/BlogArticlesPage";
+import AdminWorkoutsPage from "./pages/Admin/AdminWorkoutsPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "/admin/blog", element: <BlogArticlesPage /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
       { path: "/admin/blog/categories", element: <CategoriesPage /> },
+      { path: "/admin/workouts", element: <AdminWorkoutsPage /> },
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
       { path: "/admin/workouts/muscles", element: <GroupMusclePage /> },
       { path: "/admin/customers", element: <CustomersPage /> },

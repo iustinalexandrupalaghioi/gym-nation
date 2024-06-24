@@ -15,6 +15,9 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../firebase-config";
 
 class FirebaseClient {
+  static delete(id: any) {
+    throw new Error("Method not implemented.");
+  }
   endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
