@@ -4,7 +4,6 @@ import ErrorPage from "../Client/ErrorPage";
 import LoadingStatus from "../../components/LoadingStatus";
 import NewCategoryModal from "../../components/blog/Categories/NewCategoryModal";
 import { MdDeleteForever } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
 import FirebaseClient from "../../utilities/firebase-client";
 import showToast, { Method } from "../../utilities/showToast";
 import { queryClient } from "../../main";
@@ -33,9 +32,6 @@ const CategoriesPage = () => {
                   <td className="text-body-secondary">{index + 1}</td>
                   <td>{category.data().name}</td>
                   <td className="d-inline-flex gap-2">
-                    <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5">
-                      <MdEdit />
-                    </button>
                     <button
                       onClick={async () => {
                         const result = await firebaseClient.delete(category.id);

@@ -2,7 +2,7 @@ import useMuscles from "../../hooks/useMuscles";
 import ErrorPage from "../Client/ErrorPage";
 import LoadingStatus from "../../components/LoadingStatus";
 import PageContent from "../../components/dashboard/PageContent";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import { queryClient } from "../../main";
 import showToast, { Method } from "../../utilities/showToast";
 import FirebaseClient from "../../utilities/firebase-client";
@@ -31,9 +31,6 @@ const GroupMusclePage = () => {
               <td>{index + 1}</td>
               <td>{group.data().name}</td>
               <td className="d-inline-flex gap-2">
-                <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5">
-                  <MdEdit />
-                </button>
                 <button
                   onClick={async () => {
                     const result = await firebaseClient.delete(group.id);
