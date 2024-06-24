@@ -1,8 +1,8 @@
 import SignOutButton from "../account/SignOutButton";
 import NewCategoryModal from "../blog/Categories/NewCategoryModal";
-import NewGroupModal from "../workouts/NewWorkout/NewGroupModal";
 import CollapseMenuItem from "./CollapseMenuItem";
 import NavItem from "./NavItem";
+import NewGroupModal from "./NewGroupModal";
 
 interface Props {
   pathname: string;

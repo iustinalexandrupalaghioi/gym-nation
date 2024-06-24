@@ -21,7 +21,12 @@ const fetchCustomersWithSubscriptions = async () => {
           subscriptionStatus: doc.data().status,
         };
       });
-      return { id: doc.data().stripeId, data: doc.data(), subscriptions };
+      return {
+        docId: doc.id,
+        id: doc.data().stripeId,
+        data: doc.data(),
+        subscriptions,
+      };
     })
   );
   return customersList;

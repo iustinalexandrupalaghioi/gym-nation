@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { ReactNode, SetStateAction } from "react";
 
 interface Props {
   textContent: string;
@@ -6,6 +6,7 @@ interface Props {
   isActive: boolean;
   setActive: React.Dispatch<SetStateAction<boolean>>;
   styleClass?: string;
+  children?: ReactNode;
 }
 const ToggleModalButton = ({
   textContent,
@@ -13,6 +14,7 @@ const ToggleModalButton = ({
   setActive,
   isActive,
   styleClass,
+  children,
 }: Props) => {
   return (
     <button
@@ -27,7 +29,7 @@ const ToggleModalButton = ({
       data-bs-toggle="modal"
       data-bs-target={`#${modalId}`}
     >
-      {textContent}
+      {textContent} {children && children}
     </button>
   );
 };

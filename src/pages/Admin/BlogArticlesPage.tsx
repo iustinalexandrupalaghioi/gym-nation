@@ -31,8 +31,6 @@ export const BlogArticlesPage = () => {
 
   if (error) return <ErrorPage />;
 
-  if (isLoading) return <LoadingStatus />;
-
   return (
     <PageContent pageTitle="Articole de blog publicate">
       <div className="d-flex flex-column flex-md-row gap-2 align-items-center">
@@ -65,63 +63,67 @@ export const BlogArticlesPage = () => {
           Șterge Filtrarea
         </button>
       </div>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Titlu</th>
-            <th>Categorie</th>
-            <th>Data publicării</th>
-            <th>Acțiuni</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts?.result.map((post, index) => (
-            <tr key={post.id}>
-              <td className="text-body-secondary">{index + 1}</td>
-              <td>{post.data().title}</td>
-              <td className="text-body-secondary">
-                {post.data().category.name}
-              </td>
-              <td className="text-body-secondary">{post.data().createdAt}</td>
-              <td className="d-inline-flex gap-2">
-                <Link
-                  title="Vezi articolul"
-                  to={`/blog/${post.data().titleSlug}`}
-                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5"
-                >
-                  <MdRemoveRedEye />
-                </Link>
-                <button
-                  title="Șterge articolul"
-                  onClick={async () => {
-                    const result = await firebaseClient.delete(post.id);
-                    if (result) {
-                      await queryClient.invalidateQueries({
-                        queryKey: ["posts"],
-                      });
-                      showToast("Articol ștears cu succes!", Method.Success);
-                    } else {
-                      showToast(
-                        "Nu s-a putut efectua acțiunea de ștergere.",
-                        Method.Error
-                      );
-                    }
-                  }}
-                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
-                >
-                  <MdDeleteForever />
-                </button>
-              </td>
+      {isLoading ? (
+        <LoadingStatus />
+      ) : (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Titlu</th>
+              <th>Categorie</th>
+              <th>Data publicării</th>
+              <th>Acțiuni</th>
             </tr>
-          ))}
-          <tr>
-            <th>
-              Total: <span className="fw-bold">{postsNumber?.count}</span>
-            </th>
-          </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {posts?.result.map((post, index) => (
+              <tr key={post.id}>
+                <td className="text-body-secondary">{index + 1}</td>
+                <td>{post.data().title}</td>
+                <td className="text-body-secondary">
+                  {post.data().category.name}
+                </td>
+                <td className="text-body-secondary">{post.data().createdAt}</td>
+                <td className="d-inline-flex gap-2">
+                  <Link
+                    title="Vezi articolul"
+                    to={`/blog/${post.data().titleSlug}`}
+                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5"
+                  >
+                    <MdRemoveRedEye />
+                  </Link>
+                  <button
+                    title="Șterge articolul"
+                    onClick={async () => {
+                      const result = await firebaseClient.delete(post.id);
+                      if (result) {
+                        await queryClient.invalidateQueries({
+                          queryKey: ["posts"],
+                        });
+                        showToast("Articol șters cu succes!", Method.Success);
+                      } else {
+                        showToast(
+                          "Nu s-a putut efectua acțiunea de ștergere.",
+                          Method.Error
+                        );
+                      }
+                    }}
+                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                  >
+                    <MdDeleteForever />
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <th>
+                Total: <span className="fw-bold">{postsNumber?.count}</span>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </PageContent>
   );
 };

@@ -1,6 +1,10 @@
+import { MdDeleteForever } from "react-icons/md";
 import useCustomersSubcription from "../../hooks/useCustomersSubscriptions";
 import LoadingStatus from "../LoadingStatus";
-
+import FirebaseClient from "../../utilities/firebase-client";
+import { queryClient } from "../../main";
+import showToast, { Method } from "../../utilities/showToast";
+const firebaseClient = new FirebaseClient("/customers");
 const CustomersTable = () => {
   const { data: customers, isLoading } = useCustomersSubcription();
 
@@ -16,6 +20,7 @@ const CustomersTable = () => {
           <th>Email</th>
           <th>Abonat</th>
           <th>Status</th>
+          <th>Acțiuni</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +37,39 @@ const CustomersTable = () => {
               {customer.subscriptions &&
                 customer.subscriptions.length > 0 &&
                 customer.subscriptions[0].subscriptionStatus}
+            </td>
+            <td className="d-flex gap-2">
+              <button
+                className="btn btn-outline-danger d-inline-flex justify-content-center align-items center"
+                onClick={async () => {
+                  const allSubscriptionsInactive =
+                    customer.subscriptions?.every(
+                      (sub) => sub.subscriptionStatus === "inactive"
+                    );
+                  if (
+                    (customer.subscriptions &&
+                      customer.subscriptions.length == 0) ||
+                    allSubscriptionsInactive
+                  ) {
+                    const result = await firebaseClient.delete(customer.docId);
+                    if (result) {
+                      queryClient.invalidateQueries({
+                        queryKey: ["customers-subscriptions"],
+                      });
+                      showToast(
+                        "Clientul a fost șters definitiv.",
+                        Method.Success
+                      );
+                    } else {
+                      showToast("Clientul nu poate fi șters", Method.Error);
+                    }
+                  } else {
+                    showToast("Clientul nu poate fi șters", Method.Error);
+                  }
+                }}
+              >
+                <MdDeleteForever />
+              </button>
             </td>
           </tr>
         ))}

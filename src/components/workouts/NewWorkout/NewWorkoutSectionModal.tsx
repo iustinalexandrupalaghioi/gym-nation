@@ -2,9 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SetStateAction } from "react";
-import Workout from "../../entities/Workout";
-import showToast, { Method } from "../../utilities/showToast";
-import LoadingButton from "../account/LoadingButton";
+import Workout from "../../../entities/Workout";
+import showToast, { Method } from "../../../utilities/showToast";
+import LoadingButton from "../../account/LoadingButton";
 import { GrFormAdd } from "react-icons/gr";
 
 const schema = z.object({

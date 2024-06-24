@@ -3,7 +3,7 @@ import Workout from "../../entities/Workout";
 import NewWorkoutForm from "../../components/workouts/NewWorkout/NewWorkoutForm";
 import NewExercise from "../../components/workouts/NewWorkout/NewExercise";
 import PageContent from "../../components/dashboard/PageContent";
-import NewWorkoutSectionModal from "../../components/dashboard/NewWorkoutSectionModal";
+import NewWorkoutSectionModal from "../../components/workouts/NewWorkout/NewWorkoutSectionModal";
 
 const NewWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({

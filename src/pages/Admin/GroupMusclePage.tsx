@@ -2,11 +2,11 @@ import useMuscles from "../../hooks/useMuscles";
 import ErrorPage from "../Client/ErrorPage";
 import LoadingStatus from "../../components/LoadingStatus";
 import PageContent from "../../components/dashboard/PageContent";
-import NewGroupModal from "../../components/workouts/NewWorkout/NewGroupModal";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { queryClient } from "../../main";
 import showToast, { Method } from "../../utilities/showToast";
 import FirebaseClient from "../../utilities/firebase-client";
+import NewGroupModal from "../../components/dashboard/NewGroupModal";
 
 const firebaseClient = new FirebaseClient("/muscles");
 const GroupMusclePage = () => {

@@ -10,6 +10,7 @@ import {
   doc,
   deleteDoc,
   orderBy,
+  updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../firebase-config";
@@ -46,13 +47,23 @@ class FirebaseClient {
     }
   };
 
+  update = async (documentId: string, data: DocumentData): Promise<boolean> => {
+    try {
+      const docRef = doc(db, this.endpoint, documentId);
+      await updateDoc(docRef, data);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   delete = async (documentId: string): Promise<boolean> => {
     try {
       const docRef = doc(db, this.endpoint, documentId);
       await deleteDoc(docRef);
-      return true; // Indicates successful deletion
+      return true;
     } catch (error) {
-      return false; // Indicates deletion failure
+      return false;
     }
   };
 
