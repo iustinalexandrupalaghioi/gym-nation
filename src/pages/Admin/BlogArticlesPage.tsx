@@ -4,7 +4,7 @@ import useFetchPosts from "../../hooks/useFetchPosts";
 import useFetchPostsNumber from "../../hooks/useFetchPostsNumber";
 import ErrorPage from "../Client/ErrorPage";
 import LoadingStatus from "../../components/LoadingStatus";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import showToast, { Method } from "../../utilities/showToast";
 import { queryClient } from "../../main";
 import FirebaseClient from "../../utilities/firebase-client";
