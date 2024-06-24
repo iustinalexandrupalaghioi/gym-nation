@@ -6,7 +6,7 @@ import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { queryClient } from "../../main";
 import showToast, { Method } from "../../utilities/showToast";
 import FirebaseClient from "../../utilities/firebase-client";
-import NewGroupModal from "../../components/dashboard/NewGroupModal";
+import NewGroupModal from "../../components/workouts/NewWorkout/NewGroupModal";
 
 const firebaseClient = new FirebaseClient("/muscles");
 const GroupMusclePage = () => {
@@ -15,8 +15,8 @@ const GroupMusclePage = () => {
   if (error) return <ErrorPage />;
   if (isLoading) return <LoadingStatus />;
   return (
-    <PageContent pageTitle="Categoriile de Blog">
-      <NewGroupModal styleClass="btn btn-primary text-light my-2" />
+    <PageContent pageTitle="Grupele musculare salvate">
+      <NewGroupModal styleClass="btn btn-primary text-light my-2  d-flex gap-1 align-items-center" />
       <table className="table table-striped">
         <thead>
           <tr>

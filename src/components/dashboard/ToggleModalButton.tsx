@@ -1,4 +1,5 @@
-import { ReactNode, SetStateAction } from "react";
+import { SetStateAction } from "react";
+import { GrFormAdd } from "react-icons/gr";
 
 interface Props {
   textContent: string;
@@ -6,7 +7,6 @@ interface Props {
   isActive: boolean;
   setActive: React.Dispatch<SetStateAction<boolean>>;
   styleClass?: string;
-  children?: ReactNode;
 }
 const ToggleModalButton = ({
   textContent,
@@ -14,14 +14,13 @@ const ToggleModalButton = ({
   setActive,
   isActive,
   styleClass,
-  children,
 }: Props) => {
   return (
     <button
       className={
         styleClass
           ? styleClass
-          : `nav-link hover hover-primary text-start  ${
+          : `nav-link hover hover-primary text-start d-flex align-items-center gap-2 ${
               isActive ? "text-primary" : "text-body-secondary"
             }`
       }
@@ -29,7 +28,8 @@ const ToggleModalButton = ({
       data-bs-toggle="modal"
       data-bs-target={`#${modalId}`}
     >
-      {textContent} {children && children}
+      <GrFormAdd size={"1rem"} />
+      {textContent}
     </button>
   );
 };

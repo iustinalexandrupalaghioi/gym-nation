@@ -3,12 +3,12 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FirebaseClient from "../../utilities/firebase-client";
-import { queryClient } from "../../main";
-import showToast, { Method } from "../../utilities/showToast";
-import ToggleModalButton from "./ToggleModalButton";
-import Modal from "./Modal";
-import LoadingButton from "../account/LoadingButton";
+import FirebaseClient from "../../../utilities/firebase-client";
+import { queryClient } from "../../../main";
+import showToast, { Method } from "../../../utilities/showToast";
+import ToggleModalButton from "../../dashboard/ToggleModalButton";
+import Modal from "../../dashboard/Modal";
+import LoadingButton from "../../account/LoadingButton";
 
 const schema = z.object({
   muscleGroup: z.string().min(5, {

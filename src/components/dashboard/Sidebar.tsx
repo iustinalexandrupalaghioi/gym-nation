@@ -2,7 +2,9 @@ import SignOutButton from "../account/SignOutButton";
 import NewCategoryModal from "../blog/Categories/NewCategoryModal";
 import CollapseMenuItem from "./CollapseMenuItem";
 import NavItem from "./NavItem";
-import NewGroupModal from "./NewGroupModal";
+import NewGroupModal from "../workouts/NewWorkout/NewGroupModal";
+import { MdRemoveRedEye } from "react-icons/md";
+import { GrFormAdd } from "react-icons/gr";
 
 interface Props {
   pathname: string;
@@ -43,36 +45,40 @@ const Sidebar = ({ pathname }: Props) => {
               menuTitle="Blog"
             >
               <NavItem pathname={pathname} targetPath="/admin/blog">
+                <MdRemoveRedEye />
                 Vizualizare Articole
               </NavItem>
               <NavItem pathname={pathname} targetPath="/admin/blog/new">
-                Adaugă Articol
+                <GrFormAdd size={"1rem"} /> Adaugă Articol
               </NavItem>
               <NavItem pathname={pathname} targetPath="/admin/blog/categories">
+                <MdRemoveRedEye />
                 Vizualizare Categorii
               </NavItem>
               <NewCategoryModal />
             </CollapseMenuItem>
             <CollapseMenuItem menuId="workoutMenu" menuTitle="Antrenamente">
               <NavItem pathname={pathname} targetPath="/admin/workouts">
+                <MdRemoveRedEye />
                 Vizualizare Antrenamente
               </NavItem>
               <NavItem pathname={pathname} targetPath="/admin/workouts/new">
-                Adaugă Antrenament
+                <GrFormAdd size={"1rem"} /> Adaugă Antrenament
               </NavItem>
               <NavItem pathname={pathname} targetPath="/admin/workouts/muscles">
+                <MdRemoveRedEye />
                 Vizualizare Grupe Musculare
               </NavItem>
               <NewGroupModal />
             </CollapseMenuItem>
             <li className="nav-item">
               <NavItem pathname={pathname} targetPath="/admin/customers">
+                <MdRemoveRedEye />
                 Clienți
               </NavItem>
             </li>
           </ul>
 
-          {/* sign out button */}
           <hr className="my-3" />
           <ul className="nav flex-column mb-3">
             <li className="nav-item">

@@ -16,7 +16,7 @@ const CategoriesPage = () => {
   if (isLoading) return <LoadingStatus />;
   return (
     <PageContent pageTitle="Categoriile de Blog">
-      <NewCategoryModal styleClass="btn btn-primary text-light my-2" />
+      <NewCategoryModal styleClass="btn btn-primary text-light my-2 d-flex gap-1 align-items-center" />
       <table className="table table-striped">
         <thead>
           <tr>
