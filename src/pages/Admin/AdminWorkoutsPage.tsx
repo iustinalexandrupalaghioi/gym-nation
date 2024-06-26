@@ -39,12 +39,12 @@ const AdminWorkoutsPage = () => {
                 >
                   <MdRemoveRedEye />
                 </Link>
-                <button
-                  title="Modifică antrenamentul"
+                <Link
+                  to={`/admin/workouts/:titleSlug/edit`}
                   className="btn btn-outline-info d-inline-flex align-items justify-content-center"
                 >
                   <MdEdit />
-                </button>
+                </Link>
                 <button
                   title="Șterge antrenamentul"
                   onClick={async () => {

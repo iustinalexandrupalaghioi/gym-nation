@@ -20,6 +20,7 @@ import { BlogArticlesPage } from "./pages/Admin/BlogArticlesPage";
 import AdminWorkoutsPage from "./pages/Admin/AdminWorkoutsPage";
 import WorkoutSectionsPage from "./pages/Admin/WorkoutSectionsPage";
 import WorkoutExercisesPage from "./pages/Admin/WorkoutExercisesPage";
+import UpdateWorkout from "./pages/Admin/UpdateWorkout";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -38,6 +39,8 @@ const router = createBrowserRouter([
       { path: "/admin/blog/new", element: <NewBlogPage /> },
       { path: "/admin/blog/categories", element: <CategoriesPage /> },
       { path: "/admin/workouts", element: <AdminWorkoutsPage /> },
+      { path: "/admin/workouts/:titleSlug/edit", element: <UpdateWorkout /> },
+
       {
         path: "/admin/workouts/:titleSlug/sections",
         element: <WorkoutSectionsPage />,
