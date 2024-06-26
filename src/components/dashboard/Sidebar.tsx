@@ -1,5 +1,5 @@
 import SignOutButton from "../account/SignOutButton";
-import NewCategoryModal from "../blog/Categories/NewCategoryModal";
+import NewCategoryModal from "../blog/NewCategoryModal";
 import CollapseMenuItem from "./CollapseMenuItem";
 import NavItem from "./NavItem";
 import NewGroupModal from "../workouts/NewWorkout/NewGroupModal";

@@ -1,6 +1,6 @@
 import { MdDeleteForever } from "react-icons/md";
 import LoadingStatus from "../../../components/LoadingStatus";
-import NewCategoryModal from "../../../components/blog/Categories/NewCategoryModal";
+import NewCategoryModal from "../../../components/blog/NewCategoryModal";
 import PageContent from "../../../components/dashboard/PageContent";
 
 import { queryClient } from "../../../main";
