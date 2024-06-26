@@ -1,22 +1,23 @@
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 import {
   useState,
-  createRef,
-  ChangeEvent,
-  RefObject,
-  FormEvent,
   useRef,
+  RefObject,
+  ChangeEvent,
+  createRef,
+  FormEvent,
 } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
-import { DocumentData } from "firebase/firestore";
-import { queryClient } from "../main";
 import slugify from "slugify";
-import FirebaseClient from "../utilities/firebase-client";
+import BlogPost from "../../entities/BlogPost";
+import { queryClient } from "../../main";
+import FirebaseClient from "../../utilities/firebase-client";
+import showToast, { Method } from "../../utilities/showToast";
+import useGetFileURL from "../useGetFileURL";
 import useCategories from "./useCategories";
-import useGetFileURL from "./useGetFileURL";
-import BlogPost from "../entities/BlogPost";
-import showToast, { Method } from "../utilities/showToast";
-import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+
 export interface PostErrors {
   title: string;
   image: string;
@@ -106,7 +107,8 @@ const useAddPost = () => {
     });
 
     const categoryDoc = categories?.result.find(
-      (c) => c.data().slug === categorySlug
+      (c: QueryDocumentSnapshot<DocumentData, DocumentData>) =>
+        c.data().slug === categorySlug
     );
 
     const category = categoryDoc && categoryDoc.data();

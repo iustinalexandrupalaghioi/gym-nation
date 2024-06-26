@@ -6,13 +6,13 @@ import {
   useState,
 } from "react";
 import slugify from "slugify";
-import Workout from "../entities/Workout";
-import Exercise from "../entities/Exercise";
-import useGetFileURL from "./useGetFileURL";
-import showToast, { Method } from "../utilities/showToast";
-import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
-import { QueryDocumentSnapshot } from "firebase/firestore";
 import useMuscles from "./useMuscles";
+import Workout from "../../entities/Workout";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+import Exercise from "../../entities/Exercise";
+import showToast, { Method } from "../../utilities/showToast";
+import useGetFileURL from "../useGetFileURL";
 
 interface Errors {
   sectionId: string;
@@ -127,7 +127,10 @@ const useAddExercise = (
     const videoLink = video ? await useGetFileURL(video, "exerciseVideos") : "";
     const nameSlug = slugify(exerciseName, { replacement: "-", lower: true });
     const muscleDoc = muscleSlug
-      ? muscles?.result.find((m) => m.data().slug === muscleSlug)
+      ? muscles?.result.find(
+          (m: QueryDocumentSnapshot<DocumentData, DocumentData>) =>
+            m.data().slug === muscleSlug
+        )
       : ({} as QueryDocumentSnapshot);
     const muscleGroup = muscleDoc?.data();
     return {

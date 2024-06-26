@@ -5,13 +5,14 @@ import {
   SetStateAction,
   useRef,
 } from "react";
-import useGetFileURL from "./useGetFileURL";
-import slugify from "slugify";
-import FirebaseClient from "../utilities/firebase-client";
-import { DocumentData } from "firebase/firestore";
-import Workout from "../entities/Workout";
-import showToast, { Method } from "../utilities/showToast";
+
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+import { DocumentData } from "firebase/firestore";
+import slugify from "slugify";
+import Workout from "../../entities/Workout";
+import FirebaseClient from "../../utilities/firebase-client";
+import showToast, { Method } from "../../utilities/showToast";
+import useGetFileURL from "../useGetFileURL";
 interface Errors {
   title: string;
   workoutDescription: string;

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-import FirebaseClient from "../utilities/firebase-client";
+import FirebaseClient from "../../utilities/firebase-client";
 
 const firebaseClient = new FirebaseClient("/posts");
 const useFetchPostsNumber = (slug?: string) => {

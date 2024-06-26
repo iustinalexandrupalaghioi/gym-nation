@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import FirebaseClient from "../utilities/firebase-client";
 import ms from "ms";
+import FirebaseClient from "../../utilities/firebase-client";
 
 const firebaseClient = new FirebaseClient("/workouts");
 const useWorkout = (field: string, slug: string) => {

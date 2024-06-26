@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
-import useBlogQueryStore from "../stores/blogQueryStore";
+
 import {
   DocumentData,
   QueryDocumentSnapshot,
@@ -12,7 +12,8 @@ import {
   limit,
   getDocs,
 } from "firebase/firestore";
-import { db } from "../firebase-config";
+import useBlogQueryStore from "../../stores/blogQueryStore";
+import { db } from "../../firebase-config";
 
 const useInfiniteFetchPosts = () => {
   const categorySlug = useBlogQueryStore((s) => s.blogQuery.category);
