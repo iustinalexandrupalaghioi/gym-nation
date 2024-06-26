@@ -1,10 +1,10 @@
 import { GrFormAdd } from "react-icons/gr";
 import { SetStateAction, useEffect } from "react";
-import useAddWorkout from "../../../hooks/useAddWorkout";
 import Workout from "../../../entities/Workout";
 import showToast, { Method } from "../../../utilities/showToast";
 import LoadingButton from "../../account/LoadingButton";
 import { FileUpload } from "primereact/fileupload";
+import useAddWorkout from "../../../hooks/Workout/useAddWorkout";
 
 interface Props {
   workout: Workout;

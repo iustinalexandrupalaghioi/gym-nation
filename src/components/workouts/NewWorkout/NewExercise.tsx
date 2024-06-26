@@ -1,9 +1,10 @@
 import { SetStateAction } from "react";
-import useAddExercise from "../../../hooks/useAddExercise";
 import Workout, { Section } from "../../../entities/Workout";
 import LoadingButton from "../../account/LoadingButton";
 import { FileUpload } from "primereact/fileupload";
-import useMuscles from "../../../hooks/useMuscles";
+import useMuscles from "../../../hooks/Workout/useMuscles";
+import useAddExercise from "../../../hooks/Workout/useAddExercise";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 interface Props {
   sections: Section[];
@@ -83,7 +84,10 @@ const NewExercise = ({ sections, setWorkout }: Props) => {
                 >
                   <option value="">{"Alege din listă"}</option>
                   {muscles?.result.map(
-                    (option, index) =>
+                    (
+                      option: QueryDocumentSnapshot<DocumentData, DocumentData>,
+                      index: number
+                    ) =>
                       option.data().slug !== "" && (
                         <option key={index} value={option.data().slug}>
                           {option.data().name}
