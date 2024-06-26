@@ -75,9 +75,6 @@ const UpdateWorkoutForm = () => {
         () => navigate("/admin/workouts")
       );
       await queryClient.invalidateQueries({ queryKey: ["workouts"] });
-      queryClient.invalidateQueries({
-        queryKey: ["workout", workout?.data().titleSlug],
-      });
     },
     onError: () => {
       showToast("Nu s-a putut efectua acțiunea de actualizare.", Method.Error);
