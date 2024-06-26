@@ -1,9 +1,10 @@
 import { MdDeleteForever } from "react-icons/md";
-import LoadingStatus from "../LoadingStatus";
-import FirebaseClient from "../../utilities/firebase-client";
-import { queryClient } from "../../main";
-import showToast, { Method } from "../../utilities/showToast";
 import useCustomersSubcription from "../../hooks/useCustomersSubscriptions";
+import { queryClient } from "../../main";
+import FirebaseClient from "../../utilities/firebase-client";
+import showToast, { Method } from "../../utilities/showToast";
+import LoadingStatus from "../LoadingStatus";
+
 const firebaseClient = new FirebaseClient("/customers");
 const CustomersTable = () => {
   const { data: customers, isLoading } = useCustomersSubcription();
