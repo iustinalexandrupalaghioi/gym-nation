@@ -34,8 +34,8 @@ const AdminWorkoutsPage = () => {
               <td className="d-inline-flex gap-2">
                 <Link
                   title="Vezi articolul"
-                  to={`/workouts/${workout.data().titleSlug}`}
-                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5"
+                  to={`/admin/workouts/${workout.data().titleSlug}/sections`}
+                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
                 >
                   <MdRemoveRedEye />
                 </Link>
@@ -55,7 +55,7 @@ const AdminWorkoutsPage = () => {
                       );
                     }
                   }}
-                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
                 >
                   <MdDeleteForever />
                 </button>
