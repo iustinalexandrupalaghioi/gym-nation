@@ -16,7 +16,7 @@ const WorkoutSectionsPage = () => {
   if (error) return <ErrorPage />;
   return (
     <PageContent pageTitle="Descoperă Secțiunile">
-      <table className="table table-striped">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>#</th>

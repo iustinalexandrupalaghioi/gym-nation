@@ -68,7 +68,7 @@ export const BlogArticlesPage = () => {
       {isLoading ? (
         <LoadingStatus />
       ) : (
-        <table className="table table-striped">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>#</th>
@@ -97,7 +97,7 @@ export const BlogArticlesPage = () => {
                     <Link
                       title="Vezi articolul"
                       to={`/blog/${post.data().titleSlug}`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center fs-5"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
                     >
                       <MdRemoveRedEye />
                     </Link>
@@ -117,7 +117,7 @@ export const BlogArticlesPage = () => {
                           );
                         }
                       }}
-                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
                     >
                       <MdDeleteForever />
                     </button>

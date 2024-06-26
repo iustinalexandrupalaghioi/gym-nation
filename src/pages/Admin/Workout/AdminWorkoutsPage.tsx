@@ -16,7 +16,7 @@ const AdminWorkoutsPage = () => {
   if (isLoading) return <LoadingStatus />;
   return (
     <PageContent pageTitle="Antrenamentele disponibile">
-      <table className="table table-striped">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>#</th>

@@ -19,7 +19,7 @@ const CategoriesPage = () => {
   return (
     <PageContent pageTitle="Categoriile de Blog">
       <NewCategoryModal styleClass="btn btn-primary text-light my-2 d-flex gap-1 align-items-center" />
-      <table className="table table-striped">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>#</th>
@@ -53,7 +53,7 @@ const CategoriesPage = () => {
                           );
                         }
                       }}
-                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
                     >
                       <MdDeleteForever />
                     </button>

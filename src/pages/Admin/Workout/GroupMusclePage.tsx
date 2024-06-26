@@ -18,7 +18,7 @@ const GroupMusclePage = () => {
   return (
     <PageContent pageTitle="Grupele musculare salvate">
       <NewGroupModal styleClass="btn btn-primary text-light my-2  d-flex gap-1 align-items-center" />
-      <table className="table table-striped">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>#</th>
@@ -54,7 +54,7 @@ const GroupMusclePage = () => {
                         );
                       }
                     }}
-                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center fs-5"
+                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
                   >
                     <MdDeleteForever />
                   </button>

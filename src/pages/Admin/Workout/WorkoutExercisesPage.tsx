@@ -18,7 +18,7 @@ const WorkoutExercisesPage = () => {
   if (error) return <ErrorPage />;
   return (
     <PageContent pageTitle="Exercițiile antrenamentului">
-      <table className="table table-striped">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>#</th>
