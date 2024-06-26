@@ -19,8 +19,8 @@ const ExerciseContent = ({ workout }: Props) => {
         controls
         src={videoLink!}
         className="rounded-4 w-100"
-        autoPlay={true}
-        muted={true}
+        autoPlay
+        muted
       />
       <div className="row py-2">
         <h3>{title}</h3>

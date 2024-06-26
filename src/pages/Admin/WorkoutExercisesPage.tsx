@@ -1,10 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PageContent from "../../components/dashboard/PageContent";
 import useWorkout from "../../hooks/useWorkout";
 import ErrorPage from "../Client/ErrorPage";
 import LoadingStatus from "../../components/LoadingStatus";
 import { Section } from "../../entities/Workout";
-import { MdDeleteForever, MdEdit, MdRemoveRedEye } from "react-icons/md";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
 import ViewExerciseModal from "../../components/dashboard/AdminWorkout/ViewExerciseModal";
 
 const WorkoutExercisesPage = () => {
@@ -15,6 +15,7 @@ const WorkoutExercisesPage = () => {
   const workout = data?.result[0];
   const sections: Section[] = workout?.data().sections;
   const currentSection = sections.find((s) => s.id.toString() === sectionId);
+
   if (error) return <ErrorPage />;
   return (
     <PageContent pageTitle="Exercițiile antrenamentului">
