@@ -14,7 +14,6 @@ const GroupMusclePage = () => {
   const { data: muscles, error, isLoading } = useMuscles();
 
   if (error) return <ErrorPage />;
-  if (isLoading) return <LoadingStatus />;
   return (
     <PageContent pageTitle="Grupele musculare salvate">
       <NewGroupModal styleClass="btn btn-primary text-light my-2  d-flex gap-1 align-items-center" />
@@ -27,39 +26,45 @@ const GroupMusclePage = () => {
           </tr>
         </thead>
         <tbody>
-          {muscles?.result.map(
-            (
-              group: QueryDocumentSnapshot<DocumentData, DocumentData>,
-              index: number
-            ) => (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{group.data().name}</td>
-                <td className="d-inline-flex gap-2">
-                  <button
-                    onClick={async () => {
-                      const result = await firebaseClient.delete(group.id);
-                      if (result) {
-                        await queryClient.invalidateQueries({
-                          queryKey: ["muscles"],
-                        });
-                        showToast(
-                          "Grupă musculară ștearsă cu succes!",
-                          Method.Success
-                        );
-                      } else {
-                        showToast(
-                          "Nu s-a putut efectua acțiunea de ștergere.",
-                          Method.Error
-                        );
-                      }
-                    }}
-                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </td>
-              </tr>
+          {isLoading ? (
+            <tr>
+              <LoadingStatus />
+            </tr>
+          ) : (
+            muscles?.result.map(
+              (
+                group: QueryDocumentSnapshot<DocumentData, DocumentData>,
+                index: number
+              ) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{group.data().name}</td>
+                  <td className="d-inline-flex gap-2">
+                    <button
+                      onClick={async () => {
+                        const result = await firebaseClient.delete(group.id);
+                        if (result) {
+                          await queryClient.invalidateQueries({
+                            queryKey: ["muscles"],
+                          });
+                          showToast(
+                            "Grupă musculară ștearsă cu succes!",
+                            Method.Success
+                          );
+                        } else {
+                          showToast(
+                            "Nu s-a putut efectua acțiunea de ștergere.",
+                            Method.Error
+                          );
+                        }
+                      }}
+                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </td>
+                </tr>
+              )
             )
           )}
         </tbody>

@@ -14,6 +14,7 @@ const WorkoutSectionsPage = () => {
   const sections: Section[] = workout?.data().sections;
 
   if (error) return <ErrorPage />;
+  if (isLoading) return <LoadingStatus />;
   return (
     <PageContent pageTitle="Descoperă Secțiunile">
       <table className="table table-hover">
@@ -25,43 +26,40 @@ const WorkoutSectionsPage = () => {
             <th>Acțiuni</th>
           </tr>
         </thead>
+
         <tbody>
-          {isLoading ? (
-            <LoadingStatus />
-          ) : (
-            sections.map((section, index) => (
-              <tr key={section.id}>
-                <td className="text-body-secondary">{index + 1}</td>
-                <td>{section.name}</td>
-                <td className="text-body-secondary">
-                  {section.exercises.length}
-                </td>
-                <td className="d-flex gap-2">
-                  <Link
-                    title="Vezi exercițiile"
-                    to={`/admin/workouts/${
-                      workout!.data().titleSlug
-                    }/sections/${section.id}`}
-                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
-                  >
-                    <MdRemoveRedEye />
-                  </Link>
-                  <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
-                    <MdEdit />
-                  </button>
-                  <button
-                    title="Șterge secțiunea"
-                    onClick={async () => {
-                      console.log("deleted");
-                    }}
-                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </td>
-              </tr>
-            ))
-          )}
+          {sections.map((section, index) => (
+            <tr key={section.id}>
+              <td className="text-body-secondary">{index + 1}</td>
+              <td>{section.name}</td>
+              <td className="text-body-secondary">
+                {section.exercises.length}
+              </td>
+              <td className="d-flex gap-2">
+                <Link
+                  title="Vezi exercițiile"
+                  to={`/admin/workouts/${workout!.data().titleSlug}/sections/${
+                    section.id
+                  }`}
+                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                >
+                  <MdRemoveRedEye />
+                </Link>
+                <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
+                  <MdEdit />
+                </button>
+                <button
+                  title="Șterge secțiunea"
+                  onClick={async () => {
+                    console.log("deleted");
+                  }}
+                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
+                >
+                  <MdDeleteForever />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </PageContent>

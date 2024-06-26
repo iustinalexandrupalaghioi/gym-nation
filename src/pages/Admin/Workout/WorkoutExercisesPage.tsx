@@ -16,6 +16,7 @@ const WorkoutExercisesPage = () => {
   const currentSection = sections.find((s) => s.id.toString() === sectionId);
 
   if (error) return <ErrorPage />;
+  if (isLoading) return <LoadingStatus />;
   return (
     <PageContent pageTitle="Exercițiile antrenamentului">
       <table className="table table-hover">
@@ -26,41 +27,35 @@ const WorkoutExercisesPage = () => {
             <th>Grupa musculară</th>
           </tr>
         </thead>
+
         <tbody>
-          {isLoading ? (
-            <LoadingStatus />
-          ) : (
-            currentSection?.exercises.map((exercise, index) => (
-              <tr key={exercise.nameSlug}>
-                <td className="text-body-secondary">{index + 1}</td>
-                <td>{exercise.exerciseName}</td>
-                <td className="text-body-secondary">
-                  {exercise.muscleGroup?.name}
-                </td>
-                <td className="d-flex gap-2">
-                  <ViewExerciseModal
-                    exercise={exercise}
-                    exerciseIndex={index}
-                  />
-                  <button
-                    title="Modifică exercițiul"
-                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
-                  >
-                    <MdEdit />
-                  </button>
-                  <button
-                    title="Șterge exercițiul"
-                    onClick={async () => {
-                      console.log("deleted");
-                    }}
-                    className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </td>
-              </tr>
-            ))
-          )}
+          {currentSection?.exercises.map((exercise, index) => (
+            <tr key={exercise.nameSlug}>
+              <td className="text-body-secondary">{index + 1}</td>
+              <td>{exercise.exerciseName}</td>
+              <td className="text-body-secondary">
+                {exercise.muscleGroup?.name}
+              </td>
+              <td className="d-flex gap-2">
+                <ViewExerciseModal exercise={exercise} exerciseIndex={index} />
+                <button
+                  title="Modifică exercițiul"
+                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                >
+                  <MdEdit />
+                </button>
+                <button
+                  title="Șterge exercițiul"
+                  onClick={async () => {
+                    console.log("deleted");
+                  }}
+                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
+                >
+                  <MdDeleteForever />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </PageContent>

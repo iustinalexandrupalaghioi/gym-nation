@@ -25,6 +25,7 @@ const AdminWorkoutsPage = () => {
             <th>Acțiuni</th>
           </tr>
         </thead>
+
         <tbody>
           {workouts?.result.map(
             (
@@ -46,7 +47,7 @@ const AdminWorkoutsPage = () => {
                     <MdRemoveRedEye />
                   </Link>
                   <Link
-                    to={`/admin/workouts/:titleSlug/edit`}
+                    to={`/admin/workouts/${workout.data().titleSlug}/edit`}
                     className="btn btn-outline-info d-inline-flex align-items justify-content-center"
                   >
                     <MdEdit />
