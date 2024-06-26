@@ -9,7 +9,6 @@ import ViewExerciseModal from "../../components/dashboard/AdminWorkout/ViewExerc
 
 const WorkoutExercisesPage = () => {
   const { titleSlug, sectionId } = useParams();
-  console.log(titleSlug, sectionId);
 
   const { data, isLoading, error } = useWorkout("titleSlug", titleSlug!);
   const workout = data?.result[0];
@@ -43,11 +42,14 @@ const WorkoutExercisesPage = () => {
                     exercise={exercise}
                     exerciseIndex={index}
                   />
-                  <div className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
-                    <MdEdit />
-                  </div>
                   <button
-                    title="Șterge secțiunea"
+                    title="Modifică exercițiul"
+                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                  >
+                    <MdEdit />
+                  </button>
+                  <button
+                    title="Șterge exercițiul"
                     onClick={async () => {
                       console.log("deleted");
                     }}

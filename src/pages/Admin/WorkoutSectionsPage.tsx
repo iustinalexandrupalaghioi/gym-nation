@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PageContent from "../../components/dashboard/PageContent";
 import useWorkout from "../../hooks/useWorkout";
 import ErrorPage from "../Client/ErrorPage";
@@ -9,8 +9,6 @@ import LoadingStatus from "../../components/LoadingStatus";
 
 const WorkoutSectionsPage = () => {
   const { titleSlug } = useParams();
-  const { pathname } = useLocation();
-  console.log(pathname);
 
   const { data, isLoading, error } = useWorkout("titleSlug", titleSlug!);
   const workout = data?.result[0];
@@ -41,6 +39,7 @@ const WorkoutSectionsPage = () => {
                 </td>
                 <td className="d-flex gap-2">
                   <Link
+                    title="Vezi exercițiile"
                     to={`/admin/workouts/${
                       workout!.data().titleSlug
                     }/sections/${section.id}`}
@@ -48,9 +47,9 @@ const WorkoutSectionsPage = () => {
                   >
                     <MdRemoveRedEye />
                   </Link>
-                  <div className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
+                  <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
                     <MdEdit />
-                  </div>
+                  </button>
                   <button
                     title="Șterge secțiunea"
                     onClick={async () => {

@@ -1,4 +1,4 @@
-import { MdDeleteForever, MdRemoveRedEye } from "react-icons/md";
+import { MdDeleteForever, MdEdit, MdRemoveRedEye } from "react-icons/md";
 import PageContent from "../../components/dashboard/PageContent";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
 import showToast, { Method } from "../../utilities/showToast";
@@ -31,16 +31,22 @@ const AdminWorkoutsPage = () => {
               <td className="text-body-secondary">
                 {workout.data().sections.length}
               </td>
-              <td className="d-inline-flex gap-2">
+              <td className="d-flex gap-2">
                 <Link
-                  title="Vezi articolul"
+                  title="Vezi secțiunile"
                   to={`/admin/workouts/${workout.data().titleSlug}/sections`}
                   className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
                 >
                   <MdRemoveRedEye />
                 </Link>
                 <button
-                  title="Șterge articolul"
+                  title="Modifică antrenamentul"
+                  className="btn btn-outline-info d-inline-flex align-items justify-content-center"
+                >
+                  <MdEdit />
+                </button>
+                <button
+                  title="Șterge antrenamentul"
                   onClick={async () => {
                     const result = await firebaseClient.delete(workout.id);
                     if (result) {
