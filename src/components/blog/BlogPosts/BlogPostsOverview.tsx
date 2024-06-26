@@ -6,7 +6,7 @@ import ErrorPage from "../../../pages/Client/ErrorPage";
 
 import LoadingStatus from "../../LoadingStatus";
 import InfiniteScroll from "react-infinite-scroll-component";
-import useInfiniteFetchPosts from "../../../hooks/useInfiniteFetchPosts";
+import useInfiniteFetchPosts from "../../../hooks/Blog/useInfiniteFetchPosts";
 
 const BlogPostsOverview = () => {
   const {

@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import ExerciseContent from "../../components/workouts/SingleWorkoutPage/ExerciseContent";
-import Exercise from "../../entities/Exercise";
-import useWorkout from "../../hooks/useWorkout";
-import useExerciseQueryStore from "../../stores/exerciseQueryStore";
-import ErrorPage from "./ErrorPage";
-import useUserStatusStore from "../../stores/userStore";
-import LoadingStatus from "../../components/LoadingStatus";
-import Header from "../../components/dashboard/Header";
-import WorkoutExercise from "../../components/workouts/SingleWorkoutPage/WorkoutExercise";
-import CollapseMenuItem from "../../components/dashboard/CollapseMenuItem";
-import { Section } from "../../entities/Workout";
-import ExerciseListItem from "../../components/workouts/SingleWorkoutPage/ExerciseListItem";
+import LoadingStatus from "../../../components/LoadingStatus";
+import CollapseMenuItem from "../../../components/dashboard/CollapseMenuItem";
+import Header from "../../../components/dashboard/Header";
+import ExerciseContent from "../../../components/workouts/SingleWorkoutPage/ExerciseContent";
+import ExerciseListItem from "../../../components/workouts/SingleWorkoutPage/ExerciseListItem";
+import WorkoutExercise from "../../../components/workouts/SingleWorkoutPage/WorkoutExercise";
+import Exercise from "../../../entities/Exercise";
+import { Section } from "../../../entities/Workout";
+
+import useExerciseQueryStore from "../../../stores/exerciseQueryStore";
+import useUserStatusStore from "../../../stores/userStore";
+import ErrorPage from "../ErrorPage";
+import useWorkout from "../../../hooks/Workout/useWorkout";
 
 const SingleWorkoutPage = () => {
   const { slug } = useParams();

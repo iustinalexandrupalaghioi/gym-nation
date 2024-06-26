@@ -1,8 +1,10 @@
-import ToastAlert from "../../components/ToastAlert";
-import WorkoutCard from "../../components/workouts/WorkoutCard/WorkoutCard";
-import WorkoutCardSkeleton from "../../components/workouts/WorkoutCardSkeleton";
-import useFetchWorkouts from "../../hooks/useFetchWorkouts";
-import ErrorPage from "./ErrorPage";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import ToastAlert from "../../../components/ToastAlert";
+import WorkoutCard from "../../../components/workouts/WorkoutCard/WorkoutCard";
+import WorkoutCardSkeleton from "../../../components/workouts/WorkoutCardSkeleton";
+import useFetchWorkouts from "../../../hooks/Workout/useFetchWorkouts";
+
+import ErrorPage from "../ErrorPage";
 
 const WorkoutsPage = () => {
   const { data, isLoading, error } = useFetchWorkouts();
@@ -25,9 +27,11 @@ const WorkoutsPage = () => {
         {isLoading ? (
           <WorkoutCardSkeleton />
         ) : (
-          data?.result.map((workout) => (
-            <WorkoutCard workout={workout} key={workout.id} />
-          ))
+          data?.result.map(
+            (workout: QueryDocumentSnapshot<DocumentData, DocumentData>) => (
+              <WorkoutCard workout={workout} key={workout.id} />
+            )
+          )
         )}
       </div>
     </div>

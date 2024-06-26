@@ -1,6 +1,5 @@
 import slugify from "slugify";
 import FirebaseClient from "../../../utilities/firebase-client";
-import useCategories from "../../../hooks/useCategories";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
 import showToast, { Method } from "../../../utilities/showToast";
@@ -10,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { queryClient } from "../../../main";
 import LoadingButton from "../../account/LoadingButton";
+import useCategories from "../../../hooks/Blog/useCategories";
 
 const schema = z.object({
   category: z.string().min(5, {

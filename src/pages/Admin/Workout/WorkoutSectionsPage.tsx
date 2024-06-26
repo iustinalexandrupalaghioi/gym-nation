@@ -1,11 +1,10 @@
+import { MdRemoveRedEye, MdEdit, MdDeleteForever } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
-import PageContent from "../../components/dashboard/PageContent";
-import useWorkout from "../../hooks/useWorkout";
-import ErrorPage from "../Client/ErrorPage";
-import { Section } from "../../entities/Workout";
-import { MdDeleteForever, MdRemoveRedEye } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
-import LoadingStatus from "../../components/LoadingStatus";
+import LoadingStatus from "../../../components/LoadingStatus";
+import PageContent from "../../../components/dashboard/PageContent";
+import { Section } from "../../../entities/Workout";
+import ErrorPage from "../../Client/ErrorPage";
+import useWorkout from "../../../hooks/Workout/useWorkout";
 
 const WorkoutSectionsPage = () => {
   const { titleSlug } = useParams();

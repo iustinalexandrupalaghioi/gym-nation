@@ -1,11 +1,11 @@
+import { MdEdit, MdDeleteForever } from "react-icons/md";
 import { useParams } from "react-router-dom";
-import PageContent from "../../components/dashboard/PageContent";
-import useWorkout from "../../hooks/useWorkout";
-import ErrorPage from "../Client/ErrorPage";
-import LoadingStatus from "../../components/LoadingStatus";
-import { Section } from "../../entities/Workout";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
-import ViewExerciseModal from "../../components/dashboard/AdminWorkout/ViewExerciseModal";
+import LoadingStatus from "../../../components/LoadingStatus";
+import ViewExerciseModal from "../../../components/dashboard/AdminWorkout/ViewExerciseModal";
+import PageContent from "../../../components/dashboard/PageContent";
+import { Section } from "../../../entities/Workout";
+import ErrorPage from "../../Client/ErrorPage";
+import useWorkout from "../../../hooks/Workout/useWorkout";
 
 const WorkoutExercisesPage = () => {
   const { titleSlug, sectionId } = useParams();

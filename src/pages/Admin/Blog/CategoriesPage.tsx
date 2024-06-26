@@ -1,12 +1,15 @@
-import PageContent from "../../components/dashboard/PageContent";
-import useCategories from "../../hooks/useCategories";
-import ErrorPage from "../Client/ErrorPage";
-import LoadingStatus from "../../components/LoadingStatus";
-import NewCategoryModal from "../../components/blog/Categories/NewCategoryModal";
 import { MdDeleteForever } from "react-icons/md";
-import FirebaseClient from "../../utilities/firebase-client";
-import showToast, { Method } from "../../utilities/showToast";
-import { queryClient } from "../../main";
+import LoadingStatus from "../../../components/LoadingStatus";
+import NewCategoryModal from "../../../components/blog/Categories/NewCategoryModal";
+import PageContent from "../../../components/dashboard/PageContent";
+
+import { queryClient } from "../../../main";
+import FirebaseClient from "../../../utilities/firebase-client";
+import showToast, { Method } from "../../../utilities/showToast";
+import ErrorPage from "../../Client/ErrorPage";
+import useCategories from "../../../hooks/Blog/useCategories";
+import { DocumentData } from "firebase/firestore";
+
 const firebaseClient = new FirebaseClient("/categories");
 const CategoriesPage = () => {
   const { data: categories, error, isLoading } = useCategories();
@@ -26,7 +29,7 @@ const CategoriesPage = () => {
         </thead>
         <tbody>
           {categories?.result.map(
-            (category, index) =>
+            (category: DocumentData, index: number) =>
               category.data().slug && (
                 <tr key={category.id}>
                   <td className="text-body-secondary">{index + 1}</td>

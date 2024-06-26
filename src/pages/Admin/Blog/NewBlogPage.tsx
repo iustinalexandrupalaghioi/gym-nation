@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
-import NewBlogForm from "../../components/blog/NewBlog/NewBlogForm";
-import PageContent from "../../components/dashboard/PageContent";
-import useUserStatusStore from "../../stores/userStore";
-import NewBlogPreview from "../../components/blog/NewBlog/NewBlogPreview";
-import useAddPost from "../../hooks/useAddPost";
+import NewBlogForm from "../../../components/blog/NewBlog/NewBlogForm";
+import NewBlogPreview from "../../../components/blog/NewBlog/NewBlogPreview";
+import PageContent from "../../../components/dashboard/PageContent";
+
+import useUserStatusStore from "../../../stores/userStore";
+import useAddPost from "../../../hooks/Blog/useAddPost";
 
 const NewBlogPage = () => {
   const isAdmin = useUserStatusStore((s) => s.userStatus.isAdmin);

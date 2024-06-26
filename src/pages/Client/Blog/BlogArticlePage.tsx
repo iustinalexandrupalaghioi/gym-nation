@@ -1,6 +1,6 @@
-import BlogArticle from "../../components/blog/BlogPosts/BlogArticle";
-import BlogPostsCategories from "../../components/blog/BlogPosts/BlogPostsCategories";
-import ScrollToButton from "../../components/homepage/ScrollToButton";
+import BlogArticle from "../../../components/blog/BlogPosts/BlogArticle";
+import BlogPostsCategories from "../../../components/blog/BlogPosts/BlogPostsCategories";
+import ScrollToButton from "../../../components/homepage/ScrollToButton";
 
 const BlogArticlePage = () => {
   return (

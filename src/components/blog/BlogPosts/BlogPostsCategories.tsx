@@ -1,4 +1,5 @@
-import useCategories from "../../../hooks/useCategories";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import useCategories from "../../../hooks/Blog/useCategories";
 import useBlogQueryStore from "../../../stores/blogQueryStore";
 import BlogCategoriesSkeleton from "./BlogCategoriesSkeleton";
 import CategoryListItem from "./CategoryListItem";
@@ -6,7 +7,10 @@ import CategoryListItem from "./CategoryListItem";
 const BlogPostsCategories = () => {
   const { data: categories, error, isLoading } = useCategories();
   const setCategory = useBlogQueryStore((s) => s.setCategory);
-  const allCategoriesDoc = categories?.result.find((c) => c.data().slug === "");
+  const allCategoriesDoc = categories?.result.find(
+    (c: QueryDocumentSnapshot<DocumentData, DocumentData>) =>
+      c.data().slug === ""
+  );
   if (error) return null;
   if (isLoading) return <BlogCategoriesSkeleton />;
 
@@ -17,11 +21,13 @@ const BlogPostsCategories = () => {
         name="category"
         onChange={(event) => setCategory(event.target.value)}
       >
-        {categories?.result.map((doc) => (
-          <option key={doc.id} value={doc.data().slug}>
-            {doc.data().name}
-          </option>
-        ))}
+        {categories?.result.map(
+          (doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => (
+            <option key={doc.id} value={doc.data().slug}>
+              {doc.data().name}
+            </option>
+          )
+        )}
       </select>
 
       <div className="card border-0 shadow d-none d-md-block">
@@ -32,7 +38,7 @@ const BlogPostsCategories = () => {
           <ul className="list-group">
             <CategoryListItem doc={allCategoriesDoc!} />
             {categories?.result.map(
-              (doc) =>
+              (doc: QueryDocumentSnapshot<DocumentData, DocumentData>) =>
                 doc.data().slug && <CategoryListItem key={doc.id} doc={doc} />
             )}
           </ul>

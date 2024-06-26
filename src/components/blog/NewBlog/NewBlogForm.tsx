@@ -1,5 +1,4 @@
 import ReactQuill from "react-quill";
-import useCategories from "../../../hooks/useCategories";
 import "react-quill/dist/quill.snow.css";
 import {
   ChangeEvent,
@@ -11,8 +10,10 @@ import {
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 import BlogPost from "../../../entities/BlogPost";
 import ToastAlert from "../../ToastAlert";
-import { PostErrors } from "../../../hooks/useAddPost";
 import LoadingButton from "../../account/LoadingButton";
+import { PostErrors } from "../../../hooks/Blog/useAddPost";
+import useCategories from "../../../hooks/Blog/useCategories";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 interface Props {
   quillRef: RefObject<ReactQuill>;
@@ -128,7 +129,10 @@ const NewBlogForm = ({
           >
             <option value="">{"Alege o categorie din listă"}</option>
             {categories?.result.map(
-              (option, index) =>
+              (
+                option: QueryDocumentSnapshot<DocumentData, DocumentData>,
+                index: number
+              ) =>
                 option.data().slug !== "" && (
                   <option key={index} value={option.data().slug}>
                     {option.data().name}

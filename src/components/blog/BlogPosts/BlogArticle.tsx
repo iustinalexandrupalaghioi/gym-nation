@@ -1,8 +1,8 @@
 import DOMPurify from "dompurify";
 import { useParams } from "react-router-dom";
-import usePost from "../../../hooks/usePost";
 import { useEffect } from "react";
 import LoadingStatus from "../../LoadingStatus";
+import usePost from "../../../hooks/Blog/usePost";
 
 const BlogArticle = () => {
   const { slug } = useParams();

@@ -1,7 +1,7 @@
 import { DocumentData } from "firebase/firestore";
 import useBlogQueryStore from "../../../stores/blogQueryStore";
-import useFetchPostsNumber from "../../../hooks/useFetchPostsNumber";
 import { Link } from "react-router-dom";
+import useFetchPostsNumber from "../../../hooks/Blog/useFetchPostsNumber";
 interface Props {
   doc: DocumentData;
 }

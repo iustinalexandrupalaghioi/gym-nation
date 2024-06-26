@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Workout from "../../entities/Workout";
-import NewWorkoutForm from "../../components/workouts/NewWorkout/NewWorkoutForm";
-import NewExercise from "../../components/workouts/NewWorkout/NewExercise";
-import PageContent from "../../components/dashboard/PageContent";
-import NewWorkoutSectionModal from "../../components/workouts/NewWorkout/NewWorkoutSectionModal";
+import PageContent from "../../../components/dashboard/PageContent";
+import NewExercise from "../../../components/workouts/NewWorkout/NewExercise";
+import NewWorkoutForm from "../../../components/workouts/NewWorkout/NewWorkoutForm";
+import NewWorkoutSectionModal from "../../../components/workouts/NewWorkout/NewWorkoutSectionModal";
+import Workout from "../../../entities/Workout";
 
 const NewWorkout = () => {
   const [workout, setWorkout] = useState<Workout>({

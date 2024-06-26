@@ -2,12 +2,12 @@ import { NavLink, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 import logo from "/images/logo1.png";
-import useUserStatusStore from "../../stores/userStore";
-import { auth } from "../../firebase-config";
-import LoadingButton from "../../components/account/LoadingButton";
-import SubscriptionButton from "../../components/account/SubscriptionButton";
-import SignOutButton from "../../components/account/SignOutButton";
-import ToastAlert from "../../components/ToastAlert";
+import ToastAlert from "../components/ToastAlert";
+import LoadingButton from "../components/account/LoadingButton";
+import SignOutButton from "../components/account/SignOutButton";
+import SubscriptionButton from "../components/account/SubscriptionButton";
+import { auth } from "../firebase-config";
+import useUserStatusStore from "../stores/userStore";
 
 const Account = () => {
   const [isLoading, setLoading] = useState(false);

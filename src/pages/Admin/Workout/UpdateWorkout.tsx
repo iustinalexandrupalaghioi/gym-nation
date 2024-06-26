@@ -1,8 +1,8 @@
-import NewWorkoutForm from "../../components/workouts/NewWorkout/NewWorkoutForm";
 import { useState } from "react";
-import Workout from "../../entities/Workout";
 import { useParams } from "react-router-dom";
-import useWorkout from "../../hooks/useWorkout";
+import NewWorkoutForm from "../../../components/workouts/NewWorkout/NewWorkoutForm";
+import Workout from "../../../entities/Workout";
+import useWorkout from "../../../hooks/Workout/useWorkout";
 
 const UpdateWorkout = () => {
   const { titleSlug } = useParams();
