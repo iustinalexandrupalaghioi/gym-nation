@@ -1,5 +1,4 @@
 import { MdDeleteForever } from "react-icons/md";
-import LoadingStatus from "../../../components/LoadingStatus";
 import PageContent from "../../../components/dashboard/PageContent";
 import NewGroupModal from "../../../components/workouts/NewWorkout/NewGroupModal";
 import { queryClient } from "../../../main";
@@ -8,6 +7,8 @@ import showToast, { Method } from "../../../utilities/showToast";
 import ErrorPage from "../../Client/ErrorPage";
 import useMuscles from "../../../hooks/Workout/useMuscles";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import LoadingStatus from "../../../components/LoadingStatus";
+import UpdateGroupModal from "../../../components/workouts/NewWorkout/UpdateGroupModal";
 
 const firebaseClient = new FirebaseClient("/muscles");
 const GroupMusclePage = () => {
@@ -17,29 +18,31 @@ const GroupMusclePage = () => {
   return (
     <PageContent pageTitle="Grupele musculare salvate">
       <NewGroupModal styleClass="btn btn-primary text-light my-2  d-flex gap-1 align-items-center" />
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Denumire</th>
-            <th>Acțiuni</th>
-          </tr>
-        </thead>
-        <tbody>
-          {isLoading ? (
+      {isLoading ? (
+        <LoadingStatus />
+      ) : muscles && muscles.result.length > 0 ? (
+        <table className="table table-hover">
+          <thead>
             <tr>
-              <LoadingStatus />
+              <th>#</th>
+              <th>Denumire</th>
+              <th>Acțiuni</th>
             </tr>
-          ) : (
-            muscles?.result.map(
+          </thead>
+          <tbody>
+            {muscles?.result.map(
               (
                 group: QueryDocumentSnapshot<DocumentData, DocumentData>,
                 index: number
               ) => (
-                <tr>
+                <tr key={group.id}>
                   <td>{index + 1}</td>
                   <td>{group.data().name}</td>
                   <td className="d-inline-flex gap-2">
+                    <UpdateGroupModal
+                      modalId={`updateGroup-${group.data().slug}`}
+                      docId={group.id}
+                    />
                     <button
                       onClick={async () => {
                         const result = await firebaseClient.delete(group.id);
@@ -65,10 +68,12 @@ const GroupMusclePage = () => {
                   </td>
                 </tr>
               )
-            )
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      ) : (
+        <h2>Nu sunt grupe musculare de afișat</h2>
+      )}
     </PageContent>
   );
 };
