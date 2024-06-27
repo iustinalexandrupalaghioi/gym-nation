@@ -41,7 +41,7 @@ const GroupMusclePage = () => {
                   <td className="d-inline-flex gap-2">
                     <UpdateGroupModal
                       modalId={`updateGroup-${group.data().slug}`}
-                      docId={group.id}
+                      docId={group.data().slug}
                     />
                     <button
                       onClick={async () => {

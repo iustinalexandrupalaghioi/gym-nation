@@ -8,10 +8,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import showToast, { Method } from "../../../utilities/showToast";
 import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
-import useMuscles from "../../../hooks/Workout/useMuscles";
+import useMuscle from "../../../hooks/Workout/useMuscle";
 const schema = z.object({
   muscleGroup: z.string().min(5, {
-    message: "O grupă nouă de mușchi ar trebui să aibă cel puțin 5 caractere.",
+    message:
+      "Denumirea unei grupe de mușchi ar trebui să aibă cel puțin 5 caractere.",
   }),
 });
 
@@ -24,13 +25,14 @@ interface Props {
   docId: string;
 }
 const UpdateGroupModal = ({ modalId, docId }: Props) => {
-  const { data: muscles } = useMuscles();
-  const group = muscles?.result.find((g) => g.id === docId);
+  const { data } = useMuscle(docId);
+  const group = data?.result[0];
   const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   // populate form fields with data from firestore
@@ -50,7 +52,10 @@ const UpdateGroupModal = ({ modalId, docId }: Props) => {
       return response;
     },
     onSuccess: async () => {
-      showToast("Grupa musculară a fost actualizat cu succes!", Method.Success);
+      showToast(
+        "Grupa musculară a fost actualizată cu succes!",
+        Method.Success
+      );
       await queryClient.invalidateQueries({ queryKey: ["muscles"] });
     },
     onError: () => {
@@ -67,8 +72,11 @@ const UpdateGroupModal = ({ modalId, docId }: Props) => {
       name: data.muscleGroup,
       slug: muscleGroupSlug,
     };
-
-    await updateGroup(newGroup);
+    try {
+      await updateGroup(newGroup);
+    } finally {
+      reset();
+    }
   };
 
   return (
