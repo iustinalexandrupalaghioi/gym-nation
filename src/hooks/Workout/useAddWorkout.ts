@@ -13,6 +13,8 @@ import Workout from "../../entities/Workout";
 import FirebaseClient from "../../utilities/firebase-client";
 import showToast, { Method } from "../../utilities/showToast";
 import useGetFileURL from "../useGetFileURL";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 interface Errors {
   title: string;
   workoutDescription: string;
@@ -33,6 +35,8 @@ const useAddWorkout = (
     sections: "",
     exercises: "",
   };
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const fileInputRefImage = useRef<FileUpload>(null);
   const selectInputRef = useRef<HTMLSelectElement>(null);
@@ -117,7 +121,10 @@ const useAddWorkout = (
       if (selectInputRef.current) {
         selectInputRef.current.value = "";
       }
-      showToast("Antrenamentul a fost adăugat cu succes", Method.Success);
+      await queryClient.invalidateQueries({ queryKey: ["workouts"] });
+      showToast("Antrenamentul a fost adăugat cu succes", Method.Success, () =>
+        navigate("/admin/workouts")
+      );
     } catch (error: any) {
       console.error(error.message);
       showToast(

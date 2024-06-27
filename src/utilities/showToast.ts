@@ -3,6 +3,7 @@ export enum Method {
   Success = "success",
   Error = "error",
   Warning = "warning",
+  Info = "info",
 }
 const showToast = (
   message: string,
@@ -32,6 +33,9 @@ const showToast = (
       break;
     case Method.Warning:
       toast.warning(message, options);
+      break;
+    case Method.Info:
+      toast.info(message, options);
       break;
     default:
       toast.info(message, options);
