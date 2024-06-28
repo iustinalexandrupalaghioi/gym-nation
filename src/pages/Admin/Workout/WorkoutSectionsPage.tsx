@@ -1,10 +1,11 @@
-import { MdRemoveRedEye, MdEdit, MdDeleteForever } from "react-icons/md";
+import { MdRemoveRedEye, MdDeleteForever } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import LoadingStatus from "../../../components/LoadingStatus";
 import PageContent from "../../../components/dashboard/PageContent";
 import { Section } from "../../../entities/Workout";
 import ErrorPage from "../../Client/ErrorPage";
 import useWorkout from "../../../hooks/Workout/useWorkout";
+import UpdateSectionModal from "../../../components/workouts/NewWorkout/UpdateSectionModal";
 
 const WorkoutSectionsPage = () => {
   const { titleSlug } = useParams();
@@ -45,9 +46,11 @@ const WorkoutSectionsPage = () => {
                 >
                   <MdRemoveRedEye />
                 </Link>
-                <button className="btn btn-outline-info d-inline-flex align-items-center justify-content-center">
-                  <MdEdit />
-                </button>
+                <UpdateSectionModal
+                  modalId={`sectionId-${section.id}`}
+                  workoutId={workout?.id}
+                  section={section}
+                />
                 <button
                   title="Șterge secțiunea"
                   onClick={async () => {
