@@ -60,6 +60,9 @@ const AdminWorkoutsPage = () => {
                       <MdEdit />
                     </Link>
                     <DeleteModal
+                      successMessage="Antrenamentul a fost șters cu succes!"
+                      errorMessage="Nu s-a putut efectua acțiunea de șterege."
+                      queryKey="workouts"
                       question="Ești sigur că vrei să ștergi antrenamentul?"
                       modalId="deleteWorkoutModal"
                       docId={workout.id}

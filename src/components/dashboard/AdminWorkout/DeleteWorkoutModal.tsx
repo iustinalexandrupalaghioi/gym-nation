@@ -8,17 +8,28 @@ interface Props {
   docId: string;
   collection: string;
   question: string;
+  errorMessage: string;
+  successMessage: string;
+  queryKey: string;
 }
-const DeleteModal = ({ modalId, docId, collection, question }: Props) => {
+const DeleteModal = ({
+  modalId,
+  docId,
+  collection,
+  question,
+  errorMessage,
+  successMessage,
+  queryKey,
+}: Props) => {
   const queryClient = useQueryClient();
   const firebaseClient = new FirebaseClient(collection);
   const handleDelete = async () => {
     const response = await firebaseClient.delete(docId);
     if (response) {
-      queryClient.invalidateQueries({ queryKey: ["workouts"] });
-      showToast("Antrenamentul a fost șters cu succes", Method.Success);
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+      showToast(successMessage, Method.Success);
     } else {
-      showToast("Antrenamentul nu poate fi șters", Method.Error);
+      showToast(errorMessage, Method.Error);
     }
   };
   return (
@@ -32,7 +43,7 @@ const DeleteModal = ({ modalId, docId, collection, question }: Props) => {
       </button>
       <div
         className="modal fade"
-        id="deleteWorkoutModal"
+        id={modalId}
         tabIndex={-1}
         data-bs-backdrop="static"
         data-bs-keyboard="false"
@@ -52,8 +63,8 @@ const DeleteModal = ({ modalId, docId, collection, question }: Props) => {
             <div className="modal-body bg-body-tertiary">
               <p className="mb-2">{question}</p>
               <p className="text-danger">
-                Efectele aceastei acțiuni nu pot fi anulate și va duce la
-                pierderea completă datelor.
+                Efectele aceastei acțiuni sunt ireversibile, iar datele șterse
+                nu vor putea fi recuperate.
               </p>
               <div className="d-flex gap-2 justify-content-end">
                 <button

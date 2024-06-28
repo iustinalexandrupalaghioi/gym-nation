@@ -155,7 +155,7 @@ const UpdateWorkoutForm = () => {
         <button
           type="button"
           className="btn btn-outline-info me-2"
-          onClick={() => navigate(`/admin/workouts/${titleSlug}`)}
+          onClick={() => navigate(`/admin/workouts`)}
         >
           Anulează
         </button>

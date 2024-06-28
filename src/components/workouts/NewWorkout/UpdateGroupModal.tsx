@@ -147,6 +147,8 @@ const UpdateGroupModal = ({ modalId, docId }: Props) => {
                   ) : (
                     <button
                       type="submit"
+                      data-bs-toggle="modal"
+                      data-bs-target={`#${modalId}`}
                       className="btn btn-primary text-light"
                     >
                       Salvează modificările

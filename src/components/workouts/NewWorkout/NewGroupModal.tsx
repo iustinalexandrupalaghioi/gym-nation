@@ -9,6 +9,7 @@ import showToast, { Method } from "../../../utilities/showToast";
 import ToggleModalButton from "../../dashboard/ToggleModalButton";
 import Modal from "../../dashboard/Modal";
 import LoadingButton from "../../account/LoadingButton";
+import { useMutation } from "@tanstack/react-query";
 
 const schema = z.object({
   muscleGroup: z.string().min(5, {
@@ -32,20 +33,31 @@ const NewGroupModal = ({ styleClass }: Props) => {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
+  // define mutation function and rename it to updateGroup
+  const { mutateAsync: createGroup } = useMutation({
+    mutationFn: async (newGroup: any) => {
+      await firebaseClient.post(newGroup);
+    },
+    onSuccess: async () => {
+      showToast("Grupa musculară a fost adăugată cu succes!", Method.Success);
+      await queryClient.invalidateQueries({ queryKey: ["muscles"] });
+    },
+    onError: () => {
+      showToast("Nu s-a putut efectua acțiunea de actualizare.", Method.Error);
+    },
+  });
   const onSubmit = async (data: FormData) => {
     let muscleGroupSlug = slugify(data.muscleGroup, {
       replacement: "-",
       lower: true,
     });
+    const newGroup = {
+      name: data.muscleGroup,
+      slug: muscleGroupSlug,
+    };
+
     try {
-      await firebaseClient.post({
-        name: data.muscleGroup,
-        slug: muscleGroupSlug,
-      });
-      await queryClient.invalidateQueries({ queryKey: ["muscles"] });
-      showToast("Grupa de mușchi a fost adaugata cu succes!", Method.Success);
-    } catch (error: any) {
-      showToast("Eroare la adaugarea noii grupe musculare.", Method.Error);
+      await createGroup(newGroup);
     } finally {
       reset();
     }
@@ -86,6 +98,7 @@ const NewGroupModal = ({ styleClass }: Props) => {
               type="button"
               className="btn btn-outline-info"
               data-bs-dismiss="modal"
+              data-bs-toggle="modal"
               onClick={() => setActive(false)}
             >
               Anulează
@@ -96,7 +109,11 @@ const NewGroupModal = ({ styleClass }: Props) => {
                 textContent="Procesare..."
               />
             ) : (
-              <button type="submit" className="btn btn-primary text-light">
+              <button
+                data-bs-dismiss="modal"
+                type="submit"
+                className="btn btn-primary text-light"
+              >
                 Adaugă
               </button>
             )}
