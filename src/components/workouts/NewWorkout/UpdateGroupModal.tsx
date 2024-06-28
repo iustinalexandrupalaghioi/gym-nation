@@ -7,8 +7,8 @@ import FirebaseClient from "../../../utilities/firebase-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import showToast, { Method } from "../../../utilities/showToast";
 import { useEffect } from "react";
-import { MdEdit } from "react-icons/md";
 import useMuscle from "../../../hooks/Workout/useMuscle";
+import { MdEdit } from "react-icons/md";
 const schema = z.object({
   muscleGroup: z.string().min(5, {
     message:
@@ -22,10 +22,10 @@ const firebaseClient = new FirebaseClient("/muscles");
 
 interface Props {
   modalId: string;
-  docId: string;
+  groupSlug: string;
 }
-const UpdateGroupModal = ({ modalId, docId }: Props) => {
-  const { data } = useMuscle(docId);
+const UpdateGroupModal = ({ modalId, groupSlug }: Props) => {
+  const { data } = useMuscle(groupSlug);
   const group = data?.result[0];
   const queryClient = useQueryClient();
   const {
@@ -88,7 +88,6 @@ const UpdateGroupModal = ({ modalId, docId }: Props) => {
       >
         <MdEdit />
       </button>
-
       <div
         className="modal fade"
         id={modalId}

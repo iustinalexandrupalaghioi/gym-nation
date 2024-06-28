@@ -37,7 +37,7 @@ const GroupMusclePage = () => {
                   <td className="d-inline-flex gap-2">
                     <UpdateGroupModal
                       modalId={`updateGroup-${group.data().slug}`}
-                      docId={group.data().slug}
+                      groupSlug={group.data().slug}
                     />
                     <DeleteModal
                       successMessage="Grupa musculară a fost ștearsă cu succes!"
