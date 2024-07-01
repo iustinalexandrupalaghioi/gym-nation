@@ -6,11 +6,16 @@ import { Section } from "../../../entities/Workout";
 import ErrorPage from "../../Client/ErrorPage";
 import useWorkout from "../../../hooks/Workout/useWorkout";
 import UpdateSectionModal from "../../../components/workouts/NewWorkout/UpdateSectionModal";
+import { useQueryClient } from "@tanstack/react-query";
 
 const WorkoutSectionsPage = () => {
   const { titleSlug } = useParams();
+  const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useWorkout("titleSlug", titleSlug!);
+  const { data, isLoading, error, refetch } = useWorkout(
+    "titleSlug",
+    titleSlug!
+  );
   const workout = data?.result[0];
   const sections: Section[] = workout?.data().sections;
 
@@ -47,6 +52,12 @@ const WorkoutSectionsPage = () => {
                   <MdRemoveRedEye />
                 </Link>
                 <UpdateSectionModal
+                  onUpdateSection={async () => {
+                    refetch();
+                    await queryClient.refetchQueries({
+                      queryKey: ["workouts"],
+                    });
+                  }}
                   modalId={`sectionId-${section.id}`}
                   workoutId={workout?.id}
                   section={section}

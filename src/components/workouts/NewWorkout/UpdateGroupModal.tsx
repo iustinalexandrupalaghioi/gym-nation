@@ -56,7 +56,7 @@ const UpdateGroupModal = ({ modalId, groupSlug }: Props) => {
         "Grupa musculară a fost actualizată cu succes!",
         Method.Success
       );
-      await queryClient.invalidateQueries({ queryKey: ["muscles"] });
+      await queryClient.refetchQueries({ queryKey: ["muscles"] });
     },
     onError: () => {
       showToast("Nu s-a putut efectua acțiunea de actualizare.", Method.Error);

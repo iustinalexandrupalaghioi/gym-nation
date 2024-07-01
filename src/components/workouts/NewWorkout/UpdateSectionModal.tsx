@@ -1,6 +1,6 @@
 import { MdEdit } from "react-icons/md";
 import LoadingButton from "../../account/LoadingButton";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Section } from "../../../entities/Workout";
 import FirebaseClient from "../../../utilities/firebase-client";
 import { DocumentData } from "firebase/firestore";
+import useFetchWorkouts from "../../../hooks/Workout/useFetchWorkouts";
 
 const schema = z.object({
   name: z.string().min(5, {
@@ -23,9 +24,16 @@ interface Props {
   modalId: string;
   section: Section;
   workoutId: string | undefined;
+  onUpdateSection: () => void;
 }
-const UpdateSectionModal = ({ modalId, section, workoutId }: Props) => {
-  const queryClient = useQueryClient();
+const UpdateSectionModal = ({
+  modalId,
+  section,
+  workoutId,
+  onUpdateSection,
+}: Props) => {
+  const { data: workouts } = useFetchWorkouts();
+  const currentWorkout = workouts?.result.find((w) => w.id === workoutId);
   const {
     register,
     handleSubmit,
@@ -33,6 +41,7 @@ const UpdateSectionModal = ({ modalId, section, workoutId }: Props) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
   // populate form fields with data from firestore
   useEffect(() => {
     if (section) {
@@ -40,32 +49,40 @@ const UpdateSectionModal = ({ modalId, section, workoutId }: Props) => {
     }
   }, [section]);
 
-  // define mutation function and rename it to updateGroup
+  // define mutation function and rename it to updateSection
   const { mutateAsync: updateSection } = useMutation({
-    mutationFn: async (updatedName: DocumentData) => {
-      const response = await firebaseClient.update(workoutId!, updatedName);
+    mutationFn: async (updatedWorkout: DocumentData) => {
+      const response = await firebaseClient.update(workoutId!, updatedWorkout);
       if (!response) {
-        throw new Error("Failed to update muscle group");
+        throw new Error("Failed to update section");
       }
       return response;
     },
     onSuccess: async () => {
-      showToast(
-        "Grupa musculară a fost actualizată cu succes!",
-        Method.Success
-      );
-      await queryClient.invalidateQueries({ queryKey: ["muscles"] });
+      showToast("Secșiunea a fost actualizată cu succes!", Method.Success);
+      onUpdateSection();
     },
     onError: () => {
       showToast("Nu s-a putut efectua acțiunea de actualizare.", Method.Error);
     },
   });
   const onSubmit = async (data: FormData) => {
-    const newSection = {
-      name: data.name,
+    const updatedSections = currentWorkout
+      ?.data()
+      .sections.map((s: Section) => {
+        if (s.id === section.id) {
+          return { ...s, name: data.name };
+        } else {
+          return s;
+        }
+      });
+
+    const newWorkout = {
+      ...currentWorkout?.data(),
+      sections: updatedSections,
     };
     try {
-      await updateSection(newSection);
+      await updateSection(newWorkout);
     } finally {
       reset();
     }
