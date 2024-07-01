@@ -22,66 +22,74 @@ const WorkoutSectionsPage = () => {
 
   if (error) return <ErrorPage />;
   if (isLoading) return <LoadingStatus />;
-  return (
-    <PageContent pageTitle="Descoperă Secțiunile">
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Denumire</th>
-            <th>Nr. exerciții</th>
-            <th>Acțiuni</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          {sections.map((section, index) => (
-            <tr key={section.id}>
-              <td className="text-body-secondary">{index + 1}</td>
-              <td>{section.name}</td>
-              <td className="text-body-secondary">
-                {section.exercises.length}
-              </td>
-              <td className="d-flex gap-2">
-                <Link
-                  title="Vezi exercițiile"
-                  to={`/admin/workouts/${workout!.data().titleSlug}/sections/${
-                    section.id
-                  }`}
-                  className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
-                >
-                  <MdRemoveRedEye />
-                </Link>
-                <UpdateSectionModal
-                  onUpdateSection={async () => {
-                    refetch();
-                    await queryClient.refetchQueries({
-                      queryKey: ["workouts"],
-                    });
-                  }}
-                  modalId={`sectionId-${section.id}`}
-                  workoutId={workout?.id}
-                  section={section}
-                />
-                <DeleteSectionModal
-                  modalId={`deleteSection-${section.id}`}
-                  successMessage="Secțiunea a fost ștearsă cu succes!"
-                  errorMessage="Acțiunea de ștergere nu a putut fi realizată"
-                  question="Ești sigur că vrei să ștergi această secțiune?"
-                  sectionIdToDelete={section.id}
-                  workout={workout}
-                  onDeleteSection={() =>
-                    queryClient.refetchQueries({
-                      queryKey: ["titleSlug", titleSlug],
-                    })
-                  }
-                  queryKey="workouts"
-                />
-              </td>
+  const pageTitle =
+    workout?.data().sections.length > 0
+      ? "Secțiunile antrenamentului"
+      : "Nu sunt secțiuni de afișat";
+  return (
+    <PageContent pageTitle={pageTitle}>
+      {workout?.data().sections.length > 0 && (
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Denumire</th>
+              <th>Nr. exerciții</th>
+              <th>Acțiuni</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {sections.map((section, index) => (
+              <tr key={section.id}>
+                <td className="text-body-secondary">{index + 1}</td>
+                <td>{section.name}</td>
+                <td className="text-body-secondary">
+                  {section.exercises.length}
+                </td>
+                <td className="d-flex gap-2">
+                  <Link
+                    title="Vezi exercițiile"
+                    to={`/admin/workouts/${
+                      workout!.data().titleSlug
+                    }/sections/${section.id}`}
+                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                  >
+                    <MdRemoveRedEye />
+                  </Link>
+                  <UpdateSectionModal
+                    onUpdateSection={async () => {
+                      refetch();
+                      await queryClient.refetchQueries({
+                        queryKey: ["workouts"],
+                      });
+                    }}
+                    modalId={`sectionId-${section.id}`}
+                    workoutId={workout?.id}
+                    section={section}
+                  />
+                  <DeleteSectionModal
+                    modalId={`deleteSection-${section.id}`}
+                    successMessage="Secțiunea a fost ștearsă cu succes!"
+                    errorMessage="Acțiunea de ștergere nu a putut fi realizată"
+                    question="Ești sigur că vrei să ștergi această secțiune?"
+                    sectionIdToDelete={section.id}
+                    workout={workout}
+                    onDeleteSection={async () => {
+                      await refetch();
+                      await queryClient.refetchQueries({
+                        queryKey: ["workouts"],
+                      });
+                    }}
+                    queryKey="workouts"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </PageContent>
   );
 };
