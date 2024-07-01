@@ -25,6 +25,7 @@ const WorkoutExercisesPage = () => {
             <th>#</th>
             <th>Nume</th>
             <th>Grupa musculară</th>
+            <th>Acțiuni</th>
           </tr>
         </thead>
 

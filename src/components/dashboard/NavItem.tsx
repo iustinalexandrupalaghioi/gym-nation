@@ -9,7 +9,7 @@ interface Props {
 const NavItem = ({ pathname, targetPath, children }: Props) => {
   return (
     <NavLink
-      className={`nav-link hover hover-primary d-flex align-items-center gap-2 ${
+      className={`nav-link hover hover-primary d-flex align-items-center gap-1 ${
         pathname === targetPath ? "text-primary" : "text-body-secondary"
       }`}
       to={targetPath ? targetPath : pathname}

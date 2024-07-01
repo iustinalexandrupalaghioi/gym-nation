@@ -20,7 +20,7 @@ const ToggleModalButton = ({
       className={
         styleClass
           ? styleClass
-          : `nav-link hover hover-primary text-start d-flex align-items-center gap-2 ${
+          : `nav-link hover hover-primary text-start d-flex align-items-center gap-1 ${
               isActive ? "text-primary" : "text-body-secondary"
             }`
       }
