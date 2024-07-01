@@ -1,7 +1,7 @@
 import PageContent from "../../../components/dashboard/PageContent";
-import UpdateWorkoutForm from "../../../components/workouts/updateWorkout/UpdateWorkoutForm";
+import UpdateWorkoutForm from "../../../components/workouts/NewWorkout/UpdateWorkoutForm";
 
-const UpdateWorkout = () => {
+const UpdateWorkoutPage = () => {
   return (
     <PageContent pageTitle="Actualizează antrenamentul">
       <UpdateWorkoutForm />
@@ -9,4 +9,4 @@ const UpdateWorkout = () => {
   );
 };
 
-export default UpdateWorkout;
+export default UpdateWorkoutPage;

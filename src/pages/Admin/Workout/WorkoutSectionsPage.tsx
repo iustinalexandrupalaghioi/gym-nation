@@ -1,4 +1,4 @@
-import { MdRemoveRedEye, MdDeleteForever } from "react-icons/md";
+import { MdRemoveRedEye } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import LoadingStatus from "../../../components/LoadingStatus";
 import PageContent from "../../../components/dashboard/PageContent";
@@ -7,6 +7,7 @@ import ErrorPage from "../../Client/ErrorPage";
 import useWorkout from "../../../hooks/Workout/useWorkout";
 import UpdateSectionModal from "../../../components/workouts/NewWorkout/UpdateSectionModal";
 import { useQueryClient } from "@tanstack/react-query";
+import DeleteSectionModal from "../../../components/dashboard/AdminWorkout/DeleteSectionModal";
 
 const WorkoutSectionsPage = () => {
   const { titleSlug } = useParams();
@@ -62,15 +63,20 @@ const WorkoutSectionsPage = () => {
                   workoutId={workout?.id}
                   section={section}
                 />
-                <button
-                  title="Șterge secțiunea"
-                  onClick={async () => {
-                    console.log("deleted");
-                  }}
-                  className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                >
-                  <MdDeleteForever />
-                </button>
+                <DeleteSectionModal
+                  modalId={`deleteSection-${section.id}`}
+                  successMessage="Secțiunea a fost ștearsă cu succes!"
+                  errorMessage="Acțiunea de ștergere nu a putut fi realizată"
+                  question="Ești sigur că vrei să ștergi această secțiune?"
+                  sectionIdToDelete={section.id}
+                  workout={workout}
+                  onDeleteSection={() =>
+                    queryClient.refetchQueries({
+                      queryKey: ["titleSlug", titleSlug],
+                    })
+                  }
+                  queryKey="workouts"
+                />
               </td>
             </tr>
           ))}

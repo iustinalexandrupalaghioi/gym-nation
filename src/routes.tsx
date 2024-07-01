@@ -12,7 +12,6 @@ import Home from "./pages/Admin/Home";
 import AdminWorkoutsPage from "./pages/Admin/Workout/AdminWorkoutsPage";
 import GroupMusclePage from "./pages/Admin/Workout/GroupMusclePage";
 import NewWorkoutPage from "./pages/Admin/Workout/NewWorkoutPage";
-import UpdateWorkout from "./pages/Admin/Workout/UpdateWorkout";
 import WorkoutExercisesPage from "./pages/Admin/Workout/WorkoutExercisesPage";
 import WorkoutSectionsPage from "./pages/Admin/Workout/WorkoutSectionsPage";
 import BlogArticlePage from "./pages/Client/Blog/BlogArticlePage";
@@ -21,6 +20,7 @@ import ErrorPage from "./pages/Client/ErrorPage";
 import SingleWorkoutPage from "./pages/Client/Workout/SingleWorkoutPage";
 import WorkoutsPage from "./pages/Client/Workout/WorkoutsPage";
 import RegisterPage from "./pages/RegisterPage";
+import UpdateWorkoutPage from "./pages/Admin/Workout/UpdateWorkoutPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -39,7 +39,10 @@ const router = createBrowserRouter([
       { path: "/admin/blog/new", element: <NewBlogPage /> },
       { path: "/admin/blog/categories", element: <CategoriesPage /> },
       { path: "/admin/workouts", element: <AdminWorkoutsPage /> },
-      { path: "/admin/workouts/:titleSlug/edit", element: <UpdateWorkout /> },
+      {
+        path: "/admin/workouts/:titleSlug/edit",
+        element: <UpdateWorkoutPage />,
+      },
 
       {
         path: "/admin/workouts/:titleSlug/sections",
@@ -51,6 +54,7 @@ const router = createBrowserRouter([
       },
 
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
+
       { path: "/admin/workouts/muscles", element: <GroupMusclePage /> },
       { path: "/admin/customers", element: <CustomersPage /> },
     ],

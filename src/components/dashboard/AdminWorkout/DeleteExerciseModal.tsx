@@ -1,38 +1,70 @@
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { MdDeleteForever } from "react-icons/md";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import FirebaseClient from "../../../utilities/firebase-client";
 import showToast, { Method } from "../../../utilities/showToast";
-import { useQueryClient } from "@tanstack/react-query";
+import { Section } from "../../../entities/Workout";
 
 interface Props {
   modalId: string;
-  docId: string;
-  collection: string;
   question: string;
-  errorMessage: string;
   successMessage: string;
+  errorMessage: string;
+  sectionIdToDelete: string;
+  exerciseNameSlugToDelete: string | undefined;
   queryKey: string;
+  workout: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined;
+  onDeleteExercise: () => void;
 }
-const DeleteModal = ({
+const DeleteExerciseModal = ({
   modalId,
-  docId,
-  collection,
   question,
-  errorMessage,
   successMessage,
+  errorMessage,
+  sectionIdToDelete,
+  exerciseNameSlugToDelete,
+  onDeleteExercise,
   queryKey,
+  workout,
 }: Props) => {
+  const firebaseClient = new FirebaseClient(queryKey);
   const queryClient = useQueryClient();
-  const firebaseClient = new FirebaseClient(collection);
+  // define mutation function and rename it to updateWorkout
+  const { mutateAsync: updateWorkout } = useMutation({
+    mutationFn: async (updatedWorkout: any) => {
+      const response = await firebaseClient.update(workout!.id, updatedWorkout);
+      if (!response) {
+        throw new Error("Failed to update workout");
+      }
+      return response;
+    },
+    onSuccess: async () => {
+      showToast(successMessage, Method.Success);
+      await queryClient.refetchQueries({ queryKey: [queryKey] });
+    },
+    onError: () => {
+      showToast(errorMessage, Method.Error);
+    },
+  });
 
   const handleDelete = async () => {
-    const response = await firebaseClient.delete(docId);
-    if (response) {
-      queryClient.refetchQueries({ queryKey: [queryKey] });
-      showToast(successMessage, Method.Success);
-    } else {
-      showToast(errorMessage, Method.Error);
+    if (workout) {
+      const updatedWorkout = { ...workout.data() };
+      updatedWorkout.sections = updatedWorkout.sections.map(
+        (section: Section) => {
+          if (section.id === parseInt(sectionIdToDelete)) {
+            section.exercises = section.exercises.filter(
+              (exercise) => exercise.nameSlug !== exerciseNameSlugToDelete
+            );
+          }
+          return section;
+        }
+      );
+      await updateWorkout(updatedWorkout);
+      onDeleteExercise();
     }
   };
+
   return (
     <>
       <button
@@ -95,4 +127,4 @@ const DeleteModal = ({
   );
 };
 
-export default DeleteModal;
+export default DeleteExerciseModal;
