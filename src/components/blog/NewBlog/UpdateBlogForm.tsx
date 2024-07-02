@@ -2,7 +2,7 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import useCategories from "../../../hooks/Blog/useCategories";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import usePost from "../../../hooks/Blog/usePost";
 import {
   ChangeEvent,
@@ -324,9 +324,9 @@ const UpdateBlogForm = () => {
         </div>
       </div>
       <div className="container-fluid mt-3 d-flex justify-content-end gap-2">
-        <button type="button" className="btn btn-outline-info">
+        <Link to={"/admin/blog"} type="button" className="btn btn-outline-info">
           Anulează
-        </button>
+        </Link>
         {loadingStatus ? (
           <LoadingButton
             textContent="Procesare..."
