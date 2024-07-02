@@ -8,6 +8,7 @@ import ViewExerciseModal from "../../../components/dashboard/AdminWorkout/ViewEx
 import { queryClient } from "../../../main";
 import DeleteExerciseModal from "../../../components/dashboard/AdminWorkout/DeleteExerciseModal";
 import PageContent from "../../../components/dashboard/PageContent";
+import UpdateExerciseModal from "../../../components/workouts/NewWorkout/UpdateExercise";
 
 const WorkoutExercisesPage = () => {
   const { titleSlug, sectionId } = useParams();
@@ -56,6 +57,18 @@ const WorkoutExercisesPage = () => {
                   <ViewExerciseModal
                     exercise={exercise}
                     exerciseIndex={index}
+                  />
+                  <UpdateExerciseModal
+                    onSuccessUpdate={async () => {
+                      await queryClient.refetchQueries({
+                        queryKey: ["workouts"],
+                      });
+                      refetch();
+                    }}
+                    initialExercise={exercise}
+                    modalId={`updateExercise-${exercise.nameSlug}`}
+                    sections={sections}
+                    workout={workout}
                   />
                   <DeleteExerciseModal
                     modalId={`deleteExercise-${exercise.nameSlug}`}
