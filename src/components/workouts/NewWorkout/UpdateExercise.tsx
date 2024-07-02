@@ -365,28 +365,6 @@ const UpdateExerciseModal = ({
                     type="button"
                     className="btn btn-outline-info"
                     data-bs-dismiss="modal"
-                    onClick={() => {
-                      setExercise({
-                        sectionId: "",
-                        exerciseName: "",
-                        muscleSlug: "",
-                        exerciseDescription: "",
-                        video: null,
-                      });
-
-                      if (fileInputRefVideo.current) {
-                        fileInputRefVideo.current.setFiles([]);
-                      }
-
-                      if (selectInputRefSection.current) {
-                        selectInputRefSection.current.value = "";
-                      }
-
-                      if (selectInputRefMuscle.current) {
-                        selectInputRefMuscle.current.value = "";
-                      }
-                      setErrors(initialErrorState);
-                    }}
                   >
                     Anulează
                   </button>
