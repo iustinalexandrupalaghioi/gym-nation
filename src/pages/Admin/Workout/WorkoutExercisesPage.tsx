@@ -5,7 +5,6 @@ import ErrorPage from "../../Client/ErrorPage";
 import useWorkout from "../../../hooks/Workout/useWorkout";
 import { useEffect, useState } from "react";
 import ViewExerciseModal from "../../../components/dashboard/AdminWorkout/ViewExerciseModal";
-import UpdateExerciseModal from "../../../components/workouts/NewWorkout/UpdateExerciseForm";
 import { queryClient } from "../../../main";
 import DeleteExerciseModal from "../../../components/dashboard/AdminWorkout/DeleteExerciseModal";
 import PageContent from "../../../components/dashboard/PageContent";
@@ -57,16 +56,6 @@ const WorkoutExercisesPage = () => {
                   <ViewExerciseModal
                     exercise={exercise}
                     exerciseIndex={index}
-                  />
-                  <UpdateExerciseModal
-                    onUpdateExercise={() => {
-                      refetch();
-                      queryClient.refetchQueries({ queryKey: ["workouts"] });
-                    }}
-                    workout={workout}
-                    sections={sections}
-                    exercise={exercise}
-                    modalId={`updateExercise-${exercise.nameSlug}`}
                   />
                   <DeleteExerciseModal
                     modalId={`deleteExercise-${exercise.nameSlug}`}
