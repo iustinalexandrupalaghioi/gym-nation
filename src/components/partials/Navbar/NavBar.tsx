@@ -91,7 +91,7 @@ const NavBar = ({ styleClass }: Props) => {
                   {isAdmin ? (
                     <li className="mb-2">
                       <NavLink to="/admin" className="dropdown-item">
-                        Panou de Control
+                        Panou de Administrare
                       </NavLink>
                     </li>
                   ) : (

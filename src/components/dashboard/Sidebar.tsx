@@ -35,7 +35,7 @@ const Sidebar = ({ pathname }: Props) => {
           <ul className="nav flex-column">
             <li className="nav-item">
               <NavItem pathname={pathname} targetPath="/admin">
-                Panou de Control
+                Acasă
               </NavItem>
             </li>
 
