@@ -13,7 +13,7 @@ const ViewExerciseModal = ({
     <>
       <button
         title="Detalii exercițiu"
-        className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+        className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
         data-bs-toggle="modal"
         data-bs-target={`#exerciseModal-${exerciseIndex}`}
       >

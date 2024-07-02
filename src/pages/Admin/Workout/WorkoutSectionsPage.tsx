@@ -54,7 +54,7 @@ const WorkoutSectionsPage = () => {
                     to={`/admin/workouts/${
                       workout!.data().titleSlug
                     }/sections/${section.id}`}
-                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
                   >
                     <MdRemoveRedEye />
                   </Link>

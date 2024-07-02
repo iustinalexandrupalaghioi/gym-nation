@@ -49,13 +49,13 @@ const AdminWorkoutsPage = () => {
                       to={`/admin/workouts/${
                         workout.data().titleSlug
                       }/sections`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
                     >
                       <MdRemoveRedEye />
                     </Link>
                     <Link
                       to={`/admin/workouts/${workout.data().titleSlug}/edit`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
                     >
                       <MdEdit />
                     </Link>

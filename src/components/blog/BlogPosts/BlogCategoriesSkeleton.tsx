@@ -1,6 +1,6 @@
 const BlogCategoriesSkeleton = () => {
   return (
-    <div className="col-12 col-md-6 col-lg-4">
+    <div className="col-12 col-md-6 col-lg-4 d-none d-md-block">
       <div className="card bg-body-tertiary border-0 shadow">
         <div className="card-header bg-primary text-light">
           <h4 className="card-title placeholder-glow">
