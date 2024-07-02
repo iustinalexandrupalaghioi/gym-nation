@@ -1,20 +1,17 @@
 import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-const firebaseClient = new FirebaseClient("/posts");
-import { MdDeleteForever, MdRemoveRedEye } from "react-icons/md";
 import LoadingStatus from "../../../components/LoadingStatus";
 import PageContent from "../../../components/dashboard/PageContent";
 
-import { queryClient } from "../../../main";
 import useBlogQueryStore from "../../../stores/blogQueryStore";
-import FirebaseClient from "../../../utilities/firebase-client";
-import showToast, { Method } from "../../../utilities/showToast";
 import ErrorPage from "../../Client/ErrorPage";
 import useCategories from "../../../hooks/Blog/useCategories";
 import useFetchPosts from "../../../hooks/Blog/useFetchPosts";
 import useFetchPostsNumber from "../../../hooks/Blog/useFetchPostsNumber";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import DeleteModal from "../../../components/dashboard/AdminWorkout/DeleteWorkoutModal";
+import { MdRemoveRedEye } from "react-icons/md";
 
 export const BlogArticlesPage = () => {
   const blogQueryStore = useBlogQueryStore();
@@ -101,26 +98,15 @@ export const BlogArticlesPage = () => {
                     >
                       <MdRemoveRedEye />
                     </Link>
-                    <button
-                      title="Șterge articolul"
-                      onClick={async () => {
-                        const result = await firebaseClient.delete(post.id);
-                        if (result) {
-                          await queryClient.invalidateQueries({
-                            queryKey: ["posts"],
-                          });
-                          showToast("Articol șters cu succes!", Method.Success);
-                        } else {
-                          showToast(
-                            "Nu s-a putut efectua acțiunea de ștergere.",
-                            Method.Error
-                          );
-                        }
-                      }}
-                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                    >
-                      <MdDeleteForever />
-                    </button>
+                    <DeleteModal
+                      modalId={`deleteArticle-${post.data().titleSlug}`}
+                      docId={post.id}
+                      collection="/posts"
+                      question="Ești sigur că vrei să ștergi acest articol?"
+                      successMessage="Articol șters cu succes!"
+                      errorMessage="Nu s-a putut efectua acțiunea de ștergere."
+                      queryKey="posts"
+                    />
                   </td>
                 </tr>
               )

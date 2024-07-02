@@ -4,8 +4,8 @@ import { GrFormAdd } from "react-icons/gr";
 interface Props {
   textContent: string;
   modalId: string;
-  isActive: boolean;
-  setActive: React.Dispatch<SetStateAction<boolean>>;
+  isActive?: boolean;
+  setActive?: React.Dispatch<SetStateAction<boolean>>;
   styleClass?: string;
 }
 const ToggleModalButton = ({
@@ -24,7 +24,7 @@ const ToggleModalButton = ({
               isActive ? "text-primary" : "text-body-secondary"
             }`
       }
-      onClick={() => setActive(true)}
+      onClick={() => setActive && setActive(true)}
       data-bs-toggle="modal"
       data-bs-target={`#${modalId}`}
     >

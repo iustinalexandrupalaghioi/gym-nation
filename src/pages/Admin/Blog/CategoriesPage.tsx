@@ -1,16 +1,13 @@
-import { MdDeleteForever } from "react-icons/md";
 import LoadingStatus from "../../../components/LoadingStatus";
 import NewCategoryModal from "../../../components/blog/NewCategoryModal";
 import PageContent from "../../../components/dashboard/PageContent";
 
-import { queryClient } from "../../../main";
-import FirebaseClient from "../../../utilities/firebase-client";
-import showToast, { Method } from "../../../utilities/showToast";
 import ErrorPage from "../../Client/ErrorPage";
 import useCategories from "../../../hooks/Blog/useCategories";
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import UpdateCategoryModal from "../../../components/blog/UpdateCategoryModal";
+import DeleteModal from "../../../components/dashboard/AdminWorkout/DeleteWorkoutModal";
 
-const firebaseClient = new FirebaseClient("/categories");
 const CategoriesPage = () => {
   const { data: categories, error, isLoading } = useCategories();
 
@@ -29,34 +26,29 @@ const CategoriesPage = () => {
         </thead>
         <tbody>
           {categories?.result.map(
-            (category: DocumentData, index: number) =>
+            (
+              category: QueryDocumentSnapshot<DocumentData, DocumentData>,
+              index: number
+            ) =>
               category.data().slug && (
                 <tr key={category.id}>
                   <td className="text-body-secondary">{index + 1}</td>
                   <td>{category.data().name}</td>
                   <td className="d-inline-flex gap-2">
-                    <button
-                      onClick={async () => {
-                        const result = await firebaseClient.delete(category.id);
-                        if (result) {
-                          await queryClient.invalidateQueries({
-                            queryKey: ["categories"],
-                          });
-                          showToast(
-                            "Categorie ștearsă cu succes!",
-                            Method.Success
-                          );
-                        } else {
-                          showToast(
-                            "Nu s-a putut efectua acțiunea de ștergere.",
-                            Method.Error
-                          );
-                        }
-                      }}
-                      className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
-                    >
-                      <MdDeleteForever />
-                    </button>
+                    <UpdateCategoryModal
+                      modalId={`updateCategory-${category.data().slug}`}
+                      category={category}
+                    />
+
+                    <DeleteModal
+                      modalId={`deleteCategory-${category.data().slug}`}
+                      docId={category.id}
+                      collection="/categories"
+                      queryKey="categories"
+                      question="Ești sigur că vrei să ștergi această categorie?"
+                      successMessage="Categoria a fost ștearsă cu succes"
+                      errorMessage="Nu s-a putut efectua acțiunea de ștergere"
+                    />
                   </td>
                 </tr>
               )

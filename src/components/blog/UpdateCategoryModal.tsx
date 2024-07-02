@@ -1,15 +1,15 @@
 import slugify from "slugify";
 import FirebaseClient from "../../utilities/firebase-client";
-import ToggleModalButton from "../dashboard/ToggleModalButton";
 import Modal from "../dashboard/Modal";
 import showToast, { Method } from "../../utilities/showToast";
-import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { queryClient } from "../../main";
 import LoadingButton from "../account/LoadingButton";
-import useCategories from "../../hooks/Blog/useCategories";
+import { MdEdit } from "react-icons/md";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
 
 const schema = z.object({
   category: z.string().min(5, {
@@ -22,20 +22,21 @@ type FormData = z.infer<typeof schema>;
 const firebaseClient = new FirebaseClient("/categories");
 
 interface Props {
-  styleClass?: string;
+  modalId?: string;
+  category: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined;
 }
-const NewCategoryModal = ({ styleClass }: Props) => {
-  const [isActive, setActive] = useState(false);
-
+const UpdateCategoryModal = ({ modalId, category }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    setValue,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const { data: categories } = useCategories();
-  const newId = categories?.result ? categories.result.length : 999;
+  useEffect(() => {
+    if (category) setValue("category", category.data().name);
+  }, [category]);
 
   const onSubmit = async (data: FormData) => {
     let categorySlug = slugify(data.category, {
@@ -43,14 +44,14 @@ const NewCategoryModal = ({ styleClass }: Props) => {
       lower: true,
     });
     try {
-      await firebaseClient.post(
-        { name: data.category, slug: categorySlug },
-        newId.toString()
-      );
-      await queryClient.invalidateQueries({ queryKey: ["categories"] });
-      showToast("Categoria a fost adaugată cu succes!", Method.Success);
+      await firebaseClient.update(category!.id, {
+        name: data.category,
+        slug: categorySlug,
+      });
+      await queryClient.refetchQueries({ queryKey: ["categories"] });
+      showToast("Categoria a fost actualizată cu succes!", Method.Success);
     } catch (error: any) {
-      showToast("Eroare la adaugarea noii categorii.", Method.Error);
+      showToast("Categoria nu a putut fi actualizată.", Method.Error);
     } finally {
       reset();
     }
@@ -58,19 +59,15 @@ const NewCategoryModal = ({ styleClass }: Props) => {
 
   return (
     <>
-      <ToggleModalButton
-        isActive={isActive}
-        setActive={setActive}
-        styleClass={styleClass}
-        textContent="Adaugă Categorie"
-        modalId="newCategoryModal"
-      />
-
-      <Modal
-        modalId="newCategoryModal"
-        modalTitle="Adaugă o Categorie Nouă"
-        setActive={setActive}
+      <button
+        className="btn btn-outline-info d-inline-flex justify-content-center align-items-center"
+        data-bs-toggle="modal"
+        data-bs-target={`#${modalId}`}
       >
+        <MdEdit />
+      </button>
+
+      <Modal modalId={modalId!} modalTitle="Actualizează categoria">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-3">
             <label className="text-body-secondary" htmlFor="newCategory">
@@ -92,7 +89,6 @@ const NewCategoryModal = ({ styleClass }: Props) => {
               type="button"
               className="btn btn-outline-info"
               data-bs-dismiss="modal"
-              onClick={() => setActive(false)}
             >
               Anulează
             </button>
@@ -107,7 +103,7 @@ const NewCategoryModal = ({ styleClass }: Props) => {
                 data-bs-dismiss="modal"
                 className="btn btn-primary text-light"
               >
-                Adaugă
+                Salvează modificările
               </button>
             )}
           </div>
@@ -117,4 +113,4 @@ const NewCategoryModal = ({ styleClass }: Props) => {
   );
 };
 
-export default NewCategoryModal;
+export default UpdateCategoryModal;

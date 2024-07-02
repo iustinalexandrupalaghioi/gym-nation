@@ -3,7 +3,7 @@ import React, { ReactNode, SetStateAction } from "react";
 interface Props {
   modalId: string;
   modalTitle: string;
-  setActive: React.Dispatch<SetStateAction<boolean>>;
+  setActive?: React.Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
 }
 const Modal = ({ modalId, modalTitle, children, setActive }: Props) => {
@@ -31,7 +31,7 @@ const Modal = ({ modalId, modalTitle, children, setActive }: Props) => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={() => setActive(false)}
+              onClick={() => setActive && setActive(false)}
             ></button>
           </div>
           <div className="modal-body bg-body-tertiary">{children}</div>
