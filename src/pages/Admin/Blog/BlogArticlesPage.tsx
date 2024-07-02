@@ -11,7 +11,7 @@ import useFetchPosts from "../../../hooks/Blog/useFetchPosts";
 import useFetchPostsNumber from "../../../hooks/Blog/useFetchPostsNumber";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import DeleteModal from "../../../components/dashboard/AdminWorkout/DeleteWorkoutModal";
-import { MdRemoveRedEye } from "react-icons/md";
+import { MdEdit, MdRemoveRedEye } from "react-icons/md";
 
 export const BlogArticlesPage = () => {
   const blogQueryStore = useBlogQueryStore();
@@ -97,6 +97,13 @@ export const BlogArticlesPage = () => {
                       className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
                     >
                       <MdRemoveRedEye />
+                    </Link>
+                    <Link
+                      title="Modifică articolul"
+                      to={`/admin/blog/${post.data().titleSlug}/edit`}
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                    >
+                      <MdEdit />
                     </Link>
                     <DeleteModal
                       modalId={`deleteArticle-${post.data().titleSlug}`}

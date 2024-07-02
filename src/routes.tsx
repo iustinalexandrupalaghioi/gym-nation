@@ -21,6 +21,7 @@ import SingleWorkoutPage from "./pages/Client/Workout/SingleWorkoutPage";
 import WorkoutsPage from "./pages/Client/Workout/WorkoutsPage";
 import RegisterPage from "./pages/RegisterPage";
 import UpdateWorkoutPage from "./pages/Admin/Workout/UpdateWorkoutPage";
+import UpdateArticlePage from "./pages/Admin/Blog/UpdateArticlePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -37,13 +38,13 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/admin/blog", element: <BlogArticlesPage /> },
       { path: "/admin/blog/new", element: <NewBlogPage /> },
+      { path: "/admin/blog/:titleSlug/edit", element: <UpdateArticlePage /> },
       { path: "/admin/blog/categories", element: <CategoriesPage /> },
       { path: "/admin/workouts", element: <AdminWorkoutsPage /> },
       {
         path: "/admin/workouts/:titleSlug/edit",
         element: <UpdateWorkoutPage />,
       },
-
       {
         path: "/admin/workouts/:titleSlug/sections",
         element: <WorkoutSectionsPage />,
@@ -52,9 +53,7 @@ const router = createBrowserRouter([
         path: "/admin/workouts/:titleSlug/sections/:sectionId",
         element: <WorkoutExercisesPage />,
       },
-
       { path: "/admin/workouts/new", element: <NewWorkoutPage /> },
-
       { path: "/admin/workouts/muscles", element: <GroupMusclePage /> },
       { path: "/admin/customers", element: <CustomersPage /> },
     ],

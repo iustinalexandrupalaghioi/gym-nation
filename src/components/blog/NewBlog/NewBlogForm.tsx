@@ -1,12 +1,6 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import {
-  ChangeEvent,
-  FormEvent,
-  RefObject,
-  SetStateAction,
-  useEffect,
-} from "react";
+import { ChangeEvent, FormEvent, RefObject, SetStateAction } from "react";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 import BlogPost from "../../../entities/BlogPost";
 import ToastAlert from "../../ToastAlert";
@@ -62,9 +56,6 @@ const NewBlogForm = ({
       ["clean"],
     ],
   };
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
 
   const formats = [
     "header",
