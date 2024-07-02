@@ -34,7 +34,7 @@ const GroupMusclePage = () => {
                 <tr key={group.id}>
                   <td>{index + 1}</td>
                   <td>{group.data().name}</td>
-                  <td className="d-inline-flex gap-2">
+                  <td>
                     <UpdateGroupModal
                       modalId={`updateGroup-${group.data().slug}`}
                       groupSlug={group.data().slug}

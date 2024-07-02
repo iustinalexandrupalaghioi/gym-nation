@@ -58,7 +58,7 @@ const DeleteSectionModal = ({
   return (
     <>
       <button
-        className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center"
+        className="btn btn-outline-danger d-inline-flex align-items-center justify-content-center me-2"
         data-bs-toggle="modal"
         data-bs-target={`#${modalId}`}
       >

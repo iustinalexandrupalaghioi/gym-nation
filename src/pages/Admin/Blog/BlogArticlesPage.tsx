@@ -72,7 +72,7 @@ export const BlogArticlesPage = () => {
               <th>Titlu</th>
               <th>Categorie</th>
               <th>Data publicării</th>
-              <th>Acțiuni</th>
+              <th className="w-25">Acțiuni</th>
             </tr>
           </thead>
           <tbody>
@@ -90,18 +90,18 @@ export const BlogArticlesPage = () => {
                   <td className="text-body-secondary">
                     {post.data().createdAt}
                   </td>
-                  <td className="d-inline-flex gap-2">
+                  <td>
                     <Link
                       title="Vezi articolul"
                       to={`/blog/${post.data().titleSlug}`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
                     >
                       <MdRemoveRedEye />
                     </Link>
                     <Link
                       title="Modifică articolul"
                       to={`/admin/blog/${post.data().titleSlug}/edit`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
                     >
                       <MdEdit />
                     </Link>

@@ -34,7 +34,7 @@ const CategoriesPage = () => {
                 <tr key={category.id}>
                   <td className="text-body-secondary">{index + 1}</td>
                   <td>{category.data().name}</td>
-                  <td className="d-inline-flex gap-2">
+                  <td>
                     <UpdateCategoryModal
                       modalId={`updateCategory-${category.data().slug}`}
                       category={category}

@@ -53,7 +53,7 @@ const WorkoutExercisesPage = () => {
                 <td className="text-body-secondary">
                   {exercise.muscleGroup?.name}
                 </td>
-                <td className="d-flex gap-2">
+                <td>
                   <ViewExerciseModal
                     exercise={exercise}
                     exerciseIndex={index}

@@ -43,19 +43,19 @@ const AdminWorkoutsPage = () => {
                   <td className="text-body-secondary">
                     {workout.data().sections?.length}
                   </td>
-                  <td className="d-flex gap-2">
+                  <td>
                     <Link
                       title="Vezi secțiunile"
                       to={`/admin/workouts/${
                         workout.data().titleSlug
                       }/sections`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
                     >
                       <MdRemoveRedEye />
                     </Link>
                     <Link
                       to={`/admin/workouts/${workout.data().titleSlug}/edit`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
                     >
                       <MdEdit />
                     </Link>

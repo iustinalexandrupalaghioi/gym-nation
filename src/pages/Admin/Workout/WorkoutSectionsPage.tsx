@@ -48,13 +48,13 @@ const WorkoutSectionsPage = () => {
                 <td className="text-body-secondary">
                   {section.exercises.length}
                 </td>
-                <td className="d-flex gap-2">
+                <td>
                   <Link
                     title="Vezi exercițiile"
                     to={`/admin/workouts/${
                       workout!.data().titleSlug
                     }/sections/${section.id}`}
-                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center"
+                    className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
                   >
                     <MdRemoveRedEye />
                   </Link>
