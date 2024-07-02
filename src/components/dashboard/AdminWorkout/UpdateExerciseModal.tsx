@@ -7,8 +7,7 @@ interface Props {
 }
 
 const UpdateExerciseModal = ({ modalId, exercise }: Props) => {
-  const { exerciseName, exerciseDescription, videoLink, muscleGroup } =
-    exercise;
+  const { exerciseName } = exercise;
   return (
     <>
       <button
