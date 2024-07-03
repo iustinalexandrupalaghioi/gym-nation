@@ -30,7 +30,6 @@ class FirebaseClient {
         : query(collection(db, this.endpoint));
 
     const querySnapshot = await getDocs(baseQuery);
-
     const result = querySnapshot.docs;
 
     const snapshot = await getCountFromServer(baseQuery);
