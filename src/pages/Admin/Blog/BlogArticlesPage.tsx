@@ -94,14 +94,14 @@ export const BlogArticlesPage = () => {
                     <Link
                       title="Vezi articolul"
                       to={`/blog/${post.data().titleSlug}`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
                     >
                       <MdRemoveRedEye />
                     </Link>
                     <Link
                       title="Modifică articolul"
                       to={`/admin/blog/${post.data().titleSlug}/edit`}
-                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2"
+                      className="btn btn-outline-info d-inline-flex align-items-center justify-content-center me-2 mb-2"
                     >
                       <MdEdit />
                     </Link>

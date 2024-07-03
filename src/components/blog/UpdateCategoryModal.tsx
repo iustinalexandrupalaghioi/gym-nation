@@ -60,7 +60,7 @@ const UpdateCategoryModal = ({ modalId, category }: Props) => {
   return (
     <>
       <button
-        className="btn btn-outline-info d-inline-flex justify-content-center align-items-center me-2"
+        className="btn btn-outline-info d-inline-flex justify-content-center align-items-center me-2 mb-2"
         data-bs-toggle="modal"
         data-bs-target={`#${modalId}`}
       >
