@@ -36,14 +36,14 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      let { name, email, password } = data;
+      let { fname, lname, email, password } = data;
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
       await updateProfile(result.user, {
-        displayName: `${name.fname} ${name.lname}`,
+        displayName: `${fname} ${lname}`,
       });
 
       showToast("Te-ai înregistrat cu succes", Method.Success, () =>
