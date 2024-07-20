@@ -24,7 +24,7 @@ const SignInWithGoogleButton = () => {
         ? await getUserRole(auth.currentUser.uid)
         : false;
       setRole(newUserRole);
-      showToast("Te-ai autentificat cu succes", Method.Success, () =>
+      showToast("Te-ai autentificat cu succes!", Method.Success, () =>
         navigate("/")
       );
     } catch (err: any) {
