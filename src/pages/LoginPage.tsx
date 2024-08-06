@@ -8,7 +8,6 @@ import getUserRole from "../utilities/getUserRole";
 import showToast, { Method } from "../utilities/showToast";
 import ToastAlert from "../components/ToastAlert";
 import { FieldValues, useForm } from "react-hook-form";
-import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 import LoadingButton from "../components/account/LoadingButton";
 
 interface FormData {
