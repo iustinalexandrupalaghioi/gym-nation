@@ -118,7 +118,6 @@ const LoginPage = () => {
             </button>
           )}
 
-          <SignInWithGoogleButton />
         </form>
       </div>
     </div>
