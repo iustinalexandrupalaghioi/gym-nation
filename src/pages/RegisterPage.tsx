@@ -161,7 +161,7 @@ const RegisterPage = () => {
             </button>
           )}
 
-          <SignInWithGoogleButton />
+    
         </form>
       </div>
     </div>
