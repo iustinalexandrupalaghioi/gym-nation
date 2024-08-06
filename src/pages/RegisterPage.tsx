@@ -7,7 +7,6 @@ import showToast, { Method } from "../utilities/showToast";
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SignInWithGoogleButton from "../components/SignInWithGoogleButton";
 import LoadingButton from "../components/account/LoadingButton";
 
 const schema = z.object({
