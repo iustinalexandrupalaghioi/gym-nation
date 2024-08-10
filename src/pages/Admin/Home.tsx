@@ -3,7 +3,7 @@ import PageContent from "../../components/dashboard/PageContent";
 
 const Home = () => {
   return (
-    <PageContent pageTitle="Panoul de Administrare Gym Nation">
+    <PageContent pageTitle="Gym Nation">
       <div className="container">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           <div className="col">
